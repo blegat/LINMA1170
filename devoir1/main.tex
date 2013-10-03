@@ -24,6 +24,8 @@
 \newcommand\si[2]{\numprint[#2]{#1}}
 \newcommand\np[1]{\numprint{#1}}
 
+\DeclareMathOperator{\pgcd}{pgcd} % use \dif instead
+
 \DeclareMathOperator{\newdiff}{d} % use \dif instead
 \newcommand{\dif}{\newdiff\!}
 \newcommand{\fpart}[2]{\frac{\partial #1}{\partial #2}}
@@ -88,7 +90,7 @@ x-\alpha_1 & -\beta_2 & & \\
 -\beta_2 & \ddots & \ddots & \\
  & \ddots & \ddots & -\beta_n \\
  & & -\beta_n & x-\alpha_n
-\end{pmatrix}
+\end{pmatrix}.
 $$
 Utilisons la méthodes des cofacteurs suivant les éléments de la dernière ligne de la matrice. On a alors $$\text{det}(x I_n - T_n) = (-1)^{n+n}(x-\alpha_n)\text{det}(x I_{n-1} - T_{n-1}) + (-1)^{n+n-1}(-\beta_n)\text{det}(S_n)$$ où $S_n$ est défini par
 $$S_n =
@@ -97,31 +99,78 @@ x-\alpha_1 & -\beta_2 & & \\
 -\beta_2 & \ddots & \ddots & \\
  & \ddots & x-\alpha_{n-2} & 0 \\
  & & -\beta_{n-1} & -\beta_n
-\end{pmatrix}
+\end{pmatrix}.
 $$
 Si on calcule le déterminant de la matrice $S_n$ par la méthode des cofacteurs suivant la dernière colonne, on obtient $$\text{det}(S_n) = (-1)^{n-1+n-1}(-\beta_n)\text{det}(x I_{n-2} - T_{n-2}).$$
 Finalement, on obtient donc l'égalité suivante : $$\text{det}(x I_n - T_n) = (-1)^{2n}(x-\alpha_n)\text{det}(x I_{n-1} - T_{n-1}) + (-1)^{4n-3}(-\beta_n)^2\text{det}(x I_{n-2} - T_{n-2}).$$
 C'est-à-dire $$p_n(x) = (x-\alpha_n)p_{n-1}(x) - \beta_n^2 p_{n-2}(x),$$ la relation qu'il fallait vérifier.
 
 \section*{Question 2}
+Commençons par montrer que $p_n$ est un polynôme de degré $n$.
+On peut le montrer par induction à l'aide de l'équation de récurrence
+\[ p_n(x) = (x - \alpha_n)p_{n-1}(x) - \beta_n^2p_{n-2}(x). \]
+\begin{itemize}
+  \item C'est évident pour $p_0(x)$ qui vaut 1 pour que la récurrence
+    marche.
+  \item Si $p_{n-1}(x)$ est de degré $n-1$ et $p_{n-2}(x)$ est de degré
+    $n-2$, $p_n(x)$ qui vaut
+    \[ p_n(x) = xp_{n-1}(x) - (\alpha_np_{n-1}(x) + \beta_n^2p_{n-2}(x)) \]
+    est la somme entre un polynôme de degré $n$ et un polynôme de
+    degré au plus $n-1$ ce qui fait un polynôme de degré $n$.
+\end{itemize}
+
+Remarquons à présent à l'aide de l'équation de récurrence
+\[ p_n(x) = (x - \alpha_n)p_{n-1}(x) - \beta_n^2p_{n-2}(x) \]
+que si $(x-x_0)$ divise $p_n$ et $p_{n-1}$, alors il divise
+$p_{n-2}$ et que s'il divise $p_{n-1}$ et $p_{n-2}$, alors il divise $p_n$.
+On voit alors que $\pgcd(p_n, p_{n-1}) = \pgcd(p_{n-1}, p_{n-2})$.
+
+Comme $p_0(x) = 1$, $\pgcd(p_1,p_0) = p_0$ et donc, par transitivité,
+$\pgcd(p_n, p_{n-1}) = p_0 = 1$.
+On sait donc que $p_n$ et $p_{n-1}$ n'ont pas de racine commune.
+
 On remarque que la matrice obtenue en supprimant
 la dernière ligne et la dernière colonne de $T_n$ est $T_{n-1}$.
+Par le théorème 1, on sait que leur valeurs propres sont entrelacées.
+Comme leurs valeurs propres sont les racines des polynômes $p_n$ et $p_{n-1}$.
+On peut dire que leurs racines sont entrelacées.
+
+Du coup, si $p_i$ a une racine multiple $r$, $p_{i+1}$ et $p_{i-1}$,
+s'ils existent ont nécessairement cette racine aussi car on aura alors
+un $k$ tel que $\lambda_k = \lambda_{k+1} = r$ et donc $\mu_{k} = r$.
+Pourtant, on sait que $p_i$ et $p_{i+1}$ n'ont pas de racine commune,
+pareil pour $p_i$ et $p_{i-1}$.
+On en conclut que $p_i$ n'a pas de racine multiple.
+
 \begin{enumerate}
   \item Commençons par montrer que $f_0(\alpha)f_0(\beta) \neq 0$.
     Comme $\alpha = -\infty$ et $\beta = \infty$ et que $f_0$ est un polynôme,
     il faut que $f_0$ soit le polynôme nul.
-    Pourtant, par la récurrence
-    \[ p_n(x) = (x - \alpha_n)p_{n-1}(x) - \beta_n^2p_{n-2}(x), \]
-    on peut prouver, par récurrence que $p_n(x)$ est un polynôme de degré
-    $n$.
-    \begin{itemize}
-      \item C'est évident pour $p_0(x)$.
-      \item Si $p_{n-1}(x)$ est de degré $n-1$ et $p_{n-2}(x)$ est de degré
-        $n-2$, $p_n(x)$ qui vaut
-        \[ p_n(x) = xp_{n-1}(x) - (\alpha_np_{n-1}(x) + \beta_n^2p_{n-2}(x)) \]
-        est la somme entre un polynôme de degré $n$ et un polynôme de
-        degré au plus $n-1$ ce qui fait un polynôme de degré $n$.
-    \end{itemize}
+    Pourtant, on montré que $p_n$ était de degré $n$ et $p_0 = 1$ donc
+    c'est impossible.
+  \item Montrons à présent que si $f_i(\xi) = 0$ avec $1 \leq i \leq n-1$,
+    alors $f_{i-1}(\xi)f_{i+1}(\xi) < 0$.
+    L'équation de récurrence nous donne
+    $f_{i+1}(\xi) = -\beta_n^2f_{i-1}(\xi)$ du coup
+    \[ f_{i-1}(\xi)f_{i+1}(\xi) = -(\beta_nf_{i-1}(\xi))^2 < 0. \]
+    car $\beta_n \neq 0$ et comme on l'a montré, $f_i$ et $f_{i-1}$ ne peuvent
+    pas avoir de racine commune donc $f_{i-1}(\xi) \neq 0$.
+  \item Montrons maintenant que si $f_0(\xi) = 0$,
+    alors $f_0'(\xi)f_1(\xi) > 0$.
+    On a
+    \begin{align*}
+      f_0'(x) & = p_n'(x)\\
+              & = p_{n-1}(x) + (x-\alpha_n)p_{n-1}'(x) - \beta_n^2p_{n-2}'(x)\\
+              & = f_1(x) + (x-\alpha_n) f_1'(x) - \beta_n^2 f_2'(x).
+    \end{align*}
+    Du coup,
+    \begin{align*}
+      f_0'(\xi)f_1(\xi) & = f_1^2(x) + f_1(x)
+      ((\xi-\alpha_n) f_1'(x) - \beta_n^2 f_2'(x))\\
+      & > 0.
+    \end{align*}
+  \item Le fait que $f_n(x)$ soit de signe constant est trivial car
+    $f_n(x) = p_0(x) = 1$.
 \end{enumerate}
 
 \section*{Question 3}
