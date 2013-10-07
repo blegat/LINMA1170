@@ -34,6 +34,7 @@
 \newcommand{\fdif}[2]{\frac{\dif #1}{\dif #2}}
 \newcommand{\ffdif}[2]{\frac{\dif^2 #1}{\dif #2^2}}
 \newcommand{\constant}{\ensuremath{\mathrm{cst}}}
+\newcommand{\bigoh}{\ensuremath{\mathcal{O}}}
 
 % cfr http://en.wikibooks.org/wiki/LaTeX/Colors
 \usepackage{color}
@@ -105,18 +106,23 @@ Si on calcule le déterminant de la matrice $S_n$ par la méthode des cofacteurs
 Finalement, on obtient donc l'égalité suivante : $$\text{det}(x I_n - T_n) = (-1)^{2n}(x-\alpha_n)\text{det}(x I_{n-1} - T_{n-1}) + (-1)^{4n-3}(-\beta_n)^2\text{det}(x I_{n-2} - T_{n-2}).$$
 C'est-à-dire $$p_n(x) = (x-\alpha_n)p_{n-1}(x) - \beta_n^2 p_{n-2}(x),$$ la relation qu'il fallait vérifier.
 
+On remarque que pour que la récurrence marche,
+il faut poser $p_0(x) = 1$.
+
 \section*{Question 2}
-Commençons par montrer que $p_n$ est un polynôme de degré $n$.
+Commençons par montrer que $p_n$ est un polynôme de degré $n$ et que le
+coefficient de $x_n$ est 1.
 On peut le montrer par induction à l'aide de l'équation de récurrence
 \[ p_n(x) = (x - \alpha_n)p_{n-1}(x) - \beta_n^2p_{n-2}(x). \]
 \begin{itemize}
-  \item C'est évident pour $p_0(x)$ qui vaut 1 pour que la récurrence
-    marche.
+  \item C'est évident pour $p_0(x)$ qui vaut 1.
   \item Si $p_{n-1}(x)$ est de degré $n-1$ et $p_{n-2}(x)$ est de degré
     $n-2$, $p_n(x)$ qui vaut
     \[ p_n(x) = xp_{n-1}(x) - (\alpha_np_{n-1}(x) + \beta_n^2p_{n-2}(x)) \]
     est la somme entre un polynôme de degré $n$ et un polynôme de
     degré au plus $n-1$ ce qui fait un polynôme de degré $n$.
+    Le coefficient devant $x^n$ sera le même que celui devant $x^{n-1}$ qui,
+    par l'hypothèse de récurrence vaut 1.
 \end{itemize}
 
 Remarquons à présent à l'aide de l'équation de récurrence
@@ -157,29 +163,67 @@ On en conclut que $p_i$ n'a pas de racine multiple.
     pas avoir de racine commune donc $f_{i-1}(\xi) \neq 0$.
   \item Montrons maintenant que si $f_0(\xi) = 0$,
     alors $f_0'(\xi)f_1(\xi) > 0$.
-    On a
-    \begin{align*}
-      f_0'(x) & = p_n'(x)\\
-              & = p_{n-1}(x) + (x-\alpha_n)p_{n-1}'(x) - \beta_n^2p_{n-2}'(x)\\
-              & = f_1(x) + (x-\alpha_n) f_1'(x) - \beta_n^2 f_2'(x).
-    \end{align*}
-    Du coup,
-    \begin{align*}
-      f_0'(\xi)f_1(\xi) & = f_1^2(x) + f_1(x)
-      ((\xi-\alpha_n) f_1'(x) - \beta_n^2 f_2'(x))\\
-      & > 0.
-    \end{align*}
+
+    Commençons pour cela par montrer que
+    soit $\epsilon > 0$ tel que
+    $f_1(x) \neq 0$ $\forall x \in [\xi - \epsilon; \xi]$,
+    $f_0(\xi-\epsilon) f_1(\xi-\epsilon) < 0$.
+
+    \begin{proof}
+      Déjà, comme les racines sont entrelacées,
+      $f_1(x) \neq 0$ $\forall x \in [\xi - \epsilon; \xi]$ implique que
+      $f_0(x) \neq 0$ $\forall x \in [\xi - \epsilon; \xi[$
+      par la continuité des polynômes, $f_1$ et $f_0$ ne changent pas
+      de signe sur $[\xi - \epsilon; \xi[$.
+      De plus, en $-\infty$,
+      le signe de $f_0$ est $(-1)^n$ car c'est un polynôme de
+      degré $n$ et que le coefficient de $x^n$ est 1.
+      De la même manière, celui de $f_1$ est $(-1)^{n-1}$,
+      ils sont donc de signe opposé en $-\infty$.
+
+      À chaque fois que $f_0$ (resp. $f_1$) traverse une racine, il change
+      de signe.
+      En effet, on a prouvé qu'il n'avait que des racines simple.
+      S'il ne changeait pas de signe, $f'_0$ (resp. $f'_1$) en changerait.
+      Il aurait donc aussi une racine en $\xi$ pourtant on sait que si une
+      fonction a une racine de multiplicité $p > 0$, sa
+      dérivée l'a avec une multiplicité de $p-1$.
+      Ici, comme $\xi$ est une racine simple de $f_0$ (resp. $f_1$), ça ne peut
+      pas être une racine de $f'_0$ (resp. $f'_1$).
+
+      Comme les racines sont entrelacées, dans l'intervalle
+      $]-\infty; \xi[$, il y a le même nombre de racines de $f_0$ que de
+      racines de $f_1$.
+      Ils ont donc changé de signe le même nombre de fois.
+      Ils sont dès lors toujours de signe différent comme en $-\infty$.
+    \end{proof}
+
+    On sait que $p_0'(\xi)p_0(\xi - \epsilon) < 0$.
+    En effet, soit $q(x)$ tel que $q(\xi) \neq 0$ et
+    $p_0(x) = (x - \xi) q(x)$.
+    Soit $\epsilon > 0$ tel que
+    $p_1(x), q(x) \neq 0$ $\forall x \in [\xi - \epsilon, \xi]$.
+    On a $p_0'(x) = q(x) + (x - \xi) q'(x)$ d'où
+    $p_0(\xi - \epsilon) = -\epsilon q(\xi - \epsilon)$ et
+    $p_0'(\xi) = q(\xi)$.
+    Comme $q$ est un polynôme, il est continu donc comme il n'y a pas
+    de racine entre $\xi - \epsilon$ et $\xi$, $q(\xi - \epsilon)$ et $q(\xi)$
+    sont de même signe.
+    Du même raisonnement, $p_1(\xi - \epsilon)$ et $p_1(\xi)$ sont
+    de même signe.
+    Comme $\epsilon > 0$, on sait alors que que
+    $p_0'(\xi)$ et $p_0(\xi - \epsilon)$ sont de signe opposé.
+    comme on savait que $p_0(\xi - \epsilon)$ et $p_1(\xi - \epsilon)$ sont
+    de signe opposé, on a bien $p_0'(\xi) p_1(\xi) > 0$.
   \item Le fait que $f_n(x)$ soit de signe constant est trivial car
     $f_n(x) = p_0(x) = 1$.
 \end{enumerate}
 
 \section*{Question 3}
-Il suffit de réécrire le polynôme
-\[ a_nx^n + a_{n-1}x^{n-1} + a_{n-2}x^{n-2} + \ldots + a_1x + a_0 \]
-en
-\[ ((\ldots((a_nx + a_{n-1})x + a_{n-2})x + \ldots)x + a_1)x + a_0. \]
+Il suffit d'utiliser la récurrence
+\[ p_n(x) = (x - \alpha_n)p_{n-1}(x) - \beta_n^2 p_{n-2}(x). \]
 
 Ce qui donne
-\lstinputlisting{matlab/badass_polyval.m}
+\lstinputlisting{matlab/polyval_recurrence.m}
 
 \end{document}
