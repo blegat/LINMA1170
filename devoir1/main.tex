@@ -253,7 +253,7 @@ $$P_n(x) = \dfrac{1}{2} det
 $$
 En effet, cette expression vérifie l'équation de récurrence : 
 $$P_n(x) = 2x \dfrac{1}{2} det
-\left[ 
+\left( 
 \begin{array}{ccccc}
 2x & \sqrt{2} & & &  \\
 \sqrt{2} & 2x & 1 & & \\
@@ -261,17 +261,17 @@ $$P_n(x) = 2x \dfrac{1}{2} det
  & & \ddots & \ddots & \ddots  \\
  & & & \ddots & \ddots   \\
 \end{array}
-\right] - \dfrac{1}{2} det
-\left[ 
-\begin{array}{ccccccc}
-2x & \sqrt{2} & & & & & 0 \\
-\sqrt{2} & 2x & 1 & & & & 0\\
- & 1 & 2x & 1 & & & 0\\
- & & \ddots & \ddots & \ddots & & 0\\
- & & & \ddots & \ddots &  1 & 0\\
- & & & &  1 & 2x & 1
+\right) - \dfrac{1}{2} det
+\left( 
+\begin{array}{cccccc}
+2x & \sqrt{2} & & & & 0 \\
+\sqrt{2} & 2x & 1 & & & 0\\
+ & 1 & 2x & 1 & &  0\\
+ & & \ddots & \ddots & \ddots & 0\\
+ & & & \ddots & 2x & 0\\
+ & & & &  1  & 1
 \end{array}
-\right] = 2xP_{n-1}(x)-P_{n-2}(x)$$
+\right) = 2xP_{n-1}(x)-P_{n-2}(x)$$
 et on obtient pour les polynômes $P_1(x)$ et $P_0(x)$ : 
 $$P_1(x)=\dfrac{1}{2} 2x = x $$
 
