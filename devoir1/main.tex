@@ -84,7 +84,7 @@ $$
 avec $\beta_2 \hdots \beta_n$ non nuls.
 
 On cherche à montrer que les polynômes orthogonaux définis par $p_n(x)$ = det($x I_n - T_n$) satisfont la récurrence $$p_n(x) = (x-\alpha_n)p_{n-1}(x) - \beta_n^2 p_{n-2}(x).$$
-On va simplement calculer le déterminant de la matrice $x I_n - T_n$ par la méthode des cofacteurs. On a
+On va simplement calculer le déterminant de la matrice $x I_n - T_n$ par la méthode des cofacteurs. On obtient
 $$x I_n - T_n =
 \begin{pmatrix}
 x-\alpha_1 & -\beta_2 & & \\
@@ -138,9 +138,9 @@ On sait donc que $p_n$ et $p_{n-1}$ n'ont pas de racine commune.
 On remarque que la matrice obtenue en supprimant
 la dernière ligne et la dernière colonne de $T_n$ est $T_{n-1}$.
 Par le théorème 1, on sait que leur valeurs propres sont entrelacées.
-Comme leurs valeurs propres sont les racines des polynômes $p_n$ et $p_{n-1}$.
-On peut dire que leurs racines sont entrelacées.
+Comme leurs valeurs propres sont les racines des polynômes $p_n$ et $p_{n-1}$, on peut dire que leurs racines sont entrelacées.
 
+% A REFORMULER MAN 
 Du coup, si $p_i$ a une racine multiple $r$, $p_{i+1}$ et $p_{i-1}$,
 s'ils existent ont nécessairement cette racine aussi car on aura alors
 un $k$ tel que $\lambda_k = \lambda_{k+1} = r$ et donc $\mu_{k} = r$.
@@ -150,9 +150,9 @@ On en conclut que $p_i$ n'a pas de racine multiple.
 
 \begin{enumerate}
   \item Commençons par montrer que $f_0(\alpha)f_0(\beta) \neq 0$.
-    Comme $\alpha = -\infty$ et $\beta = \infty$ et que $f_0$ est un polynôme,
+    Comme $\alpha = -\infty$ et $\beta = + \infty$ et que $f_0$ est un polynôme,
     il faut que $f_0$ soit le polynôme nul.
-    Pourtant, on montré que $p_n$ était de degré $n$ et $p_0 = 1$ donc
+    Pourtant, on a montré que $p_n$ était de degré $n$ et $p_0 = 1$ donc
     c'est impossible.
   \item Montrons à présent que si $f_i(\xi) = 0$ avec $1 \leq i \leq n-1$,
     alors $f_{i-1}(\xi)f_{i+1}(\xi) < 0$.
@@ -168,7 +168,7 @@ On en conclut que $p_i$ n'a pas de racine multiple.
     soit $\epsilon > 0$ tel que
     $f_1(x) \neq 0$ $\forall x \in [\xi - \epsilon; \xi]$,
     $f_0(\xi-\epsilon) f_1(\xi-\epsilon) < 0$.
-
+%Stivy est pas d'accord il proteste ardemment
     \begin{proof}
       Déjà, comme les racines sont entrelacées,
       $f_1(x) \neq 0$ $\forall x \in [\xi - \epsilon; \xi]$ implique que
