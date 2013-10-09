@@ -1,34 +1,34 @@
 \section*{Question 4}
-Soit les polynômes de Tchebychev définis par la récurrence: 
+Soit les polynômes de Tchebychev définis par la récurrence:
 
-
-\begin{eqnarray}
-P_0(x)=1\\
-P_1(x)=x\\
-P_n(x)=2xP_{n-1}(x)-P_{n-2}(x)
-\end{eqnarray}
-
+\begin{align}
+  P_0(x) & = 1\\
+  P_1(x) & = x\\
+  P_n(x) & = 2xP_{n-1}(x) - P_{n-2}(x).
+\end{align}
 
 On peut exprimer ces polynômes au moyen du déterminant des matrices $xI_n - T_n$ où $T_n$ sont des matrices tridiagonales réelles et symétriques.
 
 On remarque que la récurrence ci-dessus ressemble à celle de la première question. Puisque les polynômes $P_n$ sont définis comme les polynômes $p_n$, on peut utiliser cette récurrence. Pour rappel, la récurrence de la première question était $$p_n(x) = (x-\alpha_n)p_{n-1}(x) - \beta_n^2 p_{n-2}(x).$$
 En faisant l'analogie entre les deux récurrences, on a donc $2x = x - \alpha_n$ et $\beta_n^2 = 1$, c'est-à-dire $\alpha_n = -x$ et $\beta_n = 1$ (on aura pu également choisir $\beta_n = -1$, cela n'aurait rien changé). Puisque la relation de récurrence est valable pour $n \geq 2$, on a donc défini $\alpha_n$ et $\beta_n \forall n \geq 2$.\\ Puisqu'on doit également avoir $P_1(x) = x$, on doit imposer $\alpha_1 = 0$. Les polynômes $P_n$ sont donc définis comme suit :
-%On remarque que pour satisfaire cette équation et les conditions initiales $P_0$ et $P_1$, $P_n(x)$ doit avoir la forme : 
-$$P_n(x) = \text{det}
-\left[ 
-\begin{array}{cccccc}
-x & 1 & & & &  \\
-1 & 2x & 1 & & & \\
- & 1 & 2x & 1 & & \\
- & & \ddots & \ddots & \ddots & \\
- & & & \ddots & \ddots &  1\\
- & & & &  1 & 2x
-\end{array}
-\right] 
+%On remarque que pour satisfaire cette équation et les conditions initiales $P_0$ et $P_1$, $P_n(x)$ doit avoir la forme :
 $$
-Sans surprise, en calculant $P_n$ par la méthode des cofacteurs, on retrouve l'équation de récurrence de l'énoncé : 
-$$P_n(x) = 2x \text{det}
-\left[ 
+P_n(x) = \text{det}
+\left[
+  \begin{array}{cccccc}
+    x & 1 & & & &  \\
+    1 & 2x & 1 & & & \\
+      & 1 & 2x & 1 & & \\
+      & & \ddots & \ddots & \ddots & \\
+      & & & \ddots & \ddots &  1\\
+      & & & &  1 & 2x
+  \end{array}
+\right].
+$$
+Sans surprise, en calculant $P_n$ par la méthode des cofacteurs, on retrouve l'équation de récurrence de l'énoncé :
+$$
+P_n(x) = 2x \text{det}
+\left[
 \begin{array}{ccccc}
 x & 1 & & &  \\
 1 & 2x & 1 & & \\
@@ -37,7 +37,7 @@ x & 1 & & &  \\
  & & & 1 & 2x   \\
 \end{array}
 \right] - \text{det}
-\left[ 
+\left[
 \begin{array}{cccccc}
 x & 1 & & & & 0 \\
 1 & 2x & 1 & & & 0\\
@@ -46,134 +46,79 @@ x & 1 & & & & 0 \\
  & & & 1 & 2x &  0\\
  & & & &  1 &  1
 \end{array}
-\right] = 2xP_{n-1}(x)-P_{n-2}(x)$$
+\right] = 2xP_{n-1}(x)-P_{n-2}(x).
+$$
 
 On peut décomposer cette matrice pour faire apparaître explicitement la forme recherchée, c'est-à-dire $xI_n - T_n$ :
-$$P_n(x) = \text{det}
-\left[ 
-\begin{array}{ccccc}
-x & 1 & & &  \\
-1 & 2x & 1 & & \\
- & 1 & 2x & \ddots & \\
- & & \ddots & \ddots & 1  \\
- & & & 1 & 2x   \\
-\end{array}
+$$
+P_n(x) = \text{det}
+\left[
+  \begin{array}{ccccc}
+    x & 1 & & &  \\
+    1 & 2x & 1 & & \\
+      & 1 & 2x & \ddots & \\
+      & & \ddots & \ddots & 1  \\
+      & & & 1 & 2x   \\
+  \end{array}
 \right] = \frac{1}{2 }\text{det}
-\left[ 
-\begin{array}{cccccc}
-2x & \sqrt{2} & & & \\
-\sqrt{2} & 2x & 1 & & \\
- & 1 & 2x & \ddots & \\
- & & \ddots & \ddots & 1 \\
- & & & 1 & 2x  
-\end{array}
-\right]$$
- 
-$$P_n(x) = \frac{1}{2} \text{det} \left( 2x I_n - \left[ 
-\begin{array}{cccccc}
-0 & -\sqrt{2} & & &  \\
--\sqrt{2} & 0 & -1 & & \\
- & -1 & 0 & \ddots & \\
- & & \ddots & \ddots  &  -1\\
- & & & -1 & 0
-\end{array}
-\right] \right) = 2^{n-1} \text{det} \left( x I_n - \underbrace{\left[ 
-\begin{array}{ccccc}
-0 & - \dfrac{\sqrt{2}}{2} & & &  \\
-- \dfrac{\sqrt{2}}{2} & 0 & -\dfrac{1}{2} & & \\
- & -\dfrac{1}{2} & 0 & \ddots &  \\
- & & \ddots & \ddots & -\dfrac{1}{2} \\
- & & & -\dfrac{1}{2} & 0 \\
-\end{array}
+\left[
+  \begin{array}{cccccc}
+    2x & \sqrt{2} & & & \\
+    \sqrt{2} & 2x & 1 & & \\
+             & 1 & 2x & \ddots & \\
+             & & \ddots & \ddots & 1 \\
+             & & & 1 & 2x
+  \end{array}
+\right].
+$$
+
+$$
+P_n(x) = \frac{1}{2} \text{det} \left( 2x I_n - \left[
+    \begin{array}{cccccc}
+      0 & -\sqrt{2} & & &  \\
+      -\sqrt{2} & 0 & -1 & & \\
+                & -1 & 0 & \ddots & \\
+                & & \ddots & \ddots  &  -1\\
+                & & & -1 & 0
+    \end{array}
+\right] \right) = 2^{n-1} \text{det} \left( x I_n - \underbrace{\left[
+      \begin{array}{ccccc}
+        0 & - \dfrac{\sqrt{2}}{2} & & &  \\
+        - \dfrac{\sqrt{2}}{2} & 0 & -\dfrac{1}{2} & & \\
+                              & -\dfrac{1}{2} & 0 & \ddots &  \\
+                              & & \ddots & \ddots & -\dfrac{1}{2} \\
+                              & & & -\dfrac{1}{2} & 0 \\
+      \end{array}
 \right]}_{=T_n}  \right)
 $$
 
 
-La matrice $T_{20}$ se déduit à partir de l'expression précédente. Les valeurs propres de $T_{20}$ s'obtiennent en déterminant le noyau de l'application linéaire $\lambda I_{20} - T_{20}$ ou, autrement dit, les racines du polynôme caractéristique donné par $\text{det}(\lambda I_{20} - T_{20})$. A la question précédente, nous avons implémenté une méthode permettant d'évaluer en $O(n)$ opérations la suite des polynômes $p_i$ en un point. %Notons que nos polynômes $P_i$ peuvent s'écrire sous la forme : 
+La matrice $T_{20}$ se déduit à partir de l'expression précédente.
+Les valeurs propres de $T_{20}$ s'obtiennent en déterminant le noyau
+de l'application linéaire $\lambda I_{20} - T_{20}$ ou,
+autrement dit, les racines du polynôme caractéristique donné par
+$\det(\lambda I_{20} - T_{20})$.
+À la question précédente, nous avons implémenté une méthode permettant
+d'évaluer en $\bigoh(n)$ opérations la suite des polynômes $p_i$ en un point.
+%Notons que nos polynômes $P_i$ peuvent s'écrire sous la forme :
 %\begin{equation} \label{equ_tche}
 %P_n(x) = 2^{n-1} ((x-\alpha_n)P_{n-1}(x) - \beta_n^2 P_{n-2}(x)) = 2^{n-1} (x P_{n-1}(x) - \beta_n^2 P_{n-2}(x))
 %\end{equation}
 Le facteur positif $2^{n-1}$ n'a aucune importance ici. En effet, pour déterminer le nombres de racines du polynôme caractéristique dans $\left[ \dfrac{1}{2} , \dfrac{3}{4} \right]$, il nous suffit d'évaluer la suite des polynômes de Tchebychev $ \{ P_0(x), P_1(x), ... , P_{20}(x) \}$ en $x=\dfrac{1}{2}$ et $x=\dfrac{3}{4}$ et d'appliquer le théorème de Sturm. Le nombre de racines sera donné par l'expression :
-$$N(\dfrac{1}{2} , \dfrac{3}{4}) = V(\dfrac{1}{2}) - V(\dfrac{3}{4}) $$
+$$N(\dfrac{1}{2} , \dfrac{3}{4}) = V(\dfrac{1}{2}) - V(\dfrac{3}{4})$$
 Pour ce faire, on peut appliquer l'algorithme développé à la question 3 en utilisant la formule de récurrence de la première question.
 
-\begin{verbatim}
-alpha =
+La variation peut être calculée ainsi
+\lstinputlisting{matlab/V.m}
+et le nombre de racine entre $a$ et $b$ de $P_n$ ainsi
+\lstinputlisting{matlab/main.m}
+ce qui donne
+\begin{lstlisting}
+>> main(1/2, 3/4, 20);
+N(5.0e-01,7.5e-01) = V(5.0e-01) - V(7.5e-01) = 7 - 5 = 2
+\end{lstlisting}
 
-
-  Columns 1 through 18
-
-
-     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0
-
-
-  Columns 19 through 20
-
-
-     0     0
-beta =
-
-
-  Columns 1 through 10
-
-
-   -0.7071   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000
-
-
-  Columns 11 through 20
-
-
-   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000   -0.5000
-EDU>> p = polyval_recurrence (alpha, beta, 0.5)
-
-
-p =
-
-
-  Columns 1 through 10
-
-
-    1.0000    0.5000   -0.2500   -0.2500   -0.0625    0.0313    0.0313    0.0078   -0.0039   -0.0039
-
-
-  Columns 11 through 20
-
-
-   -0.0010    0.0005    0.0005    0.0001   -0.0001   -0.0001   -0.0000    0.0000    0.0000    0.0000
-
-
-  Column 21
-
-
-   -0.0000
-
-
- p2 =  polyval_recurrence (alpha, beta, 3/4)
-
-
-p2 =
-
-
-  Columns 1 through 10
-
-
-    1.0000    0.7500    0.0625   -0.1406   -0.1211   -0.0557   -0.0115    0.0053    0.0069    0.0038
-
-
-  Columns 11 through 20
-
-
-    0.0011   -0.0001   -0.0004   -0.0002   -0.0001   -0.0000    0.0000    0.0000    0.0000    0.0000
-
-
-  Column 21
-
-
-   -0.0000
-\end{verbatim}
-
-
-On obtient ainsi $V(1/2) = 7$ et $V(3/4) = 5$. On conclut grâce au théorème de Sturm que la matrice $T_{20}$ possède 2 valeurs propre dans l'intervalle $\left[ \dfrac{1}{2} , \dfrac{3}{4} \right]$. 
-
-
-
+On obtient ainsi $V(1/2) = 7$ et $V(3/4) = 5$.
+On conclut grâce au théorème de Sturm que la matrice $T_{20}$
+possède 2 valeurs propre dans l'intervalle
+$\left[ \dfrac{1}{2} , \dfrac{3}{4} \right]$.
