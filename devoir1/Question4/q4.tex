@@ -12,7 +12,11 @@ On peut exprimer ces polynômes au moyen du déterminant des matrices $xI_n - T_
 On remarque que la récurrence ci-dessus ressemble à celle de la première question.
 Puisque les polynômes $P_n$ sont définis comme les polynômes $p_n$,
 on peut utiliser cette récurrence \eqref{equ_recur}.
-Soient les polynôme $p_n(x) = P_n(x)2^{-n}$, la récurrence devient
+Soient les polynômes
+\footnote{Le facteur positif $2^{-n}$ n'a aucune importance ici,
+$p_n$ et $P_n$ ont les même racines,
+on peut donc choisir de travailler avec l'un ou avec l'autre.}
+$p_n(x) = P_n(x)2^{-n}$, la récurrence devient
 \begin{align*}
   p_0(x) & = 1\\
   p_1(x) & = \frac{x}{2}\\
@@ -29,8 +33,17 @@ $$
 p_n(x) = \det
 \left[
   \begin{array}{cccccc}
-    x & \frac{1}{2} & & & &  \\
+    \frac{x}{2} & \frac{1}{2} & & & &  \\
     \frac{1}{2} & x & \frac{1}{2} & & & \\
+      & \frac{1}{2} & x & \frac{1}{2} & & \\
+      & & \ddots & \ddots & \ddots & \\
+      & & & \ddots & \ddots &  \frac{1}{2}\\
+      & & & &  \frac{1}{2} & x
+  \end{array}
+\right] = \frac{1}{2} \det \left[
+  \begin{array}{cccccc}
+    x & \frac{\sqrt{2}}{2} & & & &  \\
+    \frac{\sqrt{2}}{2} & x & \frac{1}{2} & & & \\
       & \frac{1}{2} & x & \frac{1}{2} & & \\
       & & \ddots & \ddots & \ddots & \\
       & & & \ddots & \ddots &  \frac{1}{2}\\
@@ -43,7 +56,7 @@ $$
 p_n(x) = x \det
 \left[
 \begin{array}{ccccc}
-x & \frac 12 & & &  \\
+\frac{x}{2} & \frac 12 & & &  \\
   \frac 12 & x & \frac 12 & & \\
  & \frac 12 & x & \ddots & \\
  & & \ddots & \ddots & \frac 12  \\
@@ -52,7 +65,7 @@ x & \frac 12 & & &  \\
 \right] - \frac 12\det
 \left[
 \begin{array}{cccccc}
-x & \frac 12 & & & & 0 \\
+\frac{x}{2} & \frac 12 & & & & 0 \\
 \frac 12 & x & \frac 12 & & & 0\\
  & \frac 12 & x & \ddots & & 0\\
  & & \ddots & \ddots & \frac 12 & 0\\
@@ -62,14 +75,11 @@ x & \frac 12 & & & & 0 \\
 \right] = xp_{n-1}(x)-\frac{1}{4}p_{n-2}(x).
 $$
 
-Le facteur positif $2^n$ n'a aucune importance ici,
-$p_n$ et $P_n$ ont les même racines.
-
-La matrice $T_{20}$ vaut
+En écrivant $p_n$ sous la forme $\det(xI_n-T_n)$, on peut mettre la matrice $T_n$ en évidence. Dans le cas qui nous intéresse, la matrice $T_{20}$ vaut
 \[
   \begin{pmatrix}
-    0 & -\frac 12 & 0 & 0 & 0 & \cdots & 0 & 0\\
-    -\frac 12 & 0 & -\frac 12 & 0 & 0 & \cdots & 0 & 0\\
+    0 & -\frac{\sqrt{2}}{2} & 0 & 0 & 0 & \cdots & 0 & 0\\
+    -\frac{\sqrt{2}}{2} & 0 & -\frac 12 & 0 & 0 & \cdots & 0 & 0\\
     0 & -\frac 12 & 0 & -\frac 12 & 0 & \cdots & 0 & 0\\
     0 & 0 & -\frac 12 & 0 & -\frac 12 & \cdots & 0 & 0\\
     \vdots & \ddots& \ddots& \ddots& \ddots& \ddots & \vdots & \vdots\\
@@ -99,7 +109,7 @@ en utilisant la formule de récurrence de la première question.
 
 La variation peut être calculée ainsi
 \lstinputlisting{matlab/V.m}
-et le nombre de racine entre $a$ et $b$ de $P_n$ ainsi
+et le nombre de racines entre $a$ et $b$ de $P_n$ ainsi
 \lstinputlisting{matlab/main.m}
 ce qui donne
 \begin{lstlisting}
