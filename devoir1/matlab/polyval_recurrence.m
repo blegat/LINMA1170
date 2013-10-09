@@ -8,13 +8,13 @@ function p = polyval_recurrence (alpha, beta, x)
 %  On a donc alpha_k = p(k), beta_k = beta(k-1) et p_k = p(k+1).
 
 n = length(alpha);
-p = zeros(1, n);
+p = zeros(numel(x), n);
 
-p(1) = 1;
-p(2)= x - alpha(1);
+p(:,1) = 1;
+p(:,2)= x - alpha(1);
 
 for k = 2:n
-  p(k+1)= (x - alpha(k)) * p(k) - (beta(k-1))^2 * p(k-1);
+  p(:,k+1) = (x - alpha(k)) .* p(:,k) - (beta(k-1))^2 * p(:,k-1);
 end
 
 end
