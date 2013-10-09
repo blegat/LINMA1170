@@ -1,0 +1,37 @@
+\section*{Question 1}
+Soient les matrices tridiagonales symétriques
+$$T_n =
+\begin{pmatrix}
+\alpha_1 & \beta_2 & & \\
+\beta_2 & \ddots & \ddots & \\
+ & \ddots & \ddots & \beta_n \\
+ & & \beta_n & \alpha_n
+\end{pmatrix}
+$$
+avec $\beta_2 \hdots \beta_n$ non nuls.
+
+On cherche à montrer que les polynômes orthogonaux définis par $p_n(x)$ = det($x I_n - T_n$) satisfont la récurrence $$p_n(x) = (x-\alpha_n)p_{n-1}(x) - \beta_n^2 p_{n-2}(x).$$
+On va simplement calculer le déterminant de la matrice $x I_n - T_n$ par la méthode des cofacteurs. On obtient
+$$x I_n - T_n =
+\begin{pmatrix}
+x-\alpha_1 & -\beta_2 & & \\
+-\beta_2 & \ddots & \ddots & \\
+ & \ddots & \ddots & -\beta_n \\
+ & & -\beta_n & x-\alpha_n
+\end{pmatrix}.
+$$
+Utilisons la méthodes des cofacteurs suivant les éléments de la dernière ligne de la matrice. On a alors $$\text{det}(x I_n - T_n) = (-1)^{n+n}(x-\alpha_n)\text{det}(x I_{n-1} - T_{n-1}) + (-1)^{n+n-1}(-\beta_n)\text{det}(S_n)$$ où $S_n$ est défini par
+$$S_n =
+\begin{pmatrix}
+x-\alpha_1 & -\beta_2 & & \\
+-\beta_2 & \ddots & \ddots & \\
+ & \ddots & x-\alpha_{n-2} & 0 \\
+ & & -\beta_{n-1} & -\beta_n
+\end{pmatrix}.
+$$
+Si on calcule le déterminant de la matrice $S_n$ par la méthode des cofacteurs suivant la dernière colonne, on obtient $$\text{det}(S_n) = (-1)^{n-1+n-1}(-\beta_n)\text{det}(x I_{n-2} - T_{n-2}).$$
+Finalement, on obtient donc l'égalité suivante : $$\text{det}(x I_n - T_n) = (-1)^{2n}(x-\alpha_n)\text{det}(x I_{n-1} - T_{n-1}) + (-1)^{4n-3}(-\beta_n)^2\text{det}(x I_{n-2} - T_{n-2}).$$
+C'est-à-dire $$p_n(x) = (x-\alpha_n)p_{n-1}(x) - \beta_n^2 p_{n-2}(x),$$ la relation qu'il fallait vérifier.
+
+On remarque que pour que la récurrence marche,
+il faut poser $p_0(x) = 1$.
