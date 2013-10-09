@@ -1,6 +1,6 @@
 function N = main(a, b, n)
 alpha = zeros(1,n);
-beta = 1/2 * ones(1,n);
+beta = -1/2 * ones(1,n);
 p_a = polyval_recurrence(alpha, beta, a);
 p_b = polyval_recurrence(alpha, beta, b);
 V_a = V(p_a);

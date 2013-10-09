@@ -16,12 +16,12 @@ Soient les polynôme $p_n(x) = P_n(x)2^{-n}$, la récurrence devient
 \begin{align*}
   p_0(x) & = 1\\
   p_1(x) & = \frac{x}{2}\\
-  p_n(x) & = (x - 0)p_{n-1}(x) - \left(\frac{1}{2}\right)^2p_{n-2}(x).
+  p_n(x) & = (x - 0)p_{n-1}(x) - \left(-\frac{1}{2}\right)^2p_{n-2}(x).
 \end{align*}
 
 En faisant l'analogie entre les deux récurrences,
-on a donc $\alpha_n = 0$ et $\beta_n = \frac{1}{2}$
-(on aura pu également choisir $\beta_n = -\frac{1}{2}$,
+on a donc $\alpha_n = 0$ et $\beta_n = -\frac{1}{2}$
+(on aura pu également choisir $\beta_n = \frac{1}{2}$,
 cela n'aurait rien changé).
 Puisque la relation de récurrence est valable pour $n \geq 2$, on a donc défini $\alpha_n$ et $\beta_n \forall n \geq 2$.\\ Puisqu'on doit également avoir $P_1(x) = x$, on doit imposer $\alpha_1 = 0$. Les polynômes $p_n$ sont donc définis comme suit :
 %On remarque que pour satisfaire cette équation et les conditions initiales $P_0$ et $P_1$, $P_n(x)$ doit avoir la forme :
@@ -68,13 +68,13 @@ $p_n$ et $P_n$ ont les même racines.
 La matrice $T_{20}$ vaut
 \[
   \begin{pmatrix}
-    0 & \frac 12 & 0 & 0 & 0 & \cdots & 0 & 0\\
-    \frac 12 & 0 & \frac 12 & 0 & 0 & \cdots & 0 & 0\\
-    0 & \frac 12 & 0 & \frac 12 & 0 & \cdots & 0 & 0\\
-    0 & 0 & \frac 12 & 0 & \frac 12 & \cdots & 0 & 0\\
+    0 & -\frac 12 & 0 & 0 & 0 & \cdots & 0 & 0\\
+    -\frac 12 & 0 & -\frac 12 & 0 & 0 & \cdots & 0 & 0\\
+    0 & -\frac 12 & 0 & -\frac 12 & 0 & \cdots & 0 & 0\\
+    0 & 0 & -\frac 12 & 0 & -\frac 12 & \cdots & 0 & 0\\
     \vdots & \ddots& \ddots& \ddots& \ddots& \ddots & \vdots & \vdots\\
-    0 & 0 & 0 & 0 & 0 & \cdots & 0 & \frac 12\\
-    0 & 0 & 0 & 0 & 0 & \cdots & \frac 12 & 0
+    0 & 0 & 0 & 0 & 0 & \cdots & 0 & -\frac 12\\
+    0 & 0 & 0 & 0 & 0 & \cdots & -\frac 12 & 0
   \end{pmatrix}
 \]
 Les valeurs propres de $T_{20}$ s'obtiennent en déterminant le noyau
