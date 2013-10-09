@@ -8,18 +8,18 @@ f_1(x) & = & p_{n-1}(x)\\
 f_n(x) & = & p_0(x)
 \end{array}
 $$
-forme une suite de Sturn sur $] - \infty, +\infty]$. Une suite de Sturn est caractérisée par quatre propriétés essentielles :
+forme une suite de Sturn sur $] - \infty, +\infty[$. Une suite de Sturn est caractérisée par quatre propriétés essentielles :
 
 \begin{enumerate}
   \item $f_0(\alpha) f_0(\beta) \neq 0$;
-  \item $f_i( \xi)=0$ avec $i \geq 1$, $\xi \in (\alpha, \beta)$, alors $f_{i-1}( \xi) f{i+1}( \xi) <0$;
+  \item $f_i( \xi)=0$ avec $i \geq 1$, $\xi \in (\alpha, \beta)$, alors $f_{i-1}( \xi) f_{i+1}( \xi) <0$;
   \item $f_0( \xi )=0 $ avec $\xi \in (\alpha, \beta)$, alors $f_0'( \xi ) f_1( \xi ) >0$;
-  \item $f_0$ est constant sur $] \alpha, \beta]$
+  \item $f_0$ est constant sur $(\alpha, \beta)$
 \end{enumerate}
 
 Montrons que la suite des polynômes satisfait bien à ces quatre propriétés.
 Pour cela, commençons par montrer que $p_n$ est un polynôme de degré $n$
-et que le coefficient de $x_n$ est 1.
+et que le coefficient de $x^n$ est 1.
 Cela peut être montré par induction à l'aide de l'équation de récurrence
 \eqref{equ_recur}.
 
@@ -52,25 +52,35 @@ la dernière ligne et la dernière colonne de $T_n$ est par définition $T_{n-1}
 Par le théorème 1, on sait que leurs valeurs propres sont entrelacées.
 Comme leurs valeurs propres sont les racines des polynômes $p_n$ et $p_{n-1}$, on peut dire que leurs racines sont entrelacées.
 
-Dès lors, si $p_i$ a une racine multiple $r$, $p_{i+1}$ et $p_{i-1}$
-(s'ils existent) ont nécessairement cette racine.
-En effet, il existera un $k$ tel que
-$\lambda_k = \lambda_{k+1} = r$ et donc $\mu_{k} = r$.
-Or on sait que $p_i$ et $p_{i+1}$ n'ont pas de racines communes;
-de même pour $p_i$ et $p_{i-1}$.
-On conclut que $p_i$ n'a pas de racines multiples.
+Essayons maintenant de déterminer si un des polynômes de cette suite,
+disons $p_i$, peut posséder une racine multiple.
+Supposons que $p_i$ possède une racine multiple
+(d'ordre strictement supérieur à un).
+Puisque les polynômes consécutifs de la suite sont entrelacés,
+$p_{i-1}$ et $p_{i+1}$ (s'ils existent) possèdent également cette racine.
+Pourtant, on a montré que $p_i$ et $p_{i+1}$ ne possèdent pas de racine commune
+(c'est également le cas pour $p_i$ et $p_{i-1}$), ce qui contredis l'hypothèse.
+On conclut que $p_i$ ne possède pas de racine multiple.
+
+%Dès lors, si $p_i$ a une racine multiple $r$, $p_{i+1}$ et $p_{i-1}$
+%(s'ils existent) ont nécessairement cette racine.
+%En effet, il existera un $k$ tel que
+%$\lambda_k = \lambda_{k+1} = r$ et donc $\mu_{k} = r$.
+%Or on sait que $p_i$ et $p_{i+1}$ n'ont pas de racines communes;
+%de même pour $p_i$ et $p_{i-1}$.
+%On conclut que $p_i$ n'a pas de racines multiples.
 
 
 	Nous pouvons à présent montrer que notre suite $p_i$ est une suite de Sturn.
 \begin{enumerate}
   \item Commençons par montrer que $f_0(\alpha)f_0(\beta) \neq 0$.
     Comme $\alpha = -\infty$ et $\beta = + \infty$ et que $f_0$ est un polynôme,
-    il faudrait que $f_0$ soit le polynôme nul.
+    il faudrait que $f_0$ soit le polynôme nul pour que $f_0(\alpha)f_0(\beta) = 0$.
     Pourtant, on a montré que $p_n$ est de degré $n$ et $p_0 = 1$ donc
-    c'est impossible.
+    c'est impossible. Ceci montre que $f_0(\alpha)f_0(\beta) \neq 0$.
   \item Montrons ensuite que si $f_i(\xi) = 0$ avec $1 \leq i \leq n-1$,
     alors $f_{i-1}(\xi)f_{i+1}(\xi) < 0$.
-    On peut réécrire l'équation de récurrence \ref{equ_recur} en $x=\xi$.
+    On peut réécrire l'équation de récurrence \eqref{equ_recur} en $x=\xi$.
     Et comme par hypothèse, $f_i(\xi)=0$, on obtient la relation
     $f_{i+1}(\xi) = -\beta_n^2f_{i-1}(\xi)$, ce qui implique que
     \[ f_{i-1}(\xi)f_{i+1}(\xi) = -(\beta_nf_{i-1}(\xi))^2 < 0. \]
@@ -129,7 +139,7 @@ On conclut que $p_i$ n'a pas de racines multiples.
     Avec le même raisonnement on montre que $f_1(\xi - \epsilon)$ et
     $f_1(\xi)$ sont de même signe.
     Comme $\epsilon > 0$, on peut déduire que $p_0'(\xi)$ et
-    $p_0(\xi - \epsilon)$ sont de signe opposé.
+    $p_0(\xi - \epsilon)$ sont de signes opposés.
     Puisqu'on sait que $p_0(\xi - \epsilon)$ et $p_1(\xi - \epsilon)$ sont
     de signe opposé, on obtient finalement $p_0'(\xi) p_1(\xi) > 0$.
   \item Le fait que $f_n(x)$ soit de signe constant est trivial car
@@ -139,12 +149,16 @@ On conclut que $p_i$ n'a pas de racines multiples.
 \begin{figure}
   \centering
   \includegraphics[height=8cm]{fig3.jpg}
-  \caption{Pour illustrer la suite des polynômes $P_i$,
+  \caption{Pour illustrer la suite des polynômes $p_i$,
   nous avons tracé le graphe des polynômes $P_{20}(x)$ et $P_{19}(x)$ de
   Tchebychev (cf. Question 4).
-  On remarque que les deux fonctions sont bien entrelacées.
-  On voit également que le polynôme $P_{20}(x)$ a bel et bien deux racines dans
-  l'intervalle $[1/2, 3/4]$,
-  ce qui confirme les résultats obtenus à la question 4.}
-  \label{figure_Tcheb}
+  On remarque que les deux fonctions sont bien entrelacées et de signe contraire en $- \infty$.
+  De même on constate qu'en chaque racine de $P_{20}(x)$,
+  soit $P_{20}(x)$ est décroissant et $P_{19}(x)$ négatif,
+  soit $P_{20}(x)$ est croissant et $P_{19}(x)$ positif
+  (c'est-à-dire $f_0'(\xi)f_1(\xi)>0$).
+  En ce qui concerne la question 4, on remarque que le polynôme $P_{20}(x)$
+  a bel et bien deux racines dans l'intervalle $[1/2, 3/4]$,
+  ce qui confirme les résultats algébriques obtenus.}
+\label{figure_Tcheb}
 \end{figure}
