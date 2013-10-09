@@ -1,4 +1,6 @@
 function p = polyval_recurrence (alpha, beta, x)
+% auteurs : groupe 3 (Arnaud Cerckel and Benoit Legat and
+% Nicolas Stevens and Harold Taeter)
 % POLYVAL_RECURRENCE Evalue tous les polynomes p_k en un point x en O(n)
 %
 %  [p] = polyval_recurrence(alpha, beta, x) renvoie p respectant la recurrence

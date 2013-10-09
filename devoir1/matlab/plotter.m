@@ -1,3 +1,6 @@
+% auteurs : groupe 3 (Arnaud Cerckel and Benoit Legat and
+% Nicolas Stevens and Harold Taeter)
+
 n = 20;
 alpha = zeros(1,n);
 beta = 1/2 * ones(1,n);
