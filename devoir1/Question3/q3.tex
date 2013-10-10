@@ -4,3 +4,11 @@ Il suffit d'utiliser la récurrence
 
 Ce qui donne
 \lstinputlisting{matlab/polyval_recurrence.m}
+
+On peut prouver que la complexité est $\bigoh(n)$ pour
+\lstinline{numel(x) = 1}.
+On remarque qu'on exécute $n+3$ lignes qui sont chacune en temps constant
+$\bigoh(1)$.
+Sauf éventuellement \lstinline{p = zeros(numel(x), n)} mais comme elle
+n'est exécutée qu'une seule fois, et que $\bigoh(2n) = \bigoh(n)$,
+on a tout de même du $\bigoh(n)$.
