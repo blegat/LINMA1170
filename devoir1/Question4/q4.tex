@@ -25,12 +25,12 @@ $p_n(x) = P_n(x)2^{-n+1}$ pour $n > 0$ et $p_0 = P_0$, la récurrence devient
 La récurrence n'est que valable pour $n > 2$ car $p_0$ n'est pas défini de
 la même manière.
 On a
-\[ p_2(x) = (x - 0)p_1(x) - \left(-\frac{\sqrt{2}}{2}\right)p_0(x) \]
+\[ p_2(x) = (x - 0)p_1(x) - \left(-\frac{\sqrt{2}}{2}\right)^2p_0(x) \]
 
 En faisant l'analogie avec \eqref{equ_recur},
 on a donc $\alpha_n = 0$ et $\beta_n = -\frac{1}{2}$
 (on aura pu également choisir $\beta_n = \frac{1}{2}$,
-cela n'aurait rien changé) pour $n > 1$ et $\beta_2 = -\frac{\sqrt{2}}{2}$
+cela n'aurait rien changé) pour $n > 2$ et $\beta_2 = -\frac{\sqrt{2}}{2}$
 %Les polynômes $p_n$ sont donc définis comme suit :
 %%On remarque que pour satisfaire cette équation et les conditions initiales $P_0$ et $P_1$, $P_n(x)$ doit avoir la forme :
 %$$
@@ -55,7 +55,9 @@ cela n'aurait rien changé) pour $n > 1$ et $\beta_2 = -\frac{\sqrt{2}}{2}$
 %  \end{array}
 %\right].
 %$$
-Sans surprise, en calculant $p_n$ par la méthode des cofacteurs, on retrouve l'équation de récurrence de $p_n$
+Sans surprise,
+en calculant $p_n$ pour $n > 2$ par la méthode des cofacteurs,
+on retrouve l'équation de récurrence de $p_n$
 $$
 p_n(x) = x \det
 \left[
