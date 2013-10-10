@@ -13,51 +13,55 @@ On remarque que la récurrence ci-dessus ressemble à celle de la première ques
 Puisque les polynômes $P_n$ sont définis comme les polynômes $p_n$,
 on peut utiliser cette récurrence \eqref{equ_recur}.
 Soient les polynômes
-\footnote{Le facteur positif $2^{-n}$ n'a aucune importance ici,
+\footnote{Le facteur positif $2^{-n+1}$ n'a aucune importance ici,
 $p_n$ et $P_n$ ont les même racines,
 on peut donc choisir de travailler avec l'un ou avec l'autre.}
-$p_n(x) = P_n(x)2^{-n}$, la récurrence devient
+$p_n(x) = P_n(x)2^{-n+1}$ pour $n > 0$ et $p_0 = P_0$, la récurrence devient
 \begin{align*}
   p_0(x) & = 1\\
-  p_1(x) & = \frac{x}{2}\\
-  p_n(x) & = (x - 0)p_{n-1}(x) - \left(-\frac{1}{2}\right)^2p_{n-2}(x).
+  p_1(x) & = x\\
+  p_n(x) & = (x - 0)p_{n-1}(x) - \left(-\frac{1}{2}\right)^2p_{n-2}(x) & \forall n > 2.
 \end{align*}
+La récurrence n'est que valable pour $n > 2$ car $p_0$ n'est pas défini de
+la même manière.
+On a
+\[ p_2(x) = (x - 0)p_1(x) - \left(-\frac{\sqrt{2}}{2}\right)p_0(x) \]
 
-En faisant l'analogie entre les deux récurrences,
+En faisant l'analogie avec \eqref{equ_recur},
 on a donc $\alpha_n = 0$ et $\beta_n = -\frac{1}{2}$
 (on aura pu également choisir $\beta_n = \frac{1}{2}$,
-cela n'aurait rien changé).
-Puisque la relation de récurrence est valable pour $n \geq 2$, on a donc défini $\alpha_n$ et $\beta_n \forall n \geq 2$.\\ Puisqu'on doit également avoir $P_1(x) = x$, on doit imposer $\alpha_1 = 0$. Les polynômes $p_n$ sont donc définis comme suit :
-%On remarque que pour satisfaire cette équation et les conditions initiales $P_0$ et $P_1$, $P_n(x)$ doit avoir la forme :
-$$
-p_n(x) = \det
-\left[
-  \begin{array}{cccccc}
-    \frac{x}{2} & \frac{1}{2} & & & &  \\
-    \frac{1}{2} & x & \frac{1}{2} & & & \\
-      & \frac{1}{2} & x & \frac{1}{2} & & \\
-      & & \ddots & \ddots & \ddots & \\
-      & & & \ddots & \ddots &  \frac{1}{2}\\
-      & & & &  \frac{1}{2} & x
-  \end{array}
-\right] = \frac{1}{2} \det \left[
-  \begin{array}{cccccc}
-    x & \frac{\sqrt{2}}{2} & & & &  \\
-    \frac{\sqrt{2}}{2} & x & \frac{1}{2} & & & \\
-      & \frac{1}{2} & x & \frac{1}{2} & & \\
-      & & \ddots & \ddots & \ddots & \\
-      & & & \ddots & \ddots &  \frac{1}{2}\\
-      & & & &  \frac{1}{2} & x
-  \end{array}
-\right].
-$$
+cela n'aurait rien changé) pour $n > 1$ et $\beta_2 = -\frac{\sqrt{2}}{2}$
+%Les polynômes $p_n$ sont donc définis comme suit :
+%%On remarque que pour satisfaire cette équation et les conditions initiales $P_0$ et $P_1$, $P_n(x)$ doit avoir la forme :
+%$$
+%p_n(x) = \det
+%\left[
+%  \begin{array}{cccccc}
+%    x & \frac{\sqrt{2}}{2} & & & &  \\
+%    \frac{\sqrt{2}}{2} & x & \frac{1}{2} & & & \\
+%      & \frac{1}{2} & x & \frac{1}{2} & & \\
+%      & & \ddots & \ddots & \ddots & \\
+%      & & & \ddots & \ddots &  \frac{1}{2}\\
+%      & & & &  \frac{1}{2} & x
+%  \end{array}
+%\right] = \frac{1}{2} \det \left[
+%  \begin{array}{cccccc}
+%    x & \frac{\sqrt{2}}{2} & & & &  \\
+%    \frac{\sqrt{2}}{2} & x & \frac{1}{2} & & & \\
+%      & \frac{1}{2} & x & \frac{1}{2} & & \\
+%      & & \ddots & \ddots & \ddots & \\
+%      & & & \ddots & \ddots &  \frac{1}{2}\\
+%      & & & &  \frac{1}{2} & x
+%  \end{array}
+%\right].
+%$$
 Sans surprise, en calculant $p_n$ par la méthode des cofacteurs, on retrouve l'équation de récurrence de $p_n$
 $$
 p_n(x) = x \det
 \left[
 \begin{array}{ccccc}
-\frac{x}{2} & \frac 12 & & &  \\
-  \frac 12 & x & \frac 12 & & \\
+  x & \frac{\sqrt{2}}{2} & & &  \\
+  \frac{\sqrt{2}}{2} & x & \frac 12 & & \\
  & \frac 12 & x & \ddots & \\
  & & \ddots & \ddots & \frac 12  \\
  & & & \frac 12 & x   \\
@@ -65,8 +69,8 @@ p_n(x) = x \det
 \right] - \frac 12\det
 \left[
 \begin{array}{cccccc}
-\frac{x}{2} & \frac 12 & & & & 0 \\
-\frac 12 & x & \frac 12 & & & 0\\
+  x & \frac{\sqrt{2}}{2} & & & & 0 \\
+  \frac{\sqrt{2}}{2} & x & \frac 12 & & & 0\\
  & \frac 12 & x & \ddots & & 0\\
  & & \ddots & \ddots & \frac 12 & 0\\
  & & & \frac 12 & x &  0\\
