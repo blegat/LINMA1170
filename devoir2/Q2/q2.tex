@@ -1,0 +1,71 @@
+\section{Question 2}
+Nous avons résolu le problème de départ $T_L X T_R = A_{\Delta}$ en deux étapes : 
+\begin{eqnarray}\label{eq_q2}
+T_L \mathcal{Y} &=& A_{\Delta}\\
+T_R \mathcal{X}^T &=& \mathcal{Y}^T.
+\end{eqnarray}
+
+Les matrices de Jacobi et de Gauss-Seidel sont définies comme suit : 
+\begin{eqnarray}
+\mathcal{J} &=& -D^{-1}(L+U)\\
+\mathcal{G} &=& -(D+L)^{-1}U,
+\end{eqnarray}
+autrement dit :
+\begin{eqnarray}
+\mathcal{J} &=& - a
+\left[ 
+\begin{array}{cccc}
+1 & & &\\
+ & 1 & &\\
+ & & \ddots & \\
+  & & & 1
+\end{array} 
+\right] 
+\left[ 
+\begin{array}{cccc}
+0 & 1& &\\
+1 & \ddots & \ddots &\\
+ & \ddots & \ddots & 1 \\
+  & & 1 & 0
+\end{array} 
+\right]\\
+\mathcal{G} & = & -  
+\left[ 
+\begin{array}{cccc}
+1 & & &\\
+a & \ddots &  &\\
+ & \ddots & \ddots  &  \\
+  & & a & 1
+\end{array} 
+\right] ^{-1}
+\left[ 
+\begin{array}{cccc}
+0 & a & &\\
+ & \ddots &  \ddots &\\
+ &  & \ddots  & a \\
+  & &  & 0
+\end{array} 
+\right] 
+\\
+&=& -
+\left[ 
+\begin{array}{ccccc}
+1 & & & &\\
+-a & \ddots &  & &\\
+a^2 & \ddots & \ddots  &  &\\
+ \vdots & \ddots & \ddots & \ddots & \\
+(-1)^{n}a^{n-1} & & -a^2 & a & -1
+\end{array} 
+\right]
+\left[ 
+\begin{array}{cccc}
+0 & a & &\\
+ & \ddots &  \ddots &\\
+ &  & \ddots  & a \\
+  & &  & 0
+\end{array} 
+\right]
+\end{eqnarray}
+
+Pour la méthode de Jacobi, on obtient directement que les valeurs propres de $\mathcal{J}$ valent $\lambda _i = -2a * cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = max |\lambda _i| < 2a$. 
+
