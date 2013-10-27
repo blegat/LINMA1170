@@ -41,12 +41,17 @@ Les valeurs propres de T sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac
 
 On obtient donc comme valeurs propres maximales $\lambda_{max}$ et minimum $\lambda_{min}$ , pour a et k positifs : 
 
-	$$\lambda_{max} =  \frac{1+2a}{k} $$
-	$$\lambda_{min} =  \frac{1-2a}{k} $$
+	$$\lambda_{max} (T) =  \frac{1+2a}{k} $$
+	$$\lambda_{min} (T) =  \frac{1-2a}{k} $$
 	
-Le carré du rapport $\frac{\lambda_{max}}{\lambda_{min}}$ est donné par :
+Le nombre de conditionnement $\kappa$ de la matrice $T$ est défini par 
 \begin{equation}
-	(\frac{\lambda_{max}}{\lambda_{min}})^2 = \frac{(1+2a)^2}{(1-2a)^2}
+	\kappa (T) = \frac{\lambda_{max} (T)}{\lambda_{min} (T)} = \frac{1+2a}{1-2a}
+\end{equation}
+	
+Le carré du nombre de conditionnement est :
+\begin{equation}
+	\kappa^2 (T) = \frac{(1+2a)^2}{(1-2a)^2}
 \end{equation}
 	
 
