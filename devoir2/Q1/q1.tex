@@ -1,0 +1,52 @@
+\section{Question 1}
+
+\subsection{Facteur k}
+
+\subsection{Valeurs propres}
+	Nous savons que les valeurs propres de la matrice S 
+	$$
+S = 	
+ \left[
+ \begin{array}{cccc}
+    0 & 1 		& 			& \\
+    1 & \ddots 	& \ddots 	& \\
+      & \ddots 	& \ddots 	& 1 \\
+      & 		& 1			& 0
+  \end{array}
+  \right]
+$$
+
+sont données par $\lambda_i = 2 \cos(\frac{i\pi}{n+1})$, $i= 1, \ldots , n$ où n est la dimension de la matrice.
+
+Vu que T est de la forme 
+
+$$
+ T = \frac{1}{k}
+ \left[
+ \begin{array}{cccc}
+    1 & a 		& 			& \\
+    a & \ddots 	& \ddots 	& \\
+      & \ddots 	& \ddots 	& a \\
+      & 		& a			& 1
+  \end{array}
+  \right] ,
+$$
+
+on a donc que $T = \frac{1}{k} I + \frac{a}{k} S$.
+
+%XXX
+\textbf{je sais je dois encore justifier proprement}
+
+Les valeurs propres de T sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
+
+On obtient donc comme valeurs propres maximales $\lambda_{max}$ et minimum $\lambda_{min}$ , pour a et k positifs : 
+
+	$$\lambda_{max} =  \frac{1+2a}{k} $$
+	$$\lambda_{min} =  \frac{1-2a}{k} $$
+	
+Le carré du rapport $\frac{\lambda_{max}}{\lambda_{min}}$ est donné par :
+\begin{equation}
+	(\frac{\lambda_{max}}{\lambda_{min}})^2 = \frac{(1+2a)^2}{(1-2a)^2}
+\end{equation}
+	
+
