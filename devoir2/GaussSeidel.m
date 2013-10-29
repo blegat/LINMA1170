@@ -6,16 +6,17 @@ L = tril(A) - D;
 U = triu(A) - D;
 
 i=0;
-n=1e4;
-x = zeros(length(A));
+n=1000;
+x = zeros(length(A), 1);
+x0 = zeros(length(A), 1);
+err = eps+1;
 
 while i<n && err>eps
 x0=x;
-x = (-U*x + b)/(D+L);
+x = (D+L)\(-U*x + b);
 err = norm(x-x0);
 i=i+1;
 end
-
 X=x;
 end
 
