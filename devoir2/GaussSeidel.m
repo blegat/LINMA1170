@@ -1,7 +1,8 @@
 function [X, i] = GaussSeidel(A, b, eps)
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
-D = diag(diag(A));
+%
+%   eps = theoretically frobenius norm, not yet implemented 
+
+D = diag(diag(A)); % diagonal matrix ( diag(diag()) ) 
 L = tril(A) - D;
 U = triu(A) - D;
 

@@ -1,22 +1,23 @@
-function [X] = Question2(A, a, k)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+function [X] = Question2(L, a, k)
+%   L = image received 
+%   a, k = coef T ( a/k sould be between 0 and 255)
+%   
 
 figure(1)
-imagesc(A);
+imagesc(L);
 
-[M N] = size(A);
-Delta = randn(M,N);
+[M N] = size(L);
+Delta = randn(M,N); % Ok mean = 0 variance = 1 
 e=ones(M,1); 
 TL = (1/k) * spdiags([a*e e a*e],-1:1, M,M);
 f=ones(N,1); 
-TR = (1/k) * spdiags([a*e e a*e],-1:1, N,N);
-I = TL*A*TR;
+TR = (1/k) * spdiags([a*f f a*f],-1:1, N,N);
+A = TL*L*TR; % initial blurred iamge
 
 figure(2)
-imagesc(I);
+imagesc(A);
 
-Ad = I+Delta;
+Ad = A+Delta; % blurred image with perturbation
 
 figure(3)
 imagesc(Ad);
@@ -26,31 +27,19 @@ X=zeros(N,M);
 
 for i=1:N
 [Y(:,i) i1] = Jacobi(TL, Ad(:,i), 0.0001);
+%[Y(:,i) i1] = GaussSeidel(TL, Ad(:,i), 0.00001);
 end
 
 for i=1:M
-[X(:,i) i2] = Jacobi(TR, Y(i,:)', 0.0001);
+  [X(:,i) i2] = Jacobi(TR, Y(i,:)', 0.0001);
+%[X(:,i) i2] = GaussSeidel(TR, Y(i,:)', 0.00001);
 end
 
 X=X';
 figure(4)
 imagesc(X);
 
-norm(A-X);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+norm(A-X); % the question is simply why do u do this ? 
 
 end
 
