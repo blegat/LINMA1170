@@ -3,6 +3,7 @@
 \subsection{Facteur k}
 	Tout d'abord, il  est capital que peu importe la valeur de $\textit{a}$ dans la matrice $\textit{T}$, les coefficients de la matrice $\textit{A}$ gardent leur valeur comprise entre 0 et 255. La valeur de $\frac{1}{k}$ doit donc permettre de ramener les valeurs obtenues après floutage dans des normes acceptables.
 	
+\textbf{Il y a clairement une autre utilité, preuve en est si on fait joujou avec le programme matlab on se rend compte qu'à a constant modifier k a un impact clair sur l'image après recomposition.}	
 	
 \subsection{Valeurs propres}
 	Nous savons que les valeurs propres de la matrice S 
@@ -41,19 +42,31 @@ on a donc que $T = \frac{1}{k} I + \frac{a}{k} S$.
 
 Les valeurs propres de T sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
 
-On obtient donc comme valeurs propres maximales $\lambda_{max}$ et minimum $\lambda_{min}$ , pour a et k positifs : 
+On obtient donc comme valeurs propres maximales $\lambda_{max}$ et minimum $\lambda_{min}$ , pour a et k positifs (on travaille avec des pixels ayant leur valeur comprise entre 0 et 255): 
 
 	$$\lambda_{max} (T) =  \frac{1+2a}{k} $$
 	$$\lambda_{min} (T) =  \frac{1-2a}{k} $$
 	
-Le nombre de conditionnement $\kappa$ de la matrice $T$ est défini par 
+Le nombre de conditionnement $\kappa$ de la matrice $T$ (symétrique) est défini par 
 \begin{equation}
-	\kappa (T) = \frac{\lambda_{max} (T)}{\lambda_{min} (T)} = \frac{1+2a}{1-2a}
+	\kappa (T) = ||T||_2||T^{-1}||_2 = \frac{\lambda_{max} (T)}{\lambda_{min} (T)} = \frac{1+2a}{1-2a}
 \end{equation}
-	
+
+La norme subordonnée $||T||_2$ est définie telle que : 
+$$||T||_2 = \sqrt{\lambda_{max}(T^TT)}$$
+où $\lambda_{max}(T^TT)$ désigne la plus grande valeur propre de $T^TT$.
+On sait donc que $\kappa(T) $ est positif.	
+
+\textbf{Parait même que c'est $\geq$ 1}
+
 Le carré du nombre de conditionnement est :
 \begin{equation}
 	\kappa^2 (T) = \frac{(1+2a)^2}{(1-2a)^2}
 \end{equation}
+
+
+(On dit d'une matrice qu'elle est bien conditionnée si son nombre de conditionnement est proche de 1 et mal conditionnée s'il est grand. En effet, dans le cadre d'un problème de type $Ax = b$, la valeur de ce nombre fournit une borne de l'erreur relative de $x$ quand on introduit une perturbation $\Delta A $ ou $\Delta b$. Dans notre cas on cherchera donc à prendre un $a$ le plus proche possible de 0. )
+
+On remarque également que pour $a \geq 0.5$ le nombre de conditionnement n'est pas défini. En $0.5$ de manière évidente et pour $a > 0.5$ parce que $\kappa$ est positif. 
 	
 

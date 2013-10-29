@@ -26,13 +26,13 @@ Y=zeros(M,N);
 X=zeros(N,M);
 
 for i=1:N
-[Y(:,i) i1] = Jacobi(TL, Ad(:,i), 0.0001);
-%[Y(:,i) i1] = GaussSeidel(TL, Ad(:,i), 0.00001);
+%[Y(:,i) i1] = Jacobi(TL, Ad(:,i), 0.0001);
+[Y(:,i) i1] = GaussSeidel(TL, Ad(:,i), 0.00001);
 end
 
 for i=1:M
-  [X(:,i) i2] = Jacobi(TR, Y(i,:)', 0.0001);
-%[X(:,i) i2] = GaussSeidel(TR, Y(i,:)', 0.00001);
+%  [X(:,i) i2] = Jacobi(TR, Y(i,:)', 0.0001);
+[X(:,i) i2] = GaussSeidel(TR, Y(i,:)', 0.00001);
 end
 
 X=X';
