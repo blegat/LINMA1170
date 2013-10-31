@@ -1,4 +1,4 @@
-function [X] = Question2(L, a, k)
+function [i1, i2] = Question2(L, a, k, iterator)
 %   L = image received 
 %   a, k = coef T ( a/k sould be between 0 and 255)
 %   
@@ -25,21 +25,26 @@ imagesc(Ad);
 Y=zeros(M,N);
 X=zeros(N,M);
 
+tic()
 for i=1:N
-%[Y(:,i) i1] = Jacobi(TL, Ad(:,i), 0.0001);
-[Y(:,i) i1] = GaussSeidel(TL, Ad(:,i), 0.00001);
+    if strcmp(iterator,'Jacobi')
+        [Y(:,i) i1] = Jacobi(TL, Ad(:,i), 0.00001);
+    else
+        [Y(:,i) i1] = GaussSeidel(TL, Ad(:,i), 0.00001);
+    end
 end
 
 for i=1:M
-%  [X(:,i) i2] = Jacobi(TR, Y(i,:)', 0.0001);
-[X(:,i) i2] = GaussSeidel(TR, Y(i,:)', 0.00001);
+    if strcmp(iterator,'Jacobi')
+        [X(:,i) i2] = Jacobi(TR, Y(i,:)', 0.00001);
+    else
+        [X(:,i) i2] = GaussSeidel(TR, Y(i,:)', 0.00001);
+    end
 end
-
+toc()
 X=X';
 figure(4)
 imagesc(X);
-
-norm(A-X); % the question is simply why do u do this ? 
 
 end
 

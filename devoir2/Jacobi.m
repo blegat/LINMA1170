@@ -8,7 +8,7 @@ U = triu(A) - D;
 
 i=0;
 err=eps+1;
-n=1000;
+n=2000;
 x1 = zeros(length(A), 1);
 x2 = zeros(length(A), 1);
 while i<n && err>eps
