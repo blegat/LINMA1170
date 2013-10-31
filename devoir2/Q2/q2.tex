@@ -1,5 +1,5 @@
 \section{Question 2}
-Nous avons résolu le problème de départ $T_L X T_R = A_{\Delta}$ en deux étapes : 
+Le problème de départ $T_L X T_R = A_{\Delta}$ peut se décomposer en deux étapes \footnote{Si $A_{\Delta}$ est une matrice de dimension $n*m$, $T_L$ (resp. $T_R$) sera une  matrice carré de dimension $n*n$ (resp. $m*m$).} : 
 \begin{eqnarray}\label{eq_q2}
 T_L \mathcal{Y} &=& A_{\Delta}\\
 T_R \mathcal{X}^T &=& \mathcal{Y}^T.
@@ -54,7 +54,7 @@ a & \ddots &  &\\
 -a & \ddots &  & &\\
 a^2 & \ddots & \ddots  &  &\\
  \vdots & \ddots & \ddots & \ddots & \\
-(-1)^{n}a^{n-1} & & -a^2 & a & -1
+(-1)^{n-1}a^{n-1} & & a^2 & -a & 1
 \end{array} 
 \right]
 \left[ 
@@ -64,8 +64,18 @@ a^2 & \ddots & \ddots  &  &\\
  &  & \ddots  & a \\
   & &  & 0
 \end{array} 
+\right]\\
+&=& -
+\left[ 
+\begin{array}{ccccc}
+0 & a & & &\\
+0 & -a^2 & \ddots  & &\\
+\vdots & a^3 & \ddots & \ddots  &\\
+\vdots & \vdots & \ddots & \ddots  & a \\
+0 & (-1)^n a^n & & a^3 & -a^2
+\end{array} 
 \right]
 \end{eqnarray}
 
-Pour la méthode de Jacobi, on obtient directement que les valeurs propres de $\mathcal{J}$ valent $\lambda _i = -2a * cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = max |\lambda _i| < 2a$. 
+Pour la méthode de Jacobi, on obtient directement (cf. question 1) que les valeurs propres de $\mathcal{J}$ valent $\lambda _i = -2a * cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = max |\lambda _i| < 2a$. Ainsi la méthode de Jacobi convergera pour des valeurs de $a \leq 0.5$. 
 
