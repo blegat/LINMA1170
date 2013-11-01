@@ -6,12 +6,15 @@ function [i1, i2] = Question2(L, a, iterator)
 k=sqrt(1 + 4*a + 4*a^2);
 %k=0.02;
 figure(1);
+colormap(gray);
 imagesc(L);
 
 %L(1,10)
 %L(10,10)
-%lk = (1/k^2)*(L(1,10)+a*L(2,10)+a*L(1,11)+a*L(1,9)+a^2*L(2,9)+a^2*L(2,11))
-%lk2 = (1/k^2)*(L(10,10)+a*L(11,10)+a*L(9,10)+a*L(10,11)+a*L(10,9)+a^2*L(9,9)+a^2*L(11,11)+a^2*L(11,9)+a^2*L(9,11))
+%lk = 
+(1/k^2)*(L(1,10)+a*L(2,10)+a*L(1,11)+a*L(1,9)+a^2*L(2,9)+a^2*L(2,11))
+%lk2 = 
+(1/k^2)*(L(10,10)+a*L(11,10)+a*L(9,10)+a*L(10,11)+a*L(10,9)+a^2*L(9,9)+a^2*L(11,11)+a^2*L(11,9)+a^2*L(9,11))
 
 [M N] = size(L);
 Delta = randn(M,N); % Ok mean = 0 variance = 1 
@@ -22,6 +25,7 @@ TR = (1/k) * spdiags([a*f f a*f],-1:1, N,N);
 A = TL*L*TR; % initial blurred iamge
 
 figure(2)
+colormap(gray);
 imagesc(A);
 
 Ad = (A+Delta); % blurred image with perturbation
@@ -52,9 +56,11 @@ end
 %toc()
 X=X';
 figure(4)
+colormap(gray);
 imagesc(X);
 
 NORM2 = sum(sum(norm(X-L)))
 
 end
+
 
