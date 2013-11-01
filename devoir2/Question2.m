@@ -59,7 +59,7 @@ figure(4)
 colormap(gray);
 imagesc(X);
 
-NORM2 = sum(sum(norm(X-L)))
+NORM2 = sqrt(sum(sum((X-L)^2)))
 
 end
 
