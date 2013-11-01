@@ -42,21 +42,29 @@ Y=zeros(M,N);
 X=zeros(N,M);
 
 %tic()
-for i=1:N
-    if strcmp(iterator,'Jacobi')
-        [Y(:,i) i1] = Jacobi(TL, Ad(:,i), 0.00001);
-    else
-        [Y(:,i) i1] = GaussSeidel(TL, Ad(:,i), 0.00001);
-    end
+% for i=1:N
+%     if strcmp(iterator,'Jacobi')
+%         [Y(:,i) i1] = Jacobi(TL, Ad(:,i), 0.00001);
+%     else
+%         [Y(:,i) i1] = GaussSeidel(TL, Ad(:,i), 0.00001);
+%     end
+% end
+
+if strcmp(iterator,'Jacobi')
+    [Y i1] = Jacobi(TL, Ad);
+    [X i2] = Jacobi(TR, Y');
+else
+    [Y i1] = GaussSeidel(TL, Ad);
+    [X i2] = GaussSeidel(TR, Y');
 end
 
-for i=1:M
-    if strcmp(iterator,'Jacobi')
-        [X(:,i) i2] = Jacobi(TR, Y(i,:)', 0.00001);
-    else
-        [X(:,i) i2] = GaussSeidel(TR, Y(i,:)', 0.00001);
-    end
-end
+% for i=1:M
+%     if strcmp(iterator,'Jacobi')
+%         [X(:,i) i2] = Jacobi(TR, Y(i,:)', 0.00001);
+%     else
+%         [X(:,i) i2] = GaussSeidel(TR, Y(i,:)', 0.00001);
+%     end
+% end
 
 %toc()
 X=X';
