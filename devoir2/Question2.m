@@ -54,7 +54,7 @@ X=X';
 figure(4)
 imagesc(X);
 
-NORM2 = sum(sum(norm(X-L)))
+NORM2 = sqrt(sum(sum((X-L)^2)))
 
 end
 
