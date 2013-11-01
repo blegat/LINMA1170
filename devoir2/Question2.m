@@ -5,7 +5,9 @@ function [i1, i2] = Question2(L, a, iterator)
 
 k=sqrt(1 + 4*a + 4*a^2);
 %k=0.02;
-figure(1);
+figure();
+plot = subplot(2,2,1);
+title(plot, 'Original');
 colormap(gray);
 imagesc(L);
 
@@ -22,15 +24,18 @@ e=ones(M,1);
 TL = (1/k) * spdiags([a*e e a*e],-1:1, M,M);
 f=ones(N,1);
 TR = (1/k) * spdiags([a*f f a*f],-1:1, N,N);
-A = TL*L*TR; % initial blurred iamge
+A = TL*L*TR; % initial blurred image
 
-figure(2)
+plot = subplot(2,2,2);
+title(plot, 'Blurred');
 colormap(gray);
 imagesc(A);
 
 Ad = (A+Delta); % blurred image with perturbation
 
-figure(3)
+plot = subplot(2,2,3);
+title(plot, 'Blurred + noise');
+colormap(gray);
 imagesc(Ad);
 
 Y=zeros(M,N);
@@ -55,10 +60,11 @@ end
 
 %toc()
 X=X';
-figure(4)
+plot = subplot(2,2,4);
+title(plot, '(blured + noise) unblurred');
 colormap(gray);
 imagesc(X);
 
-NORM2 = sqrt(sum(sum((X-L)^2)))
+NORM2 = sqrt(sum(sum((X-L).^2)))
 
 end

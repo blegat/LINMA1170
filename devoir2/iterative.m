@@ -26,6 +26,7 @@ while i < n && err > eps
     xkp1 = M \ (N * xk + b);
     err  = norm(xkp1 - xk, 'fro');
     i    = i + 1;
+    xk = xkp1;
 end
 x=xkp1;
 
