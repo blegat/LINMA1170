@@ -5,14 +5,16 @@ Tout d'abord, il  est capital que peu importe la valeur de $\textit{a}$ dans la 
 les coefficients de la matrice $\textit{A}$ gardent leur valeur comprise entre 0 et 255.
 La valeur de $\frac{1}{k}$ doit donc permettre de ramener les valeurs obtenues après floutage dans des normes acceptables.
 
-Vu la forme des matrices $T_L$ et $T_R$, les coefficients de $A$ seront composés d'une somme de trois termes,
+Vu la forme des matrices $T_L$ et $T_R$, les coefficients de $A$ seront composés
+d'une somme de trois termes,
 ces termes étant eux même la somme de 3 autres termes.
 Soit $x,y,z, u, v, w, l, m \text{ et } n$, des coefficients de la matrice $\I$,
 le coefficient de $A$ sera donc du type :
 \begin{equation} \label{kGene}
   \frac{a \frac{(ax+y+az)}{k}}{k} + \frac{\frac{(au+v+aw)}{k}}{k} + \frac{a \frac{(al+m+an)}{k}}{k}
 \end{equation}
-Notre but étant que les valeurs des éléments de $A$	soient comprises entre 0 et 255, considérons le cas extrême,
+Notre but étant que les valeurs des éléments de $A$	soient comprises entre 0 et 255, 
+considérons le cas extrême,
 c'est à dire quand les éléments de $\I$ valent 255.
 On peut donc réécrire l'équation $\ref{kGene}$ sous la forme :
 \begin{eqnarray}
@@ -20,12 +22,12 @@ On peut donc réécrire l'équation $\ref{kGene}$ sous la forme :
 1+4a+4a^2 &\leq & k^2 \\
 (2a+1)^2 &\leq & k^2
 \end{eqnarray}
-
-Vu que $a$ et $k$ sont considérés comme positifs, on obtient finalement que
+Pour flouter l'image, on modifie un pixel en lui ajoutant en quelque sorte, une "influence", une pondération des pixels autour de lui, on peut donc considérer $a$ et $k$ comme positifs.  
+Vu la positivité de $a$ et $k$, on obtient finalement que
 \begin{equation}
 k \geq 2a+1
 \end{equation}
-%\textbf{Il y a clairement une autre utilité, preuve en est si on fait joujou avec le programme matlab on se rend compte qu'à a constant modifier k a un impact clair sur l'image après recomposition.}
+
 
 \subsection{Valeurs propres}
 Nous savons que les valeurs propres de la matrice $S$
@@ -95,4 +97,4 @@ Le carré du nombre de conditionnement est :
 Celui-ci donne une idée de l'accroissement possible de $A$ par rapport à $\I$.
 En effet, vu que la transformation est du type $A = T_L \I T_R$,
 le conditionnement intervient et sur $T_L$ et sur $T_R$,
-il faut donc considérer le carré du nombre de conditionnement pour avoir une idée de l'accroissement de $A$.
+il faut donc considérer le carré du nombre de conditionnement pour avoir une idée de l'accroissement de $A$. On constate que pour une valeur de $a$ de $0.4$, on obtient $\kappa^2 (T) = 81$, qui est déjà une valeur fort conséquente quant à l'amplification d'une perturbation sur la matrice initiale.
