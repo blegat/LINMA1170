@@ -6,6 +6,7 @@ function [i1, i2] = Question2(L, a, iterator)
 k=sqrt(1 + 4*a + 4*a^2);
 %k=0.02;
 figure(1);
+colormap(gray);
 imagesc(L);
 
 %L(1,10)
@@ -24,6 +25,7 @@ TR = (1/k) * spdiags([a*f f a*f],-1:1, N,N);
 A = TL*L*TR; % initial blurred iamge
 
 figure(2)
+colormap(gray);
 imagesc(A);
 
 Ad = (A+Delta); % blurred image with perturbation
@@ -54,6 +56,7 @@ end
 %toc()
 X=X';
 figure(4)
+colormap(gray);
 imagesc(X);
 
 NORM2 = sum(sum(norm(X-L)))
