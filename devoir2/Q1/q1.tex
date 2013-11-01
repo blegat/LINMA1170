@@ -7,13 +7,13 @@ La valeur de $\frac{1}{k}$ doit donc permettre de ramener les valeurs obtenues a
 
 Vu la forme des matrices $T_L$ et $T_R$, les coefficients de $A$ seront composés d'une somme de trois termes,
 ces termes étant eux même la somme de 3 autres termes.
-Soit $x,y,z, u, v, w, l, m \text{ et } n$, des coefficients de la matrice $I$,
+Soit $x,y,z, u, v, w, l, m \text{ et } n$, des coefficients de la matrice $\I$,
 le coefficient de $A$ sera donc du type :
 \begin{equation} \label{kGene}
   \frac{a \frac{(ax+y+az)}{k}}{k} + \frac{\frac{(au+v+aw)}{k}}{k} + \frac{a \frac{(al+m+an)}{k}}{k}
 \end{equation}
 Notre but étant que les valeurs des éléments de $A$	soient comprises entre 0 et 255, considérons le cas extrême,
-c'est à dire quand les éléments de I valent 255.
+c'est à dire quand les éléments de $\I$ valent 255.
 On peut donc réécrire l'équation $\ref{kGene}$ sous la forme :
 \begin{eqnarray}
 \frac{255+1020a+1020a^2}{k^2} &\leq & 255 \\
@@ -21,40 +21,36 @@ On peut donc réécrire l'équation $\ref{kGene}$ sous la forme :
 (2a+1)^2 &\leq & k^2
 \end{eqnarray}
 
-Vu que a et k sont considérés comme positifs, on obtient finalement que
-	\begin{equation}
-	k \geq 2a+1
-	\end{equation}
+Vu que $a$ et $k$ sont considérés comme positifs, on obtient finalement que
+\begin{equation}
+k \geq 2a+1
+\end{equation}
 %\textbf{Il y a clairement une autre utilité, preuve en est si on fait joujou avec le programme matlab on se rend compte qu'à a constant modifier k a un impact clair sur l'image après recomposition.}
 
 \subsection{Valeurs propres}
-	Nous savons que les valeurs propres de la matrice S
-	$$
+Nous savons que les valeurs propres de la matrice $S$
+$$
 S =
- \left[
- \begin{array}{cccc}
+ \begin{bmatrix}
     0 & 1 		& 			& \\
     1 & \ddots 	& \ddots 	& \\
       & \ddots 	& \ddots 	& 1 \\
       & 		& 1			& 0
-  \end{array}
-  \right]
+  \end{bmatrix}
 $$
 
-sont données par $\lambda_i(S) = 2 \cos(\frac{i\pi}{n+1})$, $i= 1, \ldots , n$ où n est la dimension de la matrice.
+sont données par $\lambda_i(S) = 2 \cos(\frac{i\pi}{n+1})$, $i= 1, \ldots , n$ où $n$ est la dimension de la matrice.
 
-Vu que T est de la forme
+Vu que $T$ est de la forme
 
 $$
  T = \frac{1}{k}
- \left[
- \begin{array}{cccc}
+ \begin{bmatrix}
     1 & a 		& 			& \\
     a & \ddots 	& \ddots 	& \\
       & \ddots 	& \ddots 	& a \\
       & 		& a			& 1
-  \end{array}
-  \right] ,
+  \end{bmatrix},
 $$
 
 on a donc que $T = \frac{1}{k} I + \frac{a}{k} S$.
@@ -63,13 +59,13 @@ Soit $v$ un vecteur propre de $S$, on a que :
 \begin{equation}
 T v = ( \frac{1}{k} I + \frac{a}{k} S ) v = \frac{1}{k} v + \frac{a}{k} \lambda(S) v = (\frac{1}{k} + \frac{a}{k} \lambda(S)) v
 \end{equation}
-Les valeurs propres de T sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
+Les valeurs propres de $T$ sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
 
-On obtient donc comme valeurs propres maximales $\lambda_{max}$ et minimum $\lambda_{min}$,
-pour a et k positifs (on travaille avec des pixels ayant leur valeur comprise entre 0 et 255):
+On obtient donc comme valeurs propres maximales $\lmax$ et minimum $\lmin$,
+pour $a$ et $k$ positifs (on travaille avec des pixels ayant leur valeur comprise entre 0 et 255):
 
-	$$\lambda_{max} (T) =  \frac{1+2a}{k} $$
-	$$\lambda_{min} (T) =  \frac{1-2a}{k} $$
+	$$\lmax (T) =  \frac{1+2a}{k} $$
+	$$\lmin (T) =  \frac{1-2a}{k} $$
 
 Le nombre de conditionnement
 \footnote{On dit d'une matrice qu'elle est bien conditionnée si son nombre de conditionnement
@@ -80,12 +76,12 @@ Dans notre cas on cherchera donc à prendre un $a$ le plus proche possible de 0.
 \textit{http://fr.wikipedia.org/wiki/Conditionnement$\_$(analyse$\_$numérique)}}
  $\kappa$ de la matrice $T$ (symétrique) est défini par
 \begin{equation}
-	\kappa (T) = ||T||_2||T^{-1}||_2 = \frac{\lambda_{max} (T)}{\lambda_{min} (T)} = \frac{1+2a}{1-2a}
+	\kappa (T) = ||T||_2||T^{-1}||_2 = \frac{\lmax (T)}{\lmin (T)} = \frac{1+2a}{1-2a}
 \end{equation}
 
 La norme subordonnée $||T||_2$ est définie telle que :
-$$||T||_2 = \sqrt{\lambda_{max}(T^TT)}$$
-où $\lambda_{max}(T^TT)$ désigne la plus grande valeur propre de $T^TT$.
+$$||T||_2 = \sqrt{\lmax(T^TT)}$$
+où $\lmax(T^TT)$ désigne la plus grande valeur propre de $T^TT$.
 On sait donc que $\kappa(T) $ est positif.
 On remarque également que pour $a \geq 0.5$ le nombre de conditionnement n'est pas défini.
 En $0.5$ de manière évidente et pour $a > 0.5$ parce que $\kappa$ est positif.
