@@ -1,109 +1,101 @@
 \section{Question 2}
 \subsection{Comparaison Jacobi et Gauss-Seidel}
-Voici un tableau qui dresse un bilan comparatif des méthodes de Jacobi et de Gauss-Seidel pour différentes valeurs de $k$ et de $a$.
+Le tableau~\ref{tab:bench} qui dresse un bilan comparatif des méthodes de Jacobi et de Gauss-Seidel pour différentes valeurs de $k$ et de $a$.
 \footnote{Les codes des méthodes de Jacobi et Gauss-Seidel définissent une solution $x$
 tel que $|x-x^*|<\epsilon$ où $x^*$ est la solution exacte et $\epsilon$ a été arbitrairement fixé à $0.00001$}
 
-\begin{tabular}{|c|c|c|}
-\hline
-& nombres d'itérations & temps $[s]$\\
-\hline
-Jacobi ($k=0.02$, $a=0.4$) &98 &  0.824813\\
-Gauss-Seidel ($k=0.02$, $a=0.4$) &43 & 0.379432 \\
-\hline
-Jacobi ($k=0.02$, $a=0.45$) &206 & 1.639770\\
-Gauss-Seidel ($k=0.02$, $a=0.45$) & 79 & 0.656296 \\
-\hline
-Jacobi ($k=0.02$, $a=0.5$) & $\infty$ & $\infty$\\
-Gauss-Seidel ($k=0.02$, $a=0.5$) & $\infty$ & $\infty$\\
-\hline
-Jacobi ($k=$, $a=$) & & \\
-Gauss-Seidel ($k=$, $a=$) & & \\
-\hline
-\end{tabular}
+\begin{table}
+  \centering
+  \begin{tabular}{|c|c|c|}
+    \hline
+    & nombres d'itérations & temps $[\second]$\\
+    \hline
+    Jacobi ($k=0.02$, $a=0.4$) &98 &  0.824813\\
+    Gauss-Seidel ($k=0.02$, $a=0.4$) &43 & 0.379432 \\
+    \hline
+    Jacobi ($k=0.02$, $a=0.45$) &206 & 1.639770\\
+    Gauss-Seidel ($k=0.02$, $a=0.45$) & 79 & 0.656296 \\
+    \hline
+    Jacobi ($k=0.02$, $a=0.5$) & $\infty$ & $\infty$\\
+    Gauss-Seidel ($k=0.02$, $a=0.5$) & $\infty$ & $\infty$\\
+    \hline
+    Jacobi ($k=$, $a=$) & & \\
+    Gauss-Seidel ($k=$, $a=$) & & \\
+    \hline
+  \end{tabular}
+  \caption{Bilan comparatif des méthodes de Jacobi et de Gauss-Seidel}
+  \label{tab:bench}
+\end{table}
 
 \subsection{Rayons spectraux}
 Le problème de départ $T_L X T_R = A_{\Delta}$ peut se décomposer en deux étapes \footnote{Si $A_{\Delta}$
-est une matrice de dimension $n*m$, $T_L$ (resp. $T_R$) sera une  matrice carré de dimension $n*n$ (resp. $m*m$).} :
-\begin{eqnarray}\label{eq_q2}
-T_L \mathcal{Y} &=& A_{\Delta}\\
-T_R \mathcal{X}^T &=& \mathcal{Y}^T.
+est une matrice de dimension $n \times m$, $T_L$ (resp. $T_R$) sera une matrice carrée de dimension $n \times n$ (resp. $m \times m$).} :
+\begin{eqnarray}
+  \label{eq_q2}
+  T_L \mathcal{Y} &=& A_{\Delta}\\
+  T_R \mathcal{X}^T &=& \mathcal{Y}^T.
 \end{eqnarray}
 
 Les matrices de Jacobi et de Gauss-Seidel sont définies comme suit :
 \begin{eqnarray}
-\mathcal{J} &=& -D^{-1}(L+U)\\
-\mathcal{G} &=& -(D+L)^{-1}U,
+  \mathcal{J} &=& -D^{-1}(L+U)\\
+  \mathcal{G} &=& -(D+L)^{-1}U,
 \end{eqnarray}
-autrement dit :
-\begin{eqnarray}
-\mathcal{J} &=& - a
-\left[
-\begin{array}{cccc}
-1 & & &\\
- & 1 & &\\
- & & \ddots & \\
-  & & & 1
-\end{array}
-\right]
-\left[
-\begin{array}{cccc}
-0 & 1& &\\
-1 & \ddots & \ddots &\\
- & \ddots & \ddots & 1 \\
-  & & 1 & 0
-\end{array}
-\right]\\
-\mathcal{G} & = & -
-\left[
-\begin{array}{cccc}
-1 & & &\\
-a & \ddots &  &\\
- & \ddots & \ddots  &  \\
-  & & a & 1
-\end{array}
-\right] ^{-1}
-\left[
-\begin{array}{cccc}
-0 & a & &\\
- & \ddots &  \ddots &\\
- &  & \ddots  & a \\
-  & &  & 0
-\end{array}
-\right]
-\\
-&=& -
-\left[
-\begin{array}{ccccc}
-1 & & & &\\
--a & \ddots &  & &\\
-a^2 & \ddots & \ddots  &  &\\
- \vdots & \ddots & \ddots & \ddots & \\
-(-1)^{n-1}a^{n-1} & & a^2 & -a & 1
-\end{array}
-\right]
-\left[
-\begin{array}{cccc}
-0 & a & &\\
- & \ddots &  \ddots &\\
- &  & \ddots  & a \\
-  & &  & 0
-\end{array}
-\right]\\
-&=& -
-\left[
-\begin{array}{ccccc}
-0 & a & & &\\
-0 & -a^2 & \ddots  & &\\
-\vdots & a^3 & \ddots & \ddots  &\\
-\vdots & \vdots & \ddots & \ddots  & a \\
-0 & (-1)^n a^n & & a^3 & -a^2
-\end{array}
-\right]
-\end{eqnarray}
+autrement dit:
+\begin{align*}
+  \mathcal{J} & = - a
+  \begin{bmatrix}
+    1 & & &\\
+      & 1 & &\\
+      & & \ddots & \\
+      & & & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    0 & 1& &\\
+    1 & \ddots & \ddots &\\
+      & \ddots & \ddots & 1 \\
+      & & 1 & 0
+  \end{bmatrix}\\
+  \mathcal{G} & = -
+  \begin{bmatrix}
+    1 & & &\\
+    a & \ddots &  &\\
+      & \ddots & \ddots  &  \\
+      & & a & 1
+  \end{bmatrix} ^{-1}
+  \begin{bmatrix}
+    0 & a & &\\
+      & \ddots &  \ddots &\\
+      &  & \ddots  & a \\
+      & &  & 0
+  \end{bmatrix}
+  \\
+  & = -
+  \begin{bmatrix}
+    1 & & & &\\
+    -a & \ddots &  & &\\
+    a^2 & \ddots & \ddots  &  &\\
+    \vdots & \ddots & \ddots & \ddots & \\
+    (-1)^{n-1}a^{n-1} & & a^2 & -a & 1
+  \end{bmatrix}
+  \begin{bmatrix}
+    0 & a & &\\
+      & \ddots &  \ddots &\\
+      &  & \ddots  & a \\
+      & &  & 0
+  \end{bmatrix}\\
+  & = -
+  \begin{bmatrix}
+    0 & a & & &\\
+    0 & -a^2 & \ddots  & &\\
+    \vdots & a^3 & \ddots & \ddots  &\\
+    \vdots & \vdots & \ddots & \ddots  & a \\
+    0 & (-1)^n a^n & & a^3 & -a^2
+  \end{bmatrix}
+\end{align*}
 
 Pour la méthode de Jacobi, on obtient directement (cf. question 1) que les valeurs propres de $\mathcal{J}$ valent
-$\lambda _i = -2a * cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = max |\lambda _i| < 2a$.
+$\lambda _i = -2a \cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = \max |\lambda_i| < 2a$.
 Ainsi la méthode de Jacobi convergera pour des valeurs de $a \leq 0.5$.
 
 \subsection{Représentation des résultats en fonction de $a$}
