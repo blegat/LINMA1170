@@ -57,15 +57,16 @@ on a donc que $T = \frac{1}{k} I + \frac{a}{k} S$.
 
 Soit $v$ un vecteur propre de $S$, on a que :
 \begin{equation}
-T v = ( \frac{1}{k} I + \frac{a}{k} S ) v = \frac{1}{k} v + \frac{a}{k} \lambda(S) v = (\frac{1}{k} + \frac{a}{k} \lambda(S)) v
+T v = \left( \frac{1}{k} I + \frac{a}{k} S \right) v =
+\frac{1}{k} v + \frac{a}{k} \lambda(S) v = \left(\frac{1}{k} + \frac{a}{k} \lambda(S)\right) v
 \end{equation}
 Les valeurs propres de $T$ sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
 
 On obtient donc comme valeurs propres maximales $\lmax$ et minimum $\lmin$,
 pour $a$ et $k$ positifs (on travaille avec des pixels ayant leur valeur comprise entre 0 et 255):
 
-	$$\lmax (T) =  \frac{1+2a}{k} $$
-	$$\lmin (T) =  \frac{1-2a}{k} $$
+$$\lmax (T) =  \frac{1+2a}{k} $$
+$$\lmin (T) =  \frac{1-2a}{k} $$
 
 Le nombre de conditionnement
 \footnote{On dit d'une matrice qu'elle est bien conditionnée si son nombre de conditionnement
@@ -88,10 +89,10 @@ En $0.5$ de manière évidente et pour $a > 0.5$ parce que $\kappa$ est positif.
 
 Le carré du nombre de conditionnement est :
 \begin{equation}
-	\kappa^2 (T) = (\frac{1+2a}{1-2a})^2
+	\kappa^2 (T) = \left(\frac{1+2a}{1-2a}\right)^2
 \end{equation}
 
-Celui-ci donne une idée de l'accroissement possible de $A$ par rapport à $\mathcal{I}$.
-En effet, vu que la transformation est du type $A = T_L \mathcal{I} T_R$,
+Celui-ci donne une idée de l'accroissement possible de $A$ par rapport à $\I$.
+En effet, vu que la transformation est du type $A = T_L \I T_R$,
 le conditionnement intervient et sur $T_L$ et sur $T_R$,
 il faut donc considérer le carré du nombre de conditionnement pour avoir une idée de l'accroissement de $A$.
