@@ -1,7 +1,7 @@
 function [i1, i2] = Question2(L, a, iterator)
-%   L = image received 
+%   L = image received
 %   a, k = coef T ( a/k sould be between 0 and 255)
-%   
+%
 
 k=sqrt(1 + 4*a + 4*a^2);
 %k=0.02;
@@ -11,16 +11,16 @@ imagesc(L);
 
 %L(1,10)
 %L(10,10)
-%lk = 
+%lk =
 (1/k^2)*(L(1,10)+a*L(2,10)+a*L(1,11)+a*L(1,9)+a^2*L(2,9)+a^2*L(2,11))
-%lk2 = 
+%lk2 =
 (1/k^2)*(L(10,10)+a*L(11,10)+a*L(9,10)+a*L(10,11)+a*L(10,9)+a^2*L(9,9)+a^2*L(11,11)+a^2*L(11,9)+a^2*L(9,11))
 
 [M N] = size(L);
-Delta = randn(M,N); % Ok mean = 0 variance = 1 
-e=ones(M,1); 
+Delta = randn(M,N); % Ok mean = 0 variance = 1
+e=ones(M,1);
 TL = (1/k) * spdiags([a*e e a*e],-1:1, M,M);
-f=ones(N,1); 
+f=ones(N,1);
 TR = (1/k) * spdiags([a*f f a*f],-1:1, N,N);
 A = TL*L*TR; % initial blurred iamge
 
@@ -62,5 +62,3 @@ imagesc(X);
 NORM2 = sqrt(sum(sum((X-L)^2)))
 
 end
-
-
