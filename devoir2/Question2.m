@@ -5,18 +5,14 @@ function [i1, i2] = Question2(L, a, iterator)
 
 k=sqrt(1 + 4*a + 4*a^2);
 %k=0.02;
-figure();
-plot = subplot(2,2,1);
-title(plot, 'Original');
-colormap(gray);
-imagesc(L);
+save_image(L, sprintf('Q2/original_%d',a*100));
 
 %L(1,10)
 %L(10,10)
 %lk =
-(1/k^2)*(L(1,10)+a*L(2,10)+a*L(1,11)+a*L(1,9)+a^2*L(2,9)+a^2*L(2,11))
+%(1/k^2)*(L(1,10)+a*L(2,10)+a*L(1,11)+a*L(1,9)+a^2*L(2,9)+a^2*L(2,11))
 %lk2 =
-(1/k^2)*(L(10,10)+a*L(11,10)+a*L(9,10)+a*L(10,11)+a*L(10,9)+a^2*L(9,9)+a^2*L(11,11)+a^2*L(11,9)+a^2*L(9,11))
+%(1/k^2)*(L(10,10)+a*L(11,10)+a*L(9,10)+a*L(10,11)+a*L(10,9)+a^2*L(9,9)+a^2*L(11,11)+a^2*L(11,9)+a^2*L(9,11))
 
 [M N] = size(L);
 Delta = randn(M,N); % Ok mean = 0 variance = 1
@@ -26,17 +22,11 @@ f=ones(N,1);
 TR = (1/k) * spdiags([a*f f a*f],-1:1, N,N);
 A = TL*L*TR; % initial blurred image
 
-plot = subplot(2,2,2);
-title(plot, 'Blurred');
-colormap(gray);
-imagesc(A);
+save_image(A, sprintf('Q2/blurred_%d',a*100));
 
 Ad = (A+Delta); % blurred image with perturbation
 
-plot = subplot(2,2,3);
-title(plot, 'Blurred + noise');
-colormap(gray);
-imagesc(Ad);
+save_image(Ad, sprintf('Q2/noise_%d',a*100));
 
 Y=zeros(M,N);
 X=zeros(N,M);
@@ -68,11 +58,8 @@ end
 
 %toc()
 X=X';
-plot = subplot(2,2,4);
-title(plot, '(blured + noise) unblurred');
-colormap(gray);
-imagesc(X);
+save_image(X, sprintf('Q2/unblurred_%d',a*100));
 
-NORM2 = sqrt(sum(sum((X-L).^2)))
+%NORM2 = sqrt(sum(sum((X-L).^2)))
 
 end

@@ -99,3 +99,105 @@ $\lambda _i = -2a \cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = \max |\
 Ainsi la méthode de Jacobi convergera pour des valeurs de $a \leq 0.5$.
 
 \subsection{Représentation des résultats en fonction de $a$}
+On peut voir sur la figure~\ref{fig:a2} les étapes successives de l'image qui part
+de la figure~\ref{fig:a2original}, qui est ensuite floutée (figure~\ref{fig:a2blurred}),
+on lui ajoute du bruit (figure~\ref{fig:a2noise}) et on essaie de défloutée l'image obtenue pour
+obtenir la figure~\ref{fig:a2unblurred}.
+On remarque que la figure~\ref{fig:a2unblurred} est assez proche de l'originale, c'est du
+à la valeur faible de $a$.
+
+On remarque aussi que les premières et dernières lignes et colonnes de la figure~\ref{fig:a2blurred} et la figure~\ref{fig:a2noise}
+sont noircies.
+C'est parce qu'ils sont le résultat de $x' = \frac{x + ay}{1 + 2a}$ où $x$ est le pixel de l'image originale est $y$ le pixel à côté.
+Comme ils sont à côté, $x \approx y$ donc on a $x' \approx x \frac{1+a}{1+2a}$, on multiplie donc $x$ par une valeur plus petite que 1 ce qui noirci le pixel
+car $0$ correspont à noir et 255 à blanc.
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Q2/original_20.png}
+    \caption{Image originale}
+    \label{fig:a2original}
+  \end{subfigure}%
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Q2/blurred_20.png}
+    \caption{Image floutée}
+    \label{fig:a2blurred}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Q2/noise_20.png}
+    \caption{Image floutée et bruitée}
+    \label{fig:a2noise}
+  \end{subfigure}%
+  ~
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Q2/unblurred_20.png}
+    \caption{Image floutée et bruitée défloutée}
+    \label{fig:a2unblurred}
+  \end{subfigure}
+  \caption{Résultats pour $a = 0.2$}\label{fig:a2}
+\end{figure}
+
+La figure~\ref{fig:adiff} montre le résultat du défloutage pour différentes valeurs de $a$.
+On a vu que plus $a$ était petit, plus vite on convergerait et à partir de $a = 0.5$, on n'était
+plus sûr de converger.
+C'est bien ce qu'on observe dans le tableau~\ref{tab:iter} qui donne d'ailleurs un avantage
+à Gauss-Seidel. % TODO why ???
+
+On remarque aussi que
+la figure~\ref{fig:a2unblurred} est meilleure que la figure~\ref{fig:a4} qui est meilleure
+que la figure~\ref{fig:a45}.
+La figure~\ref{fig:a5} ne ressemble plus du tout à la figure de départ et pour cause,
+l'algorithme s'est arrêté après 500 itérations sans avoir convergé comme nous le montre
+le tableau~\ref{tab:iter}.
+Pourtant, le fait qu'on prenne plus de temps à converger ne veut pas dire qu'on arrive
+pas à la solution voulue.
+Cet effet est plutôt du au fait que lorsqu'on augmente $a$, le conditionnement de $T_L$
+et $T_R$ s'éloignent de 1 se qui rend la résolution plus sensible au bruit.
+% TODO, il faut vraiment analyser T_L et T_R ?? Non, plus M et N non ?
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{Q2/unblurred_40.png}
+    \caption{$a = 0.4$}
+    \label{fig:a4}
+  \end{subfigure}%
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{Q2/unblurred_45.png}
+    \caption{$a = 45$}
+    \label{fig:a45}
+  \end{subfigure}%
+  ~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{Q2/unblurred_50.png}
+    \caption{$a = 0.5$}
+    \label{fig:a5}
+  \end{subfigure}
+  \caption{Résultats du défloutage avec différentes valeurs de $a$}\label{fig:adiff}
+\end{figure}
+
+\begin{table}
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    \multirow{2}{*}{$a$} & \multicolumn{2}{l|}{Jacobi} & \multicolumn{2}{l|}{Gauss-Seidel}\\
+    \cline{2-5}
+        & $i_1$ & $i_2$ & $i_1$ & $i_2$\\
+    \hline
+    0.2 & 18    & 19    & 13    & 13\\
+    \hline
+    0.4 & 71    & 76    & 41    & 44\\
+    \hline
+    0.45& 147   & 163   & 81    & 90\\
+    \hline
+    0.5 & 500   & 500   & 500   & 500\\
+    \hline
+  \end{tabular}
+  \caption{Nombre d'itération nécessaire pour déflouter pour différentes valeures de $a$ (le défloutage abandonne à 500 itérations).
+  $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
+  \label{tab:iter}
+\end{table}
