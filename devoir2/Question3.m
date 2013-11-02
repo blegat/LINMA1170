@@ -3,9 +3,7 @@ function [X] = Question3(L, a, k, r, n)
 %   a, k = coef T ( a/k sould be between 0 and 255)
 %   
 
-figure(1)
-imagesc(L);
-colormap(gray)
+save_image(L, 'Q3/original');
 
 [M N] = size(L);
 Delta = randn(M,N); % Ok mean = 0 variance = 1 
