@@ -1,32 +1,4 @@
 \section{Question 2}
-\subsection{Comparaison Jacobi et Gauss-Seidel}
-Le tableau~\ref{tab:bench} qui dresse un bilan comparatif des méthodes de Jacobi et de Gauss-Seidel pour différentes valeurs de $k$ et de $a$.
-\footnote{Les codes des méthodes de Jacobi et Gauss-Seidel définissent une solution $x$
-tel que $|x-x^*|<\epsilon$ où $x^*$ est la solution exacte et $\epsilon$ a été arbitrairement fixé à $0.00001$}
-
-\begin{table}
-  \centering
-  \begin{tabular}{|c|c|c|}
-    \hline
-    & nombres d'itérations & temps $[\second]$\\
-    \hline
-    Jacobi ($k=0.02$, $a=0.4$) &98 &  0.824813\\
-    Gauss-Seidel ($k=0.02$, $a=0.4$) &43 & 0.379432 \\
-    \hline
-    Jacobi ($k=0.02$, $a=0.45$) &206 & 1.639770\\
-    Gauss-Seidel ($k=0.02$, $a=0.45$) & 79 & 0.656296 \\
-    \hline
-    Jacobi ($k=0.02$, $a=0.5$) & $\infty$ & $\infty$\\
-    Gauss-Seidel ($k=0.02$, $a=0.5$) & $\infty$ & $\infty$\\
-    \hline
-    Jacobi ($k=$, $a=$) & & \\
-    Gauss-Seidel ($k=$, $a=$) & & \\
-    \hline
-  \end{tabular}
-  \caption{Bilan comparatif des méthodes de Jacobi et de Gauss-Seidel}
-  \label{tab:bench}
-\end{table}
-
 \subsection{Rayons spectraux}
 Le problème de départ $T_L X T_R = A_{\Delta}$ peut se décomposer en deux étapes \footnote{Si $A_{\Delta}$
 est une matrice de dimension $n \times m$, $T_L$ (resp. $T_R$) sera une matrice carrée de dimension $n \times n$ (resp. $m \times m$).} :
@@ -98,6 +70,36 @@ Pour la méthode de Jacobi, on obtient directement (cf. question 1) que les vale
 $\lambda _i = -2a \cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = \max |\lambda_i| < 2a$.
 Ainsi la méthode de Jacobi convergera pour des valeurs de $a \leq 0.5$.
 
+
+\subsection{Comparaison Jacobi et Gauss-Seidel}
+Le tableau qui dresse un bilan comparatif des méthodes de Jacobi et de Gauss-Seidel pour différentes valeurs de $a$ (les valeurs de $k$ étant calculées en fonction de $a$).
+\footnote{Les codes des méthodes de Jacobi et Gauss-Seidel définissent une solution $x$
+tel que $|x-x^*|<\epsilon$ où $x^*$ est la solution exacte et $\epsilon$ a été arbitrairement fixé à $0.00001$}
+\begin{table}
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    \multirow{2}{*}{$a$} & \multicolumn{2}{l|}{Jacobi} & \multicolumn{2}{l|}{Gauss-Seidel}\\
+    \cline{2-5}
+        & $i_1$ & $i_2$ & $i_1$ & $i_2$\\
+    \hline
+    0.2 & 18    & 19    & 13    & 13\\
+    \hline
+    0.4 & 71    & 76    & 41    & 44\\
+    \hline
+    0.45& 147   & 163   & 81    & 90\\
+    \hline
+    0.5 & 500   & 500   & 500   & 500\\
+    \hline
+  \end{tabular}
+  \caption{Nombre d'itération nécessaire pour déflouter pour différentes valeurs de $a$ (le défloutage abandonne à 500 itérations).
+  $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
+  \label{tab:iter}
+\end{table}
+
+
+
+
 \subsection{Représentation des résultats en fonction de $a$}
 On peut voir sur la figure~\ref{fig:a2} les étapes successives de l'image qui part
 de la figure~\ref{fig:a2original}, qui est ensuite floutée (figure~\ref{fig:a2blurred}),
@@ -143,7 +145,7 @@ La figure~\ref{fig:adiff} montre le résultat du défloutage pour différentes v
 On a vu que plus $a$ était petit, plus vite on convergerait et à partir de $a = 0.5$, on n'était
 plus sûr de converger.
 C'est bien ce qu'on observe dans le tableau~\ref{tab:iter} qui donne d'ailleurs un avantage
-à Gauss-Seidel. % TODO why ???
+à Gauss-Seidel. 
 
 On remarque aussi que
 la figure~\ref{fig:a2unblurred} est meilleure que la figure~\ref{fig:a4} qui est meilleure
@@ -180,39 +182,19 @@ et $T_R$ s'éloignent de 1 se qui rend la résolution plus sensible au bruit.
   \caption{Résultats du défloutage avec différentes valeurs de $a$}\label{fig:adiff}
 \end{figure}
 
-\begin{table}
-  \centering
-  \begin{tabular}{|l|l|l|l|l|}
-    \hline
-    \multirow{2}{*}{$a$} & \multicolumn{2}{l|}{Jacobi} & \multicolumn{2}{l|}{Gauss-Seidel}\\
-    \cline{2-5}
-        & $i_1$ & $i_2$ & $i_1$ & $i_2$\\
-    \hline
-    0.2 & 18    & 19    & 13    & 13\\
-    \hline
-    0.4 & 71    & 76    & 41    & 44\\
-    \hline
-    0.45& 147   & 163   & 81    & 90\\
-    \hline
-    0.5 & 500   & 500   & 500   & 500\\
-    \hline
-  \end{tabular}
-  \caption{Nombre d'itération nécessaire pour déflouter pour différentes valeures de $a$ (le défloutage abandonne à 500 itérations).
-  $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
-  \label{tab:iter}
-\end{table}
+
 
 En effet, comme dit précédemment dans la question 1, le conditionnement $\kappa$ d'une matrice permet de donner une borne d'erreur de la solution si les conditions initiales dont entachées d'erreurs. Plus concrètement, si on cherche à résoudre le système linéaire $Ax=b$ et qu'on perturbe le vecteur $b\rightarrow b+\Delta b$, notre solution $x$ sera entachée d'erreur tel que : 
 $$\frac{\Vert \Delta x \Vert}{\Vert x \Vert} \leq \kappa(A) \frac{\Vert \Delta b \Vert}{\Vert b \Vert} $$. 
 Nous résolvons ici deux système successive (equations \ref{eq_q2}); et nous avons calculé dans la question 1 la valeur du conditionnent des matrices $T_L$ et $T_R$ (equation \ref{equatkappa}). Ce qui nous donne finalement : 
 $$\frac{\Vert \Delta \mathcal{X} \Vert}{\Vert \mathcal{X} \Vert} \leq \kappa (T_R) \frac{\Vert \Delta \mathcal{Y} \Vert}{\Vert \mathcal{Y} \Vert} \leq \kappa(T_R) \kappa (T_L) \frac{\Vert \Delta \Vert}{\Vert A \Vert} = \left(\frac{1+2a}{1-2a}\right)^2  \frac{\Vert \Delta \Vert}{\Vert A \Vert}. $$
 Où $\Delta$ est la perturbation de moyenne nulle et de variance 1 ajoutée à $A$. Numériquement cela nous donne \footnote{Les valeurs des perturbations relatives sont une moyenne sur 20 tests. Les normes matricielles utilisées sont des norme 2 implémenté sous Matlab dans la fonction \text{norm}} : 
-\begin{equation}
-a=0.4 & \Longrightarrow & 0.0366 \leq  0.1041\\
-a=0.45 & \Longrightarrow &  \leq  \\
-a=0.5 & \Longrightarrow &  \leq 
-\end{equation}
-
+\begin{eqnarray}
+a=0.4  &\Longrightarrow & 0.0366 \leq  0.1041\\
+a=0.45  &\Longrightarrow &   0.1242 \leq  0.4680\\
+a=0.5  &\Longrightarrow &   \leq 
+\end{eqnarray}
+%Norm = [norm(X-L)/norm(X) , ((1+2*a)/(1-2*a))^2*norm(Delta)/norm(A)];
 
 
 
