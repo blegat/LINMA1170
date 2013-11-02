@@ -201,3 +201,28 @@ et $T_R$ s'éloignent de 1 se qui rend la résolution plus sensible au bruit.
   $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
   \label{tab:iter}
 \end{table}
+
+En effet, comme dit précédemment dans la question 1, le conditionnement $\kappa$ d'une matrice permet de donner une borne d'erreur de la solution si les conditions initiales dont entachées d'erreurs. Plus concrètement, si on cherche à résoudre le système linéaire $Ax=b$ et qu'on perturbe le vecteur $b\rightarrow b+\Delta b$, notre solution $x$ sera entachée d'erreur tel que : 
+$$\frac{\Vert \Delta x \Vert}{\Vert x \Vert} \leq \kappa(A) \frac{\Vert \Delta b \Vert}{\Vert b \Vert} $$. 
+Nous résolvons ici deux système successive (equations \ref{eq_q2}); et nous avons calculé dans la question 1 la valeur du conditionnent des matrices $T_L$ et $T_R$ (equation \ref{equatkappa}). Ce qui nous donne finalement : 
+$$\frac{\Vert \Delta \mathcal{X} \Vert}{\Vert \mathcal{X} \Vert} \leq \kappa (T_R) \frac{\Vert \Delta \mathcal{Y} \Vert}{\Vert \mathcal{Y} \Vert} \leq \kappa(T_R) \kappa (T_L) \frac{\Vert \Delta \Vert}{\Vert A \Vert} = \left(\frac{1+2a}{1-2a}\right)^2  \frac{\Vert \Delta \Vert}{\Vert A \Vert}. $$
+Où $\Delta$ est la perturbation de moyenne nulle et de variance 1 ajoutée à $A$. Numériquement cela nous donne \footnote{Les valeurs des perturbations relatives sont une moyenne sur 20 tests. Les normes matricielles utilisées sont des norme 2 implémenté sous Matlab dans la fonction \text{norm}} : 
+\begin{equation}
+a=0.4 & \Longrightarrow & 0.0366 \leq  0.1041\\
+a=0.45 & \Longrightarrow &  \leq  \\
+a=0.5 & \Longrightarrow &  \leq 
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

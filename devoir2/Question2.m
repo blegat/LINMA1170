@@ -1,4 +1,4 @@
-function [i1, i2] = Question2(L, a, iterator)
+function [i1, i2, Norm] = Question2(L, a, iterator)
 %   L = image received
 %   a, k = coef T ( a/k sould be between 0 and 255)
 %
@@ -55,20 +55,24 @@ save_image(X, sprintf('Q2/unblurred_%d',a*100));
 
 %NORM2 = sqrt(sum(sum((X-L).^2)))
 
-emax=0;
-deltaMax1=0; deltaMax2=0;
-for i=1:M
-    for j=1:N
-        if norm(X(i,j)-L(i,j))>emax
-            emax=norm(X(i,j)-L(i,j));
-            deltaMax=Delta(i,j);
-        end
-        if norm(Delta(i,j))>deltaMax2
-            deltaMax2=Delta(i,j);
-        end
-    end
-end
-emax
-deltaMax
-deltaMax2
+
+Norm = [norm(X-L)/norm(X) , ((1+2*a)/(1-2*a))^2*norm(Delta)/norm(A)];
+
+
+% emax=0;
+% deltaMax1=0; deltaMax2=0;
+% for i=1:M
+%     for j=1:N
+%         if norm(X(i,j)-L(i,j))>emax
+%             emax=norm(X(i,j)-L(i,j));
+%             deltaMax=Delta(i,j);
+%         end
+%         if norm(Delta(i,j))>deltaMax2
+%             deltaMax2=Delta(i,j);
+%         end
+%     end
+% end
+% emax
+% deltaMax
+% deltaMax2
 end
