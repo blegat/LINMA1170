@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 function [i1, i2, Norm] = Question2(L, a, iterator)
-=======
-function [i1, i2] = Question2(Img, a, iterator)
->>>>>>> 741b5983bc43b671cb7a39bc69013c24670ecacb
 %   L = image received
 %   a, k = coef T ( a/k sould be between 0 and 255)
 %
@@ -17,7 +13,6 @@ TR = get_T(a,k,N);
 
 %NORM2 = sqrt(sum(sum((X-L).^2)))
 
-<<<<<<< HEAD
 
 Norm = [norm(X-L)/norm(X) , ((1+2*a)/(1-2*a))^2*norm(Delta)/norm(A)];
 
@@ -39,20 +34,3 @@ Norm = [norm(X-L)/norm(X) , ((1+2*a)/(1-2*a))^2*norm(Delta)/norm(A)];
 % deltaMax
 % deltaMax2
 end
-=======
-Delta = randn(M,N);
-emax=0;
-deltaMax=0; deltaMax2=0;
-for i=1:M
-    for j=1:N
-        if norm(X(i,j)-Img(i,j))>emax
-            emax=norm(X(i,j)-Img(i,j));
-            deltaMax=Delta(i,j);
-        end
-        if norm(Delta(i,j))>deltaMax2
-            deltaMax2=Delta(i,j);
-        end
-    end
-end
-end
->>>>>>> 741b5983bc43b671cb7a39bc69013c24670ecacb
