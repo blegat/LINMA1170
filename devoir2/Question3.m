@@ -1,4 +1,4 @@
-function [i1, i2, X] = Question3(Img, a, r, iterator)
+function [i1, i2, X] = Question3(Img, a, r, iterator, graph)
 %   L = image received 
 %   a, k = coef T ( a/k sould be between 0 and 255)
 %   
@@ -32,6 +32,6 @@ L = tril(Ax) - D;
 U = triu(Ax) - D;
 %max(abs(eig(-D\(Low+Up))))
 
-[i1, i2, X] = doubleSolver(Img, Ay, By, Cy, Ax, Bx, Cx, iterator, 'Q3', a, k);
+[i1, i2, X] = doubleSolver(Img, Ay, By, Cy, Ax, Bx, Cx, iterator, 'Q3', a, k, graph);
 
 end
