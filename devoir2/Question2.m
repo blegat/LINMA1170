@@ -11,13 +11,6 @@ title(plot, 'Original');
 colormap(gray);
 imagesc(L);
 
-%L(1,10)
-%L(10,10)
-%lk =
-(1/k^2)*(L(1,10)+a*L(2,10)+a*L(1,11)+a*L(1,9)+a^2*L(2,9)+a^2*L(2,11))
-%lk2 =
-(1/k^2)*(L(10,10)+a*L(11,10)+a*L(9,10)+a*L(10,11)+a*L(10,9)+a^2*L(9,9)+a^2*L(11,11)+a^2*L(11,9)+a^2*L(9,11))
-
 [M N] = size(L);
 Delta = randn(M,N); % Ok mean = 0 variance = 1
 e=ones(M,1);
@@ -41,7 +34,7 @@ imagesc(Ad);
 Y=zeros(M,N);
 X=zeros(N,M);
 
-%tic()
+tic()
 % for i=1:N
 %     if strcmp(iterator,'Jacobi')
 %         [Y(:,i) i1] = Jacobi(TL, Ad(:,i), 0.00001);
@@ -66,7 +59,7 @@ end
 %     end
 % end
 
-%toc()
+toc()
 X=X';
 plot = subplot(2,2,4);
 title(plot, '(blured + noise) unblurred');
@@ -75,4 +68,20 @@ imagesc(X);
 
 NORM2 = sqrt(sum(sum((X-L).^2)))
 
+emax=0;
+deltaMax1=0; deltaMax2=0;
+for i=1:M
+    for j=1:N
+        if norm(X(i,j)-L(i,j))>emax
+            emax=norm(X(i,j)-L(i,j));
+            deltaMax=Delta(i,j);
+        end
+        if norm(Delta(i,j))>deltaMax2
+            deltaMax2=Delta(i,j);
+        end
+    end
+end
+emax
+deltaMax
+deltaMax2
 end
