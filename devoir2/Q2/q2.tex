@@ -1,13 +1,16 @@
 \section{Question 2}
-\subsection{Rayons spectraux}
-Le problème de départ $T_L X T_R = A_{\Delta}$ peut se décomposer en deux étapes \footnote{Si $A_{\Delta}$
+Soit $A_{\Delta} = A + \Delta$ où $\Delta$ est une perturbation de moyenne nulle et d'écart-type 1. Le problème de départ $T_L X T_R = A_{\Delta}$ peut se décomposer en deux étapes \footnote{Si $A_{\Delta}$
 est une matrice de dimension $n \times m$, $T_L$ (resp. $T_R$) sera une matrice carrée de dimension $n \times n$ (resp. $m \times m$).} :
 \begin{eqnarray}
   \label{eq_q2}
   T_L \mathcal{Y} &=& A_{\Delta}\\
   T_R \mathcal{X}^T &=& \mathcal{Y}^T.
 \end{eqnarray}
+Qui en français correspond à résoudre le problème suivant : une photo a été flouté (on connait le type de floutage) puis une perturbation (inconnue) a dégradé la photo; et on souhaite déflouter la photo perturbé afin de retrouver l'image d'origine (la plus proche possible).
 
+
+
+\subsection{Rayons spectraux}
 Les matrices de Jacobi et de Gauss-Seidel sont définies comme suit :
 \begin{eqnarray}
   \mathcal{J} &=& -D^{-1}(L+U)\\
@@ -96,21 +99,20 @@ tel que $|x-x^*|<\epsilon$ où $x^*$ est la solution exacte et $\epsilon$ a ét�
   $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
   \label{tab:iter}
 \end{table}
-
+On constate bien que la méthode de Gauss-Seidel converge plus rapidement que celle de Jacobi. De plus, comme prédit précédemment, la méthode de Jacobi et de Gauss-Seidel divergent pour des valeurs de $a \geq 0.5$
 
 
 
 \subsection{Représentation des résultats en fonction de $a$}
-On peut voir sur la figure~\ref{fig:a2} les étapes successives de l'image qui part
-de la figure~\ref{fig:a2original}, qui est ensuite floutée (figure~\ref{fig:a2blurred}),
+La figure~\ref{fig:a2} représente les étapes successives de l'image qui part
+de la figure~\ref{fig:a2original}; qui est ensuite floutée (figure~\ref{fig:a2blurred});
 on lui ajoute du bruit (figure~\ref{fig:a2noise}) et on essaie de défloutée l'image obtenue pour
 obtenir la figure~\ref{fig:a2unblurred}.
-On remarque que la figure~\ref{fig:a2unblurred} est assez proche de l'originale, c'est du
-à la valeur faible de $a$.
+On remarque que la figure~\ref{fig:a2unblurred} est assez proche de l'originale, ce qui s'explique par la valeur de $a$ assez faible.
 
-On remarque aussi que les premières et dernières lignes et colonnes de la figure~\ref{fig:a2blurred} et la figure~\ref{fig:a2noise}
+On remarque également que les bords de la figure~\ref{fig:a2blurred} et ~\ref{fig:a2noise}
 sont noircies.
-C'est parce qu'ils sont le résultat de $x' = \frac{x + ay}{1 + 2a}$ où $x$ est le pixel de l'image originale est $y$ le pixel à côté.
+Cela est du au fait qu'ils sont le résultat de $x' = \frac{x + ay}{1 + 2a}$ où $x$ est le pixel de l'image originale et $y$ le pixel d'à côté.
 Comme ils sont à côté, $x \approx y$ donc on a $x' \approx x \frac{1+a}{1+2a}$, on multiplie donc $x$ par une valeur plus petite que 1 ce qui noirci le pixel
 car $0$ correspont à noir et 255 à blanc.
 \begin{figure}
@@ -142,16 +144,15 @@ car $0$ correspont à noir et 255 à blanc.
 \end{figure}
 
 La figure~\ref{fig:adiff} montre le résultat du défloutage pour différentes valeurs de $a$.
-On a vu que plus $a$ était petit, plus vite on convergerait et à partir de $a = 0.5$, on n'était
-plus sûr de converger.
-C'est bien ce qu'on observe dans le tableau~\ref{tab:iter} qui donne d'ailleurs un avantage
+On a vu que plus $a$ était petit, plus vite on convergerait. De plus, à partir de $a = 0.5$, la convergence n'était plus assurée.
+Ce qui est bien ce qu'on observe dans le tableau~\ref{tab:iter}, qui donne d'ailleurs un avantage
 à Gauss-Seidel. 
 
 On remarque aussi que
 la figure~\ref{fig:a2unblurred} est meilleure que la figure~\ref{fig:a4} qui est meilleure
 que la figure~\ref{fig:a45}.
 La figure~\ref{fig:a5} ne ressemble plus du tout à la figure de départ et pour cause,
-l'algorithme s'est arrêté après 500 itérations sans avoir convergé comme nous le montre
+l'algorithme s'est arrêté après 500 itérations sans avoir convergé comme le montre
 le tableau~\ref{tab:iter}.
 Pourtant, le fait qu'on prenne plus de temps à converger ne veut pas dire qu'on arrive
 pas à la solution voulue.
@@ -184,17 +185,18 @@ et $T_R$ s'éloignent de 1 se qui rend la résolution plus sensible au bruit.
 
 
 
-En effet, comme dit précédemment dans la question 1, le conditionnement $\kappa$ d'une matrice permet de donner une borne d'erreur de la solution si les conditions initiales dont entachées d'erreurs. Plus concrètement, si on cherche à résoudre le système linéaire $Ax=b$ et qu'on perturbe le vecteur $b\rightarrow b+\Delta b$, notre solution $x$ sera entachée d'erreur tel que : 
+En effet, comme dit dans la question 1, le conditionnement $\kappa$ d'une matrice permet de donner une borne d'erreur de la solution si les conditions initiales dont entachées d'erreurs. Plus concrètement, si on cherche à résoudre le système linéaire $Ax=b$ et qu'on perturbe le vecteur $b\rightarrow b+\Delta b$, notre solution $x$ sera entachée d'erreur tel que : 
 $$\frac{\Vert \Delta x \Vert}{\Vert x \Vert} \leq \kappa(A) \frac{\Vert \Delta b \Vert}{\Vert b \Vert} $$. 
 Nous résolvons ici deux système successive (equations \ref{eq_q2}); et nous avons calculé dans la question 1 la valeur du conditionnent des matrices $T_L$ et $T_R$ (equation \ref{equatkappa}). Ce qui nous donne finalement : 
 $$\frac{\Vert \Delta \mathcal{X} \Vert}{\Vert \mathcal{X} \Vert} \leq \kappa (T_R) \frac{\Vert \Delta \mathcal{Y} \Vert}{\Vert \mathcal{Y} \Vert} \leq \kappa(T_R) \kappa (T_L) \frac{\Vert \Delta \Vert}{\Vert A \Vert} = \left(\frac{1+2a}{1-2a}\right)^2  \frac{\Vert \Delta \Vert}{\Vert A \Vert}. $$
 Où $\Delta$ est la perturbation de moyenne nulle et de variance 1 ajoutée à $A$. Numériquement cela nous donne \footnote{Les valeurs des perturbations relatives sont une moyenne sur 20 tests. Les normes matricielles utilisées sont des norme 2 implémenté sous Matlab dans la fonction \text{norm}} : 
 \begin{eqnarray}
-a=0.4  &\Longrightarrow & 0.0366 \leq  0.1041\\
-a=0.45  &\Longrightarrow &   0.1242 \leq  0.4680\\
-a=0.5  &\Longrightarrow &   \leq 
+a=0.4  &\Longrightarrow & \kappa^2 = 81 \Longrightarrow 0.0366 \leq  0.1041\\
+a=0.45  &\Longrightarrow & \kappa^2 = 361 \Longrightarrow  0.1242 \leq  0.4680\\
+a=0.5  &\Longrightarrow &  \kappa^2 = \infty \Longrightarrow 1 \leq \infty 
 \end{eqnarray}
-%Norm = [norm(X-L)/norm(X) , ((1+2*a)/(1-2*a))^2*norm(Delta)/norm(A)];
+
+Les résultats numérique confirme bien les prédictions théoriques
 
 
 
