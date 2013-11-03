@@ -6,17 +6,17 @@ est une matrice de dimension $n \times m$, $T_L$ (resp. $T_R$) sera une matrice 
   T_L \mathcal{Y} &=& A_{\Delta}\\
   T_R \mathcal{X}^T &=& \mathcal{Y}^T.
 \end{eqnarray}
-Qui en français correspond à résoudre le problème suivant : une photo a été flouté (on connait le type de floutage) puis une perturbation (inconnue) a dégradé la photo; et on souhaite déflouter la photo perturbé afin de retrouver l'image d'origine (la plus proche possible).
+Qui en français correspond à résoudre le problème suivant : une photo a été flouté (le type de floutage est connu) puis une perturbation (inconnue) a dégradé la photo; et on souhaite déflouter la photo perturbée afin de retrouver une image proche de celle d'origine.
 
 
 
 \subsection{Rayons spectraux}
-Les matrices de Jacobi et de Gauss-Seidel sont définies comme suit :
+Soit une matrice $A=U+D+L$. Les matrices de Jacobi et de Gauss-Seidel sont définies comme suit :
 \begin{eqnarray}
   \mathcal{J} &=& -D^{-1}(L+U)\\
-  \mathcal{G} &=& -(D+L)^{-1}U,
+  \mathcal{G} &=& -(D+L)^{-1}U.
 \end{eqnarray}
-autrement dit:
+Dans notre cas la matrice $A$ est donnée soit par $T_R$ soit par $T_L$. Comme elles ont la même forme nous ne distinguons pas les deux cas et traitons en une seule fois le cas d'une matrice $T$. Autrement dit:
 \begin{align*}
   \mathcal{J} & = - a
   \begin{bmatrix}
@@ -71,8 +71,10 @@ autrement dit:
 
 Pour la méthode de Jacobi, on obtient directement (cf. question 1) que les valeurs propres de $\mathcal{J}$ valent
 $\lambda _i = -2a \cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = \max |\lambda_i| < 2a$.
-Ainsi la méthode de Jacobi convergera pour des valeurs de $a \leq 0.5$.
+Ainsi la méthode de Jacobi convergera pour des valeurs de $a \leq 0.5$. 
 
+Pour la méthode de Gauss-Seidel, le calcul des valeurs propres de $\mathcal{G}$ s'avère plus fastidieux. On peut néanmoins donner la valeur théorique du rayon spectral en utilisant le théorème 2.10 des notes de cours : comme les matrices de Gauss-Seidel et de Jacobi sont obtenues sur base de la même décomposition et que $T$ est une matrice tridiagonale par blocs, leur rayon spectral sont liés par la relation $$\rho (\mathcal{G}) = (\rho (\mathcal{J}))^2 .$$
+Ce qui nous permet de conclure que $\rho (\mathcal{G}) < 4a^2$.
 
 \subsection{Comparaison Jacobi et Gauss-Seidel}
 Le tableau qui dresse un bilan comparatif des méthodes de Jacobi et de Gauss-Seidel pour différentes valeurs de $a$ (les valeurs de $k$ étant calculées en fonction de $a$).
@@ -99,22 +101,22 @@ tel que $|x-x^*|<\epsilon$ où $x^*$ est la solution exacte et $\epsilon$ a ét�
   $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
   \label{tab:iter}
 \end{table}
-On constate bien que la méthode de Gauss-Seidel converge plus rapidement que celle de Jacobi. De plus, comme prédit précédemment, la méthode de Jacobi et de Gauss-Seidel divergent pour des valeurs de $a \geq 0.5$
+On constate bien que la méthode de Gauss-Seidel converge plus rapidement que celle de Jacobi. Pour $a=0.5$, l'itération devrait théoriquement converger, cependant nous avons stopper l'algorithme à 500 itérations. 
+
+Pour rappel, soit l'itération $x_{k+1} = B x_k + c$,
+l'erreur au pas $x_{k+1}$ est donnée par $e_{k+1} = B e_k $. Par conséquent, si $\rho (B)<1$ la méthode converge. La convergence est linéaire avec un taux qui dépend de $\rho(B)$. Pour les méthodes de Jacobi et de Gauss-Seidel, étant donné le spectral de $\mathcal{J}$ et de $\mathcal{G}$ calculé précédemment, il est normal d'observer une convergence plus rapide pour des valeurs de $a$ faible de même qu'une convergence plus rapide pour la méthode de Gauss-Seidel. 
 
 
 
 \subsection{Représentation des résultats en fonction de $a$}
 La figure~\ref{fig:a2} représente les étapes successives de l'image qui part
 de la figure~\ref{fig:a2original}; qui est ensuite floutée (figure~\ref{fig:a2blurred});
-on lui ajoute du bruit (figure~\ref{fig:a2noise}) et on essaie de défloutée l'image obtenue pour
-obtenir la figure~\ref{fig:a2unblurred}.
-On remarque que la figure~\ref{fig:a2unblurred} est assez proche de l'originale, ce qui s'explique par la valeur de $a$ assez faible.
+on lui ajoute du bruit (figure~\ref{fig:a2noise}) et on essaie de déflouter cette dernière (figure~\ref{fig:a2unblurred}).
+On remarque que la figure~\ref{fig:a2unblurred} est assez proche de l'originale, ce qui s'explique par la valeur de $a$ assez faible \footnote{Numériquement, on obtient une erreur relative maximale sur un pixel ($max\left( \frac{\mathcal{X} (i,j) - \I(i,j)}{\I (i,j)} \right)$) qui vaut entre 10\% et 14\% pour $a=0.2$. Pour $a=0.4$ celle-ci va jusqu'à 80\%; et pour $a=0.45$ on atteint les 230\%... Notez que des estimations théoriques de l'erreur sont données plus loin.}.
 
 On remarque également que les bords de la figure~\ref{fig:a2blurred} et ~\ref{fig:a2noise}
-sont noircies.
-Cela est du au fait qu'ils sont le résultat de $x' = \frac{x + ay}{1 + 2a}$ où $x$ est le pixel de l'image originale et $y$ le pixel d'à côté.
-Comme ils sont à côté, $x \approx y$ donc on a $x' \approx x \frac{1+a}{1+2a}$, on multiplie donc $x$ par une valeur plus petite que 1 ce qui noirci le pixel
-car $0$ correspont à noir et 255 à blanc.
+sont noircis, pour les raisons déjà évoquées à la question 1.
+
 \begin{figure}
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
@@ -154,10 +156,10 @@ que la figure~\ref{fig:a45}.
 La figure~\ref{fig:a5} ne ressemble plus du tout à la figure de départ et pour cause,
 l'algorithme s'est arrêté après 500 itérations sans avoir convergé comme le montre
 le tableau~\ref{tab:iter}.
-Pourtant, le fait qu'on prenne plus de temps à converger ne veut pas dire qu'on arrive
-pas à la solution voulue.
-Cet effet est plutôt du au fait que lorsqu'on augmente $a$, le conditionnement de $T_L$
-et $T_R$ s'éloignent de 1 se qui rend la résolution plus sensible au bruit.
+Cependant, le fait qu'on prenne plus de temps à converger ne signifie pas qu'on arrivera
+jamais à la solution voulue.
+La mauvaise qualité de l'image finale est plutôt due à l'augmentation du facteur $a$ qui implique que le conditionnement de $T_L$
+et $T_R$ s'éloignent de 1. Cela rend la résolution plus sensible au bruit.
 % TODO, il faut vraiment analyser T_L et T_R ?? Non, plus M et N non ?
 
 \begin{figure}
@@ -185,18 +187,18 @@ et $T_R$ s'éloignent de 1 se qui rend la résolution plus sensible au bruit.
 
 
 
-En effet, comme dit dans la question 1, le conditionnement $\kappa$ d'une matrice permet de donner une borne d'erreur de la solution si les conditions initiales dont entachées d'erreurs. Plus concrètement, si on cherche à résoudre le système linéaire $Ax=b$ et qu'on perturbe le vecteur $b\rightarrow b+\Delta b$, notre solution $x$ sera entachée d'erreur tel que : 
+En effet, comme nous l'avons déjà évoqué dans la question 1, le conditionnement $\kappa$ d'une matrice permet de donner une borne sur l'erreur de la solution si les conditions initiales sont perturbées. Plus concrètement, si on cherche à résoudre le système linéaire $Ax=b$ et qu'une perturbation vient s'ajouter au vecteur $b\rightarrow b+\Delta b$, notre solution $x$ sera entachée d'erreurs tel que : 
 $$\frac{\Vert \Delta x \Vert}{\Vert x \Vert} \leq \kappa(A) \frac{\Vert \Delta b \Vert}{\Vert b \Vert} $$. 
-Nous résolvons ici deux système successive (equations \ref{eq_q2}); et nous avons calculé dans la question 1 la valeur du conditionnent des matrices $T_L$ et $T_R$ (equation \ref{equatkappa}). Ce qui nous donne finalement : 
+Nous résolvons ici deux système successifs (equations \ref{eq_q2}); et nous avons calculé dans la question 1 la valeur du conditionnent des matrices $T_L$ et $T_R$ (equation \ref{equatkappa}). Ce qui nous donne finalement : 
 $$\frac{\Vert \Delta \mathcal{X} \Vert}{\Vert \mathcal{X} \Vert} \leq \kappa (T_R) \frac{\Vert \Delta \mathcal{Y} \Vert}{\Vert \mathcal{Y} \Vert} \leq \kappa(T_R) \kappa (T_L) \frac{\Vert \Delta \Vert}{\Vert A \Vert} = \left(\frac{1+2a}{1-2a}\right)^2  \frac{\Vert \Delta \Vert}{\Vert A \Vert}. $$
-Où $\Delta$ est la perturbation de moyenne nulle et de variance 1 ajoutée à $A$. Numériquement cela nous donne \footnote{Les valeurs des perturbations relatives sont une moyenne sur 20 tests. Les normes matricielles utilisées sont des norme 2 implémenté sous Matlab dans la fonction \text{norm}} : 
+Où $\Delta$ est une perturbation de moyenne nulle et de variance 1 ajoutée à $A$. Numériquement on obtient \footnote{Les valeurs des perturbations relatives sont une moyenne sur 20 tests. Les normes matricielles utilisées sont des norme 2 implémenté sous Matlab dans la fonction \text{norm}} : 
 \begin{eqnarray}
 a=0.4  &\Longrightarrow & \kappa^2 = 81 \Longrightarrow 0.0366 \leq  0.1041\\
 a=0.45  &\Longrightarrow & \kappa^2 = 361 \Longrightarrow  0.1242 \leq  0.4680\\
 a=0.5  &\Longrightarrow &  \kappa^2 = \infty \Longrightarrow 1 \leq \infty 
 \end{eqnarray}
 
-Les résultats numérique confirme bien les prédictions théoriques
+Les résultats numériques confirment bien les prédictions théoriques.
 
 
 

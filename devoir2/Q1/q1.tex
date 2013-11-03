@@ -1,21 +1,56 @@
 \section{Question 1}
+Soit une image $\mathcal{I}$ \footnote{Matrice $n \times m$ dont les valeurs sont comprises entre 0 et 255.} qu'on souhaite flouter au moyen de deux matrices $T_R$ et $T_L$ : 
+$$A=T_L \mathcal{I} T_R$$
+où les matrices $T_R$ et $T_L$ sont de la forme : 
+$$
+ T = \frac{1}{k}
+ \begin{bmatrix}
+    1 & a 		& 			& \\
+    a & \ddots 	& \ddots 	& \\
+      & \ddots 	& \ddots 	& a \\
+      & 		& a			& 1
+  \end{bmatrix}.
+$$
+Nous séparons notre analyse en deux partie : (1) la détermination des valeurs adéquates de $k$ et (2) l'étude spectrale des matrices $T$.
 
 \subsection{Facteur k}
 Tout d'abord, il  est capital que peu importe la valeur de $\textit{a}$ dans la matrice $\textit{T}$,
 les coefficients de la matrice $\textit{A}$ gardent leur valeur comprise entre 0 et 255.
-La valeur de $\frac{1}{k}$ doit donc permettre de ramener les valeurs obtenues après floutage dans des normes acceptables.
+La valeur de $\frac{1}{k}$ doit donc permettre de ramener les valeurs obtenues après floutage dans une norme acceptable.
 
 Vu la forme des matrices $T_L$ et $T_R$, les coefficients de $A$ seront composés
 d'une somme de trois termes,
 ces termes étant eux même la somme de 3 autres termes.
-Soit $x,y,z, u, v, w, l, m \text{ et } n$, des coefficients de la matrice $\I$,
-le coefficient de $A$ sera donc du type :
+
+\begin{table}
+$$
+\begin{array}{|c|c|c|c|c|} 
+\hline
+\ddots & & \vdots & & \\
+\hline
+\cdots & x & u & l & \cdots\\
+\hline
+\cdots & y & v & m & \cdots \\
+\hline
+\cdots & z & w & n & \cdots \\
+\hline
+ & & \vdots & & \ddots \\
+\hline
+\end{array} 
+$$
+\caption{Pixels intérieurs à l'image.} 
+\label{tabinter}
+\end{table}
+
+
+
+Soit $x,y,z, u, v, w, l, m \text{ et } n$, des coefficients de la matrice $\I$ (cf. \ref{tabinter}). On "floute" cette matrice comme décrit plus haut tel que le pixel $v \in \mathcal{I} \Longrightarrow v' \in A$ : 
 \begin{equation} \label{kGene}
-  \frac{a \frac{(ax+y+az)}{k}}{k} + \frac{\frac{(au+v+aw)}{k}}{k} + \frac{a \frac{(al+m+an)}{k}}{k}
+  v' = \frac{a \frac{(ax+y+az)}{k}}{k} + \frac{\frac{(au+v+aw)}{k}}{k} + \frac{a \frac{(al+m+an)}{k}}{k}
 \end{equation}
-Notre but étant que les valeurs des éléments de $A$	soient comprises entre 0 et 255, 
-considérons le cas extrême,
-c'est à dire quand les éléments de $\I$ valent 255.
+
+Notre but étant que la valeur de chaque élément quelconque $v' \in A$	soit comprise entre 0 et 255. 
+Considérons le cas extrême, où tous les éléments de $\I$ valent 255 ($x=y=z=...=255$).
 On peut donc réécrire l'équation $\ref{kGene}$ sous la forme :
 \begin{eqnarray}
 \frac{255+1020a+1020a^2}{k^2} &\leq & 255 \\
@@ -27,10 +62,27 @@ Vu la positivité de $a$ et $k$, on obtient finalement que
 \begin{equation}
 k \geq 2a+1
 \end{equation}
+Si cette inégalité est satisfaite, nous somme assurer d'avoir des valeurs de $A$ comprises entre 0 et 255. Nous  pouvons ajouter une contrainte supplémentaire permettant de fixer une valeur $k$ : si les pixels $v$, $x$, $y$... ont la même valeur, l'idéal serait que le pixel $v'=v$. Ce qui correspond à l'égalité \footnote{Notons que cette propriété est vraie pour toutes les valeurs "intérieures" de $A$. Pour les bords de l'image (cf. tableau \ref{tabborder}), un pixel quelconque $e \in \I \Longrightarrow e' \in A$ tel que:  
+$$e' = \frac{a \frac{(d+ag)}{k}}{k} + \frac{ \frac{(e+ah)}{k}}{k} + \frac{a \frac{(f+ai)}{k}}{k} . $$ On a bien trois termes de moins que dans le cas du pixel intérieur. La valeur de $e'$ sera toujours comprise entre 0 et 255 mais si $d=e=f=g=h=i$ on aura $e'= e * \frac{1+3a+2a^2}{(1+2a)^2} < e$ (c'est à dire que le bord sera noirci, étant donné que 0 correspond au noir et 255 au blanc).}  $k=2a+1$. 
 
+\begin{table}
+$$
+\begin{array}{|c|c|c|c|c|} 
+\hline
+\cdots & d & e & f & \cdots\\
+\hline
+\cdots & g & h & i & \cdots\\
+\hline
+\vdots &  & \vdots &  & \ddots \\
+\hline
+\end{array} 
+$$
+\caption{Pixels sur le bord de l'image.}
+\label{tabborder}
+\end{table}
 
 \subsection{Valeurs propres}
-Nous savons que les valeurs propres de la matrice $S$
+Nous savons que les valeurs propres de la matrice
 $$
 S =
  \begin{bmatrix}
@@ -65,10 +117,10 @@ T v = \left( \frac{1}{k} I + \frac{a}{k} S \right) v =
 Les valeurs propres de $T$ sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
 
 On obtient donc comme valeurs propres maximales $\lmax$ et minimum $\lmin$,
-pour $a$ et $k$ positifs (on travaille avec des pixels ayant leur valeur comprise entre 0 et 255):
+pour $a$ et $k$ positifs :
 
-$$\lmax (T) =  \frac{1+2a}{k} $$
-$$\lmin (T) =  \frac{1-2a}{k} $$
+$$\lmax(T) \underset{n\rightarrow \infty}{\longrightarrow} \frac{1+2a}{k} $$
+$$\lmin (T) \underset{n\rightarrow \infty}{\longrightarrow} \frac{1-2a}{k} $$
 
 Le nombre de conditionnement
 \footnote{On dit d'une matrice qu'elle est bien conditionnée si son nombre de conditionnement
@@ -79,7 +131,7 @@ Dans notre cas on cherchera donc à prendre un $a$ le plus proche possible de 0.
 \textit{http://fr.wikipedia.org/wiki/Conditionnement$\_$(analyse$\_$numérique)}}
  $\kappa$ de la matrice $T$ (symétrique) est défini par
 \begin{equation}
-	\kappa (T) = ||T||_2||T^{-1}||_2 = \frac{\lmax (T)}{\lmin (T)} = \frac{1+2a}{1-2a}
+	\kappa (T) = ||T||_2||T^{-1}||_2 = \frac{\lmax (T)}{\lmin (T)} \underset{n\rightarrow \infty}{\longrightarrow} \frac{1+2a}{1-2a}
 \end{equation}
 
 La norme subordonnée $||T||_2$ est définie telle que :
