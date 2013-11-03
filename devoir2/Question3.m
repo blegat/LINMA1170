@@ -9,18 +9,18 @@ k=abs(1+2*a);
 TL = get_T(a,k,M);
 TR = get_T(a,k,N);
 
-Delta = randn(M,N); % Ok mean = 0 variance = 1 
-A = TL*Img*TR; % initial blurred image
-Ad = A+Delta; % blurred image with perturbation
-Add = mean(mean(Ad))*ones(M,N);
+%Delta = randn(M,N); % Ok mean = 0 variance = 1 
+%A = TL*Img*TR; % initial blurred image
+%Ad = A+Delta; % blurred image with perturbation
+%Add = mean(mean(Ad))*ones(M,N);
 
 Ay = TL'*TL + eye(M)*r^2;
 By = TL';
 Cy = r^2;
 
-D = diag(diag(Ay));
-L = tril(Ay) - D;
-U = triu(Ay) - D;
+%D = diag(diag(Ay));
+%L = tril(Ay) - D;
+%U = triu(Ay) - D;
 %max(abs(eig(-D\(Low+Up))))
 
 Ax = TR'*TR + eye(N)*r^2;
