@@ -9,7 +9,7 @@ k=abs(1+2*a);
 TL = get_T(a,k,M);
 TR = get_T(a,k,N);
 
-[i1, i2, X, Norm] = doubleSolver(Img, TL, eye(M), 0, TR, eye(N), 0, iterator, 'Q2', a, k);
+[i1, i2, X] = doubleSolver(Img, TL, eye(M), 0, TR, eye(N), 0, iterator, 'Q2', a, k);
 
 %NORM2 = sqrt(sum(sum((X-L).^2)))
 
@@ -18,19 +18,13 @@ TR = get_T(a,k,N);
 
 
 % emax=0;
-% deltaMax1=0; deltaMax2=0;
 % for i=1:M
 %     for j=1:N
-%         if norm(X(i,j)-L(i,j))>emax
-%             emax=norm(X(i,j)-L(i,j));
-%             deltaMax=Delta(i,j);
-%         end
-%         if norm(Delta(i,j))>deltaMax2
-%             deltaMax2=Delta(i,j);
+%         if norm(X(i,j)-L(i,j))/L(i,j) >emax
+%             emax=norm(X(i,j)-L(i,j))/L(i,j);
 %         end
 %     end
 % end
 % emax
-% deltaMax
-% deltaMax2
+
 end

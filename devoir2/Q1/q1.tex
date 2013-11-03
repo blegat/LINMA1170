@@ -21,6 +21,8 @@ La valeur de $\frac{1}{k}$ doit donc permettre de ramener les valeurs obtenues a
 Vu la forme des matrices $T_L$ et $T_R$, les coefficients de $A$ seront composés
 d'une somme de trois termes,
 ces termes étant eux même la somme de 3 autres termes.
+
+\begin{table}
 $$
 \begin{array}{|c|c|c|c|c|} 
 \hline
@@ -34,8 +36,13 @@ $$
 \hline
  & & \vdots & & \ddots \\
 \hline
-\end{array} \label{tabinter}
+\end{array} 
 $$
+\caption{Pixels intérieurs à l'image.} 
+\label{tabinter}
+\end{table}
+
+
 
 Soit $x,y,z, u, v, w, l, m \text{ et } n$, des coefficients de la matrice $\I$ (cf. \ref{tabinter}). On "floute" cette matrice comme décrit plus haut tel que le pixel $v \in \mathcal{I} \Longrightarrow v' \in A$ : 
 \begin{equation} \label{kGene}
@@ -56,8 +63,9 @@ Vu la positivité de $a$ et $k$, on obtient finalement que
 k \geq 2a+1
 \end{equation}
 Si cette inégalité est satisfaite, nous somme assurer d'avoir des valeurs de $A$ comprises entre 0 et 255. Nous  pouvons ajouter une contrainte supplémentaire permettant de fixer une valeur $k$ : si les pixels $v$, $x$, $y$... ont la même valeur, l'idéal serait que le pixel $v'=v$. Ce qui correspond à l'égalité \footnote{Notons que cette propriété est vraie pour toutes les valeurs "intérieures" de $A$. Pour les bords de l'image (cf. tableau \ref{tabborder}), un pixel quelconque $e \in \I \Longrightarrow e' \in A$ tel que:  
-$$e' = \frac{a \frac{(d+ag)}{k}}{k} + \frac{ \frac{(e+ah)}{k}}{k} + \frac{a \frac{(f+ai)}{k}}{k} . $$ On a bien trois termes de moins que dans le cas du pixel intérieur. La valeur de $e'$ sera toujours comprise entre 0 et 255 mais si $d=e=f=g=h=i$ on aura $e'= e * \frac{1+3a+2a^2}{(1+2a)^2} < e$ }  $k=2a+1$. 
+$$e' = \frac{a \frac{(d+ag)}{k}}{k} + \frac{ \frac{(e+ah)}{k}}{k} + \frac{a \frac{(f+ai)}{k}}{k} . $$ On a bien trois termes de moins que dans le cas du pixel intérieur. La valeur de $e'$ sera toujours comprise entre 0 et 255 mais si $d=e=f=g=h=i$ on aura $e'= e * \frac{1+3a+2a^2}{(1+2a)^2} < e$ (c'est à dire que le bord sera noirci, étant donné que 0 correspond au noir et 255 au blanc).}  $k=2a+1$. 
 
+\begin{table}
 $$
 \begin{array}{|c|c|c|c|c|} 
 \hline
@@ -67,8 +75,11 @@ $$
 \hline
 \vdots &  & \vdots &  & \ddots \\
 \hline
-\end{array} \label{tabborder}
+\end{array} 
 $$
+\caption{Pixels sur le bord de l'image.}
+\label{tabborder}
+\end{table}
 
 \subsection{Valeurs propres}
 Nous savons que les valeurs propres de la matrice
@@ -108,8 +119,8 @@ Les valeurs propres de $T$ sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \fr
 On obtient donc comme valeurs propres maximales $\lmax$ et minimum $\lmin$,
 pour $a$ et $k$ positifs :
 
-$$\lmax (T) =  \frac{1+2a}{k} $$
-$$\lmin (T) =  \frac{1-2a}{k} $$
+$$\lmax(T) \underset{n\rightarrow \infty}{\longrightarrow} \frac{1+2a}{k} $$
+$$\lmin (T) \underset{n\rightarrow \infty}{\longrightarrow} \frac{1-2a}{k} $$
 
 Le nombre de conditionnement
 \footnote{On dit d'une matrice qu'elle est bien conditionnée si son nombre de conditionnement
@@ -120,7 +131,7 @@ Dans notre cas on cherchera donc à prendre un $a$ le plus proche possible de 0.
 \textit{http://fr.wikipedia.org/wiki/Conditionnement$\_$(analyse$\_$numérique)}}
  $\kappa$ de la matrice $T$ (symétrique) est défini par
 \begin{equation}
-	\kappa (T) = ||T||_2||T^{-1}||_2 = \frac{\lmax (T)}{\lmin (T)} = \frac{1+2a}{1-2a}
+	\kappa (T) = ||T||_2||T^{-1}||_2 = \frac{\lmax (T)}{\lmin (T)} \underset{n\rightarrow \infty}{\longrightarrow} \frac{1+2a}{1-2a}
 \end{equation}
 
 La norme subordonnée $||T||_2$ est définie telle que :
