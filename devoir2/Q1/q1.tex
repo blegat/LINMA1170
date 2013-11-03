@@ -55,8 +55,8 @@ Vu la positivité de $a$ et $k$, on obtient finalement que
 \begin{equation}
 k \geq 2a+1
 \end{equation}
-Si cette inégalité est satisfaite, nous somme assurer d'avoir des valeurs de $A$ comprises entre 0 et 255. Nous  pouvons ajouter une contrainte supplémentaire permettant de fixer une valeur $k$ : si les pixels $v$, $x$, $y$... ont la même valeur, l'idéal serait que le pixel $v'=v$. Ce qui correspond à l'égalité $k=2a+1$. \footnote{Notons que cette propriété est vraie pour toutes les valeurs "intérieures" de $A$. Pour les bords de l'image (cf. tableau \ref{tabborder}), un pixel quelconque $e \in \I \Longrightarrow e' \in A$ tel que:  
-$$e' = \frac{a \frac{(d+ag)}{k}}{k} + \frac{ \frac{(e+ah)}{k}}{k} + \frac{a \frac{(f+ai)}{k}}{k} . $$ On a bien trois termes de moins que dans le cas du pixel intérieur. La valeur de $e'$ sera toujours comprise entre 0 et 255 mais si $d=e=f=g=h=i$ on aura $e'= e * \frac{1+3a+2a^2}{(1+2a)^2} < e$ }  
+Si cette inégalité est satisfaite, nous somme assurer d'avoir des valeurs de $A$ comprises entre 0 et 255. Nous  pouvons ajouter une contrainte supplémentaire permettant de fixer une valeur $k$ : si les pixels $v$, $x$, $y$... ont la même valeur, l'idéal serait que le pixel $v'=v$. Ce qui correspond à l'égalité \footnote{Notons que cette propriété est vraie pour toutes les valeurs "intérieures" de $A$. Pour les bords de l'image (cf. tableau \ref{tabborder}), un pixel quelconque $e \in \I \Longrightarrow e' \in A$ tel que:  
+$$e' = \frac{a \frac{(d+ag)}{k}}{k} + \frac{ \frac{(e+ah)}{k}}{k} + \frac{a \frac{(f+ai)}{k}}{k} . $$ On a bien trois termes de moins que dans le cas du pixel intérieur. La valeur de $e'$ sera toujours comprise entre 0 et 255 mais si $d=e=f=g=h=i$ on aura $e'= e * \frac{1+3a+2a^2}{(1+2a)^2} < e$ }  $k=2a+1$. 
 
 $$
 \begin{array}{|c|c|c|c|c|} 
@@ -71,7 +71,7 @@ $$
 $$
 
 \subsection{Valeurs propres}
-Nous savons que les valeurs propres de la matrice $S$
+Nous savons que les valeurs propres de la matrice
 $$
 S =
  \begin{bmatrix}
@@ -106,7 +106,7 @@ T v = \left( \frac{1}{k} I + \frac{a}{k} S \right) v =
 Les valeurs propres de $T$ sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
 
 On obtient donc comme valeurs propres maximales $\lmax$ et minimum $\lmin$,
-pour $a$ et $k$ positifs (on travaille avec des pixels ayant leur valeur comprise entre 0 et 255):
+pour $a$ et $k$ positifs :
 
 $$\lmax (T) =  \frac{1+2a}{k} $$
 $$\lmin (T) =  \frac{1-2a}{k} $$
