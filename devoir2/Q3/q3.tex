@@ -1,13 +1,43 @@
 \section{Question 3}
 
+\subsection{Jacobi}
+% TODO comparer itérations
 La figure~\ref{fig:ar} nous donne un aperçu de l'impact de $r$
 sur l'erreur pour différentes valeurs de $a$.
-Cette figure nous invite à supposer
+
+On voit que pour $a \geq 0.3$, la régularisation donne de meilleurs résultats
+lorsqu'on choisit bien $r$.
+Pour $a \leq 0.25$ par contre, la régularisation donne de moins bons résultats.
+
+On a d'ailleurs pas toujours la convergence pour $a \geq 0.25$ mais à partir
+d'un certain $r$, ça converge.
+Le meilleur $r$ pour $a \geq 0.3$ semble être le premier $r$ à partir duquel
+ça converge.
+Pour $a \leq 0.25$, ça n'a pas l'air aussi simple mais la fonction semble
+unimodale donc on peut aisément trouver le $r$ qui minimise l'erreur.
+
+Une recherche binaire trouvant le $r$ pour lequel la méthode commence à converger
+suivit d'une recherche unimodale nous permettra donc de voir le $r$ optimal en
+fonction de $a$.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{Q3/ar.png}
-  \caption{Erreur pour différents $a$ en fonction de $r$.
-  Lorsque la méthode ne converge pas, l'erreur est mise à 1600.}
+  \includegraphics[width=\textwidth]{Q3/arJacobi.png}
+  \caption{Erreur pour différents $a$ en fonction de $r$ de Jacobi.
+  Lorsque la méthode ne converge pas, le point n'est pas représenté.
+  L'erreur est calculée comme la norme de Frobenius entre l'image de départ
+  et l'image défloutée.}
+  \label{fig:ar}
+\end{figure}
+
+\subsection{Gauss-Seidel}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{Q3/arGauss-Seidel.png}
+  \caption{Erreur pour différents $a$ en fonction de $r$ de Gauss-Seidel.
+  Lorsque la méthode ne converge pas, le point n'est pas représenté.
+  L'erreur est calculée comme la norme de Frobenius entre l'image de départ
+  et l'image défloutée.}
   \label{fig:ar}
 \end{figure}
