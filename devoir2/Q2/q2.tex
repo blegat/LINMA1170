@@ -11,12 +11,12 @@ Qui en français correspond à résoudre le problème suivant : une photo a ét�
 
 
 \subsection{Rayons spectraux}
-Les matrices de Jacobi et de Gauss-Seidel sont définies comme suit :
+Soit une matrice $A=U+D+L$. Les matrices de Jacobi et de Gauss-Seidel sont définies comme suit :
 \begin{eqnarray}
   \mathcal{J} &=& -D^{-1}(L+U)\\
-  \mathcal{G} &=& -(D+L)^{-1}U,
+  \mathcal{G} &=& -(D+L)^{-1}U.
 \end{eqnarray}
-autrement dit:
+Dans notre cas la matrice $A$ est donnée soit par $T_R$ soit par $T_L$. Comme elles ont la même forme nous ne distinguons pas les deux cas et traitons en une seule fois le cas d'une matrice $T$. Autrement dit:
 \begin{align*}
   \mathcal{J} & = - a
   \begin{bmatrix}
@@ -71,8 +71,10 @@ autrement dit:
 
 Pour la méthode de Jacobi, on obtient directement (cf. question 1) que les valeurs propres de $\mathcal{J}$ valent
 $\lambda _i = -2a \cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = \max |\lambda_i| < 2a$.
-Ainsi la méthode de Jacobi convergera pour des valeurs de $a \leq 0.5$.
+Ainsi la méthode de Jacobi convergera pour des valeurs de $a \leq 0.5$. 
 
+Pour la méthode de Gauss-Seidel, le calcul des valeurs propres de $\mathcal{G}$ s'avère plus fastidieux. On peut néanmoins donner la valeur théorique du rayon spectral en utilisant le théorème 2.10 des notes de cours : comme les matrices de Gauss-Seidel et de Jacobi sont obtenues sur base de la même décomposition et que $T$ est une matrice tridiagonale par blocs, leur rayon spectral sont liés par la relation $$\rho (\mathcal{G}) = (\rho (\mathcal{J}))^2 .$$
+Ce qui nous permet de conclure que $\rho (\mathcal{G}) < 4a^2$.
 
 \subsection{Comparaison Jacobi et Gauss-Seidel}
 Le tableau qui dresse un bilan comparatif des méthodes de Jacobi et de Gauss-Seidel pour différentes valeurs de $a$ (les valeurs de $k$ étant calculées en fonction de $a$).
@@ -99,7 +101,10 @@ tel que $|x-x^*|<\epsilon$ où $x^*$ est la solution exacte et $\epsilon$ a ét�
   $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
   \label{tab:iter}
 \end{table}
-On constate bien que la méthode de Gauss-Seidel converge plus rapidement que celle de Jacobi. De plus, comme prédit précédemment, la méthode de Jacobi et de Gauss-Seidel divergent pour des valeurs de $a  0.5$
+On constate bien que la méthode de Gauss-Seidel converge plus rapidement que celle de Jacobi. Pour $a=0.5$, l'itération devrait théoriquement converger, cependant nous avons stopper l'algorithme à 500 itérations. 
+
+Pour rappel, soit l'itération $x_{k+1} = B x_k + c$,
+l'erreur au pas $x_{k+1}$ est donnée par $e_{k+1} = B e_k $. Par conséquent, si $\rho (B)<1$ la méthode converge. La convergence est linéaire avec un taux qui dépend de $\rho(B)$. Pour les méthodes de Jacobi et de Gauss-Seidel, étant donné le spectral de $\mathcal{J}$ et de $\mathcal{G}$ calculé précédemment, il est normal d'observer une convergence plus rapide pour des valeurs de $a$ faible de même qu'une convergence plus rapide pour la méthode de Gauss-Seidel. 
 
 
 
