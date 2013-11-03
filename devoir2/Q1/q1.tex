@@ -63,7 +63,7 @@ Vu la positivité de $a$ et $k$, on obtient finalement que
 k \geq 2a+1
 \end{equation}
 Si cette inégalité est satisfaite, nous somme assurer d'avoir des valeurs de $A$ comprises entre 0 et 255. Nous  pouvons ajouter une contrainte supplémentaire permettant de fixer une valeur $k$ : si les pixels $v$, $x$, $y$... ont la même valeur, l'idéal serait que le pixel $v'=v$. Ce qui correspond à l'égalité \footnote{Notons que cette propriété est vraie pour toutes les valeurs "intérieures" de $A$. Pour les bords de l'image (cf. tableau \ref{tabborder}), un pixel quelconque $e \in \I \Longrightarrow e' \in A$ tel que:  
-$$e' = \frac{a \frac{(d+ag)}{k}}{k} + \frac{ \frac{(e+ah)}{k}}{k} + \frac{a \frac{(f+ai)}{k}}{k} . $$ On a bien trois termes de moins que dans le cas du pixel intérieur. La valeur de $e'$ sera toujours comprise entre 0 et 255 mais si $d=e=f=g=h=i$ on aura $e'= e * \frac{1+3a+2a^2}{(1+2a)^2} < e$ (c'est à dire que le bord sera noirci, étant donné que 0 correspond au noir et 255 au blanc).}  $k=2a+1$. 
+$$e' = \frac{a \frac{(d+ag)}{k}}{k} + \frac{ \frac{(e+ah)}{k}}{k} + \frac{a \frac{(f+ai)}{k}}{k} . $$ On a bien trois termes de moins que dans le cas du pixel intérieur. La valeur de $e'$ sera toujours comprise entre 0 et 255 mais si $d=e=f=g=h=i$ on aura $e'= e \frac{1+3a+2a^2}{(1+2a)^2} < e$ (c'est à dire que le bord sera noirci, étant donné que 0 correspond au noir et 255 au blanc).}  $k=2a+1$. 
 
 \begin{table}
 $$
@@ -116,6 +116,7 @@ T v = \left( \frac{1}{k} I + \frac{a}{k} S \right) v =
 \end{equation}
 Les valeurs propres de $T$ sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
 
+On considère une matrice de très grande taille et donc un $n$ qui tend vers l'infini\footnote{ Pour l'image donnée, en réalisant cette approximation, on obtient un $\kappa^2 $ pour $a = 0.4$ (cf. suite du rapport) de  81 au lieu de 80.862, comme il s'agit d'une borne supérieur sur un accroissement de perturbations proportionnellement très petites c'est approximation fait sens.}. 
 On obtient donc comme valeurs propres maximales $\lmax$ et minimum $\lmin$,
 pour $a$ et $k$ positifs :
 
@@ -134,7 +135,7 @@ Dans notre cas on cherchera donc à prendre un $a$ le plus proche possible de 0.
 	\kappa (T) = ||T||_2||T^{-1}||_2 = \frac{\lmax (T)}{\lmin (T)} \underset{n\rightarrow \infty}{\longrightarrow} \frac{1+2a}{1-2a}
 \end{equation}
 
-La norme subordonnée $||T||_2$ est définie telle que :
+La norme subordonnée à la norme $||T||_2$ est définie telle que :
 $$||T||_2 = \sqrt{\lmax(T^TT)}$$
 où $\lmax(T^TT)$ désigne la plus grande valeur propre de $T^TT$.
 On sait donc que $\kappa(T) $ est positif.
