@@ -1,12 +1,12 @@
 \section{Question 2}
-Soit $A_{\Delta} = A + \Delta$ où $\Delta$ est une perturbation de moyenne nulle et d'écart-type 1. Le problème de départ $T_L X T_R = A_{\Delta}$ peut se décomposer en deux étapes \footnote{Si $A_{\Delta}$
+Soit $A_{\Delta} = A + \Delta$ où $\Delta$ est une perturbation de moyenne nulle et d'écart-type 1. Le problème de départ $T_L \mathcal{X} T_R = A_{\Delta}$ peut se décomposer en deux étapes \footnote{Si $A_{\Delta}$
 est une matrice de dimension $n \times m$, $T_L$ (resp. $T_R$) sera une matrice carrée de dimension $n \times n$ (resp. $m \times m$).} :
 \begin{eqnarray}
   \label{eq_q2}
   T_L \mathcal{Y} &=& A_{\Delta}\\
   T_R \mathcal{X}^T &=& \mathcal{Y}^T.
 \end{eqnarray}
-Qui en français correspond à résoudre le problème suivant : une photo a été flouté (le type de floutage est connu) puis une perturbation (inconnue) a dégradé la photo; et on souhaite déflouter la photo perturbée afin de retrouver une image proche de celle d'origine.
+Qui en français correspond à résoudre le problème suivant : une photo a été floutée (le type de floutage est connu) puis une perturbation (inconnue) a dégradé la photo; on souhaite maintenant déflouter la photo perturbée afin de retrouver une image proche de celle d'origine.
 
 
 
@@ -101,10 +101,10 @@ tel que $|x-x^*|<\epsilon$ où $x^*$ est la solution exacte et $\epsilon$ a ét�
   $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
   \label{tab:iter}
 \end{table}
-On constate bien que la méthode de Gauss-Seidel converge plus rapidement que celle de Jacobi. Pour $a=0.5$, l'itération devrait théoriquement converger, cependant nous avons stopper l'algorithme à 500 itérations. 
+On constate bien que la méthode de Gauss-Seidel converge plus rapidement que celle de Jacobi. Pour $a=0.5$, on constate que les deux algorithmes atteignent la borne arbitraire des 500 itérations sans converger. En effet, la convergence en $0.5$ est théoriquement possible mais vu la différence entre $2a$ et $2a \cos(\dfrac{i \pi}{n+1})$ pour un $n$ dans les $150$, $170$ (l'image donnée), elle nécessiterait un nombre d'itérations considérable et les résultats ne seraient que peu pertinents à cause de l'amplification des perturbations. %l'itération devrait théoriquement converger, cependant nous avons stopper l'algorithme à 500 itérations. 
 
 Pour rappel, soit l'itération $x_{k+1} = B x_k + c$,
-l'erreur au pas $x_{k+1}$ est donnée par $e_{k+1} = B e_k $. Par conséquent, si $\rho (B)<1$ la méthode converge. La convergence est linéaire avec un taux qui dépend de $\rho(B)$. Pour les méthodes de Jacobi et de Gauss-Seidel, étant donné le spectral de $\mathcal{J}$ et de $\mathcal{G}$ calculé précédemment, il est normal d'observer une convergence plus rapide pour des valeurs de $a$ faible de même qu'une convergence plus rapide pour la méthode de Gauss-Seidel. 
+l'erreur au pas $x_{k+1}$ est donnée par $e_{k+1} = B e_k $. Par conséquent, si $\rho (B)<1$ la méthode converge. La convergence est linéaire avec un taux qui dépend de $\rho(B)$. Pour les méthodes de Jacobi et de Gauss-Seidel, étant donné le rayon spectral de $\mathcal{J}$ et de $\mathcal{G}$ calculé précédemment, il est normal d'observer une convergence plus rapide pour des valeurs de $a$ faible de même qu'une convergence plus rapide pour la méthode de Gauss-Seidel. 
 
 
 
@@ -146,8 +146,7 @@ sont noircis, pour les raisons déjà évoquées à la question 1.
 \end{figure}
 
 La figure~\ref{fig:adiff} montre le résultat du défloutage pour différentes valeurs de $a$.
-On a vu que plus $a$ était petit, plus vite on convergerait. De plus, à partir de $a = 0.5$, la convergence n'était plus assurée.
-Ce qui est bien ce qu'on observe dans le tableau~\ref{tab:iter}, qui donne d'ailleurs un avantage
+On avait vu précédemment que plus $a$ était petit, plus vite on convergeait. De plus, à partir de $a = 0.5$, la convergence n'était plus assurée; ce qui est bien ce qu'on observe dans le tableau~\ref{tab:iter}, qui donne d'ailleurs un avantage
 à Gauss-Seidel. 
 
 On remarque aussi que
@@ -189,7 +188,7 @@ et $T_R$ s'éloignent de 1. Cela rend la résolution plus sensible au bruit.
 
 En effet, comme nous l'avons déjà évoqué dans la question 1, le conditionnement $\kappa$ d'une matrice permet de donner une borne sur l'erreur de la solution si les conditions initiales sont perturbées. Plus concrètement, si on cherche à résoudre le système linéaire $Ax=b$ et qu'une perturbation vient s'ajouter au vecteur $b\rightarrow b+\Delta b$, notre solution $x$ sera entachée d'erreurs tel que : 
 $$\frac{\Vert \Delta x \Vert}{\Vert x \Vert} \leq \kappa(A) \frac{\Vert \Delta b \Vert}{\Vert b \Vert} $$. 
-Nous résolvons ici deux système successifs (equations \ref{eq_q2}); et nous avons calculé dans la question 1 la valeur du conditionnent des matrices $T_L$ et $T_R$ (equation \ref{equatkappa}). Ce qui nous donne finalement : 
+Nous résolvons ici deux système successifs (équations \ref{eq_q2}); et nous avons calculé dans la question 1 la valeur du conditionnent des matrices $T_L$ et $T_R$ (equation \ref{equatkappa}). Ce qui nous donne finalement : 
 $$\frac{\Vert \Delta \mathcal{X} \Vert}{\Vert \mathcal{X} \Vert} \leq \kappa (T_R) \frac{\Vert \Delta \mathcal{Y} \Vert}{\Vert \mathcal{Y} \Vert} \leq \kappa(T_R) \kappa (T_L) \frac{\Vert \Delta \Vert}{\Vert A \Vert} = \left(\frac{1+2a}{1-2a}\right)^2  \frac{\Vert \Delta \Vert}{\Vert A \Vert}. $$
 Où $\Delta$ est une perturbation de moyenne nulle et de variance 1 ajoutée à $A$. Numériquement on obtient \footnote{Les valeurs des perturbations relatives sont une moyenne sur 20 tests. Les normes matricielles utilisées sont des norme 2 implémenté sous Matlab dans la fonction \text{norm}} : 
 \begin{eqnarray}
