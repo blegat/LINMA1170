@@ -180,12 +180,12 @@ et $T_R$ s'éloigne de 1. Cela rend la résolution plus sensible au bruit.
 En effet, comme nous l'avons déjà évoqué dans la question 1, le conditionnement $\kappa$ d'une matrice permet de donner une borne sur l'erreur de la solution si les conditions initiales sont perturbées. Plus concrètement, si on cherche à résoudre le système linéaire $Ax=b$ et qu'une perturbation vient s'ajouter au vecteur $b\rightarrow b+\Delta b$, notre solution $x$ sera entachée d'erreurs tel que : 
 $$\frac{\Vert \Delta x \Vert}{\Vert x \Vert} \leq \kappa(A) \frac{\Vert \Delta b \Vert}{\Vert b \Vert}. $$ 
 Nous résolvons ici deux système successifs (équations \ref{eq_q2} et \ref{eq_q2'}) et nous avons calculé la valeur du conditionnement des matrices $T_L$ et $T_R$ à la question 1 (équation \ref{equatkappa}). Ce qui nous donne finalement : 
-$$\frac{\Vert \Delta \mathcal{X} \Vert}{\Vert \mathcal{X} \Vert} \leq \kappa (T_R) \frac{\Vert \Delta \mathcal{Y} \Vert}{\Vert \mathcal{Y} \Vert} \leq \kappa(T_R) \kappa (T_L) \frac{\Vert \Delta \Vert}{\Vert A \Vert} = \left(\frac{1+2a}{1-2a}\right)^2  \frac{\Vert \Delta \Vert}{\Vert A \Vert}. $$
+$$\frac{\Vert \Delta \mathcal{X} \Vert}{\Vert \mathcal{X} \Vert} \leq \kappa (T_R) \frac{\Vert \Delta \mathcal{Y} \Vert}{\Vert \mathcal{Y} \Vert} \leq \kappa(T_R) \kappa (T_L) \frac{\Vert \Delta \Vert}{\Vert A \Vert} \leq \left(\frac{1+2a}{1-2a}\right)^2  \frac{\Vert \Delta \Vert}{\Vert A \Vert}. $$
 Où $\Delta$ est une perturbation de moyenne nulle et de variance 1 ajoutée à $A$. Numériquement on obtient \footnote{Les valeurs des perturbations relatives sont une moyenne sur 20 tests. Les normes matricielles utilisées sont des norme 2 implémenté sous Matlab dans la fonction \texttt{norm}} : 
 \begin{eqnarray}
-a=0.4  &\Longrightarrow & \kappa^2 = 81 \Longrightarrow 0.0366 \leq  0.1041\\
-a=0.45  &\Longrightarrow & \kappa^2 = 361 \Longrightarrow  0.1242 \leq  0.4680\\
-a=0.5  &\Longrightarrow &  \kappa^2 = \infty \Longrightarrow 1 \leq \infty 
+a=0.4  &\Longrightarrow & \kappa^2 \approx 81 \Longrightarrow 0.0366 \leq  0.1041\\
+a=0.45  &\Longrightarrow & \kappa^2 \approx 361 \Longrightarrow  0.1242 \leq  0.4680\\
+a=0.5  &\Longrightarrow &  \kappa^2 \approx \infty \Longrightarrow 1 \leq \infty 
 \end{eqnarray}
 
 Les résultats numériques confirment bien les prédictions théoriques.
