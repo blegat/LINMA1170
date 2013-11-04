@@ -1,8 +1,8 @@
 function [] = save_image (L, name, graph)
-% graph: 0 just don't
-%        1 export in png
+% graph: 1 export in png
 %        2 just show
-if graph > 0
+%        else do nothing
+if graph == 1 || graph == 2
     figure();
     if graph == 1
         set(gcf,'Visible','off');

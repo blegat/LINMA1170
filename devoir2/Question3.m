@@ -1,4 +1,4 @@
-function [i1, i2, X] = Question3(Img, a, r, iterator, graph)
+function [i1, i2, X, rho] = Question3(Img, a, r, iterator, task)
 %   L = image received 
 %   a, k = coef T ( a/k sould be between 0 and 255)
 %   
@@ -21,17 +21,20 @@ Cy = r^2;
 %D = diag(diag(Ay));
 %L = tril(Ay) - D;
 %U = triu(Ay) - D;
-%max(abs(eig(-D\(Low+Up))))
+%max(abs(eig(-D\(L+U))))
 
 Ax = TR'*TR + eye(N)*r^2;
 Bx = TR';
 Cx = r^2;
 
-D = diag(diag(Ax));
-L = tril(Ax) - D;
-U = triu(Ax) - D;
-%max(abs(eig(-D\(Low+Up))))
+%D = diag(diag(Ax));
+%L = tril(Ax) - D;
+%U = triu(Ax) - D;
+%rho = max(abs(eig(-D\(L+U))))
+%i1=0;
+%i2=0;
+%X=0;
 
-[i1, i2, X] = doubleSolver(Img, Ay, By, Cy, Ax, Bx, Cx, iterator, 'Q3', a, k, graph);
+[i1, i2, X, rho] = doubleSolver(Img, Ay, By, Cy, Ax, Bx, Cx, iterator, 'Q3', a, k, task);
 
 end
