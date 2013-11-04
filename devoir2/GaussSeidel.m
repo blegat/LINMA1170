@@ -1,6 +1,4 @@
 function [x, i, rho] = GaussSeidel(A, b, task, eps)
-%
-%   eps = theoretically frobenius norm, not yet implemented
 
 if nargin < 4
     eps = 1e-5;
