@@ -48,29 +48,7 @@ diminution pour $a \geq 0.3$.
 La fonction de l'erreur en fonction de $r$ semble à nouveau unimodale
 ce qui nous permettra d'effectuer une recherche unimodale.
 
-\begin{table}
-  \centering
-  \begin{tabular}{|l|l|l|l|l|}
-    \hline
-    \multirow{2}{*}{$a$} & \multicolumn{2}{l|}{Jacobi} & \multicolumn{2}{l|}{Gauss-Seidel}\\
-    \cline{2-5}
-        & $i_1$ & $i_2$ & $i_1$ & $i_2$\\
-    \hline
-    0.2 &     &     &     & \\
-    \hline
-    0.4 & 71    &     &     & \\
-    \hline
-    0.45&   &    &     & \\
-    \hline
-    0.5 &    &   &    & \\
-    \hline
-  \end{tabular}
-  \caption{Nombre d'itération nécessaire pour déflouter pour différentes valeurs de $a$ (le défloutage abandonne à 500 itérations).
-  $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
-  \label{tab:iter}
-\end{table}
-
-\subsubsection{Comparaison entre Gauss-Seidel et Jacobi}
+\subsection{Comparaison entre Gauss-Seidel et Jacobi}
 En comparant la figure~\ref{fig:arj} et la figure~\ref{fig:args}, on voit
 que lorsque Jacobi converge, ils ont la même erreur.
 Seulement, Jacobi ne converge pas toujours pour le meilleur $r$ pour Gauss-Seidel.
@@ -78,9 +56,6 @@ C'est d'ailleurs assez naturel qu'ils aient la même erreur car ils résolvent l
 système linéaire.
 C'est donc pour ça qu'on a pas comparé l'erreur à la question 2.
 
-\subsection{Comparaison de Jacobi et de Gauss-Seidel}
-
-Voici les résultats obtenus pour les méthodes de Jacobi et de Gauss-Seidel selon différentes valeurs de $a$ et de $r$.
 
 \begin{table}
   \centering
@@ -141,7 +116,8 @@ Comme on peut le remarquer dans le tableau \ref{tab:iterQ3JvsGS} ou sur les grap
 
 \subsection{Analyse du rayon spectral}
 
-Comme illustré aux figures \ref{fig:rhoj} et \ref{fig:rhogs}, le rayon spectral tend à diminuer pour un r de plus en plus grand. On constate également que la méthode de la question 3 n'a un rayon spectral plus petit qu'à la question 2 qu'à partir d'un certain r. La régularisation n'est donc intéressante au point de vue de la vitesse qu'à partir d'un certain r. Par exemple pour $a = 0.3$, il faut choisir un minimum de $r = 0.5$ pour que la méthode de Gauss-Seidel converge plus rapidement.
+Comme illustré aux figures \ref{fig:rhoj} et \ref{fig:rhogs}, le rayon spectral tend à diminuer pour un $r$ de plus en plus grand. On constate également que la méthode de la question 3 n'a un rayon spectral plus petit qu'à la question 2 qu'à partir d'un certain $r$.
+La régularisation n'est donc intéressante au point de vue de la vitesse qu'à partir d'un certain $r$. Par exemple pour $a = 0.3$, il faut choisir un minimum de $r = 0.5$ pour que la méthode de Gauss-Seidel converge plus rapidement.
 
 \begin{figure}
   \centering
@@ -174,6 +150,8 @@ Comme illustré aux figures \ref{fig:rhoj} et \ref{fig:rhogs}, le rayon spectral
     \caption{Graphe du rayon spectral de A $\rho(A)$ en fonction de r et ce pour différentes valeurs de a pour la méthode de Gauss-Seidel. Les croix indiquent quant à elles les valeurs du rayon spectral obtenues à la question 2.}
     \label{fig:rhogs}
   \end{subfigure}
+  \caption{Graphes sur le rayon spectral et l'erreur.}
+  \label{fig:arrho}
 \end{figure}
 
 \subsection{Recherche unimodale}

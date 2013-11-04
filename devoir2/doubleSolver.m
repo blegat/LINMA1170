@@ -41,6 +41,4 @@ X=X';
 
 save_image(X, sprintf('%s/unblurred_%d', dir, a*100), task);
 
-
 save_image(X, sprintf('%s/unblurred_%d', dir, a*100), task);
-

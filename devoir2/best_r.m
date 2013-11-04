@@ -1,4 +1,5 @@
 function [best] = best_r (Img, a, method)
+% returns the value of r giving the test value for a given a
     eps = 1e-3;
     min = first_conv(Img, a, method);
     max = 10;

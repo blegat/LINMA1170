@@ -56,8 +56,8 @@
   breaklines=true,
   framextopmargin=2pt,
   framexbottommargin=2pt,
-  extendedchars=true,
-  inputencoding=utf8x
+  %extendedchars=true,
+  %inputencoding=utf8x
 }
 \lstset{language={matlab}}
 
@@ -76,5 +76,38 @@ Nicolas Stevens \and Harold Taeter}
 \input{Q1/q1.tex}
 \input{Q2/q2.tex}
 \input{Q3/q3.tex}
+
+\appendix
+\section{Annexes}
+
+\subsection{Solveur}
+\lstinputlisting{iterative.m}
+\lstinputlisting{Jacobi.m}
+\lstinputlisting{GaussSeidel.m}
+
+\subsection{Questions}
+\lstinputlisting{save_image.m}
+\lstinputlisting{get_T.m}
+\lstinputlisting{doubleSolver.m}
+\lstinputlisting{Question2.m}
+\lstinputlisting{Question3.m}
+\lstinputlisting{get_erreur2.m}
+\lstinputlisting{get_erreur3.m}
+
+\section{Unimodale}
+\lstinputlisting{q3best.m}
+\lstinputlisting{best_r.m}
+\lstinputlisting{first_conv.m}
+
+\section{Scripts}
+\lstinputlisting{q2.m}
+\lstinputlisting{q3rho.m}
+\lstinputlisting{q3rho_method.m}
+\lstinputlisting{q3r.m}
+\lstinputlisting{q3r_method.m}
+
+\section{Région de convergence}
+\lstinputlisting{statJvsGS.m}
+\lstinputlisting{statQ2.m}
 
 \end{document}
