@@ -1,5 +1,5 @@
 \section{Question 3}
-
+La question 3 est fort similaire à la question 2, la seule différence est qu'on rajoute un terme $r$ à la fonction objectif. Ce terme a pour but de régulariser le problème d'optimisation en pénalisant les valeurs extrêmes de $\mathcal{X}$. On a ici les deux systèmes suivants à résoudre : $$T_{L}^{T} T_L \mathcal{Y} + r^2 (\mathcal{Y}-\overline{A_{\Delta}} = T_{L}^{T} A_{\Delta}$$ $$T_{R}^{T} T_R \mathcal{X}^{T} + r^2 (\mathcal{X}^{T}-\overline{A_{\Delta}} = T_{R}^{T} \mathcal{Y}^{T}$$ où $r>0$ est le paramètre de régularisation et $\overline{A_{\Delta}}$ est la moyenne des pixels de $A_{\Delta}$.
 \subsection{Jacobi}
 % TODO comparer itérations
 On remarque tout d'abord à l'aide de la figure~\ref{fig:arj}
