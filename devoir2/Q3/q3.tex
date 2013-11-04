@@ -50,6 +50,22 @@ diminution pour $a \geq 0.3$.
 La fonction de l'erreur en fonction de $r$ semble à nouveau unimodale
 ce qui nous permettra d'effectuer une recherche unimodale.
 
+\subsubsection{Comparaison entre Gauss-Seidel et Jacobi}
+En comparant la figure~\ref{fig:arj} et la figure~\ref{fig:args}, on voit
+que lorsque Jacobi converge, ils ont la même erreur.
+Seulement, Jacobi ne converge pas toujours pour le meilleur $r$ pour Gauss-Seidel.
+C'est d'ailleurs assez naturel qu'ils aient la même erreur car ils résolvent le même
+système.
+
+Il est donc plus pertinent de les comparer sur leur convergence et leur vitesse
+de convergence.
+On voit que Gauss-Seidel a une meilleur convergence,
+d'ailleurs on remarque en comparant le rayon spectral de Gauss-Seidel et de Jacobi
+que Gauss-Seidel a un rayon spectral bien plus faible ce qui explique ça meilleure
+convergence et qui nous invite à attendre une meilleure vitesse de convergence.
+
+TODO, comparer nombre d'itérations
+
 \begin{figure}
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
