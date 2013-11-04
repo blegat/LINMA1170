@@ -33,10 +33,6 @@ Le meilleur $r$ pour $a \geq 0.3$ semble être le premier $r$ à partir duquel
 Pour $a \leq 0.25$, ça n'a pas l'air aussi simple mais la fonction semble
 unimodale donc on peut aisément trouver le $r$ qui minimise l'erreur.
 
-Une recherche binaire trouvant le $r$ pour lequel la méthode commence à converger
-suivit d'une recherche unimodale nous permettra donc de voir le $r$ optimal en
-fonction de $a$.
-
 \subsection{Gauss-Seidel}
 La figure~\ref{fig:rhogs} nous invite à penser que pour
 $a < 0.5$, le rayon spectral est plus petit que 1.
@@ -55,7 +51,8 @@ En comparant la figure~\ref{fig:arj} et la figure~\ref{fig:args}, on voit
 que lorsque Jacobi converge, ils ont la même erreur.
 Seulement, Jacobi ne converge pas toujours pour le meilleur $r$ pour Gauss-Seidel.
 C'est d'ailleurs assez naturel qu'ils aient la même erreur car ils résolvent le même
-système.
+système linéaire.
+C'est donc pour ça qu'on a pas comparé l'erreur à la question 2.
 
 Il est donc plus pertinent de les comparer sur leur convergence et leur vitesse
 de convergence.
@@ -99,4 +96,29 @@ TODO, comparer nombre d'itérations
     calculé numériquement.}
     \label{fig:rhogs}
   \end{subfigure}
+\end{figure}
+
+\subsection{Recherche unimodale}
+Bien qu'on pourrait faire une recherche unimodale directement, on prenant
+$+\infty$ comme erreur par convention quand ça ne converge pas,
+commençons par faire une recherche binaire pour trouver à partir de quel
+$r$ ça converge.
+
+Faisons ensuite une recherche unimodale du minimum
+avec $r$ entre cette valeur et 0.5.
+En effet, comme vu à la figure~\ref{fig:arj} et à la figure~\ref{fig:args},
+le minimum se situe toujours entre 0 et 0.5.
+
+On obtient la figure~\ref{fig:best} où on observe les même minimums que sur la figure~\ref{fig:arj}
+et la figure~\ref{fig:args}.
+On voit que la valeur de $r$ est à peu prêt la même pour Gauss-Seidel et Jacobi,
+c'est normal car leur erreur en fonction de $r$ est pareil comme ils résolvent le même système.
+Ce n'est par contre plus le cas pour $a \geq 0.25$ car Jacobi ne converge alors plus pour tout $r$.
+Dans ce cas, le minimum est atteint pour le premier $r$ tel qu'il converge.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{Q3/best.png}
+  \caption{Valeur de $r$ donnant la plus petite erreur pour différentes valeurs de $a$.}
+  \label{fig:best}
 \end{figure}

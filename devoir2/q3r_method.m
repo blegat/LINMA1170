@@ -7,18 +7,14 @@ last_fail = zeros(numel(a),1);
 eq2 = zeros(numel(a),1);
 col = ['b' 'r' 'm' 'c' 'y' 'g'];
 for ia = 1:numel(a)
-    [i1 i2 X] = Question2(Img, a(ia), method, 0);
-    if i1 == 500 || i2 == 500
-        eq2(ia,1) = fail_e;
-    else
-        eq2(ia,1) = norm(X - Img, 'fro');
-    end
+    err = get_erreur2(Img, a(ia), method);
+    eq2(ia,1) = err;
     for i = 1:numel(r)
-        [i1 i2 X] = Question3(Img, a(ia), r(i), method, 0);
-        if i1 == 500 || i2 == 500
+        err = get_erreur3(Img, a(ia), r(i), method);
+        if err == -1
             last_fail(ia) = i;
         else
-            e(ia,i) = norm(X - Img, 'fro');
+            e(ia,i) = err;
         end
     end
     plot(mean(r), eq2(ia,1), [col(ia) '+'], 'Markersize', 8); hold on;
