@@ -21,8 +21,9 @@ if nargin < 6
 end
 
 if task == 3
-    opts.maxit = 1000;
-    rho = max(abs(eigs(M \ N,1,'LM',opts)));
+    %opts.maxit = 300;
+    %rho = max(abs(eigs(M \ N,1,'LM',opts)));
+    rho = max(abs(eig(full(M \ N))));
     x = b;
     i = 0;
 else
