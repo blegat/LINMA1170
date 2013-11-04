@@ -4,6 +4,7 @@ est une matrice de dimension $n \times m$, $T_L$ (resp. $T_R$) sera une matrice 
 \begin{eqnarray}
   \label{eq_q2}
   T_L \mathcal{Y} &=& A_{\Delta}\\
+  \label{eq_q2'}
   T_R \mathcal{X}^T &=& \mathcal{Y}^T.
 \end{eqnarray}
 Qui en français correspond à résoudre le problème suivant : une photo a été floutée (le type de floutage est connu) puis une perturbation (inconnue) a dégradé la photo; on souhaite maintenant déflouter la photo perturbée afin de retrouver une image proche de celle d'origine.
@@ -71,7 +72,7 @@ Dans notre cas la matrice $A$ est donnée soit par $T_R$ soit par $T_L$. Comme e
 
 Pour la méthode de Jacobi, on obtient directement (cf. question 1) que les valeurs propres de $\mathcal{J}$ valent
 $\lambda _i = -2a \cos(\dfrac{i \pi}{n+1})$ et donc $\rho(\mathcal{J}) = \max |\lambda_i| < 2a$.
-Ainsi la méthode de Jacobi convergera pour des valeurs de $a \leq 0.5$. 
+Ainsi la méthode de Jacobi convergera lorsque $\rho(\mathcal{J}) \leq 1$, c'est-à-dire pour des valeurs de $a \leq 0.5$. 
 
 Pour la méthode de Gauss-Seidel, le calcul des valeurs propres de $\mathcal{G}$ s'avère plus fastidieux. On peut néanmoins donner la valeur théorique du rayon spectral en utilisant le théorème 2.10 des notes de cours : comme les matrices de Gauss-Seidel et de Jacobi sont obtenues sur base de la même décomposition et que $T$ est une matrice tridiagonale par blocs, leur rayon spectral sont liés par la relation $$\rho (\mathcal{G}) = (\rho (\mathcal{J}))^2 .$$
 Ce qui nous permet de conclure que $\rho (\mathcal{G}) < 4a^2$.
@@ -101,21 +102,18 @@ tel que $\Vert x-x^* \Vert_F < \epsilon$ où $x^*$ est la solution exacte et $\e
   $i_1$ est le nombre d'itérations pour le premier système et $i_2$ pour le deuxième.}
   \label{tab:iter}
 \end{table}
-On constate bien que la méthode de Gauss-Seidel converge plus rapidement que celle de Jacobi. Pour $a=0.5$, on constate que les deux algorithmes atteignent la borne arbitraire des 500 itérations sans converger. En effet, la convergence en $0.5$ est théoriquement possible mais vu la différence entre $2a$ et $2a \cos(\dfrac{i \pi}{n+1})$ pour un $n$ dans les $150$, $170$ (l'image donnée), elle nécessiterait un nombre d'itérations considérable et les résultats ne seraient que peu pertinents à cause de l'amplification des perturbations. %l'itération devrait théoriquement converger, cependant nous avons stopper l'algorithme à 500 itérations. 
+On constate bien que la méthode de Gauss-Seidel converge plus rapidement que celle de Jacobi. Pour $a=0.5$, on constate que les deux algorithmes atteignent la borne arbitraire des 500 itérations sans avoir convergé. En effet, la convergence en $0.5$ est théoriquement possible mais vu que $|\lmax| = \cos(\dfrac{\pi}{n+1})$ pour un $n$ de l'ordre de $150$ (l'image donnée), elle nécessiterait un nombre d'itérations considérable et les résultats, entâché fortement par les perturbations, ne seraient que peu pertinents.\footnote{En effet, avec un $n$ élevé, on a un $\lmin$ qui tend vers $0$. Ceci implique que le nombre de conditionnement $\kappa$ tend vers l'infini, autorisant ainsi des perturbations très élevées.} %l'itération devrait théoriquement converger, cependant nous avons stopper l'algorithme à 500 itérations. 
 
 Pour rappel, soit l'itération $x_{k+1} = B x_k + c$,
-l'erreur au pas $x_{k+1}$ est donnée par $e_{k+1} = B e_k $. Par conséquent, si $\rho (B)<1$ la méthode converge. La convergence est linéaire avec un taux qui dépend de $\rho(B)$. Pour les méthodes de Jacobi et de Gauss-Seidel, étant donné le rayon spectral de $\mathcal{J}$ et de $\mathcal{G}$ calculé précédemment, il est normal d'observer une convergence plus rapide pour des valeurs de $a$ faible de même qu'une convergence plus rapide pour la méthode de Gauss-Seidel. 
+l'erreur au pas $x_{k+1}$ est donnée par $e_{k+1} = B e_k $. Par conséquent, si $\rho (B)<1$, la méthode converge. La convergence est linéaire avec un taux qui dépend de $\rho(B)$. Etant donnés les rayons spectrals de $\mathcal{J}$ et de $\mathcal{G}$ calculés précédemment, il est normal d'observer une convergence plus rapide pour lorsque la valeur de $a$ est faible. Puisque $\rho (\mathcal{G}) = (\rho (\mathcal{J}))^2$, il est également normal de constater une convergence plus rapide pour la méthode de Gauss-Seidel que pour celle de Jacobi. 
 
 
 
 \subsection{Représentation des résultats en fonction de $a$}
-La figure~\ref{fig:a2} représente les étapes successives de l'image qui part
-de la figure~\ref{fig:a2original}; qui est ensuite floutée (figure~\ref{fig:a2blurred});
-on lui ajoute du bruit (figure~\ref{fig:a2noise}) et on essaie de déflouter cette dernière (figure~\ref{fig:a2unblurred}).
-On remarque que la figure~\ref{fig:a2unblurred} est assez proche de l'originale, ce qui s'explique par la valeur de $a$ assez faible \footnote{Numériquement, on obtient une erreur relative maximale sur un pixel ($max\left( \frac{\mathcal{X} (i,j) - \I(i,j)}{\I (i,j)} \right)$) qui vaut entre 10\% et 14\% pour $a=0.2$. Pour $a=0.4$ celle-ci va jusqu'à 80\%; et pour $a=0.45$ on atteint les 230\%... Notez que des estimations théoriques de l'erreur sont données plus loin.}.
+Sur la figure~\ref{fig:a2} sont représentés les états successifs de l'image $\I$ décrits ci-dessus. L'image initiale est représentée sur la figure~\ref{fig:a2original}, elle est ensuite floutée comme représenté sur la figure~\ref{fig:a2blurred}, puis on lui ajoute du bruit (figure~\ref{fig:a2noise}) et est finalement défloutée sur la figure~\ref{fig:a2unblurred}.
+On remarque que la figure~\ref{fig:a2unblurred} est assez proche de l'originale, ce qui s'explique par une valeur de $a$ utilisée assez faible \footnote{Numériquement, on obtient une erreur relative maximale sur un pixel ($max\left( \frac{\mathcal{X} (i,j) - \I(i,j)}{\I (i,j)} \right)$) qui vaut entre 10\% et 14\% pour $a=0.2$. Pour $a=0.4$ celle-ci va jusqu'à 80\%; et pour $a=0.45$ on atteint les 230\%... Notez que des estimations théoriques de l'erreur sont données plus loin.}.
 
-On remarque également que les bords de la figure~\ref{fig:a2blurred} et ~\ref{fig:a2noise}
-sont noircis, pour les raisons déjà évoquées à la question 1.
+On remarque également que les bords de la figure~\ref{fig:a2blurred} et ~\ref{fig:a2noise} sont noircis, pour les raisons déjà évoquées à la question 1.
 
 \begin{figure}
   \centering
@@ -146,19 +144,12 @@ sont noircis, pour les raisons déjà évoquées à la question 1.
 \end{figure}
 
 La figure~\ref{fig:adiff} montre le résultat du défloutage pour différentes valeurs de $a$.
-On avait vu précédemment que plus $a$ était petit, plus vite on convergeait. De plus, à partir de $a = 0.5$, la convergence n'était plus assurée; ce qui est bien ce qu'on observe dans le tableau~\ref{tab:iter}, qui donne d'ailleurs un avantage
-à Gauss-Seidel. 
-
-On remarque aussi que
-la figure~\ref{fig:a2unblurred} est meilleure que la figure~\ref{fig:a4} qui est meilleure
-que la figure~\ref{fig:a45}.
-La figure~\ref{fig:a5} ne ressemble plus du tout à la figure de départ et pour cause,
-l'algorithme s'est arrêté après 500 itérations sans avoir convergé comme le montre
-le tableau~\ref{tab:iter}.
-Cependant, le fait qu'on prenne plus de temps à converger ne signifie pas qu'on arrivera
-jamais à la solution voulue.
+%On avait vu précédemment que plus $a$ est petit, plus vite la méthode utilisée converge. De plus, à partir de $a = 0.5$, la convergence n'est plus assurée, ce qui est bien ce qu'on observe dans le tableau~\ref{tab:iter}(qui montre d'ailleurs la méthode de Gauss-Seidel converge plus vite que la méthode de Jacobi). 
+On remarque que la figure~\ref{fig:a2unblurred} est de meilleure qualité que la figure~\ref{fig:a4} qui est elle-même de meilleure qualité que la figure~\ref{fig:a45}.
+La figure~\ref{fig:a5}, quant à elle, ne ressemble plus du tout à la figure de départ et pour cause, l'algorithme s'est arrêté après 500 itérations sans avoir convergé comme indiqué dans le tableau~\ref{tab:iter}.
+Cependant, le fait qu'on prenne plus de temps à converger ne signifie pas qu'on arrivera jamais à la solution voulue.
 La mauvaise qualité de l'image finale est plutôt due à l'augmentation du facteur $a$ qui implique que le conditionnement de $T_L$
-et $T_R$ s'éloignent de 1. Cela rend la résolution plus sensible au bruit.
+et $T_R$ s'éloigne de 1. Cela rend la résolution plus sensible au bruit.
 % TODO, il faut vraiment analyser T_L et T_R ?? Non, plus M et N non ?
 
 \begin{figure}
@@ -172,7 +163,7 @@ et $T_R$ s'éloignent de 1. Cela rend la résolution plus sensible au bruit.
   %(or a blank line to force the subfigure onto a new line)
   \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{Q2/unblurred_45.png}
-    \caption{$a = 45$}
+    \caption{$a = 0.45$}
     \label{fig:a45}
   \end{subfigure}%
   ~
@@ -187,10 +178,10 @@ et $T_R$ s'éloignent de 1. Cela rend la résolution plus sensible au bruit.
 
 
 En effet, comme nous l'avons déjà évoqué dans la question 1, le conditionnement $\kappa$ d'une matrice permet de donner une borne sur l'erreur de la solution si les conditions initiales sont perturbées. Plus concrètement, si on cherche à résoudre le système linéaire $Ax=b$ et qu'une perturbation vient s'ajouter au vecteur $b\rightarrow b+\Delta b$, notre solution $x$ sera entachée d'erreurs tel que : 
-$$\frac{\Vert \Delta x \Vert}{\Vert x \Vert} \leq \kappa(A) \frac{\Vert \Delta b \Vert}{\Vert b \Vert} $$. 
-Nous résolvons ici deux système successifs (équations \ref{eq_q2}); et nous avons calculé dans la question 1 la valeur du conditionnent des matrices $T_L$ et $T_R$ (equation \ref{equatkappa}). Ce qui nous donne finalement : 
+$$\frac{\Vert \Delta x \Vert}{\Vert x \Vert} \leq \kappa(A) \frac{\Vert \Delta b \Vert}{\Vert b \Vert}. $$ 
+Nous résolvons ici deux système successifs (équations \ref{eq_q2} et \ref{eq_q2'}) et nous avons calculé la valeur du conditionnement des matrices $T_L$ et $T_R$ à la question 1 (équation \ref{equatkappa}). Ce qui nous donne finalement : 
 $$\frac{\Vert \Delta \mathcal{X} \Vert}{\Vert \mathcal{X} \Vert} \leq \kappa (T_R) \frac{\Vert \Delta \mathcal{Y} \Vert}{\Vert \mathcal{Y} \Vert} \leq \kappa(T_R) \kappa (T_L) \frac{\Vert \Delta \Vert}{\Vert A \Vert} = \left(\frac{1+2a}{1-2a}\right)^2  \frac{\Vert \Delta \Vert}{\Vert A \Vert}. $$
-Où $\Delta$ est une perturbation de moyenne nulle et de variance 1 ajoutée à $A$. Numériquement on obtient \footnote{Les valeurs des perturbations relatives sont une moyenne sur 20 tests. Les normes matricielles utilisées sont des norme 2 implémenté sous Matlab dans la fonction \text{norm}} : 
+Où $\Delta$ est une perturbation de moyenne nulle et de variance 1 ajoutée à $A$. Numériquement on obtient \footnote{Les valeurs des perturbations relatives sont une moyenne sur 20 tests. Les normes matricielles utilisées sont des norme 2 implémenté sous Matlab dans la fonction \texttt{norm}} : 
 \begin{eqnarray}
 a=0.4  &\Longrightarrow & \kappa^2 = 81 \Longrightarrow 0.0366 \leq  0.1041\\
 a=0.45  &\Longrightarrow & \kappa^2 = 361 \Longrightarrow  0.1242 \leq  0.4680\\

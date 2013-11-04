@@ -116,7 +116,7 @@ T v = \left( \frac{1}{k} I + \frac{a}{k} S \right) v =
 \end{equation}
 Les valeurs propres de $T$ sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
 
-On considère une matrice de très grande taille et donc un $n$ qui tend vers l'infini\footnote{ Pour l'image donnée, en réalisant cette approximation, on obtient un $\kappa^2 $ pour $a = 0.4$ (cf. suite du rapport) de  81 au lieu de 80.862, comme il s'agit d'une borne supérieur sur un accroissement de perturbations proportionnellement très petites c'est approximation fait sens.}. 
+On considère une matrice de très grande taille et donc un $n$ qui tend vers l'infini\footnote{ Pour l'image donnée, en réalisant cette approximation, on obtient un $\kappa^2 $ pour $a = 0.4$ (cf. suite du rapport) de  81 au lieu de 80.862, comme il s'agit d'une borne supérieure sur un accroissement de perturbations proportionnellement très petites c'est approximation fait sens.}. 
 On obtient donc comme valeurs propres maximales $\lmax$ et minimales $\lmin$,
 pour $a$ et $k$ positifs :
 
@@ -124,8 +124,7 @@ $$\lmax(T) \underset{n\rightarrow \infty}{\longrightarrow} \frac{1+2a}{k} $$
 $$\lmin (T) \underset{n\rightarrow \infty}{\longrightarrow} \frac{1-2a}{k} $$
 
 Le nombre de conditionnement
-\footnote{On dit d'une matrice qu'elle est bien conditionnée si son nombre de conditionnement
-  est proche de 1 et mal conditionnée s'il est grand.
+\footnote{On dit d'une matrice qu'elle est bien conditionnée si son nombre de conditionnement est proche de 1 et mal conditionnée s'il est grand.
 En effet, dans le cadre d'un problème de type $Ax = b$,
 la valeur de ce nombre fournit une borne de l'erreur relative de $x$ quand on introduit une perturbation $\Delta A $ ou $\Delta b$.
 Dans notre cas on cherchera donc à prendre un $a$ le plus proche possible de 0.
