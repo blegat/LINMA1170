@@ -6,7 +6,7 @@ La figure~\ref{fig:ar} nous donne un aperçu de l'impact de $r$
 sur l'erreur pour différentes valeurs de $a$.
 
 On voit que pour $a \geq 0.3$, la régularisation donne de meilleurs résultats
-lorsqu'on choisit bien $r$.
+pour autant qu'on choisissse un bon $r$.
 Pour $a \leq 0.25$ par contre, la régularisation donne de moins bons résultats.
 
 On a d'ailleurs pas toujours la convergence pour $a \geq 0.25$ mais à partir
@@ -50,13 +50,13 @@ fonction de $a$.
     \cline{2-5}
         & $i_1$ & $i_2$ & $i_1$ & $i_2$\\
     \hline
-    0.2 & 18    & 19    & 13    & 13\\
+    0.2 &     &     &     & \\
     \hline
-    0.4 & 71    & 76    & 41    & 44\\
+    0.4 & 71    &     &     & \\
+    \hlin
+    0.45&   &    &     & \\
     \hline
-    0.45& 147   & 163   & 81    & 90\\
-    \hline
-    0.5 & 500   & 500   & 500   & 500\\
+    0.5 &    &   &    & \\
     \hline
   \end{tabular}
   \caption{Nombre d'itération nécessaire pour déflouter pour différentes valeurs de $a$ (le défloutage abandonne à 500 itérations).
@@ -64,3 +64,13 @@ fonction de $a$.
   \label{tab:iter}
 \end{table}
 
+\subsection{Analyse du rayon spectral}
+
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{Q3/rhoJacobi.png}
+  \includegraphics[width=\textwidth]{Q3/rhoGauss-Seidel.png}
+  \caption{Les valeurs de \lambda pour différentes valeurs de a et de r}
+  \label{fig:ar}
+\end{figure}

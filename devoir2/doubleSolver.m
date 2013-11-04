@@ -29,6 +29,7 @@ save_image(IBN, sprintf('%s/noise_%d', dir, a*100), task);
 meanIBN = mean(mean(IBN));
 
 if strcmp(iterator,'Jacobi')
+    % TODO rho and rho are the same since T_L == T_R
     [Y, i1, rho] = Jacobi(A1, B1 * IBN + C1 * meanIBN, task);
     [X, i2, rho] = Jacobi(A2, B2 * Y' + C2 * meanIBN, task);
 else
@@ -37,16 +38,9 @@ else
 end
 X=X';
 
-% emax=0;
-% for i=1:M
-%     for j=1:N
-%         if norm(X(i,j)-Img(i,j))/Img(i,j) >emax
-%             emax=norm(X(i,j)-Img(i,j))/Img(i,j);
-%         end
-%     end
-% end
-% emax
 
 save_image(X, sprintf('%s/unblurred_%d', dir, a*100), task);
 
-end
+
+save_image(X, sprintf('%s/unblurred_%d', dir, a*100), task);
+
