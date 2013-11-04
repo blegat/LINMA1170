@@ -14,7 +14,7 @@ $$
 Nous séparons notre analyse en deux partie : (1) la détermination des valeurs adéquates de $k$ et (2) l'étude spectrale des matrices $T$.
 
 \subsection{Facteur k}
-Tout d'abord, il  est capital que peu importe la valeur de $\textit{a}$ dans la matrice $\textit{T}$,
+Tout d'abord, il  est capital que, peu importe la valeur de $\textit{a}$ dans la matrice $\textit{T}$,
 les coefficients de la matrice $\textit{A}$ gardent leur valeur comprise entre 0 et 255.
 La valeur de $\frac{1}{k}$ doit donc permettre de ramener les valeurs obtenues après floutage dans une norme acceptable.
 
@@ -62,7 +62,7 @@ Vu la positivité de $a$ et $k$, on obtient finalement que
 \begin{equation}
 k \geq 2a+1
 \end{equation}
-Si cette inégalité est satisfaite, nous somme assurer d'avoir des valeurs de $A$ comprises entre 0 et 255. Nous  pouvons ajouter une contrainte supplémentaire permettant de fixer une valeur $k$ : si les pixels $v$, $x$, $y$... ont la même valeur, l'idéal serait que le pixel $v'=v$. Ce qui correspond à l'égalité \footnote{Notons que cette propriété est vraie pour toutes les valeurs "intérieures" de $A$. Pour les bords de l'image (cf. tableau \ref{tabborder}), un pixel quelconque $e \in \I \Longrightarrow e' \in A$ tel que:  
+Si cette inégalité est satisfaite, nous sommes assurés d'avoir des valeurs de $A$ comprises entre 0 et 255. Nous  pouvons ajouter une contrainte supplémentaire permettant de fixer une valeur $k$ : si les pixels $v$, $x$, $y$... ont la même valeur, l'idéal serait que le pixel $v'=v$. Ce qui correspond à l'égalité \footnote{Notons que cette propriété est vraie pour toutes les valeurs "intérieures" de $A$. Pour les bords de l'image (cf. tableau \ref{tabborder}), un pixel quelconque $e \in \I \Longrightarrow e' \in A$ tel que:  
 $$e' = \frac{a \frac{(d+ag)}{k}}{k} + \frac{ \frac{(e+ah)}{k}}{k} + \frac{a \frac{(f+ai)}{k}}{k} . $$ On a bien trois termes de moins que dans le cas du pixel intérieur. La valeur de $e'$ sera toujours comprise entre 0 et 255 mais si $d=e=f=g=h=i$ on aura $e'= e \frac{1+3a+2a^2}{(1+2a)^2} < e$ (c'est à dire que le bord sera noirci, étant donné que 0 correspond au noir et 255 au blanc).}  $k=2a+1$. 
 
 \begin{table}
@@ -107,7 +107,7 @@ $$
   \end{bmatrix},
 $$
 
-on a donc que $T = \frac{1}{k} I + \frac{a}{k} S$.
+on a donc que $T = \frac{1}{k} I + \frac{a}{k} S$. Ceci implique également que tout vecteur propre de $T$ est également vecteur propre de $S$ et inversément.
 
 Soit $v$ un vecteur propre de $S$, on a que :
 \begin{equation}
@@ -116,16 +116,15 @@ T v = \left( \frac{1}{k} I + \frac{a}{k} S \right) v =
 \end{equation}
 Les valeurs propres de $T$ sont donc du type $\lambda_i(T) = \frac{1}{k} + 2 \frac{a}{k} \cos(\frac{i\pi}{n+1})$.
 
-On considère une matrice de très grande taille et donc un $n$ qui tend vers l'infini\footnote{ Pour l'image donnée, en réalisant cette approximation, on obtient un $\kappa^2 $ pour $a = 0.4$ (cf. suite du rapport) de  81 au lieu de 80.862, comme il s'agit d'une borne supérieur sur un accroissement de perturbations proportionnellement très petites c'est approximation fait sens.}. 
-On obtient donc comme valeurs propres maximales $\lmax$ et minimum $\lmin$,
+On considère une matrice de très grande taille et donc un $n$ qui tend vers l'infini\footnote{ Pour l'image donnée, en réalisant cette approximation, on obtient un $\kappa^2 $ pour $a = 0.4$ (cf. suite du rapport) de  81 au lieu de 80.862, comme il s'agit d'une borne supérieure sur un accroissement de perturbations proportionnellement très petites c'est approximation fait sens.}. 
+On obtient donc comme valeurs propres maximales $\lmax$ et minimales $\lmin$,
 pour $a$ et $k$ positifs :
 
 $$\lmax(T) \underset{n\rightarrow \infty}{\longrightarrow} \frac{1+2a}{k} $$
 $$\lmin (T) \underset{n\rightarrow \infty}{\longrightarrow} \frac{1-2a}{k} $$
 
 Le nombre de conditionnement
-\footnote{On dit d'une matrice qu'elle est bien conditionnée si son nombre de conditionnement
-  est proche de 1 et mal conditionnée s'il est grand.
+\footnote{On dit d'une matrice qu'elle est bien conditionnée si son nombre de conditionnement est proche de 1 et mal conditionnée s'il est grand.
 En effet, dans le cadre d'un problème de type $Ax = b$,
 la valeur de ce nombre fournit une borne de l'erreur relative de $x$ quand on introduit une perturbation $\Delta A $ ou $\Delta b$.
 Dans notre cas on cherchera donc à prendre un $a$ le plus proche possible de 0.
@@ -139,8 +138,9 @@ La norme subordonnée à la norme $||T||_2$ est définie telle que :
 $$||T||_2 = \sqrt{\lmax(T^TT)}$$
 où $\lmax(T^TT)$ désigne la plus grande valeur propre de $T^TT$.
 On sait donc que $\kappa(T) $ est positif.
+De plus, comme $\lmax(T)$ est forcément plus grand ou également à $\lmin$, on a que $\kappa(T) \geq 1$.
 On remarque également que pour $a \geq 0.5$ le nombre de conditionnement n'est pas défini.
-En $0.5$ de manière évidente et pour $a > 0.5$ parce que $\kappa$ est positif.
+C'est le cas de manière évidente pour $a = 0.5$ et c'est également le cas pour $a > 0.5$ parce que $\kappa$ doit être positif.
 
 Le carré du nombre de conditionnement est :
 \begin{equation} \label{equatkappa}
@@ -149,5 +149,5 @@ Le carré du nombre de conditionnement est :
 
 Celui-ci donne une idée de l'accroissement possible de $A$ par rapport à $\I$.
 En effet, vu que la transformation est du type $A = T_L \I T_R$,
-le conditionnement intervient et sur $T_L$ et sur $T_R$,
+le conditionnement de $T_L$ et de $T_R$ interviennent,
 il faut donc considérer le carré du nombre de conditionnement pour avoir une idée de l'accroissement de $A$. On constate que pour une valeur de $a$ de $0.4$, on obtient $\kappa^2 (T) = 81$, qui est déjà une valeur fort conséquente quant à l'amplification d'une perturbation sur la matrice initiale.
