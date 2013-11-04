@@ -26,7 +26,7 @@ fonction de $a$.
   \caption{Erreur pour différents $a$ en fonction de $r$ de Jacobi.
   Lorsque la méthode ne converge pas, le point n'est pas représenté.
   L'erreur est calculée comme la norme de Frobenius entre l'image de départ
-  et l'image défloutée.}
+  et l'image défloutée. Les croix représentent quant à elles l'erreur obtenue pour différent a à la question 2 (identique pour Jacobi et Gauss-Seidel).}
   \label{fig:ar}
 \end{figure}
 
@@ -38,7 +38,7 @@ fonction de $a$.
   \caption{Erreur pour différents $a$ en fonction de $r$ de Gauss-Seidel.
   Lorsque la méthode ne converge pas, le point n'est pas représenté.
   L'erreur est calculée comme la norme de Frobenius entre l'image de départ
-  et l'image défloutée.}
+  et l'image défloutée. Les croix représentent quant à elles l'erreur obtenue pour différent a à la question 2 (identique pour Jacobi et Gauss-Seidel).}
   \label{fig:ar}
 \end{figure}
 
@@ -53,7 +53,7 @@ fonction de $a$.
     0.2 &     &     &     & \\
     \hline
     0.4 & 71    &     &     & \\
-    \hlin
+    \hline
     0.45&   &    &     & \\
     \hline
     0.5 &    &   &    & \\
@@ -66,11 +66,19 @@ fonction de $a$.
 
 \subsection{Analyse du rayon spectral}
 
+Comme illustré aux figures $\ref{fig:Jrayon}$ et $\ref{fig:GSrayon}$, le rayon spectral tend à diminuer pour un r de plus en plus grand. On constate également que la méthode de la question 3 n'a un rayon spectral plus petit qu'à la question 2 qu'à partir d'un certain r. La régularisation n'est donc intéressante au point de vue de la vitesse qu'à partir d'un certain r. Par exemple pour $a = 0.3$, il faut choisir un minimum de $r = 0.5$ pour que la méthode de Gauss-Seidel converge plus rapidement. 
 
-\begin{figure}
+
+\begin{figure} \label{fig:Jrayon}
   \centering
   \includegraphics[width=\textwidth]{Q3/rhoJacobi.png}
+  \caption{Graphe du rayon spectral de A $\rho(A)$ en fonction de r et ce pour différentes valeurs de a pour la méthode de Jacobi. Les croix indiquent quant à elles les valeurs du rayon spectral obtenues à la question 2.}
+  \label{fig:ar}
+\end{figure}
+
+ \begin{figure} \label{fig:GSrayon}
+  \centering
   \includegraphics[width=\textwidth]{Q3/rhoGauss-Seidel.png}
-  \caption{Les valeurs de \lambda pour différentes valeurs de a et de r}
+  \caption{Graphe du rayon spectral de A $\rho(A)$ en fonction de r et ce pour différentes valeurs de a pour la méthode de Gauss-Seidel. Les croix indiquent quant à elles les valeurs du rayon spectral obtenues à la question 2.}
   \label{fig:ar}
 \end{figure}
