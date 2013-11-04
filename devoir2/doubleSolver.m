@@ -19,11 +19,12 @@ save_image(Img, sprintf('%s/original_%d', dir, a*100), task);
 TL = get_T(a, k, M);
 TR = get_T(a, k, N);
 IB = TL * Img * TR; % initial blurred image
-save_image(IB, sprintf('Q2/blurred_%d', a*100), task);
+
+save_image(IB, sprintf('%s/blurred_%d', dir, a*100), graph);
 
 Delta = randn(M, N); % Ok mean = 0 variance = 1
 IBN = (IB + Delta); % blurred image with perturbation
-save_image(IBN, sprintf('Q2/noise_%d', a*100), task);
+save_image(IBN, sprintf('%s/noise_%d', dir, a*100), graph);
 
 meanIBN = mean(mean(IBN));
 
@@ -36,5 +37,19 @@ else
 end
 X=X';
 
+<<<<<<< HEAD
+% emax=0;
+% for i=1:M
+%     for j=1:N
+%         if norm(X(i,j)-Img(i,j))/Img(i,j) >emax
+%             emax=norm(X(i,j)-Img(i,j))/Img(i,j);
+%         end
+%     end
+% end
+% emax
+
+save_image(X, sprintf('%s/unblurred_%d', dir, a*100), graph);
+=======
 save_image(X, sprintf('Q2/unblurred_%d', a*100), task);
+>>>>>>> cfe75ca6c1454e6caa8afe2e45c62ee96dfaeab6
 end
