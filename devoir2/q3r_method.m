@@ -8,7 +8,7 @@ eq2 = zeros(numel(a),1);
 col = ['b' 'r' 'm' 'c' 'y' 'g'];
 for ia = 1:numel(a)
     err = get_erreur2(Img, a(ia), method);
-    eq2(ia,1) = err;
+    eq2(ia,:) = err;
     for i = 1:numel(r)
         err = get_erreur3(Img, a(ia), r(i), method);
         if err == -1
