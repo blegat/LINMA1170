@@ -8,7 +8,7 @@ if graph == 1 || graph == 2
         set(gcf,'Visible','off');
     end
     colormap(gray);
-    imagesc(L);
+    imagesc(L, [0 255]);
     axis off;
     if graph == 1
         saveas(gcf, name, 'png');

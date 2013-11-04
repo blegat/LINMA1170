@@ -2,15 +2,32 @@
 
 \subsection{Jacobi}
 % TODO comparer itérations
-La figure~\ref{fig:ar} nous donne un aperçu de l'impact de $r$
+On remarque tout d'abord à l'aide de la figure~\ref{fig:arj}
+et de la figure~\ref{fig:rhoj} que pour $a \geq 0.25$,
+Jacobi ne converge pas pour tout $r$ mais uniquement à partir
+d'un certain $r$.
+
+Le $r$ pour lequel Jacobi commence à converge correspond d'ailleurs
+assez bien au point où le rayon spectral passe en dessous de 1.
+
+La figure~\ref{fig:rhoj} nous montre que le rayon spectral est
+décroisant en fonction de $r$ ce qui nous invite à penser que
+la convergence sera de plus en plus rapide mais ça ne nous
+dit rien sur l'évolution de l'erreur.
+
+La figure~\ref{fig:arj} nous donne un aperçu de l'impact de $r$
 sur l'erreur pour différentes valeurs de $a$.
+On voit qu'en choisissant correctement $r$ on a une erreur semblable
+pour $a \leq 0.25$ mais pour $a \geq 0.3$, on a une nette
+diminution de l'erreur.
+Pour $a = 0.45$ (pas représenta sur la figure~\ref{fig:rhoj}),
+l'erreur était de 7000 mais avec la régularisation, on obtenait
+1500.
 
 On voit que pour $a \geq 0.3$, la régularisation donne de meilleurs résultats
 lorsqu'on choisit bien $r$.
 Pour $a \leq 0.25$ par contre, la régularisation donne de moins bons résultats.
 
-On a d'ailleurs pas toujours la convergence pour $a \geq 0.25$ mais à partir
-d'un certain $r$, ça converge.
 Le meilleur $r$ pour $a \geq 0.3$ semble être le premier $r$ à partir duquel
 ça converge.
 Pour $a \leq 0.25$, ça n'a pas l'air aussi simple mais la fonction semble
@@ -20,24 +37,50 @@ Une recherche binaire trouvant le $r$ pour lequel la méthode commence à conver
 suivit d'une recherche unimodale nous permettra donc de voir le $r$ optimal en
 fonction de $a$.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{Q3/arJacobi.png}
-  \caption{Erreur pour différents $a$ en fonction de $r$ de Jacobi.
-  Lorsque la méthode ne converge pas, le point n'est pas représenté.
-  L'erreur est calculée comme la norme de Frobenius entre l'image de départ
-  et l'image défloutée.}
-  \label{fig:ar}
-\end{figure}
-
 \subsection{Gauss-Seidel}
+La figure~\ref{fig:rhogs} nous invite à penser que pour
+$a < 0.5$, le rayon spectral est plus petit que 1.
+On voit d'ailleurs avec la figure~\ref{fig:args} que contrairement
+à Jacobi, on a pas de problème de convergence.
+
+On a aussi une erreur semblable pour un $r$ bien choisi
+avec et sans la régularisation pour $a \leq 0.25$ et une nette
+diminution pour $a \geq 0.3$.
+
+La fonction de l'erreur en fonction de $r$ semble à nouveau unimodale
+ce qui nous permettra d'effectuer une recherche unimodale.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{Q3/arGauss-Seidel.png}
-  \caption{Erreur pour différents $a$ en fonction de $r$ de Gauss-Seidel.
-  Lorsque la méthode ne converge pas, le point n'est pas représenté.
-  L'erreur est calculée comme la norme de Frobenius entre l'image de départ
-  et l'image défloutée.}
-  \label{fig:ar}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Q3/arJacobi.png}
+    \caption{Erreur pour différents $a$ en fonction de $r$ de Jacobi.
+      Lorsque la méthode ne converge pas, le point n'est pas représenté.
+      L'erreur est calculée comme la norme de Frobenius entre l'image de départ
+    et l'image défloutée.}
+    \label{fig:arj}
+  \end{subfigure}%
+  ~
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Q3/arGauss-Seidel.png}
+    \caption{Erreur pour différents $a$ en fonction de $r$ de Gauss-Seidel.
+      Lorsque la méthode ne converge pas, le point n'est pas représenté.
+      L'erreur est calculée comme la norme de Frobenius entre l'image de départ
+    et l'image défloutée.}
+    \label{fig:args}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Q3/rhoJacobi.png}
+    \caption{$\rho(M^{-1}N)$ pour différents $a$ en fonction de $r$ de Gauss-Seidel
+    calculé numériquement.}
+    \label{fig:rhoj}
+  \end{subfigure}%
+  ~
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Q3/rhoGauss-Seidel.png}
+    \caption{$\rho(M^{-1}N)$ pour différents $a$ en fonction de $r$ de Jacobi
+    calculé numériquement.}
+    \label{fig:rhogs}
+  \end{subfigure}
 \end{figure}

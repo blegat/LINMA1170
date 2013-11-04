@@ -12,8 +12,8 @@ for ia = 1:numel(a)
         [i1 i2 X rho] = Question3(Img, a(ia), r(i), method, 3);
         rhoq3(ia,i) = max(rho);
     end
-    plot(r, rhoq2(ia,:), [col(ia) '+']); hold on;
-    plot(r, rhoq3(ia,:), col(ia));
+    plot(r, rhoq2(ia,:), [col(ia) '+'], 'Markersize', 8); hold on;
+    plot(r, rhoq3(ia,:), col(ia), 'Linewidth', 2);
 end
 xlabel('r');
 ylabel('\rho');

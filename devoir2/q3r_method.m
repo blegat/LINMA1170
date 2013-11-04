@@ -21,9 +21,9 @@ for ia = 1:numel(a)
             e(ia,i) = norm(X - Img, 'fro');
         end
     end
-    plot(mean(r), eq2(ia,1), [col(ia) '+']); hold on;
+    plot(mean(r), eq2(ia,1), [col(ia) '+'], 'Markersize', 8); hold on;
     no_fail = last_fail(ia)+1:numel(r);
-    plot(r(no_fail), e(ia,no_fail), col(ia)); hold on;
+    plot(r(no_fail), e(ia,no_fail), col(ia), 'Linewidth', 2); hold on;
 end
 xlabel('r');
 ylabel('erreur');
