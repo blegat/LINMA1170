@@ -1,5 +1,11 @@
 \section{Question 3}
-La question 3 est fort similaire à la question 2, la seule différence est qu'on rajoute un terme $r$ à la fonction objectif. Ce terme a pour but de régulariser le problème d'optimisation en pénalisant les valeurs extrêmes de $\mathcal{X}$. On a ici les deux systèmes suivants à résoudre : $$T_{L}^{T} T_L \mathcal{Y} + r^2 (\mathcal{Y}-\overline{A_{\Delta}} = T_{L}^{T} A_{\Delta}$$ $$T_{R}^{T} T_R \mathcal{X}^{T} + r^2 (\mathcal{X}^{T}-\overline{A_{\Delta}} = T_{R}^{T} \mathcal{Y}^{T}$$ où $r>0$ est le paramètre de régularisation et $\overline{A_{\Delta}}$ est la moyenne des pixels de $A_{\Delta}$.
+La question 3 est fort similaire à la question 2, la seule différence est qu'on rajoute un terme $r$ à la fonction objectif. Ce terme a pour but de régulariser le problème d'optimisation en pénalisant les valeurs extrêmes de $\mathcal{X}$. On a ici les deux systèmes suivants à résoudre : $$T_{L}^{T} T_L \mathcal{Y} + r^2 (\mathcal{Y}-\overline{A_{\Delta}}) = T_{L}^{T} A_{\Delta}$$ $$T_{R}^{T} T_R \mathcal{X}^{T} + r^2 (\mathcal{X}^{T}-\overline{A_{\Delta}}) = T_{R}^{T} \mathcal{Y}^{T}$$ où $r>0$ est le paramètre de régularisation et $\overline{A_{\Delta}}$ est la moyenne des pixels de $A_{\Delta}$.
+
+On remarque en effet qu'en foutant, la moyenne des pixels restent la même (si on négliges les effets sur les bords),
+comme on ajoute une normale de moyenne nulle, l'image floutée et bruitée a toujours la même moyenne que l'image de départ.
+Notre solution devrait donc avoir la même moyenne que l'image floutée et bruitée.
+On ajoute donc un terme régularisateur qui pénalisera des écartements à cette moyenne.
+
 \subsection{Jacobi}
 % TODO comparer itérations
 On remarque tout d'abord à l'aide de la figure~\ref{fig:arj}
