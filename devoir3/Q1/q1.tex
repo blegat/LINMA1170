@@ -36,4 +36,41 @@ La méthode de Newton ne fonctionne pas lorsque la jacobienne de la fonction dev
 Or, si $J_F(x_k)^{-1}$ est singulière pour un certain itéré $x_k$, elle n'est pas inversible en cet itéré et l'itération ne fonctionne donc plus. Pour que la méthode converge, il est donc requis que $J_F$ soit inversible en chacun des itérés.\\
 Dans notre cas, $J_F$ devient singulière en $x=s$ tel que $F(s)=0$. Si $s$ est un itéré, cela pose donc problème. On peut donc être certain qu'on ne convergera jamais exactement en la solution mais on peut toutefois espérer s'en approcher assez, cela dépendant du critère d'arrêt fixé.
 % Pas hyper développé car pas hyper sur de ce qui arriverait lorsque les itérés s'approchent de plus en plus de s. A partir d'un certain moment, cela ne fonctionnerait-il plus ?
+\\
 
+Montrons à présent le point 4. On définit $w \in \mathbb{C}_0^n$ de norme 1 et $W_{\bot}$, une base orthonormée du complément orthogonal de $w$, c'est-à-dire $ \lbrace v\in \mathbb{C} | (v|w)=0 \rbrace$. On considère la fonction : 
+\begin{equation} \label{eq_point4_q1}
+ G:y \rightarrow W_{\bot}^* A(w+ W_{\bot}y) - w^*A(w+ W_{\bot}y)y.
+\end{equation}
+
+Montrons que si $(w+ W_{\bot}y)$ est un vecteur propre de $A$, alors $G(y)=0$.
+\begin{proof}
+Soit $(w+ W_{\bot}y) \in Ker(A-\lambda I)$. L'équation \ref{eq_point4_q1} se réécrit alors : 
+\begin{eqnarray}
+G(y) &=& W_{\bot}^* \lambda (w+ W_{\bot}y) - w^*\lambda (w+ W_{\bot}y)y\\
+G(y) &=& \lambda [W_{\bot}^* w + W_{\bot}^*W_{\bot}y - w^* wy + w^* W_{\bot}yy ] 
+\end{eqnarray}
+Comme $W_{\bot}$ est orthogonal, on a $W_{\bot}^* W_{\bot} = I$. De plus, comme $w$ est de norme 1, $w^* w=1$. Enfin par définition $(w| W_{\bot}y)=0$. La dernière équation se réécrit alors : 
+$$G(y) = \lambda [0 + Iy - y + 0] = 0 $$
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
