@@ -14,3 +14,26 @@ f_1(x_1,...,x_n) \\
 f_n(x_1,...,x_n)
 \end{array}\right)
 $$
+où les fonctions $f_1,...,f_n$ sont des fonctions scalaires.\\
+Montrons tout d'abord que $F(\alpha x) = \alpha F(x)$ pour tout $\alpha$ scalaire non nul.\\
+Pour se faire, nous allons simplement utiliser la définition de la fonction $F$. On a $$F(\alpha x) = A(\alpha x) - \frac{(\alpha x)^*A(\alpha x)}{(\alpha x)^*(\alpha x)}\alpha x = \alpha Ax - \frac{\alpha^2 x^* A x}{\alpha^2 x^* x}\alpha x = \alpha F(x)$$
+
+Nous allons maintenant utiliser cette propriété pour montrer que la jacobienne de la fonction $F$ est singulière lorsque $F$ s'annule. Autrement dit, il faut montrer que $$F(s) = 0 \Rightarrow J_{F}(s) \text{ singulière}.$$
+La dérivée d'une fonction scalaire à une variable est définie comme suit : $$g'(x) = \lim_{h \to 0} \frac{g(x+h)-g(x)}{h}$$
+Nous allons essayer d'adapter cette définition pour l'appliquer à la jacobienne de la fonction $F$. Nous allons d'abord l'adapter aux fonctions scalaires à plusieurs variables $f_i$ qui composent $F$. On peut montrer qu'on a $$\lim_{h \to 0} (\nabla f_i(x))^T h = \lim_{h \to 0} f_i(x+h)-f_i(x), i = 1,...,n$$ où $x$, $h$ et $\nabla f_i(x)$ sont des vecteurs colonnes de même tailles. %Ca serait cool de le montrer un peu mieux
+Puisque la jacobienne d'une fonction vectorielle telle que $F$ est définie comme 
+$$J_F(x) =
+\left(\begin{array}{c}
+(\nabla f_1(x))^T \\
+\vdots \\
+(\nabla f_n(x))^T
+\end{array}\right),$$
+on peut adapter la définition du gradient pour des fonctions scalaires à une définition du jacobien pour des fonctions vectorielles. On a alors le résultat suivant\footnote{Une autre approche assez similaire aurait été d'évaluer le développement en série de Taylor de la fonction $F$ autour de $s$ et de l'évaluer en $s + \delta s$.} : $$\lim_{h \to 0} J_F(x) h = \lim_{h \to 0} F(x+h) - F(x).$$
+Afin d'utiliser la propriété montrée ci-dessus, on peut réécrire cette définition de la jacobienne comme suit : $$\lim_{\delta \to 0} J_F(x) \delta x = \lim_{\delta \to 0} F(x+\delta x) - F(x) = \lim_{\delta \to 0} \delta F(x)$$ où on peut diviser à gauche et à droite par $\delta$ et on a donc plus besoin de passer par la limite. Dans le cas $x=s$ tel que $F(s)=0$, on a alors $J_F(s)s=0$. C'est-à-dire que $s$ est vecteur propre de $J_F(s)$, associé à la valeur propre $0$. Ceci implique que $0$ est solution de l'équation $\text{det}(J_F(s)-xI)=0$.\\
+On a donc $$\text{det}(J_F(s))=0$$ et ceci ne peut-être vrai que si $J_F(s)$ est une matrice singulière.
+
+La méthode de Newton ne fonctionne pas lorsque la jacobienne de la fonction devient singulière en un itéré car la méthode de Newton se base sur l'itération suivante : $$x_{k+1} = x_k - J_F(x_k)^{-1}F(x_k).$$
+Or, si $J_F(x_k)^{-1}$ est singulière pour un certain itéré $x_k$, elle n'est pas inversible en cet itéré et l'itération ne fonctionne donc plus. Pour que la méthode converge, il est donc requis que $J_F$ soit inversible en chacun des itérés.\\
+Dans notre cas, $J_F$ devient singulière en $x=s$ tel que $F(s)=0$. Si $s$ est un itéré, cela pose donc problème. On peut donc être certain qu'on ne convergera jamais exactement en la solution mais on peut toutefois espérer s'en approcher assez, cela dépendant du critère d'arrêt fixé.
+% Pas hyper développé car pas hyper sur de ce qui arriverait lorsque les itérés s'approchent de plus en plus de s. A partir d'un certain moment, cela ne fonctionnerait-il plus ?
+
