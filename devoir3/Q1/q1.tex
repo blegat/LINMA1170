@@ -22,8 +22,8 @@ Nous allons maintenant utiliser cette propriété pour montrer que la jacobienne
 Utilisons le développement en série de Taylor de la fonction $F$ autour de $s$.\\
 $$\forall \delta \geq 0, \exists \theta \in [0;\delta], F(s+\delta s) = F(s) + \delta J_F(s+\theta s)s$$
 A l'aide de la propriété montrée ci-dessus, on a la relation suivante  $$\forall \delta \geq 0, \exists \theta \in [0;\delta], (1+\delta)F(s) = F(s) + \delta J_F(s+\theta s)s$$
-On utilise maintenant le fait que $F(s) = 0$ et on trouve $$\forall \delta \geq 0, \exists \theta \in [0;\delta], \delta J_F(s+\theta s) = 0$$
-Etant donné que cette relation est vraie $\forall \delta \geq 0$, elle est aussi valable $\forall \delta > 0$. Le terme $\delta$ pouvant valoir n'importe quel réel strictement positif, on peut diviser par $\delta$ à gauche et à droite de l'expression ci-dessus. On a alors la relation suivante : $$\forall \delta > 0, \exists \theta \in [0;\delta], J_F(s+\theta s) = 0$$
+On utilise maintenant le fait que $F(s) = 0$ et on trouve $$\forall \delta \geq 0, \exists \theta \in [0;\delta], \delta J_F(s+\theta s)s = 0$$
+Etant donné que cette relation est vraie $\forall \delta \geq 0$, elle est aussi valable $\forall \delta > 0$. Le terme $\delta$ pouvant valoir n'importe quel réel strictement positif, on peut diviser par $\delta$ à gauche et à droite de l'expression ci-dessus. On a alors la relation suivante : $$\forall \delta > 0, \exists \theta \in [0;\delta], J_F(s+\theta s)s = 0$$
 Par continuité de la jacobienne, on déduit que $$J_F(s)s = 0$$
 %La dérivée d'une fonction scalaire à une variable est définie comme suit : $$g'(x) = \lim_{h \to 0} \frac{g(x+h)-g(x)}{h}$$
 %Nous allons essayer d'adapter cette définition pour l'appliquer à la jacobienne de la fonction $F$. Nous allons d'abord l'adapter aux fonctions scalaires à plusieurs variables $f_i$ qui composent $F$. On peut montrer qu'on a $$\lim_{h \to 0} (\nabla f_i(x))^T h = \lim_{h \to 0} f_i(x+h)-f_i(x), i = 1,...,n$$ où $x$, $h$ et $\nabla f_i(x)$ sont des vecteurs colonnes de même tailles. %Ca serait cool de le montrer un peu mieux
