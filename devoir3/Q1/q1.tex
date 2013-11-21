@@ -32,11 +32,10 @@ on peut adapter la définition du gradient pour des fonctions scalaires à une d
 Afin d'utiliser la propriété montrée ci-dessus, on peut réécrire cette définition de la jacobienne comme suit : $$\lim_{\delta \to 0} J_F(x) \delta x = \lim_{\delta \to 0} F(x+\delta x) - F(x) = \lim_{\delta \to 0} \delta F(x)$$ où on peut diviser à gauche et à droite par $\delta$ et on a donc plus besoin de passer par la limite. Dans le cas $x=s$ tel que $F(s)=0$, on a alors $J_F(s)s=0$. C'est-à-dire que $s$ est vecteur propre de $J_F(s)$, associé à la valeur propre $0$. Ceci implique que $0$ est solution de l'équation $\text{det}(J_F(s)-xI)=0$.\\
 On a donc $$\text{det}(J_F(s))=0$$ et ceci ne peut-être vrai que si $J_F(s)$ est une matrice singulière.
 
-La méthode de Newton ne fonctionne pas lorsque la jacobienne de la fonction devient singulière en un itéré car la méthode de Newton se base sur l'itération suivante : $$x_{k+1} = x_k - J_F(x_k)^{-1}F(x_k).$$
-Or, si $J_F(x_k)^{-1}$ est singulière pour un certain itéré $x_k$, elle n'est pas inversible en cet itéré et l'itération ne fonctionne donc plus. Pour que la méthode converge, il est donc requis que $J_F$ soit inversible en chacun des itérés.\\
-Dans notre cas, $J_F$ devient singulière en $x=s$ tel que $F(s)=0$. Si $s$ est un itéré, cela pose donc problème. On peut donc être certain qu'on ne convergera jamais exactement en la solution mais on peut toutefois espérer s'en approcher assez, cela dépendant du critère d'arrêt fixé.
-% Pas hyper développé car pas hyper sur de ce qui arriverait lorsque les itérés s'approchent de plus en plus de s. A partir d'un certain moment, cela ne fonctionnerait-il plus ?
-\\
+
+La méthode de Newton définie la fonction d'itération $f$ tel que : $$f:\mathbb{R^n} \Rightarrow \mathbb{R^n} : x \rightarrow F(x)-[DF^(x)]^{-1}F(x). $$
+On a bien $\forall s | F(s)=0 \Longrightarrow f(s)=0$ si $DF$ est régulière. Ainsi s est un point fixe de la fonction $f$. Par le théorème 3.10 du cours, ce point fixe est attractif et la convergence est superlinéaire. Or comme ici la jacobienne $DF(x)$ est singulière en $s$, aucun résultats ne nous permet de conclure quoique ce soit sur sa convergence locale ou globale.
+
 
 Montrons à présent le point 4. On définit $w \in \mathbb{C}_0^n$ de norme 1 et $W_{\bot}$, une base orthonormée du complément orthogonal de $w$, c'est-à-dire $ \lbrace v\in \mathbb{C} | (v|w)=0 \rbrace$. On considère la fonction : 
 \begin{equation} \label{eq_point4_q1}
