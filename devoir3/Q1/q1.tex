@@ -44,11 +44,12 @@ La méthode de Newton définie la fonction d'itération $f$ tel que : $$f:\mathb
 On a bien $\forall s | F(s)=0 \Longrightarrow f(s)=0$ si $DF$ est régulière. Ainsi s est un point fixe de la fonction $f$. Par le théorème 3.10 du cours, ce point fixe est attractif et la convergence est superlinéaire. Or comme ici la jacobienne $DF(x)$ est singulière en $s$, aucun résultats ne nous permet de conclure quoique ce soit sur sa convergence locale ou globale.
 
 
-Montrons à présent le point 4. On définit $w \in \mathbb{C}_0^n$ de norme 1 et $W_{\bot}$, une base orthonormée du complément orthogonal de $w$, c'est-à-dire $ \lbrace v\in \mathbb{C} | (v|w)=0 \rbrace$. On considère la fonction : 
+Montrons à présent le point 4. On définit $w \in \mathbb{C}_0^n$ de norme 1 et $W_{\bot}$, une base orthonormée du complément orthogonal de $w$, c'est-à-dire une matrice dont les colonnes sont les vecteurs de la base de l'espace $ \lbrace v\in \mathbb{C^n_0} | (v|w)=0 \rbrace$. $W_{\bot}$ est bien une matrice de taille $n \times (n-1)$. On considère la fonction : 
 \begin{equation} \label{eq_point4_q1}
  G:y \rightarrow W_{\bot}^* A(w+ W_{\bot}y) - w^*A(w+ W_{\bot}y)y.
 \end{equation}
 
+Où $y$ est donc un vecteur de taille $n-1$, coordonnées dans la base $W_{bot}$; $M^*$ est la matrice adjointe \footnote{Une matrice adjointe d'une matrice $M$ à coefficients complexes est la matrice transposé de la matrice conjuguée de $M$ (qui est la matrice formée des éléments de $M$ conjugués).} de $M$.
 Montrons que si $(w+ W_{\bot}y)$ est un vecteur propre de $A$, alors $G(y)=0$.
 \begin{proof}
 Soit $(w+ W_{\bot}y) \in Ker(A-\lambda I)$. L'équation \ref{eq_point4_q1} se réécrit alors : 
@@ -56,12 +57,14 @@ Soit $(w+ W_{\bot}y) \in Ker(A-\lambda I)$. L'équation \ref{eq_point4_q1} se r�
 G(y) &=& W_{\bot}^* \lambda (w+ W_{\bot}y) - w^*\lambda (w+ W_{\bot}y)y\\
 G(y) &=& \lambda [W_{\bot}^* w + W_{\bot}^*W_{\bot}y - w^* wy + w^* W_{\bot}yy ] 
 \end{eqnarray}
-Comme $W_{\bot}$ est orthogonal, on a $W_{\bot}^* W_{\bot} = I$. De plus, comme $w$ est de norme 1, $w^* w=1$. Enfin par définition $(w| W_{\bot}y)=0$. La dernière équation se réécrit alors : 
+Comme $W_{\bot}$ est orthogonal, on a $W_{\bot}^* W_{\bot} = I$. De plus, comme $w$ est de norme 1, $w^* w=1$. Enfin par définition de $W_{bot}$: $(w| W_{\bot}y)=0$. La dernière équation se réécrit alors : 
 $$G(y) = \lambda [0 + Iy - y + 0] = 0 $$
 \end{proof}
 
 
-Et finalement, attaquons nous au point 5. 
+Et finalement, attaquons nous au point 5. C'est super simple : 
+$$J_G(y) = W^*_{\bot}AW_{\bot} - w^*A(w + 2W_{\bot}) $$
+TADAM!! 
 
 
 
