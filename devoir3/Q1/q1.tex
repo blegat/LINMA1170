@@ -41,18 +41,33 @@ On a donc $$\text{det}(J_F(s))=0$$ et ceci ne peut-être vrai que si $J_F(s)$ es
 
 Nous sommes ici dans le cas de la méthode de Newton multidimensionnelle et le seul résultat du cours donnant des informations sur la convergence de cette méthode est le théorème 3.10. Enonçons-le.\\
 \textbf{Théorème 3.10.} Soit $F : \mathbb{R}^n \rightarrow \mathbb{R}^n$ une fonction dérivable dans un voisinage ouvert $\Omega$ d'un point $s$ pour lequel $F(s)=0$. Supposons que $J_F$ est continue en $s$ et que $J_F(s)$ est non singulière. Alors $s$ est un point d'attraction de l'itération de Newton $$\mathcal{I} : x_{k+1} = x_k - J_F(x_k)^{-1}F(x_k), k = 0,1,...,$$ et la convergence est superlinéaire en $s$.\\
-Puisque, comme nuos l'avons montré ci-dessus, la jacobienne $J_F$ est signulière en $s$, ce théorème n'est pas applicable. Par conséquent, on ne peut conclure quoique ce soit sur la convergence locale ou globale de la méthode.
+Puisque, comme nous l'avons montré ci-dessus, la jacobienne $J_F$ est singulière en $s$, ce théorème n'est pas applicable. Par conséquent, on ne peut conclure quoique ce soit sur la convergence locale ou globale de la méthode.
 
 %La méthode de Newton définie la fonction d'itération $\mathcal{I}$ tel que : $$f:\mathbb{R^n} \Rightarrow \mathbb{R^n} : x \rightarrow F(x)-[DF^(x)]^{-1}F(x). $$
 %On a bien $\forall s | F(s)=0 \Longrightarrow f(s)=0$ si $DF$ est régulière. Ainsi s est un point fixe de la fonction $f$. Par le théorème 3.10 du cours, ce point fixe est attractif et la convergence est superlinéaire. Or comme ici la jacobienne $DF(x)$ est singulière en $s$, aucun résultats ne nous permet de conclure quoique ce soit sur sa convergence locale ou globale.
 
 
-Montrons à présent le point 4. On définit $w \in \mathbb{C}_0^n$ de norme 1 et $W_{\bot}$, une base orthonormée du complément orthogonal de $w$, c'est-à-dire une matrice dont les colonnes sont les vecteurs de la base de l'espace $ \lbrace v\in \mathbb{C^n_0} | (v|w)=0 \rbrace$. $W_{\bot}$ est bien une matrice de taille $n \times (n-1)$. On considère la fonction : 
+Montrons à présent le point 4. On définit $w \in \mathbb{C}_0^n$ de norme 1 et $W_{\bot}$, une base orthonormée du complément orthogonal de $w$. La matrice $W_{\bot}$ est une matrice composée des vecteurs de base de l'espace associé. Elle est, par conséquent, de taille $n \times (n-1)$ et est de la forme $$W_{\bot} = (v_1 v_2 \hdots v_{n-1})$$ où les $v_i$ sont des vecteurs colonnes de taille $n$. Puisque les $v_i$ sont les vecteurs d'une base orthonormée, on a $v_i^*v_j = \delta_{ij}$ et, puisque cette base est la base d'un espace orthogonal à $w$, on a également $v_i^*w = 0$ et ce $\forall i = 1,...,n-1$.%, c'est-à-dire une matrice dont les colonnes sont les vecteurs de la base de l'espace $ \lbrace v\in \mathbb{C^n_0} | (v|w)=0 \rbrace$. $W_{\bot}$ est bien une matrice de taille $n \times (n-1)$. On considère la fonction : 
+On cherche à montrer que la fonction
 \begin{equation} \label{eq_point4_q1}
- G:y \rightarrow W_{\bot}^* A(w+ W_{\bot}y) - w^*A(w+ W_{\bot}y)y.
+ G:y \rightarrow W_{\bot}^* A(w+ W_{\bot}y) - w^*A(w+ W_{\bot}y)y,
 \end{equation}
+vaut $0$ lorsqu'elle est évaluée en $y$ si $(w+ W_{\bot}y)$ est un vecteur propre de $A$. La relation à montrer est donc la suivante : $$A(w+ W_{\bot}y) = \lambda (w+ W_{\bot}y) \Rightarrow G(y)=0.$$
 
-Où $y$ est donc un vecteur de taille $n-1$, coordonnées dans la base $W_{bot}$; $M^*$ est la matrice adjointe \footnote{Une matrice adjointe d'une matrice $M$ à coefficients complexes est la matrice transposé de la matrice conjuguée de $M$ (qui est la matrice formée des éléments de $M$ conjugués).} de $M$.
+Pour rester cohérent au niveau des dimensions des objets manipulés, le vecteur colonne $y$ doit être de taille $n-1$. C'est en effet le cas puisque le vecteur $y$ appartient à l'espace engendré par $W_{\bot}$ et ses entrées correspondent à ses coordonnées dans la base $W_{\bot}$. De façon plus explicite, on a que le vecteur $y$ est de la forme $y = a_1 v_1 + a_2 v_2 + ... + a_{n-1} v_{n-1}$ lorsqu'il est exprimé dans la base de l'espace total de taille $n$ et il est de la forme $y = (a_1 a_2 ... a_{n-1})^{T}$ lorsqu'il est exprimé dans la base $W_{\bot}$. On remarque assez facilement que la matrice $W_{\bot}$ permet de passer d'une base à l'autre. En effet, on a $$a_1 v_1 + a_2 v_2 + ... + a_{n-1} v_{n-1} = W_{\bot}
+\left(\begin{array}{c}
+a_1 \\
+\vdots \\
+a_{n-1}
+\end{array}\right)
+\text{et}
+\left(\begin{array}{c}
+a_1 \\
+\vdots \\
+a_{n-1}
+\end{array}\right)
+= W_{\bot}^*(a_1 v_1 + a_2 v_2 + ... + a_{n-1} v_{n-1})$$ où $W_{\bot}^*$ est la matrice adjointe \footnote{Une matrice adjointe d'une matrice $M$ à coefficients complexes est la matrice transposée de la matrice conjuguée de $M$ (qui est la matrice formée des éléments de $M$ conjugués).} de $W_{\bot}$.
+%Où $y$ est donc un vecteur de taille $n-1$, coordonnées dans la base $W_{bot}$; $M^*$ est la matrice adjointe \footnote{Une matrice adjointe d'une matrice $M$ à coefficients complexes est la matrice transposé de la matrice conjuguée de $M$ (qui est la matrice formée des éléments de $M$ conjugués).} de $M$.
 Montrons que si $(w+ W_{\bot}y)$ est un vecteur propre de $A$, alors $G(y)=0$.
 \begin{proof}
 Soit $(w+ W_{\bot}y) \in Ker(A-\lambda I)$. L'équation \ref{eq_point4_q1} se réécrit alors : 
@@ -60,7 +75,8 @@ Soit $(w+ W_{\bot}y) \in Ker(A-\lambda I)$. L'équation \ref{eq_point4_q1} se r�
 G(y) &=& W_{\bot}^* \lambda (w+ W_{\bot}y) - w^*\lambda (w+ W_{\bot}y)y\\
 G(y) &=& \lambda [W_{\bot}^* w + W_{\bot}^*W_{\bot}y - w^* wy + w^* W_{\bot}yy ] 
 \end{eqnarray}
-Comme $W_{\bot}$ est orthogonal, on a $W_{\bot}^* W_{\bot} = I$. De plus, comme $w$ est de norme 1, $w^* w=1$. Enfin par définition de $W_{bot}$: $(w| W_{\bot}y)=0$. La dernière équation se réécrit alors : 
+Puisque la matrice $W_{\bot}$ est composée de vecteurs colonnes orthogonaux à $w$, on remarque assez aisément que $W_{\bot}^*w = 0$. On peut également mettre en évidence le fait que $W_{\bot}^* W_{\bot} = I$ lorsque cet opérateur est appliqué à un vecteur appartenant à l'espace orthogonal à $w$. Cela fait de la matrice $W_{\bot}$ une matrice orthogonal. De plus, comme $w$ est de norme unitaire, on a $w^* w=1$. Finalement, on observe que $w^*W_{\bot}y = 0$ car $W_{\bot}y$ est le vecteur $y$ exprimé dans les coordonnées de l'espace total, ce vecteur étant forcément orthogonal à $w$. Sachant tout cela, on peut réécrire l'équation ci-dessus comme ceci :
+%Comme $W_{\bot}$ est orthogonal, on a $W_{\bot}^* W_{\bot} = I$. De plus, comme $w$ est de norme 1, $w^* w=1$. Enfin par définition de $W_{bot}$: $(w| W_{\bot}y)=0$. La dernière équation se réécrit alors : 
 $$G(y) = \lambda [0 + Iy - y + 0] = 0 $$
 \end{proof}
 
