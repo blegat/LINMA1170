@@ -3,7 +3,7 @@
 \subsection*{Newton-Raphson}
 
 Utilisons le théorème $3.10$ énoncé à la question 1.
-Dans notre cas, on voit aisément que $J_G = W_{\perp}^{*} A W_{\perp}- w^{*} A w I - 2 w^{*} A W_{\perp} x$ est continu en $s$ ($I$ est la matrice identité de taille $n-1$).
+Dans notre cas, on voit aisément que $J_G(y) = W_{\bot}^*AW_{\bot} - w^*AwI - (yw^*AW_{\bot}+Iw^*AW_{\bot}y) $ est continu en $s$ ($I$ est la matrice identité de taille $n-1$).
 
 On peut étendre le théorème $3.10$ avec des hypothèses plus forte sur la jacobienne : 
 
@@ -11,14 +11,13 @@ Si, de plus, il existe une constante $\alpha > 0$ telle que la condition de Lips
 $$||DF(x) - DF(s)|| \leq \alpha || x - s||, \forall x \in \Omega,$$
 alors l'ordre de convergence est au moins 2. 
 
-Dans notre cas, on a que : 
+Dans notre cas, en utilisant l'inégalité de Cauchy et l'inégalité triangulaire, on obtient que : 
 \begin{eqnarray}
-||DG(x) - DG(s)|| &=& ||W_{\perp}^{*} A W_{\perp}- w^{*} A w - 2 w^{*} A W_{\perp} x - W_{\perp}^{*} A W_{\perp}+ w^{*} A w + 2 w^{*} A W_{\perp} s || \\
-||DG(x) - DG(s)|| &=&  ||2 w^{*} A W_{\perp} (s-x) || \\
- ||DG(x) - DG(s)|| &\leq & \alpha || x - s||, \text{	} \alpha \geq || - 2 w^{*} A W_{\perp} ||
+||DG(x) - DG(s)|| &=& ||W_{\perp}^{*} A W_{\perp}- w^{*} A wI - (xw^*AW_{\bot}+Iw^*AW_{\bot}x) - W_{\perp}^{*} A W_{\perp}+ w^{*} A wI + (sw^*AW_{\bot}+Iw^*AW_{\bot}s) || \\
+||DG(x) - DG(s)|| &=&  ||(sw^*AW_{\bot}+Iw^*AW_{\bot}s) - (xw^*AW_{\bot}+Iw^*AW_{\bot}x) || \\
+ ||DG(x) - DG(s)|| &\leq & (||w^*AW_{\bot}|| + || Iw^*AW_{\bot} ||) || x-s ||
 \end{eqnarray}
-
-On a donc bien un ordre de convergence d'au moins 2 pour la méthode de Newton appliquée à la fonction $G$.
+Par identification on a $\alpha = ||w^*AW_{\bot}|| + || Iw^*AW_{\bot} || \geq 0$, et donc la condition de Lipschitz sur $DG(x)$ est satisfaite.On conclut qu'on a bien un ordre de convergence d'au moins 2 pour la méthode de Newton appliquée à la fonction $G$.
 
 \subsection*{Rayleigh symétrique}
 
