@@ -1,7 +1,7 @@
 \section*{Question 2}
 
 \subsection*{Newton-Raphson}
-
+Soit la fonction $G$ de la question 1. On souhaite appliquer la méthode de Newton pour trouver le point $s$ tel que $G(s)=0$. On a montrer précédemment que $G(y)=0$ ssi  $(w+ W_{\bot}y)$ est un vecteur propre de $A$. La méthode de Newton appliquée à $G$ permet donc bien de trouver le vecteur propre dominant de $A$.
 Utilisons le théorème $3.10$ énoncé à la question 1.
 Dans notre cas, on voit aisément que $J_G(y) = W_{\bot}^*AW_{\bot} - w^*AwI - (yw^*AW_{\bot}+Iw^*AW_{\bot}y) $ est continu en $s$ ($I$ est la matrice identité de taille $n-1$).
 
@@ -17,7 +17,95 @@ Dans notre cas, en utilisant l'inégalité de Cauchy et l'inégalité triangulai
 ||DG(x) - DG(s)|| &=&  ||(sw^*AW_{\bot}+Iw^*AW_{\bot}s) - (xw^*AW_{\bot}+Iw^*AW_{\bot}x) || \\
  ||DG(x) - DG(s)|| &\leq & (||w^*AW_{\bot}|| + || Iw^*AW_{\bot} ||) || x-s ||
 \end{eqnarray}
-Par identification on a $\alpha = ||w^*AW_{\bot}|| + || Iw^*AW_{\bot} || \geq 0$, et donc la condition de Lipschitz sur $DG(x)$ est satisfaite.On conclut qu'on a bien un ordre de convergence d'au moins 2 pour la méthode de Newton appliquée à la fonction $G$.
+Par identification on a $\alpha = ||w^*AW_{\bot}|| + || Iw^*AW_{\bot} || \geq 0$, et donc la condition de Lipschitz sur $DG(x)$ est satisfaite.On conclut qu'on a bien un ordre de convergence d'au moins 2 pour la méthode de Newton appliquée à la fonction $G$.\\
+
+Passons à présent à l'étude numérique de la méthode. Nous séparons notre analyse en trois étapes : (1) la représentation graphique de la méthode pour une matrice $A$ de taille 3; (2) l'étude numérique de la convergence et de la vitesse de convergence de la méthode.
+
+\subsubsection{Étude graphique}
+L'interprétation graphique de la méthode de Newton appliqué à la fonction $G$ est la suivante. Contrairement à la question 1.1. où la fonction $F$ calculait un vecteur $x$ de taille $n$ (avec $A$ matrice de taille $n$) qui était le vecteur propre dominant; la fonction $G$ va fixer un vecteur $w$ de tel sorte qu'on ne doivent plus calculer qu'un vecteur $y$ (dans la base $W_{\bot}$ orthogonale à $w$) de taille $n-1$. On "perd" en quelque sorte un degré de liberté. Illustrons cela sur un cas particulier.\\
+
+Soit $A=  \left[ 
+\begin{matrix}
+1 & 3 & 5 \\
+-2 & 4 & 6 \\
+5 & 4 & -8
+\end{matrix} \right] 
+, w = 
+\left[ 
+\begin{matrix}
+1 \\
+0\\
+0
+\end{matrix} \right] , 
+W_{\bot} = 
+\left[ 
+\begin{matrix}
+0 & 0 \\
+1 & 0 \\
+0 & 1 
+\end{matrix} \right] , 
+Q=
+\left[ 
+\begin{matrix}
+0.2672 & 0.9094 & 0.7416 \\
+0.3831 & -0.2059 & 0.5256 \\
+-0.8842 & 0.3613 & 0.4169
+\end{matrix} \right] 
+$\\
+Où $Q$ est la matrice des vecteurs propres de $A$. Les vecteurs propres sont donc des vecteurs de l'espace $\mathbb{R^3}$ (cf. figure \ref{figureNewton}). $W_{\bot}$ est un plan de normale $w$. La méthode recherche un vecteur $y$ qui appartient au plan $W_{bot}$. Ou encore $y_1$, $y2$, $y3$ sont les projections orthogonale de $v1$, $v2$ et $v3$ dans le plan $W_{\bot}$.
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{grapheNewton.png}\\
+\includegraphics[width=12cm]{grapheNewton2.png}
+\caption{Illustration graphique de la méthode de Newton appliquée à la fonction $G$. Le vecteur bleu est $w$ qui ets fixé. La méthode va chercher un $y_1$ (resp. $y_2$ ou $y_3$) tel que la somme vectorielle $w+y_1$ soit le vecteur propre $v_1$ (resp. $v_2$ ou $v_3$).}
+\label{figureNewton}
+\end{figure}
+
+Si on représente la fonction $G$ pour ces même matrices $A$, $W_{\bot}$ et $w$, on obtient la figure \ref{grapheG}.
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{grapheG.png}\\
+\includegraphics[width=12cm]{grapheG2.png}
+\caption{Graphes de la fonction $G$. $G$ étant une fonction vectorielle à deux composante ($G(y)=[G_1(y), G_2(y)]$), nous avons tracer les deux courbes sur un même graphe. On cherche les points $y$ tels que $G_1(y)=G_2(y)=0$. Ces points sont tracer en vert sur les graphes ($G_1$ et $G_2$ étant ici tracer approximativement, ce points ne sont pas tous des racines mais permettent de localiser grossièrement les zones où se trouvent les vraies racines de $G$, ce qui est suffisant pour notre analyse), tandis que les points $y$ sont tracer en blanc.}
+\label{grapheG}
+\end{figure}
+Graphiquement, la méthode de Newton convergera (pas toujours, selon les bassins de convergence de la méthode) vers un $y$ le plus proche de $y_0$, l'itéré de départ.\\
+
+
+
+Regardons ce qui se passe quand $w$ est orthogonal au vecteur propre dominant. Cela signifie que $v_1$ est dans le plan $W_\bot$. Par conséquent, on ne peut exprimer $v_1$ par $w+W_{\bot}y$ (sauf peut-être pour $||y|| \rightarrow \infty$). \\
+Soit $w = 
+\begin{bmatrix}
+1 \\
+0\\
+0.3021
+\end{bmatrix} , 
+W_{\bot} =  
+\begin{bmatrix}
+0 & 0.2672 \\
+1 & 0 \\
+0 & -0.8842 
+\end{bmatrix}$\\
+La fonction $G$ n'a plus que deux racines (cf. figure \ref{FigNewtonv1inW}).
+
+\begin{figure}
+\centering
+\includegraphics[width=12cm]{grapheG3.png}
+\caption{Graphe de $G$ pour la même matrice $A$, mais pour $v_1 \bot w$  
+}
+\label{FigNewtonv1inW}
+\end{figure}
+
+
+\subsubsection{Étude de la convergence}
+
+
+
+
+
+
 
 \subsection*{Rayleigh symétrique}
 On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis a jour à chaque itération). En d'autre mots, elle définie la méthode itérative suivante : 

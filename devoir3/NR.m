@@ -2,7 +2,7 @@ function [y i] = NR(y, w, W, A)
 %NR Newton-Raphson implementation for non symetric matrix
 %
 i = 1;
-eLim = 1e-10;
+eLim = 1e-18;
 err = eLim +1;
 l=length(A);
 
