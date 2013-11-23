@@ -19,6 +19,13 @@ Montrons tout d'abord que $F(\alpha x) = \alpha F(x)$ pour tout $\alpha$ scalair
 Pour se faire, nous allons simplement utiliser la définition de la fonction $F$. On a $$F(\alpha x) = A(\alpha x) - \frac{(\alpha x)^*A(\alpha x)}{(\alpha x)^*(\alpha x)}\alpha x = \alpha Ax - \frac{\alpha^2 x^* A x}{\alpha^2 x^* x}\alpha x = \alpha F(x)$$
 
 Nous allons maintenant utiliser cette propriété pour montrer que la jacobienne de la fonction $F$ est singulière lorsque $F$ s'annule. Autrement dit, il faut montrer que $$F(s) = 0 \Rightarrow J_{F}(s) \text{ singulière}.$$
+Pour rappel, la jacobienne d'un fonction vectorielle $F$ telle que celle ci-dessus est donnée par 
+$$J_F(x) =
+\left(\begin{array}{c}
+(\nabla f_1(x))^T \\
+\vdots \\
+(\nabla f_n(x))^T
+\end{array}\right).$$
 Utilisons le développement en série de Taylor de la fonction $F$ autour de $s$.\\
 $$\forall \delta \geq 0, \exists \theta \in [0;\delta], F(s+\delta s) = F(s) + \delta J_F(s+\theta s)s$$
 A l'aide de la propriété montrée ci-dessus, on a la relation suivante  $$\forall \delta \geq 0, \exists \theta \in [0;\delta], (1+\delta)F(s) = F(s) + \delta J_F(s+\theta s)s$$
@@ -80,10 +87,28 @@ Puisque la matrice $W_{\bot}$ est composée de vecteurs colonnes orthogonaux à 
 $$G(y) = \lambda [0 + Iy - y + 0] = 0 $$
 \end{proof}
 
-
-Et finalement, attaquons nous au point 5. C'est super simple : 
-$$J_G(y) = W^*_{\bot}AW_{\bot} - w^*A(w + 2W_{\bot}) $$
-TADAM!! 
+Calculons maintenant la jacobienne $J_G$ de cette fonction vectorielle. Pour commencer, nous allons calculer les jacobiennes de quelques fonctions type. Ces jacobiennes vont ensuite nous être utiles pour calculer la jacobienne de la fonction $G$.\\
+Soit la fonction $f(x) = \alpha x$ où $x$ est un vecteur colonne de taille $n$ et $\alpha$ est un scalaire. Calculons la jacobienne de la fonction $f$. On trouve directement que $$J_f(x) = \alpha I.$$
+Intéressons nous maintenant à la fonction $g(x) = Mx$ où $x$ est un vecteur colonne de taille $n$ et $M$ est une matrice carrée de taille $n \times n$. Calculons sa jacobienne. On trouve assez facilement que $$J_g(x) = M.$$
+Passons maintenant à un dernier tpye de fonction vectorielle, les fonctions de la forme $h(x) = v^* x x$ où $x$ et $v$ sont des vecteurs colonnes de taille $n$. On a que 
+$$J_h(x) =
+\left(\begin{array}{cccc}
+\sum_{i=1}^{n}{v_i^* x_i} + v_1^* x_1 & v_2^* x_1 & \hdots & v_n^* x_1 \\
+\vdots & \vdots & \vdots & \vdots\\
+v_1^* x_n & v_2^* x_n & \hdots & \sum_{i=1}^{n}{v_i^* x_i} + v_n^* x_n \\
+\end{array}\right).$$
+$$J_h(x) =
+\left(\begin{array}{cccc}
+v_1^* x_1 & v_2^* x_1 & \hdots & v_n^* x_1 \\
+\vdots & \vdots & \vdots & \vdots\\
+v_1^* x_n & v_2^* x_n & \hdots & v_n^* x_n \\
+\end{array}\right) + I\sum_{i=1}^{n}{v_i^* x_i} = xv^*+Iv^*x.
+$$
+On a maintenant tous les outils dont on a besoin pour trouver la jacobienne de $G$.\\
+On trouve que $$J_G(y) = W_{\bot}^*AW_{\bot} - w^*Aw - (yw^*AW_{\bot}+Iw^*AW_{\bot}y).$$
+%Et finalement, attaquons nous au point 5. C'est super simple : 
+%$$J_G(y) = W^*_{\bot}AW_{\bot} - w^*A(w + 2W_{\bot}) $$
+%TADAM!! 
 
 
 
