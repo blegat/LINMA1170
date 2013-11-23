@@ -100,12 +100,22 @@ La fonction $G$ n'a plus que deux racines (cf. figure \ref{FigNewtonv1inW}).
 
 
 \subsubsection{Étude de la convergence}
+Prenons une matrice aléatoire $A$ de taille 5 (randn(5)). Soit $w=[1,0,0,0,0]$ et $W_{\bot}$ sont complément orthogonal. Appliquons la méthode de Newton. Si celle-ci converge nous obtenons une erreur du type : 
+\begin{table}
+\centering
+\begin{tabular}{cccc}
+itération & erreur (sur $y+$) & itération & erreur\\
+\end{tabular}
+\end{table}  
 
+\paragraph{Remarque : }
+Observons un phénomène numérique intéressant : si on impose une trop grande précision à la méthode de Newton (ex : $\epsilon = 1e-30$), on a une stagnation de l'erreur qui apparaît (cf. figure \ref{plor_erreur}). Cela est du au fait que notre itération de Newton est définie comme : $x_{k+1} = x_k - J_G^{-1}(xk) G(x_k)$. le fait qu'on fasse une différence implique une perte de précision à partir d'un certain nombre d'itération. D'où l'intérêt des méthodes d'extrapolation (type Aiteken ou Steffesen). 
 
-
-
-
-
+\begin{figure}
+\includegraphics[width = 12cm]{erreur.png}
+\caption{Plot logarithmique de l'erreur à chaque itération.}
+\label{plor_erreur}
+\end{figure}
 
 \subsection*{Rayleigh symétrique}
 On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis a jour à chaque itération). En d'autre mots, elle définie la méthode itérative suivante : 
