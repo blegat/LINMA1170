@@ -1,3 +1,32 @@
 \section*{Question 2}
 
+\subsection*{Newton-Raphson}
 
+Le théorème $3.10$ énoncé à la question 1 nous disait : 
+
+Soit $F : \mathbb{R}^n \rightarrow \mathbb{R}^n$ une fonction dérivable dans un voisinage ouvert $\Omega$ d'un point $s$ pour lequel $F(s)=0$. Supposons que $J_F$ est continue en $s$ et que $J_F(s)$ est non singulière. Alors $s$ est un point d'attraction de l'itération de Newton $$\mathcal{I} : x_{k+1} = x_k - J_F(x_k)^{-1}F(x_k), k = 0,1,...,$$ et la convergence est superlinéaire en $s$. 
+
+Dans notre cas, on voit aisément que $J_G$ ($W_{\perp}^{*} A W_{\perp}- w^{*} A w - 2 w^{*} A W_{\perp} x$) est continu en $s$ .
+
+A cela, on peut ajouter : 
+
+Si, de plus, il existe une constante $\alpha > 0$ telle que la condition de Lipschitz 
+$$||DF(x) - DF(s)|| \leq \alpha || x - s||, \forall x \in \Omega,$$
+alors l'ordre de convergence est au moins 2. 
+
+Dans notre cas, on a que : 
+\begin{eqnarray}
+||DG(x) - DG(s)|| &=& ||W_{\perp}^{*} A W_{\perp}- w^{*} A w - 2 w^{*} A W_{\perp} x - W_{\perp}^{*} A W_{\perp}+ w^{*} A w + 2 w^{*} A W_{\perp} s || \\
+||DG(x) - DG(s)|| &=&  ||2 w^{*} A W_{\perp} (s-x) || \\
+ ||DG(x) - DG(s)|| &\leq & \alpha || x - s||, \text{	} \alpha \geq || - 2 w^{*} A W_{\perp} ||
+\end{eqnarray}
+
+On a donc bien un ordre de convergence d'au moins 2 pour la méthode de Newton appliquée à la fonction $G$.
+
+\subsection*{Rayleigh symétrique}
+
+\textbf{Proposition 4.4} Soit $A = A^*$ $ \in \mathbb{C}^{n\times n}$. L'itération du quotient de Rayleigh pour $A$ converge vers une direction propre de $A$ pour presque tout itéré initial. Lorsque la suite des itérés converge vers une direction propre, la convergence est cubique. 
+
+Il faut maintenant préciser ce \textit{pour presque tout itéré initial}. On ne peut pas choisir n'importe quel itéré initial. En effet, soit $x_0 = a_1 v_1 + \ldots + a_n v_n $ la décomposition dans la base ($v_1$, \ldots , $v_n$ ) de $\mathbb{C}^n$ formée des vecteurs propres de $A$. En considérant que $v_1$ est le vecteur propre pour la valeur propre $\lambda_1$ dominante, il faut que $a_1$ soit non nul dans l'itéré initial pour avoir convergence, sinon le vecteur initial n'aura aucune composante dans la bonne direction.   
+
+\subsection*{Rayleigh asymétrique}
