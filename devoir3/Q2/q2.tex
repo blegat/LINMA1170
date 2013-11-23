@@ -7,7 +7,7 @@ Dans notre cas, on voit aisément que $J_G(y) = W_{\bot}^*AW_{\bot} - w^*AwI - (
 
 On peut étendre le théorème $3.10$ avec des hypothèses plus forte sur la jacobienne : 
 
-Si, de plus, il existe une constante $\alpha > 0$ telle que la condition de Lipschitz 
+Si, de plus, il existe une constante $\alpha > 0$ telle que la condition de Lipschitz est satisfaite
 $$||DF(x) - DF(s)|| \leq \alpha || x - s||, \forall x \in \Omega,$$
 alors l'ordre de convergence est au moins 2. 
 
@@ -20,9 +20,16 @@ Dans notre cas, en utilisant l'inégalité de Cauchy et l'inégalité triangulai
 Par identification on a $\alpha = ||w^*AW_{\bot}|| + || Iw^*AW_{\bot} || \geq 0$, et donc la condition de Lipschitz sur $DG(x)$ est satisfaite.On conclut qu'on a bien un ordre de convergence d'au moins 2 pour la méthode de Newton appliquée à la fonction $G$.
 
 \subsection*{Rayleigh symétrique}
-
+On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis a jour à chaque itération). En d'autre mots, elle définie la méthode itérative suivante : 
+$$x_{k+1} = \left(  A- \frac{x^*Ax}{x^*x}  \right)^{-1} x_k.  $$
 \textbf{Proposition 4.4} Soit $A = A^*$ $ \in \mathbb{C}^{n\times n}$. L'itération du quotient de Rayleigh pour $A$ converge vers une direction propre de $A$ pour presque tout itéré initial. Lorsque la suite des itérés converge vers une direction propre, la convergence est cubique. 
 
-Il faut maintenant préciser ce \textit{pour presque tout itéré initial}. On ne peut pas choisir n'importe quel itéré initial. En effet, soit $x_0 = a_1 v_1 + \ldots + a_n v_n $ la décomposition dans la base ($v_1$, \ldots , $v_n$ ) de $\mathbb{C}^n$ formée des vecteurs propres de $A$. En considérant que $v_1$ est le vecteur propre pour la valeur propre $\lambda_1$ dominante, il faut que $a_1$ soit non nul dans l'itéré initial pour avoir convergence, sinon le vecteur initial n'aura aucune composante dans la bonne direction.   
+Il faut maintenant préciser ce \textit{pour presque tout itéré initial}. Supposons que $A$ est diagonalisable et faisons un changement de variable afin d'exprimer $x$ dans la base formée par les vecteurs propres de $A$. Nommons le $x$ après changement de variables $x'$. Soit $Q$ la matrice dont les colonnes sont les vecteurs propres de $A$ et $D$ la matrice diagonale des valeurs propres de $A$. On utilise le théorème spectrale et le fait que $A$ et $(A-\mu I)^{-1}$ possèdent les mêmes vecteurs propres pour réécrire l'itération : 
+\begin{eqnarray}
+Qx_{k+1}' & = &(Q D Q^T - \frac{x_k'^* D x_k}{x_k'^* x_k})^{-1} Qx_{k}'\\
+Qx_{k+1}' & = & Q(D-\frac{x_k'^* D x_k}{x_k'^* x_k})^{-1}Q^T Qx_k'\\
+x_{k+1}' & = & \underbrace{(D-\frac{x_k'^* D x_k}{x_k'^* x_k})^{-1}}_{\text{matrice diagonale}} x_k'
+\end{eqnarray}
+Supposons qu'on souhaite converger vers le vecteur propres dominant $v_1$, autrement dit on souhaite que $lim_{k\rightarrow \infty} x_k' = [1 0 \cdots 0]^T$. Pour que cela soit possible, il faut que $x_0$ ait sa composante dans la direction $v_1$ non nulle ($x_0'^* v_1 \neq 0$). 
 
 \subsection*{Rayleigh asymétrique}
