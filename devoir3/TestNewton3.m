@@ -1,8 +1,8 @@
 
 
 A=[1 3 5;-2 4 6; 5 4 -8];
-W=[0 0 ; 1 0 ; 0 1];
-w=[1 0 0]';
+W=[0 0.2672 ; 1 0 ; 0 -0.8842];
+w=[1 0 0.3021]';
 y=[0 0]';
 
 [eigenvecteur eigenvalue] = eig(A)
@@ -32,13 +32,20 @@ surf(X , Y, G2); hold on;
 for i=1:n
     for j=1:n
         if (abs(G1(i,j))<5 && abs(G2(i,j))<5)
-            plot3(X(i),Y(j),0,'g.');hold on;
+            plot3(X(i),Y(j),0,'b.');hold on;
         end
     end
 end
-plot3(1.4337,-3.309,0,'c.');hold on;
-plot3(-0.2264,0.3972,0,'c.');hold on;
-plot3(0.706,0.5621,0,'c.');hold on;
+plot3(1.4337,-3.309,0,'r.');hold on;
+plot3(-0.2264,0.3972,0,'r.');hold on;
+plot3(0.706,0.5621,0,'r.');hold on;
+title('Plot de la fonction G');
+xlabel('1e composante de y');
+ylabel('2e composante de y');
+zlabel('valeur de G');
+
+
+
 
 
 figure(2)
@@ -49,22 +56,22 @@ quiver3(0,0,0,eigenvecteur(1,3),eigenvecteur(2,3),eigenvecteur(3,3), 'k','linewi
 %w
 quiver3(0,0,0,1,0,0, 'b','linewidth',2);
 %y
-quiver3(0,0,0,0,1.4337,-3.309, 'r','linewidth',2);
-quiver3(0,0,0,0,-0.2264,0.3972, 'r','linewidth',2);
-quiver3(0,0,0,0,0.706,0.5621, 'r','linewidth',2);
+quiver3(0,0,0,0,1.4337,-3.309, 'c','linewidth',2);
+quiver3(0,0,0,0,-0.2264,0.3972, 'c','linewidth',2);
+quiver3(0,0,0,0,0.706,0.5621, 'c','linewidth',2);
 %plan W
-[y,z] = meshgrid(-1:0.1:1, -1:0.1:1);
-x=zeros(size(y))
+
+[y,z] = meshgrid(-1:0.1:2, -3:0.1:1);
+x=zeros(size(y));
 surf(x,y,z);
-legend('lambda1','lambda2','lambda3', 'vecteur w', 'y1', 'y2', );
+legend('v1','v2','v3', 'vecteur w', 'y1', 'y2', 'y3','plan W');
 
 
 
 
 
 
-
-
+%Cas où w ortho a v1
 
 
 
