@@ -1,4 +1,4 @@
-function [mu] = RQIS(A,x)
+function [mu] = RQIS(A,x, muGiven)
 %RQ Rayleigh Quotient Iteration for symmetric matrix
 %  mu returns the approximation of the eigenvalue
 %  x returns the approximation of the eigenvector linked to this mu
@@ -6,17 +6,22 @@ function [mu] = RQIS(A,x)
 % 1] => mu = 5.2361 ok (cf. wikipedia)
 
 i = 1;
-eLim = 1e-5;
+eLim = 1e-8;
 err = eLim +1;
-mu = (x'*A*x)/(x'*x);
+mu = muGiven; %(x'*A*x)/(x'*x);
 while i < 100 && err > eLim
     y = (A-mu*eye(size(A)))\x;
     x = y/norm(y);
     mu1 = (x'*A*x)/(x'*x); % shift = rayleigh quotient --> eigenvalue
-    err = norm(mu1-mu);
+    err = abs(mu1-mu);
     mu= mu1;
-    i = i + 1
+    fprintf('iteration number : %d\n error : %f \n mu : %f \n ',i,err,mu1) 
+    
+    
+    i = i + 1;
 end
+
+fprintf('final i : %d\n final mu : %f \n ',i, mu1)
 
 end
 

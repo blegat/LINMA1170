@@ -32,4 +32,73 @@ x_{k+1}' & = & \underbrace{(D-\frac{x_k'^* D x_k}{x_k'^* x_k})^{-1}}_{\text{matr
 \end{eqnarray}
 Supposons qu'on souhaite converger vers le vecteur propres dominant $v_1$, autrement dit on souhaite que $lim_{k\rightarrow \infty} x_k' = [1 0 \cdots 0]^T$. Pour que cela soit possible, il faut que $x_0$ ait sa composante dans la direction $v_1$ non nulle ($x_0'^* v_1 \neq 0$). 
 
+Vérifions maintenant de manière numérique les résultats théoriques obtenus. Prenons par exemple la matrice symétrique $A$ : 
+
+$$ A = \left[
+\begin{array}{ccc}
+  2 & 4 & 6  \\
+  4 & 2 & 1 \\
+  6 & 1 & 2 \\
+\end{array}
+\right]$$
+
+En utilisant la fonction $eigs$ de \textit{Matlab}, on sait que les valeurs propres de $A$ sont : 
+   \begin{eqnarray*}
+   \lambda_1 &=& 9.6965\\
+   \lambda_2 &=& 1.0796 \\
+   \lambda_3 &=& -4.7762
+   \end{eqnarray*}
+
+En appliquant l'itération du quotient de Rayleigh symétrique implémentée par nos soins pour un $x_0$ tel que : 
+$$ x_0 = \left[
+\begin{array}{c}
+  \frac{1}{\sqrt{3}}  \\
+  \frac{1}{\sqrt{3}} \\
+  \frac{1}{\sqrt{3}} \\
+\end{array}
+\right]$$
+ et pour $\mu_0 = 1000$ (la valeur propre la plus "proche" est donc 9.696530) , on obtient : 
+$$\begin{array}{ccc}
+  itération & erreur & \mu  \\
+  1 &  990.658295   & \underline{9}.341705  \\
+  2 &   0.354404   &  \underline{9.696}109\\
+  3 &  0.000421  & \underline{9.696530} \\
+  4 &  0.000000  & \underline{9.696530} \\
+\end{array}$$
+
+Ce qui correspond bien à la théorie. En effet, à chaque itération on gagne bien 3 chiffres significatifs comme l'illustrent l'erreur (définie comme la différence entre les $\mu_k$ à chaque itération) et les chiffres soulignés qui représentent les chiffres significatifs du $\mu_k$.
+
+On considère maintenant un itéré initial qui n'a pas de composante dans la direction du vecteur propre  
+
+$$ v_1 = \left[
+\begin{array}{c}
+  0.6834  \\
+   0.4317 \\
+   0.5888 \\
+\end{array}
+\right], \text{ t.q. } Av_1 = \lambda_1 v_1,$$
+
+par exemple  :
+
+$$ x_0 = \left[
+\begin{array}{c}
+  1  \\
+  0 \\
+  -1.1606\\
+\end{array}
+\right]$$
+
+Lorsqu'on applique l'itération, on ne converge effectivement plus vers $\lambda_1$ mais vers $\lambda_3$. Le \textit{pour presque tout itéré initial} est donc confirmé.
+
+\textbf{je sais ces image et explications puent pour l'instant, je les mets parce que j'ai fait le script et tout mais en soit hesitez pas à modifier et vu qu'elles vont peut etre disparaitre du rapport ca me soule d'écrire un roman pour l'expliquer nickel :p}
+
+L'image suivante illustre les valeurs propres (sur l'axe des z, 9.6965 1.0796 -4.7762 ) vers lesquelles on converge pour différents vecteurs propres initiaux $x_0$ (représentés par les points 1, 2 ou 3 sur l'axe des x, cf. code pour savoir leur valeurs exactes) et pour différents $\mu$ initiaux (de -10 à 10 sur l'axe des y).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=15cm]{RaySym.png}
+  \caption{Graphe représentant les valeurs propres vers lesquelles on converge pour différents $x_0$ et $mu$}
+  \label{fig:RaySym}
+\end{figure}
 \subsection*{Rayleigh asymétrique}
+
