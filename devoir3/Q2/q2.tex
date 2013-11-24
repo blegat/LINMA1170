@@ -119,11 +119,11 @@ itération & erreur (sur $y+$) & itération & erreur\\
 \end{figure}
 
 \subsection*{Rayleigh symétrique}
-On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis a jour à chaque itération). En d'autre mots, elle définie la méthode itérative suivante : 
+On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis a jour à chaque itération). En d'autre mots, elle définit la méthode itérative suivante : 
 $$x_{k+1} = \left(  A- \frac{x^*Ax}{x^*x}  \right)^{-1} x_k.  $$
 \textbf{Proposition 4.4} Soit $A = A^*$ $ \in \mathbb{C}^{n\times n}$. L'itération du quotient de Rayleigh pour $A$ converge vers une direction propre de $A$ pour presque tout itéré initial. Lorsque la suite des itérés converge vers une direction propre, la convergence est cubique. 
 
-Il faut maintenant préciser ce \textit{pour presque tout itéré initial}. Supposons que $A$ est diagonalisable et faisons un changement de variable afin d'exprimer $x$ dans la base formée par les vecteurs propres de $A$. Nommons le $x$ après changement de variables $x'$. Soit $Q$ la matrice dont les colonnes sont les vecteurs propres de $A$ et $D$ la matrice diagonale des valeurs propres de $A$. On utilise le théorème spectrale et le fait que $A$ et $(A-\mu I)^{-1}$ possèdent les mêmes vecteurs propres pour réécrire l'itération : 
+Il faut maintenant préciser ce \textit{pour presque tout itéré initial}. Supposons que $A$ est diagonalisable et faisons un changement de variable afin d'exprimer $x$ dans la base formée par les vecteurs propres de $A$. Nommons le $x$ après changement de variables $x'$. Soit $Q$ la matrice dont les colonnes sont les vecteurs propres de $A$ et $D$ la matrice diagonale des valeurs propres de $A$. On utilise le théorème spectrale et le fait que $A$ et $(A-\rho I)^{-1}$ possèdent les mêmes vecteurs propres pour réécrire l'itération : 
 \begin{eqnarray}
 Qx_{k+1}' & = &(Q D Q^T - \frac{x_k'^* D x_k}{x_k'^* x_k})^{-1} Qx_{k}'\\
 Qx_{k+1}' & = & Q(D-\frac{x_k'^* D x_k}{x_k'^* x_k})^{-1}Q^T Qx_k'\\
@@ -131,7 +131,9 @@ x_{k+1}' & = & \underbrace{(D-\frac{x_k'^* D x_k}{x_k'^* x_k})^{-1}}_{\text{matr
 \end{eqnarray}
 Supposons qu'on souhaite converger vers le vecteur propres dominant $v_1$, autrement dit on souhaite que $lim_{k\rightarrow \infty} x_k' = [1 0 \cdots 0]^T$. Pour que cela soit possible, il faut que $x_0$ ait sa composante dans la direction $v_1$ non nulle ($x_0'^* v_1 \neq 0$). 
 
-Vérifions maintenant de manière numérique les résultats théoriques obtenus. Prenons par exemple la matrice symétrique $A$ : 
+Vérifions maintenant de manière numérique les résultats théoriques obtenus. Dans un premier temps, on peut générer un certain nombre de matrices, de différentes tailles et avec des coefficients aléatoires, tel que la matrice reste symétrique. On applique ensuite notre algorithme de Rayleigh symétrique sur ces matrices. On constate qu'on converge toujours en un petit nombre d'itération typiquement moins que 10 voir même moins que 5 si on choisit un bon $x_0$. En revanche le temps de calcul pour chaque itération lui va croître avec la taille des matrices.
+
+Prenons par exemple la matrice symétrique $A$ : 
 
 $$ A = \left[
 \begin{array}{ccc}
@@ -139,14 +141,15 @@ $$ A = \left[
   4 & 2 & 1 \\
   6 & 1 & 2 \\
 \end{array}
-\right]$$
+\right],$$
 
-En utilisant la fonction $eigs$ de \textit{Matlab}, on sait que les valeurs propres de $A$ sont : 
+pour illustrer notre démarche. En utilisant la fonction $eigs$ de \textit{Matlab}, on obtient comme valeurs propres de $A$ : 
    \begin{eqnarray} \label{valPropre1}
    \lambda_1 &=& 9.6965\\\label{valPropre2}
    \lambda_2 &=& 1.0796 \\\label{valPropre3}
    \lambda_3 &=& -4.7762
    \end{eqnarray}
+Ces valeurs propres sont bien entendu également sujet à des erreurs, nous allons cependant les considérer comme référence et nous baser dessus pour vérifier la convergence de l'itération du quotient de Rayleigh.
 
 En appliquant l'itération du quotient de Rayleigh symétrique implémentée par nos soins pour un $x_0$ tel que : 
 $$ x_0 = \left[
@@ -155,17 +158,16 @@ $$ x_0 = \left[
   \frac{1}{\sqrt{3}} \\
   \frac{1}{\sqrt{3}} \\
 \end{array}
-\right]$$
- et pour $\mu_0 = 1000$ (la valeur propre la plus "proche" est donc 9.696530) , on obtient : 
+\right],$$
+ on obtient : 
 $$\begin{array}{ccc}
-  itération & erreur & \mu  \\
-  1 &  990.658295   & \underline{9}.341705  \\
-  2 &   0.354404   &  \underline{9.696}109\\
-  3 &  0.000421  & \underline{9.696530} \\
-  4 &  0.000000  & \underline{9.696530} \\
+  itération & erreur & \rho  \\
+  1 &   0.354404   &  \underline{9.696}109\\
+  2 &  0.000421  & \underline{9.696530} \\
+  3 &  0.000000  & \underline{9.696530} \\
 \end{array}$$
 
-Ce qui correspond bien à la théorie. En effet, à chaque itération on gagne bien 3 chiffres significatifs comme l'illustrent l'erreur (définie comme la différence entre les $\mu_k$ à chaque itération) et les chiffres soulignés qui représentent les chiffres significatifs du $\mu_k$.
+Ce qui correspond bien à la théorie. En effet, à chaque itération on gagne bien 3 chiffres significatifs comme l'illustrent l'erreur (définie comme la différence entre $\rho_k$ et $\rho_{k-1}$ à chaque itération) et les chiffres soulignés qui représentent les chiffres significatifs de $\rho_k$.
 
 On considère maintenant un itéré initial qui n'a pas de composante dans la direction du vecteur propre  
 
@@ -187,17 +189,20 @@ $$ x_0 = \left[
 \end{array}
 \right]$$
 
-Lorsqu'on applique l'itération, on ne converge effectivement plus vers $\lambda_1$ mais vers $\lambda_3$. Le \textit{pour presque tout itéré initial} est donc confirmé.
+Lorsqu'on applique l'itération, on ne converge effectivement plus vers $\lambda_1$ mais vers $\lambda_3$. Le \textit{pour presque tout itéré initial} pour la convergence vers un certain vecteur propre est donc confirmé.
+
+On observe également lors de nos tests un élément prévisible et non négligeable, le mauvais conditionnement de la matrice dû au déterminant de $(A-\lambda I)$ qui tend vers $0$ au fil des itérations, la matrice devient singulière. Ce problème ne cause cependant pas de gros soucis dans notre cas. En effet, notre algorithme s'arrête lorsque l'erreur est plus petite que $10^{-5}$, ce n'est donc en général qu'à la dernière itération que l'avertissement sur le conditionnement survient, s'il survient, et la valeur de $\rho$ est déjà suffisamment proche de celle de référence fournie par la fonction $eigs$ de \textit{Matlab}.
+
+%La figure \ref{fig:RaySym} illustre les valeurs propres (sur l'axe des z, cf. \ref{valPropre1}, \ref{valPropre2} et \ref{valPropre3} pour leur valeur) vers lesquelles l'itération converge pour différents vecteurs propres initiaux $x_0$ (représentés par les points 1, 2 ou 3 sur l'axe des x) et pour différents $\rho$ initiaux (de -10 à 10 sur l'axe des y). Le point 1 de l'axe des x représente le vecteur initial le plus proche du vecteur propre relatif à la valeur propre $\lambda_1$, le deuxième à $\lambda_2$ et le troisième à $\lambda_3$. On constate que lorsque $\rho$ est très proche d'une valeur propre, on aura tendance à converger vers cette valeur, par contre si on s'éloigne on convergera vers la valeur propre pour laquelle le vecteur propre est le plus proche du vecteur initial\footnote{On constate qu'une valeur propre est incohérente par rapport aux autres, ceci est du au fait que, lorsqu'on applique l'algorithme, si on choisit mal le $\rho$ et $x_0$ il est possible qu'après un certain nombre d'itération, on tombe par hasard sur un $\rho$ qui sera identique à l'itération $k-1$ et $k$. Or vu que nous avons défini notre erreur comme la différence des $\rho$, certaines fois l'algorithme s'arrête à cause d'une égalité fortuite  }. 
 
 
-La figure \ref{fig:RaySym} illustre les valeurs propres (sur l'axe des z, cf. \ref{valPropre1}, \ref{valPropre2} et \ref{valPropre3} pour leur valeur) vers lesquelles l'itération converge pour différents vecteurs propres initiaux $x_0$ (représentés par les points 1, 2 ou 3 sur l'axe des x) et pour différents $\mu$ initiaux (de -10 à 10 sur l'axe des y). Le point 1 de l'axe des x représente le vecteur initial le plus proche du vecteur propre relatif à la valeur propre $\lambda_1$, le deuxième à $\lambda_2$ et le troisième à $\lambda_3$. On constate que lorsque $\mu$ est très proche d'une valeur propre, on aura tendance à converger vers cette valeur, par contre si on s'éloigne on convergera vers la valeur propre pour laquelle le vecteur propre est le plus proche du vecteur initial\footnote{On constate qu'une valeur propre est incohérente par rapport aux autres, ceci est du au fait que, lorsqu'on applique l'algorithme, si on choisit mal le $\mu$ et $x_0$ il est possible qu'après un certain nombre d'itération, on tombe par hasard sur un $\mu$ qui sera identique à l'itération $k-1$ et $k$. Or vu que nous avons défini notre erreur comme la différence des $\mu$, certaines fois l'algorithme s'arrête à cause d'une égalité fortuite  }. 
 
-\begin{figure}
-  \centering
-  \includegraphics[width=15cm]{RaySym.png}
-  \caption{Graphe représentant les valeurs propres vers lesquelles on converge pour différents $x_0$ et $\mu$}
-  \label{fig:RaySym}
-\end{figure}
+%\begin{figure}
+%  \centering
+%  \includegraphics[width=15cm]{RaySym.png}
+%  \caption{Graphe représentant les valeurs propres vers lesquelles on converge pour différents $x_0$ et $\rho$}
+%  \label{fig:RaySym}
+%\end{figure}
 
 \subsection*{Rayleigh asymétrique}
 
@@ -206,7 +211,7 @@ La figure \ref{fig:RaySym} illustre les valeurs propres (sur l'axe des z, cf. \r
 	Au niveau de la vitesse de convergence, on reste dans le même ordre de grandeur que pour Rayleigh symétrique si on choisit des vecteurs à plus ou moins même distance relative d'un vecteur propre. \textbf{si il y en a 1 qui est chaud faire un petit tableau, en soit ca a pas full intéret juste du remplissage }
 	MAIS C EST UN AVANTAGE SI ON  SAIT PAS TROP OU ALLER DE POUVOIR CHOISIR 2 VECT INITIAUX ! (\textbf{A faire, la on pourrait peut etre un peu blabla sur le fait que on peut peut etre taper plus au pif que pour sym})
 	
-	Si on considère un des deux vecteurs initiaux orthogonal à un vecteur propre. (\textbf{A faire, ca bug comme pour sym.})
+	Si on considère un des deux vecteurs initiaux orthogonal à un vecteur propre, on constate que comme pour le cas symétrique, on ne converge plus vers ce vecteur propre, malgré qu'on ait un deuxième vecteur qui ait une composante dans la bonne direction.   
 	
 	
 	Enfin, considérons comme pour la méthode de Rayleigh symétrique, différents vecteurs initiaux ainsi que différents $\rho_0$. (\textbf{A commenter, meme conclusions que pour sym rien d'hors du commun})
