@@ -14,7 +14,7 @@ f_1(x_1,...,x_n) \\
 f_n(x_1,...,x_n)
 \end{array}\right)
 $$
-où les fonctions $f_1,...,f_n$ sont des fonctions scalaires.\\
+où les fonctions $f_1,...,f_n$ sont des fonctions scalaires. Commençons par étudier quelques propriétés de cette fonction $F$ afin de voir si la méthode de Newton appliquée à $F$ constitue bien une méthode itérative intéressante pour calculer les vecteurs propres de $A$.\\
 Montrons tout d'abord que $F(\alpha x) = \alpha F(x)$ pour tout $\alpha$ scalaire non nul.\\
 Pour se faire, nous allons simplement utiliser la définition de la fonction $F$. On a $$F(\alpha x) = A(\alpha x) - \frac{(\alpha x)^*A(\alpha x)}{(\alpha x)^*(\alpha x)}\alpha x = \alpha Ax - \frac{\alpha^2 x^* A x}{\alpha^2 x^* x}\alpha x = \alpha F(x)$$
 
@@ -44,23 +44,23 @@ Par continuité de la jacobienne, on déduit que $$J_F(s)s = 0$$
 %on peut adapter la définition du gradient pour des fonctions scalaires à une définition du jacobien pour des fonctions vectorielles. On a alors le résultat suivant\footnote{Une autre approche assez similaire aurait été d'évaluer le développement en série de Taylor de la fonction $F$ autour de $s$ et de l'évaluer en $s + \delta s$.} : $$\lim_{h \to 0} J_F(x) h = \lim_{h \to 0} F(x+h) - F(x).$$
 %Afin d'utiliser la propriété montrée ci-dessus, on peut réécrire cette définition de la jacobienne comme suit : $$\lim_{\delta \to 0} J_F(x) \delta x = \lim_{\delta \to 0} F(x+\delta x) - F(x) = \lim_{\delta \to 0} \delta F(x)$$ où on peut diviser à gauche et à droite par $\delta$ et on a donc plus besoin de passer par la limite. Dans le cas $x=s$ tel que $F(s)=0$, on a alors $J_F(s)s=0$. 
 C'est-à-dire que $s$ est vecteur propre de $J_F(s)$, associé à la valeur propre $0$. Ceci implique que $0$ est solution de l'équation $\text{det}(J_F(s)-xI)=0$.\\
-On a donc $$\text{det}(J_F(s))=0$$ et ceci ne peut-être vrai que si $J_F(s)$ est une matrice singulière.
+On a donc $$\text{det}(J_F(s))=0$$ et ceci ne peut-être vrai que si $J_F(s)$ est une matrice singulière.\\
 
-Nous sommes ici dans le cas de la méthode de Newton multidimensionnelle qui définie la fonction itérative $f(x)=x-DF^{-1}(x) F(x)$. On cherche les points fixes de $f$, c'est-à-dire les points vers lesquels l'itération est susceptible de converger : $s=f(s)$. L'unique point fixe correspond au point où $F$ s'annule. Or, comme nous l'avons démontré précédemment, en ce point $DF$ est singulière. Et par conséquent $DF^{-1}(s)$ n'est pas définie et $f(s)$ non plus. Dés lors aucun des théorèmes vus au cours ne sont applicable dans notre cas. Par exemple, le seul résultat du cours donnant des informations sur la convergence (locale et globale) de cette méthode est le théorème 3.10 \footnote{
+Ce dernier résultat met en doute la qualité de cette méthode itérative. En effet, nous sommes ici dans le cas de la méthode de Newton multidimensionnelle qui définie la fonction itérative $f(x)=x-DF^{-1}(x) F(x)$. On cherche les points fixes de $f$, c'est-à-dire les points vers lesquels l'itération est susceptible de converger : $s=f(s)$. L'unique point fixe correspond au point où $F$ s'annule. Or, comme nous l'avons démontré précédemment, en ce point $DF$ est singulière. Et par conséquent $DF^{-1}(s)$ n'est pas définie et $f(s)$ non plus. Dés lors aucun des théorèmes vus au cours ne sont applicable dans notre cas. Par exemple, le seul résultat du cours donnant des informations sur la convergence (locale et globale) de cette méthode est le théorème 3.10 \footnote{
 \textbf{Théorème 3.10.} Soit $F : \mathbb{R}^n \rightarrow \mathbb{R}^n$ une fonction dérivable dans un voisinage ouvert $\Omega$ d'un point $s$ pour lequel $F(s)=0$. Supposons que $J_F$ est continue en $s$ et que $J_F(s)$ est non singulière. Alors $s$ est un point d'attraction de l'itération de Newton $$\mathcal{I} : x_{k+1} = x_k - J_F(x_k)^{-1}F(x_k), k = 0,1,...,$$ et la convergence est superlinéaire en $s$.}
 
-Puisque, comme nous l'avons montré ci-dessus, la jacobienne $J_F$ est singulière en $s$, ce théorème n'est pas applicable. Par conséquent, on ne peut conclure quoique ce soit sur la convergence locale ou globale de la méthode.
+Puisque, comme nous l'avons montré ci-dessus, la jacobienne $J_F$ est singulière en $s$, ce théorème n'est pas applicable. Par conséquent, on ne peut conclure quoique ce soit sur la convergence locale ou globale de la méthode.\\
+
 
 %La méthode de Newton définie la fonction d'itération $\mathcal{I}$ tel que : $$f:\mathbb{R^n} \Rightarrow \mathbb{R^n} : x \rightarrow F(x)-[DF^(x)]^{-1}F(x). $$
 %On a bien $\forall s | F(s)=0 \Longrightarrow f(s)=0$ si $DF$ est régulière. Ainsi s est un point fixe de la fonction $f$. Par le théorème 3.10 du cours, ce point fixe est attractif et la convergence est superlinéaire. Or comme ici la jacobienne $DF(x)$ est singulière en $s$, aucun résultats ne nous permet de conclure quoique ce soit sur sa convergence locale ou globale.
 
-
-Montrons à présent le point 4. On définit $w \in \mathbb{C}_0^n$ de norme 1 et $W_{\bot}$, une base orthonormée du complément orthogonal de $w$. La matrice $W_{\bot}$ est une matrice composée des vecteurs de base de l'espace associé. Elle est, par conséquent, de taille $n \times (n-1)$ et est de la forme $$W_{\bot} = (v_1 v_2 \hdots v_{n-1})$$ où les $v_i$ sont des vecteurs colonnes de taille $n$. Puisque les $v_i$ sont les vecteurs d'une base orthonormée, on a $v_i^*v_j = \delta_{ij}$ et, puisque cette base est la base d'un espace orthogonal à $w$, on a également $v_i^*w = 0$ et ce $\forall i = 1,...,n-1$.%, c'est-à-dire une matrice dont les colonnes sont les vecteurs de la base de l'espace $ \lbrace v\in \mathbb{C^n_0} | (v|w)=0 \rbrace$. $W_{\bot}$ est bien une matrice de taille $n \times (n-1)$. On considère la fonction : 
-On cherche à montrer que la fonction
+Définissons alors une nouvelle fonction
 \begin{equation} \label{eq_point4_q1}
- G:y \rightarrow W_{\bot}^* A(w+ W_{\bot}y) - w^*A(w+ W_{\bot}y)y,
+ G:y \rightarrow W_{\bot}^* A(w+ W_{\bot}y) - w^*A(w+ W_{\bot}y)y
 \end{equation}
-vaut $0$ lorsqu'elle est évaluée en $y$ si $(w+ W_{\bot}y)$ est un vecteur propre de $A$. La relation à montrer est donc la suivante : $$A(w+ W_{\bot}y) = \lambda (w+ W_{\bot}y) \Rightarrow G(y)=0.$$
+où on a défini $w \in \mathbb{C}_0^n$ de norme 1 et $W_{\bot}$, une base orthonormée du complément orthogonal de $w$. La matrice $W_{\bot}$ est une matrice composée des vecteurs de base de l'espace associé. Elle est, par conséquent, de taille $n \times (n-1)$ et est de la forme $$W_{\bot} = (v_1 v_2 \hdots v_{n-1})$$ où les $v_i$ sont des vecteurs colonnes de taille $n$. Puisque les $v_i$ sont les vecteurs d'une base orthonormée, on a $v_i^*v_j = \delta_{ij}$ et, puisque cette base est la base d'un espace orthogonal à $w$, on a également $v_i^*w = 0$ et ce $\forall i = 1,...,n-1$.%, c'est-à-dire une matrice dont les colonnes sont les vecteurs de la base de l'espace $ \lbrace v\in \mathbb{C^n_0} | (v|w)=0 \rbrace$. $W_{\bot}$ est bien une matrice de taille $n \times (n-1)$. On considère la fonction : 
+On cherche à montrer que la fonction $G$ vaut $0$ lorsqu'elle est évaluée en $y$ si $(w+ W_{\bot}y)$ est un vecteur propre de $A$. La relation à montrer est donc la suivante : $$A(w+ W_{\bot}y) = \lambda (w+ W_{\bot}y) \Rightarrow G(y)=0.$$
 
 Pour rester cohérent au niveau des dimensions des objets manipulés, le vecteur colonne $y$ doit être de taille $n-1$. C'est en effet le cas puisque le vecteur $y$ appartient à l'espace engendré par $W_{\bot}$ et ses entrées correspondent à ses coordonnées dans la base $W_{\bot}$. De façon plus explicite, on a que le vecteur $y$ est de la forme $y = a_1 v_1 + a_2 v_2 + ... + a_{n-1} v_{n-1}$ lorsqu'il est exprimé dans la base de l'espace total de taille $n$ et il est de la forme $y = (a_1 a_2 ... a_{n-1})^{T}$ lorsqu'il est exprimé dans la base $W_{\bot}$. On remarque assez facilement que la matrice $W_{\bot}$ permet de passer d'une base à l'autre. En effet, on a $$a_1 v_1 + a_2 v_2 + ... + a_{n-1} v_{n-1} = W_{\bot}
 \left(\begin{array}{c}
@@ -107,6 +107,8 @@ v_1^* x_n & v_2^* x_n & \hdots & v_n^* x_n \\
 $$
 On a maintenant tous les outils dont on a besoin pour trouver la jacobienne de $G$.\\
 On trouve que $$J_G(y) = W_{\bot}^*AW_{\bot} - w^*AwI - (yw^*AW_{\bot}+Iw^*AW_{\bot}y).$$
+
+On conclut que la méthode de Newton appliqué à cette nouvelle fonction $G$ pourrait constituer une méthode itérative bien plus sûre que la précédente associée à $F$. Nous étudierons étudier la méthode de Newton associée à $G$ plus en détail au point suivant. 
 %Et finalement, attaquons nous au point 5. C'est super simple : 
 %$$J_G(y) = W^*_{\bot}AW_{\bot} - w^*A(w + 2W_{\bot}) $$
 %TADAM!! 
