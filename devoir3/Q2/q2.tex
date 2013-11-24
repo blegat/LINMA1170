@@ -100,7 +100,7 @@ La fonction $G$ n'a plus que deux racines (cf. figure \ref{FigNewtonv1inW}).
 
 
 \subsubsection{Étude de la convergence}
-Prenons une matrice aléatoire $A$ de taille 5 (randn(5)). Soit $w=[1,0,0,0,0]$ et $W_{\bot}$ sont complément orthogonal. Appliquons la méthode de Newton. Si celle-ci converge nous obtenons une erreur du type : 
+Prenons une matrice aléatoire $A$ de taille 5 (randn(5)). Soit $w=[1,0,0,0,0]$ et $W_{\bot}$ sont complément orthogonal. Appliquons la méthode de Newton. Les graphes de l'erreur sont donnés à la figure \ref{plor_erreur}. On observe différents comportement de la méthode de Newton. Le graphe en haut à gauche correspond au cas où Newton converge vers la solution. La droite de l'erreur à une pente qui vaut approximativement 2 ce qui correspond donc bien à une convergence d'ordre 2 (puisque on est dans un plot logarithmique, une pente de 2 signifie 2 chiffres significatif à chaque itération et donc un ordre de convergence quadratique). Remarquons que après un certain nombre d'itération, l'erreur stagne (typiquement autour des $1e-16$ ou $1e-17$) pour des raisons numériques liées à la capacité de l'ordinateur. Le graphe du haut à droite laisse entendre que la méthode a d'abord diverger puis s'est mis à converger. Le graphe du bas à gauche correspond au cas où la méthode diverge mais avec une erreur qui se stabilise après un certain temps. Et le dernier graphe correspond au cas où la méthode diverge purement et simplement.
 \begin{table}
 \centering
 \begin{tabular}{cccc}
@@ -108,12 +108,13 @@ itération & erreur (sur $y+$) & itération & erreur\\
 \end{tabular}
 \end{table}  
 
-\paragraph{Remarque : }
-Observons un phénomène numérique intéressant : si on impose une trop grande précision à la méthode de Newton (ex : $\epsilon = 1e-30$), on a une stagnation de l'erreur qui apparaît (cf. figure \ref{plor_erreur}). Cela est du au fait que notre itération de Newton est définie comme : $x_{k+1} = x_k - J_G^{-1}(xk) G(x_k)$. le fait qu'on fasse une différence implique une perte de précision à partir d'un certain nombre d'itération. D'où l'intérêt des méthodes d'extrapolation (type Aiteken ou Steffesen). 
-
 \begin{figure}
-\includegraphics[width = 12cm]{erreur.png}
-\caption{Plot logarithmique de l'erreur à chaque itération.}
+\centering
+\begin{tabular}{cc}
+\includegraphics[width = 10cm]{erreur5.png} & \includegraphics[width = 10cm]{erreur2.png}\\
+\includegraphics[width = 10cm]{erreur.png} & \includegraphics[width = 10cm]{erreur4.png}\\
+\end{tabular}
+\caption{Plot logarithmique de l'erreur à chaque itération (loglog(erreur)). }
 \label{plor_erreur}
 \end{figure}
 
