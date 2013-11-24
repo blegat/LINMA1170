@@ -17,7 +17,7 @@ while (i < 100 && err > eLim) || i<3
     mu1 = (x'*A*x)/(x'*x); % shift = rayleigh quotient --> eigenvalue
     err = abs(mu1-mu);
     mu= mu1;
-    fprintf('iteration number : %d\n error : %f \n mu : %f \n ',i,err,mu)    
+    fprintf('iteration number : %d\n error : %f \n mu : %f \n ',i,err,mu)
     i = i + 1;
 end
 x
