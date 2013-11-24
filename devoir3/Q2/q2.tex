@@ -100,7 +100,7 @@ La fonction $G$ n'a plus que deux racines (cf. figure \ref{FigNewtonv1inW}).
 
 
 \subsubsection{Étude de la convergence}
-Prenons une matrice aléatoire $A$ de taille 5 (randn(5)). Soit $w=[1,0,0,0,0]$ et $W_{\bot}$ sont complément orthogonal. Appliquons la méthode de Newton. Les graphes de l'erreur sont donnés à la figure \ref{plor_erreur}. On observe différents comportement de la méthode de Newton. Le graphe en haut à gauche correspond au cas où Newton converge vers la solution. La droite de l'erreur à une pente qui vaut approximativement 2 ce qui correspond donc bien à une convergence d'ordre 2 (puisque on est dans un plot logarithmique, une pente de 2 signifie 2 chiffres significatif à chaque itération et donc un ordre de convergence quadratique). Remarquons que après un certain nombre d'itération, l'erreur stagne (typiquement autour des $1e-16$ ou $1e-17$) pour des raisons numériques liées à la capacité de l'ordinateur. Le graphe du haut à droite laisse entendre que la méthode a d'abord diverger puis s'est mis à converger. Le graphe du bas à gauche correspond au cas où la méthode diverge mais avec une erreur qui se stabilise après un certain temps. Et le dernier graphe correspond au cas où la méthode diverge purement et simplement.
+Prenons des matrices aléatoires $A$ de taille 5 (randn(5)). Soit $w=[1,0,0,0,0]$ et $W_{\bot}$ son complément orthogonal. Appliquons la méthode de Newton. Les graphes de l'erreur à chaque itération sont donnés à la figure \ref{plor_erreur}. On observe différents comportement de la méthode de Newton. Le graphe en haut à gauche correspond au cas où Newton converge vers la solution. La "droite" de l'erreur à une pente qui vaut approximativement 2 ce qui correspond donc bien à une convergence d'ordre 2 (puisque on est dans un plot logarithmique, une pente de 2 signifie 2 chiffres significatif à chaque itération et donc un ordre de convergence quadratique). Remarquons que après un certain nombre d'itération, l'erreur stagne (typiquement autour des $1e-16$) pour des raisons numériques liées à la capacité de l'ordinateur. Le graphe du haut à droite laisse entendre que la méthode a d'abord légèrement diverger puis s'est mis à converger très rapidement. Les graphes du bas correspondent au cas où la méthode diverge purement et simplement.
 \begin{table}
 \centering
 \begin{tabular}{cccc}
@@ -111,16 +111,20 @@ itération & erreur (sur $y+$) & itération & erreur\\
 \begin{figure}
 \centering
 \begin{tabular}{cc}
-\includegraphics[width = 10cm]{erreur5.png} & \includegraphics[width = 10cm]{erreur2.png}\\
-\includegraphics[width = 10cm]{erreur.png} & \includegraphics[width = 10cm]{erreur4.png}\\
+\includegraphics[width = 8cm]{erreur2.png} & \includegraphics[width = 8cm]{erreur5.png}\\
+\includegraphics[width = 8cm]{erreur.png} & \includegraphics[width = 8cm]{erreur4.png}\\
 \end{tabular}
 \caption{Plot logarithmique de l'erreur à chaque itération (loglog(erreur)). }
 \label{plor_erreur}
 \end{figure}
 
+
+
+
 \subsection*{Rayleigh symétrique}
 On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis a jour à chaque itération). En d'autre mots, elle définit la méthode itérative suivante : 
 $$x_{k+1} = \left(  A- \frac{x^*Ax}{x^*x}  \right)^{-1} x_k.  $$
+Commençons par étudier sa convergence globale et locale. Pour ce faire, on utilise un des théorème du cours : 
 \textbf{Proposition 4.4} Soit $A = A^*$ $ \in \mathbb{C}^{n\times n}$. L'itération du quotient de Rayleigh pour $A$ converge vers une direction propre de $A$ pour presque tout itéré initial. Lorsque la suite des itérés converge vers une direction propre, la convergence est cubique. 
 
 Il faut maintenant préciser ce \textit{pour presque tout itéré initial}. Supposons que $A$ est diagonalisable et faisons un changement de variable afin d'exprimer $x$ dans la base formée par les vecteurs propres de $A$. Nommons le $x$ après changement de variables $x'$. Soit $Q$ la matrice dont les colonnes sont les vecteurs propres de $A$ et $D$ la matrice diagonale des valeurs propres de $A$. On utilise le théorème spectrale et le fait que $A$ et $(A-\rho I)^{-1}$ possèdent les mêmes vecteurs propres pour réécrire l'itération : 

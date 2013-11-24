@@ -1,4 +1,4 @@
-function [y i Q] = NR(y, w, W, A)
+function [y i Q G erreur] = NR(y, w, W, A)
 %NR Newton-Raphson implementation for non symetric matrix
 %
 i = 1;
@@ -19,8 +19,9 @@ while i < 500 && err > eLim
     end
     i = i + 1;
 end
+G = W'*A*(w+W*y)-w'*A*(w+W*y)*y;
 y=w+W*y;
-y=y/norm(y);
+%y=y/norm(y);
 
 erreur = zeros(i,1);
 
@@ -28,7 +29,7 @@ erreur = zeros(i,1);
      erreur(j)=norm(w+W*Q(1:l-1, j) - y);
  end
 figure(1)
-loglog(1:i,erreur);
+loglog(1:i,erreur,'b');
 title('erreur (logarithmique) de la methode de Newton');
 xlabel('nombre d iterations');
 ylabel('log(erreur)');
