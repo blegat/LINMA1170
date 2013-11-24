@@ -9,19 +9,19 @@ i = 1;
 eLim = 1e-8;
 err = eLim +1;
 mu = muGiven; %(x'*A*x)/(x'*x);
-while i < 100 && err > eLim
+mu
+while (i < 100 && err > eLim) || i<3
     y = (A-mu*eye(size(A)))\x;
     x = y/norm(y);
+    x
     mu1 = (x'*A*x)/(x'*x); % shift = rayleigh quotient --> eigenvalue
     err = abs(mu1-mu);
     mu= mu1;
-    fprintf('iteration number : %d\n error : %f \n mu : %f \n ',i,err,mu1) 
-    
-    
+    fprintf('iteration number : %d\n error : %f \n mu : %f \n ',i,err,mu)    
     i = i + 1;
 end
-
-fprintf('final i : %d\n final mu : %f \n ',i, mu1)
+x
+fprintf('final i : %d\n final mu : %f \n ',i-1, mu1)
 
 end
 

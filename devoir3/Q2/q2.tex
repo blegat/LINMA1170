@@ -189,15 +189,50 @@ $$ x_0 = \left[
 
 Lorsqu'on applique l'itération, on ne converge effectivement plus vers $\lambda_1$ mais vers $\lambda_3$. Le \textit{pour presque tout itéré initial} est donc confirmé.
 
-%\textbf{je sais ces image et explications puent pour l'instant, je les mets parce que j'ai fait le script et tout mais en soit hesitez pas à modifier et vu qu'elles vont peut etre disparaitre du rapport ca me soule d'écrire un roman pour l'expliquer nickel :p}
 
-La figure \ref{fig:RaySym} illustre les valeurs propres (sur l'axe des z, cf. \ref{valPropre1}, \ref{valPropre2} et \ref{valPropre3} pour leur valeur) vers lesquelles l'itération converge pour différents vecteurs propres initiaux $x_0$ (représentés par les points 1, 2 ou 3 sur l'axe des x) et pour différents $\mu$ initiaux (de -10 à 10 sur l'axe des y). Le point 1 de l'axe des x représente le vecteur initial le plus proche du vecteur propre relatif à la valeur propre $\lambda_1$, le deuxième à $\lambda_2$ et le troisième à $\lambda_3$. On constate que lorsque $\mu$ est très proche d'une valeur propre, on aura tendance à converger vers cette valeur, par contre si on s'éloigne on convergera vers la valeur propre pour laquelle le vecteur propre est le plus proche du vecteur initial. 
+La figure \ref{fig:RaySym} illustre les valeurs propres (sur l'axe des z, cf. \ref{valPropre1}, \ref{valPropre2} et \ref{valPropre3} pour leur valeur) vers lesquelles l'itération converge pour différents vecteurs propres initiaux $x_0$ (représentés par les points 1, 2 ou 3 sur l'axe des x) et pour différents $\mu$ initiaux (de -10 à 10 sur l'axe des y). Le point 1 de l'axe des x représente le vecteur initial le plus proche du vecteur propre relatif à la valeur propre $\lambda_1$, le deuxième à $\lambda_2$ et le troisième à $\lambda_3$. On constate que lorsque $\mu$ est très proche d'une valeur propre, on aura tendance à converger vers cette valeur, par contre si on s'éloigne on convergera vers la valeur propre pour laquelle le vecteur propre est le plus proche du vecteur initial\footnote{On constate qu'une valeur propre est incohérente par rapport aux autres, ceci est du au fait que, lorsqu'on applique l'algorithme, si on choisit mal le $\mu$ et $x_0$ il est possible qu'après un certain nombre d'itération, on tombe par hasard sur un $\mu$ qui sera identique à l'itération $k-1$ et $k$. Or vu que nous avons défini notre erreur comme la différence des $\mu$, certaines fois l'algorithme s'arrête à cause d'une égalité fortuite  }. 
 
 \begin{figure}
   \centering
   \includegraphics[width=15cm]{RaySym.png}
-  \caption{Graphe représentant les valeurs propres vers lesquelles on converge pour différents $x_0$ et $mu$}
+  \caption{Graphe représentant les valeurs propres vers lesquelles on converge pour différents $x_0$ et $\mu$}
   \label{fig:RaySym}
 \end{figure}
+
 \subsection*{Rayleigh asymétrique}
 
+	Tout d'abord assurons nous que l'itération asymétrique du quotient de Rayleigh converge bien dans le cas où l'on prend $x_0$ et $y_0$ identiques et que l'on retombe donc sur l'itération symétrique. On constate aisément que l'on retombe sur les mêmes résultats, c'est juste sensiblement plus lent vu qu'on fait deux fois certains calculs. 
+	
+	Au niveau de la vitesse de convergence, on reste dans le même ordre de grandeur que pour Rayleigh symétrique si on choisit des vecteurs à plus ou moins même distance relative d'un vecteur propre. \textbf{si il y en a 1 qui est chaud faire un petit tableau, en soit ca a pas full intéret juste du remplissage }
+	MAIS C EST UN AVANTAGE SI ON  SAIT PAS TROP OU ALLER DE POUVOIR CHOISIR 2 VECT INITIAUX ! (\textbf{A faire, la on pourrait peut etre un peu blabla sur le fait que on peut peut etre taper plus au pif que pour sym})
+	
+	Si on considère un des deux vecteurs initiaux orthogonal à un vecteur propre. (\textbf{A faire, ca bug comme pour sym.})
+	
+	
+	Enfin, considérons comme pour la méthode de Rayleigh symétrique, différents vecteurs initiaux ainsi que différents $\rho_0$. (\textbf{A commenter, meme conclusions que pour sym rien d'hors du commun})
+	
+	
+	
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.85\textwidth}
+    \includegraphics[width=\textwidth]{RayAsym1.png}
+    \caption{Pour un vecteur initial proche du premier vecteur propre.}
+    \label{fig:a4}
+  \end{subfigure}%
+  
+  %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.85\textwidth}
+    \includegraphics[width=\textwidth]{RayAsym2.png}
+    \caption{Pour un vecteur initial proche du second vecteur propre.}
+    \label{fig:a45}
+  \end{subfigure}%
+  
+  \begin{subfigure}[b]{0.85\textwidth}
+    \includegraphics[width=\textwidth]{RayAsym3.png}
+    \caption{Pour un vecteur initial proche du troisième vecteur propre.}
+    \label{fig:a5}
+  \end{subfigure}
+  \caption{Valeurs propres vers lesquelles l'algorithme de l'itération asymétrique du quotient de Rayleigh converge. Les 3 graphes représentent chacun d'eux un $x_0$ différent pour lesquels on a fait varier le $y_0$ et le $\rho_0$.}\label{fig:adiff}
+\end{figure}	
