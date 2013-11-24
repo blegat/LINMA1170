@@ -141,11 +141,11 @@ $$ A = \left[
 \right]$$
 
 En utilisant la fonction $eigs$ de \textit{Matlab}, on sait que les valeurs propres de $A$ sont : 
-   \begin{eqnarray*}
-   \lambda_1 &=& 9.6965\\
-   \lambda_2 &=& 1.0796 \\
+   \begin{eqnarray} \label{valPropre1}
+   \lambda_1 &=& 9.6965\\\label{valPropre2}
+   \lambda_2 &=& 1.0796 \\\label{valPropre3}
    \lambda_3 &=& -4.7762
-   \end{eqnarray*}
+   \end{eqnarray}
 
 En appliquant l'itération du quotient de Rayleigh symétrique implémentée par nos soins pour un $x_0$ tel que : 
 $$ x_0 = \left[
@@ -188,9 +188,9 @@ $$ x_0 = \left[
 
 Lorsqu'on applique l'itération, on ne converge effectivement plus vers $\lambda_1$ mais vers $\lambda_3$. Le \textit{pour presque tout itéré initial} est donc confirmé.
 
-\textbf{je sais ces image et explications puent pour l'instant, je les mets parce que j'ai fait le script et tout mais en soit hesitez pas à modifier et vu qu'elles vont peut etre disparaitre du rapport ca me soule d'écrire un roman pour l'expliquer nickel :p}
+%\textbf{je sais ces image et explications puent pour l'instant, je les mets parce que j'ai fait le script et tout mais en soit hesitez pas à modifier et vu qu'elles vont peut etre disparaitre du rapport ca me soule d'écrire un roman pour l'expliquer nickel :p}
 
-L'image suivante illustre les valeurs propres (sur l'axe des z, 9.6965 1.0796 -4.7762 ) vers lesquelles on converge pour différents vecteurs propres initiaux $x_0$ (représentés par les points 1, 2 ou 3 sur l'axe des x, cf. code pour savoir leur valeurs exactes) et pour différents $\mu$ initiaux (de -10 à 10 sur l'axe des y).
+La figure \ref{fig:RaySym} illustre les valeurs propres (sur l'axe des z, cf. \ref{valPropre1}, \ref{valPropre2} et \ref{valPropre3} pour leur valeur) vers lesquelles l'itération converge pour différents vecteurs propres initiaux $x_0$ (représentés par les points 1, 2 ou 3 sur l'axe des x) et pour différents $\mu$ initiaux (de -10 à 10 sur l'axe des y). Le point 1 de l'axe des x représente le vecteur initial le plus proche du vecteur propre relatif à la valeur propre $\lambda_1$, le deuxième à $\lambda_2$ et le troisième à $\lambda_3$. On constate que lorsque $\mu$ est très proche d'une valeur propre, on aura tendance à converger vers cette valeur, par contre si on s'éloigne on convergera vers la valeur propre pour laquelle le vecteur propre est le plus proche du vecteur initial. 
 
 \begin{figure}
   \centering
