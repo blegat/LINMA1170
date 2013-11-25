@@ -10,14 +10,14 @@ function [eigenVector i] = NR(y, w, W, A)
 %           - 'y' a (n-1)*1 vector and is the first iterate
 %
 % out :     - 'i' is the number of iterations which has been necessary to
-%             converge (error<1e-10).
+%             converge (error<1e-5).
 %           - 'eigenVector' is the eigen-vector = w+Wy where y is the 
 %             vector towards the iteration method converge.
 %            
 
 
 i = 1;
-eLim = 1e-10;
+eLim = 1e-5;
 err = eLim +1;
 l=length(A);
 
