@@ -1,4 +1,4 @@
-function [ rho ] = RQIA(A, x, y, rhoGiven)
+function [ rho ] = RQIA(A, x, y)
 % RQA Asymmetric Rayleigh quotient iteration
 %   
 % Tested with  x = [1/sqrt(3) 1/sqrt(3) 1/sqrt(3)]'; y = [1 0 0];
@@ -7,20 +7,15 @@ function [ rho ] = RQIA(A, x, y, rhoGiven)
 i = 1;
 eLim = 1e-5;
 err = eLim +1;
-rho = rhoGiven; %10; %(y'*A*x)/(y'*x);
+rho = (y'*A*x)/(y'*x);
 
 while (i < 100 && err > eLim) || i<3
     x = (A-rho*eye(size(A)))\x;
     y = (A-rho*eye(size(A)))'\y;
-    
     rho1 = (y'*A*x)/(y'*x);
-   
     err = abs(rho1-rho);
     rho= rho1;
     fprintf('iteration number : %d\n error : %f \n rho : %f \n ',i,err,rho)
-    
-y/norm(y)
-x/norm(x)
     i = i + 1;
 end
 
