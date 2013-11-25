@@ -1,4 +1,4 @@
-
+% PLOT des figures Newton (fig 1 et 2)
 
 A=[1 3 5;-2 4 6; 5 4 -8];
 W=[0 0 ; 1 0 ; 0 1];
