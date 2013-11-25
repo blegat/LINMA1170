@@ -9,7 +9,7 @@ eLim = 1e-5;
 err = eLim +1;
 rho= (x'*A*x)/(x'*x);
 
-while i < 100 && err > eLim
+while i < 500 && err > eLim
     y = (A-rho*eye(size(A)))\x;
     x = y/norm(y);
     rho1 = (x'*A*x)/(x'*x); % shift = rayleigh quotient --> eigenvalue
