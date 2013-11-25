@@ -220,38 +220,41 @@ On observe également lors de nos tests un élément prévisible et non néglige
 
 \subsection*{Rayleigh asymétrique}
 
-	Tout d'abord assurons nous que l'itération asymétrique du quotient de Rayleigh converge bien dans le cas où l'on prend $x_0$ et $y_0$ identiques et que l'on retombe donc sur l'itération symétrique. On constate aisément que l'on retombe sur les mêmes résultats, c'est juste sensiblement plus lent vu qu'on fait deux fois certains calculs. 
+	Avant tout chose, il est évident qu'il nous faut choisir $x_0$ et $y_0$ non orthogonaux, c'est à dire tels que $$y_0^* x_0 \neq 0,$$ et nous assurer que $$y_t^* x_t \neq 0$$.
 	
-	Au niveau de la vitesse de convergence, on reste dans le même ordre de grandeur que pour Rayleigh symétrique si on choisit des vecteurs à plus ou moins même distance relative d'un vecteur propre. \textbf{si il y en a 1 qui est chaud faire un petit tableau, en soit ca a pas full intéret juste du remplissage }
-	MAIS C EST UN AVANTAGE SI ON  SAIT PAS TROP OU ALLER DE POUVOIR CHOISIR 2 VECT INITIAUX ! (\textbf{A faire, la on pourrait peut etre un peu blabla sur le fait que on peut peut etre taper plus au pif que pour sym})
+	Assurons nous que l'itération asymétrique du quotient de Rayleigh converge bien dans le cas où l'on prend $x_0$ et $y_0$ identiques, que l'on considère une matrice symétrique et que donc on retombe donc sur l'itération symétrique. On constate aisément que l'on retombe sur les mêmes résultats, c'est juste sensiblement plus lent vu qu'on fait deux fois certains calculs. 
+	
+	Intéressons-nous maintenant au cas où notre matrice est non symétrique. On a donc un vecteur propre à gauche et un à droite. Prenons le temps de redéfinir ce que sont des vecteurs propres à gauche et à droite. Un vecteur propre à gauche est tel que $X_L A = \lambda X_L$ et un à droite $A X_R = \lambda X_R$. 
+	
+	Au niveau de la vitesse de convergence, on reste dans le même ordre de grandeur que pour Rayleigh symétrique  (une dizaine d'itérations), alors que ce sont des matrices non-symétriques, c'est donc un résultat très intéressant! Cependant il arrive que des fois on ne converge pas. 
 	
 	Si on considère un des deux vecteurs initiaux orthogonal à un vecteur propre, on constate que comme pour le cas symétrique, on ne converge plus vers ce vecteur propre, malgré qu'on ait un deuxième vecteur qui ait une composante dans la bonne direction.   
 	
 	
-	Enfin, considérons comme pour la méthode de Rayleigh symétrique, différents vecteurs initiaux ainsi que différents $\rho_0$. (\textbf{A commenter, meme conclusions que pour sym rien d'hors du commun})
-	
-	
-	
-\begin{figure}
-  \centering
-  \begin{subfigure}[b]{0.85\textwidth}
-    \includegraphics[width=\textwidth]{RayAsym1.png}
-    \caption{Pour un vecteur initial proche du premier vecteur propre.}
-    \label{fig:a4}
-  \end{subfigure}%
-  
-  %add desired spacing between images, e. g. ~, \quad, \qquad etc.
-  %(or a blank line to force the subfigure onto a new line)
-  \begin{subfigure}[b]{0.85\textwidth}
-    \includegraphics[width=\textwidth]{RayAsym2.png}
-    \caption{Pour un vecteur initial proche du second vecteur propre.}
-    \label{fig:a45}
-  \end{subfigure}%
-  
-  \begin{subfigure}[b]{0.85\textwidth}
-    \includegraphics[width=\textwidth]{RayAsym3.png}
-    \caption{Pour un vecteur initial proche du troisième vecteur propre.}
-    \label{fig:a5}
-  \end{subfigure}
-  \caption{Valeurs propres vers lesquelles l'algorithme de l'itération asymétrique du quotient de Rayleigh converge. Les 3 graphes représentent chacun d'eux un $x_0$ différent pour lesquels on a fait varier le $y_0$ et le $\rho_0$.}\label{fig:adiff}
-\end{figure}	
+%	Enfin, considérons comme pour la méthode de Rayleigh symétrique, différents vecteurs initiaux ainsi que différents $\rho_0$. (\textbf{A commenter, meme conclusions que pour sym rien d'hors du commun})
+%	
+%	
+%	
+%\begin{figure}
+%  \centering
+%  \begin{subfigure}[b]{0.85\textwidth}
+%    \includegraphics[width=\textwidth]{RayAsym1.png}
+%    \caption{Pour un vecteur initial proche du premier vecteur propre.}
+%    \label{fig:a4}
+%  \end{subfigure}%
+%  
+%  %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+%  %(or a blank line to force the subfigure onto a new line)
+%  \begin{subfigure}[b]{0.85\textwidth}
+%    \includegraphics[width=\textwidth]{RayAsym2.png}
+%    \caption{Pour un vecteur initial proche du second vecteur propre.}
+%    \label{fig:a45}
+%  \end{subfigure}%
+%  
+%  \begin{subfigure}[b]{0.85\textwidth}
+%    \includegraphics[width=\textwidth]{RayAsym3.png}
+%    \caption{Pour un vecteur initial proche du troisième vecteur propre.}
+%    \label{fig:a5}
+%  \end{subfigure}
+%  \caption{Valeurs propres vers lesquelles l'algorithme de l'itération asymétrique du quotient de Rayleigh converge. Les 3 graphes représentent chacun d'eux un $x_0$ différent pour lesquels on a fait varier le $y_0$ et le $\rho_0$.}\label{fig:adiff}
+%\end{figure}	
