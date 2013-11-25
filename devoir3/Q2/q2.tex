@@ -108,15 +108,15 @@ W_{\bot} =
 \end{figure}
 
 
-\subsubsection{Étude de la convergence}
-Prenons des matrices aléatoires $A$ de taille 5 (randn(5)). Soit $w=[1,0,0,0,0]$ et $W_{\bot}$ son complément orthogonal. Appliquons la méthode de Newton. Les graphes de l'erreur à chaque itération sont donnés à la figure \ref{plor_erreur}. On observe différents comportement de la méthode de Newton. Le graphe en haut à gauche correspond au cas où Newton converge vers la solution. La "droite" de l'erreur à une pente qui vaut approximativement 2 ce qui correspond donc bien à une convergence d'ordre 2 (puisque on est dans un plot logarithmique, une pente de 2 signifie 2 chiffres significatif à chaque itération et donc un ordre de convergence quadratique). Remarquons que après un certain nombre d'itération, l'erreur stagne (typiquement autour des $1e-16$) pour des raisons numériques liées à la capacité de l'ordinateur. Le graphe du haut à droite laisse entendre que la méthode a d'abord légèrement diverger puis s'est mis à converger très rapidement. Les graphes du bas correspondent au cas où la méthode diverge purement et simplement.
+\subsubsection*{Étude de la convergence}
+Prenons des matrices aléatoires $A$ de taille 5 (\texttt{randn(5)}). Soit $w=[1,0,0,0,0]$ et $W_{\bot}$ son complément orthogonal. Appliquons la méthode de Newton. Les graphes de l'erreur à chaque itération sont donnés à la figure \ref{plor_erreur}. On observe différents comportement de la méthode de Newton. Le graphe en haut à gauche correspond au cas où Newton converge vers la solution. La "droite" de l'erreur à une pente qui vaut approximativement 2 ce qui correspond donc bien à une convergence d'ordre 2 (puisque on est dans un plot logarithmique, une pente de 2 signifie 2 chiffres significatif à chaque itération et donc un ordre de convergence quadratique). Remarquons que après un certain nombre d'itération, l'erreur stagne (typiquement autour des $1e-16$) pour des raisons numériques liées à la capacité de l'ordinateur. Le graphe du haut à droite laisse entendre que la méthode a d'abord légèrement divergé puis s'est mis à converger très rapidement. Les graphes du bas correspondent au cas où la méthode diverge purement et simplement.
 
-\begin{table}
-\centering
-\begin{tabular}{cccc}
-itération & erreur (sur $y+$) & itération & erreur\\
-\end{tabular}
-\end{table}  
+%\begin{table}
+%\centering
+%\begin{tabular}{cccc}
+%itération & erreur (sur $y+$) & itération & erreur\\
+%\end{tabular}
+%\end{table}  
 
 \begin{figure}
 \centering
