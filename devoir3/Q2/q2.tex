@@ -1,20 +1,10 @@
 \section*{Question 2}
 
 \subsection*{Newton-Raphson}
-Soit la fonction $G$ de la question 1. On souhaite appliquer la méthode de Newton pour trouver le point $s$ tel que $G(s)=0$. On a montré précédemment que $G(y)=0$ si  $(w+ W_{\bot}y)$ est un vecteur propre de $A$. On va maintenant montrer que cela est également vrai dans l'autre sens : lorsque $G(y)=0$, alors $(w+ W_{\bot}y)$ est un vecteur propre de $A$. On va montrer que $G(y)=0 \Rightarrow (w+W_{\bot}y)$ est vecteur propre de $A$.\\
-On part du principe que $G(y)=0$, c'est-à-dire :
-$$W_{\bot}^*A(w+W_{\bot}y)=w^*A(w+W_{\bot}y)y$$
-On pose $A(w+W_{\bot}y) = \alpha (w+W_{\bot}y) + v$ où $v$ est orthogonal à $(w+W_{\bot}y)$ et $\alpha$ est un scalaire quelconque\footnote{De manière générale, $A(w+W_{\bot}y)$ renvoie un vecteur quelconque avec une composante parallèle à $w+W_{\bot}y$ et une composante orthogonale à ce même vecteur.}. L'équation ci-dessus devient alors $$W_{\bot}^*\alpha(w+W_{\bot}y)+W_{\bot}^*v=w^*\alpha(w+W_{\bot}y)y+w^*vy.$$
-On a déjà montré dans la première question que $W_{\bot}^*\alpha(w+W_{\bot}y)=w^*\alpha(w+W_{\bot}y)y$. L'équation devient alors $$W_{\bot}^*v=w^*vy.$$
-On a alors les deux relations suivantes :
-$$(w^*+y^*W_{\bot}^*)v=0 \Leftrightarrow -y^*W_{\bot}^*v = w^*v \text{ (orthogonalité)}$$
-et
-$$W_{\bot}^*v=w^*vy.$$
-En utilisant les deux équations ci-dessus, on trouve
-$$y^*w^*vy+w^*v=0 \Leftrightarrow w^*v(y^*y+1)=0.$$
-Ceci implique que la vecteur $v$ est nul et que, par conséquent, $w+ W_{\bot}y$ est vecteur propre de $A$\footnote{On pourrait également avoir $w^*v=0$ avec $v$ non nul mais cela impliquerait $W_{\bot}y=0$ et donc $y=0$. Dans ce cas, l'équation deviendrait $W_{\bot}^*Aw=0$ ce qui implique que $w+W_{\bot}y$ est vecteur propre de A (associé à la valeur propre $0$).}. Cela est très utile car on sait maintenant que la méthode de Newton appliquée à $G$ permet donc bien de trouver les vecteurs propres de $A$.
+Soit la fonction $G$ de la question 1. On souhaite appliquer la méthode de Newton pour trouver le point $s$ tel que $G(s)=0$. On a montrer précédemment que $G(y)=0$ ssi  $(w+ W_{\bot}y)$ est un vecteur propre de $A$. La méthode de Newton appliquée à $G$ permet donc bien de trouver le vecteur propre dominant de $A$.
+Utilisons le théorème $3.10$ énoncé à la question 1.
+Dans notre cas, on voit aisément que $J_G(y) = W_{\bot}^*AW_{\bot} - w^*AwI - (yw^*AW_{\bot}+Iw^*AW_{\bot}y) $ est continu en $s$ ($I$ est la matrice identité de taille $n-1$).
 
-Nous allons maintenant nous intéresser à la convergence de cette méthode. Dans notre cas, on voit aisément que $G$ est dérivable que sa jacobienne $J_G(y) = W_{\bot}^*AW_{\bot} - w^*AwI - (yw^*AW_{\bot}+Iw^*AW_{\bot}y)$ est continue en $s$ tel que $G(s)=0$ ($I$ est la matrice identité de taille $n-1$). Par conséquent, si $J_G$ est non singulière en $s$ tel que $G(s)=0$, on peut utiliser le théorème 3.10 énoncé à la question 1. Ce théorème nous assure que si la méthode converge vers ce vecteur $s$, elle le fera de manière superlinéaire.\\ 
 On peut étendre le théorème $3.10$ avec des hypothèses plus forte sur la jacobienne : 
 
 Si, de plus, il existe une constante $\alpha > 0$ telle que la condition de Lipschitz est satisfaite
@@ -23,18 +13,16 @@ alors l'ordre de convergence est au moins 2.
 
 Dans notre cas, en utilisant l'inégalité de Cauchy et l'inégalité triangulaire, on obtient que : 
 \begin{eqnarray}
-||DG(x) - DG(s)|| &=& ||W_{\perp}^{*} A W_{\perp}- w^{*} A wI - (xw^*AW_{\bot}+Iw^*AW_{\bot}x)\\
- & & - (W_{\perp}^{*} A W_{\perp}- w^{*} A wI - (sw^*AW_{\bot}+Iw^*AW_{\bot}s))|| \nonumber \\
+||DG(x) - DG(s)|| &=& ||W_{\perp}^{*} A W_{\perp}- w^{*} A wI - (xw^*AW_{\bot}+Iw^*AW_{\bot}x) - W_{\perp}^{*} A W_{\perp}+ w^{*} A wI + (sw^*AW_{\bot}+Iw^*AW_{\bot}s) || \\
 ||DG(x) - DG(s)|| &=&  ||(sw^*AW_{\bot}+Iw^*AW_{\bot}s) - (xw^*AW_{\bot}+Iw^*AW_{\bot}x) || \\
  ||DG(x) - DG(s)|| &\leq & (||w^*AW_{\bot}|| + || Iw^*AW_{\bot} ||) || x-s ||
 \end{eqnarray}
-Par identification, on a $\alpha = ||w^*AW_{\bot}|| + || Iw^*AW_{\bot} || \geq 0$ et donc la condition de Lipschitz sur $DG(x)$ est satisfaite. On conclut qu'on a bien un ordre de convergence d'au moins 2 pour la méthode de Newton appliquée à la fonction $G$. Cependant cela ne nous permet pas de conclure quoique ce soit sur la convergence global de la méthode (c'est-à-dire si celle-ci converge) qui dépend notamment du choix de l'itéré initial.\\
-C'est donc en ceci que réside l'avantage d'utiliser la fonction $G$ plutôt que la fonction $F$. La fonction $F$ ne garantit rien sur la vitesse de convergence (ni sur sa convergence) tandis qu'on peut obtenir des informations sur la vitesse de convergence lorsqu'on utilise $G$ (à condition qu'on converge et que la jacobienne soit non singulière).\\
+Par identification on a $\alpha = ||w^*AW_{\bot}|| + || Iw^*AW_{\bot} || \geq 0$, et donc la condition de Lipschitz sur $DG(x)$ est satisfaite.On conclut qu'on a bien un ordre de convergence d'au moins 2 pour la méthode de Newton appliquée à la fonction $G$. Cependant cela ne nous permet pas de conclure quoique ce soit sur la convergence global de la méthode (c'est-à-dire si celle-ci converge) qui dépend notamment du choix de l'itéré initial.\\
 
-Passons à présent à l'étude numérique de la méthode. Nous séparerons notre analyse en deux étapes : la représentation graphique du fonctionnement de la méthode pour une matrice $A$ de taille 3 et l'étude numérique de la convergence.
+Passons à présent à l'étude numérique de la méthode. Nous séparons notre analyse en trois étapes : (1) la représentation graphique de la méthode pour une matrice $A$ de taille 3; (2) l'étude numérique de la convergence et de la vitesse de convergence de la méthode.
 
-\subsubsection*{Représentation graphique}
-L'interprétation graphique de la méthode de Newton appliquée à la fonction $G$ est la suivante. Dans la question 1.1, la fonction $F$ calculait un vecteur $x$ de taille $n$ (avec $A$ matrice de taille $n$) qui était un vecteur propre de $A$. La fonction $G$, quant à elle, va fixer un vecteur $w$ de telle sorte qu'on ne doivent plus calculer qu'un vecteur $y$ (dans la base $W_{\bot}$ orthogonale à $w$) de taille $n-1$. On travaille donc dans un espace de dimension plus petite, on "perd" en quelque sorte un degré de liberté. Illustrons cela par un cas particulier.\\
+\subsubsection{Étude graphique}
+L'interprétation graphique de la méthode de Newton appliqué à la fonction $G$ est la suivante. Contrairement à la question 1.1. où la fonction $F$ calculait un vecteur $x$ de taille $n$ (avec $A$ matrice de taille $n$) qui était le vecteur propre dominant; la fonction $G$ va fixer un vecteur $w$ de tel sorte qu'on ne doivent plus calculer qu'un vecteur $y$ (dans la base $W_{\bot}$ orthogonale à $w$) de taille $n-1$. On "perd" en quelque sorte un degré de liberté. Illustrons cela sur un cas particulier.\\
 
 Soit $A=  \left[ 
 \begin{matrix}
@@ -64,59 +52,61 @@ Q=
 -0.8842 & 0.3613 & 0.4169
 \end{matrix} \right] 
 $\\
-Où $Q=[v_1 v_2 v_3]$ est la matrice des vecteurs propres de $A$. Les vecteurs propres sont donc des vecteurs de l'espace $\mathbb{R}^3$. $W_{\bot}$ est un plan de normale $w$ et la méthode recherche un vecteur $y$ appartenant à ce plan. On cherche donc les vecteurs $y_1$, $y_2$, $y_3$ étant les projections orthogonales de $v_1$, $v_2$ et $v_3$ dans le plan $W_{\bot}$ (cf. figure \ref{figureNewton}).
+Où $Q$ est la matrice des vecteurs propres de $A$. Les vecteurs propres sont donc des vecteurs de l'espace $\mathbb{R^3}$ (cf. figure \ref{figureNewton}). $W_{\bot}$ est un plan de normale $w$. La méthode recherche un vecteur $y$ qui appartient au plan $W_{bot}$. Ou encore $y_1$, $y2$, $y3$ sont les projections orthogonale de $v1$, $v2$ et $v3$ dans le plan $W_{\bot}$.
 
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{grapheNewton.png}\\
 \includegraphics[width=12cm]{grapheNewton2.png}
-\caption{Illustration graphique de la méthode de Newton appliquée à la fonction $G$. Le vecteur bleu est $w$, qui est fixé. La méthode va chercher un $y_1$ (resp. $y_2$ ou $y_3$) tel que la somme vectorielle $w+y_1$ soit le vecteur propre $v_1$ (resp. $v_2$ ou $v_3$).}
+\caption{Illustration graphique de la méthode de Newton appliquée à la fonction $G$. Le vecteur bleu est $w$ qui ets fixé. La méthode va chercher un $y_1$ (resp. $y_2$ ou $y_3$) tel que la somme vectorielle $w+y_1$ soit le vecteur propre $v_1$ (resp. $v_2$ ou $v_3$).}
 \label{figureNewton}
 \end{figure}
 
-Si on représente la fonction $G$ pour les matrices et vecteurs explicités ci-dessus, on obtient la figure \ref{grapheG}.
+Si on représente la fonction $G$ pour ces même matrices $A$, $W_{\bot}$ et $w$, on obtient la figure \ref{grapheG}.
 
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{grapheG.png}\\
 \includegraphics[width=12cm]{grapheG2.png}
-\caption{Graphes de la fonction $G$. $G$ étant une fonction vectorielle à deux composantes ($G(y)=[G_1(y), G_2(y)]$), nous avons tracé les deux surfaces sur un même graphe. On cherche les points $y$ tels que $G_1(y)=G_2(y)=0$. Ces points sont tracés en bleu sur les graphes.}
+\caption{Graphes de la fonction $G$. $G$ étant une fonction vectorielle à deux composante ($G(y)=[G_1(y), G_2(y)]$), nous avons tracer les deux courbes sur un même graphe. On cherche les points $y$ tels que $G_1(y)=G_2(y)=0$. Ces points sont tracer en vert sur les graphes ($G_1$ et $G_2$ étant ici tracer approximativement, ce points ne sont pas tous des racines mais permettent de localiser grossièrement les zones où se trouvent les vraies racines de $G$, ce qui est suffisant pour notre analyse), tandis que les points $y$ sont tracer en blanc.}
 \label{grapheG}
 \end{figure}
-Graphiquement, la méthode de Newton, si elle converge, convergera vers le $y_i$ le plus proche de $y_0$, l'itéré de départ.\\
+Graphiquement, la méthode de Newton convergera (pas toujours, selon les bassins de convergence de la méthode) vers un $y$ le plus proche de $y_0$, l'itéré de départ.\\
 
-Regardons maintenant ce qui se passe quand $w$ est orthogonal au vecteur propre dominant, disons $v_l$. Cela signifie que $v_l$ est dans le plan $W_{\bot}$. Par conséquent, on ne peut exprimer $v_l$ par $w+W_{\bot}y$ (on peut toutefois s'en rapproche de plus en plus au fur et à mesure que $||y||$ augmente jusqu'au cas extrême où $||y|| \rightarrow \infty$).\\
-Ceci n'est pas vrai que pour le vecteur propre dominant, c'est le cas pour tous vecteurs propres de $A$. Illustrons ceci par un exemple.
+
+
+Regardons ce qui se passe quand $w$ est orthogonal au vecteur propre dominant. Cela signifie que $v_1$ est dans le plan $W_\bot$. Par conséquent, on ne peut exprimer $v_1$ par $w+W_{\bot}y$ (sauf peut-être pour $||y|| \rightarrow \infty$). \\
 Soit $w = 
 \begin{bmatrix}
 1 \\
 0\\
 0.3021
-\end{bmatrix} \text{ et } 
+\end{bmatrix} , 
 W_{\bot} =  
 \begin{bmatrix}
 0 & 0.2672 \\
 1 & 0 \\
 0 & -0.8842 
-\end{bmatrix}$, A et Q ne changeant pas. On remarque que la fonction $G$ n'a plus que deux racines (cf. figure \ref{FigNewtonv1inW}).
+\end{bmatrix}$\\
+La fonction $G$ n'a plus que deux racines (cf. figure \ref{FigNewtonv1inW}).
 
 \begin{figure}
 \centering
 \includegraphics[width=12cm]{grapheG3.png}
-\caption{Graphe de $G$ pour la même matrice $A$, mais pour $v_1 \bot w$.}
+\caption{Graphe de $G$ pour la même matrice $A$, mais pour $v_1 \bot w$  
+}
 \label{FigNewtonv1inW}
 \end{figure}
 
 
-\subsubsection*{Étude de la convergence}
-Prenons des matrices aléatoires $A$ de taille 5 (\texttt{randn(5)}). Soit $w=[1,0,0,0,0]$ et $W_{\bot}$ son complément orthogonal. Appliquons la méthode de Newton. Les graphes de l'erreur à chaque itération sont donnés à la figure \ref{plor_erreur}. On observe différents comportement de la méthode de Newton. Le graphe en haut à gauche correspond au cas où Newton converge vers la solution. La "droite" de l'erreur à une pente qui vaut approximativement 2 ce qui correspond donc bien à une convergence d'ordre 2 (puisque on est dans un plot logarithmique, une pente de 2 signifie 2 chiffres significatif à chaque itération et donc un ordre de convergence quadratique). Remarquons que après un certain nombre d'itération, l'erreur stagne (typiquement autour des $1e-16$) pour des raisons numériques liées à la capacité de l'ordinateur. Le graphe du haut à droite laisse entendre que la méthode a d'abord légèrement divergé puis s'est mis à converger très rapidement. Les graphes du bas correspondent au cas où la méthode diverge purement et simplement.
-
-%\begin{table}
-%\centering
-%\begin{tabular}{cccc}
-%itération & erreur (sur $y+$) & itération & erreur\\
-%\end{tabular}
-%\end{table}  
+\subsubsection{Étude de la convergence}
+Prenons des matrices aléatoires $A$ de taille 5 (randn(5)). Soit $w=[1,0,0,0,0]$ et $W_{\bot}$ son complément orthogonal. Appliquons la méthode de Newton. Les graphes de l'erreur à chaque itération sont donnés à la figure \ref{plor_erreur}. On observe différents comportement de la méthode de Newton. Le graphe en haut à gauche correspond au cas où Newton converge vers la solution. La "droite" de l'erreur à une pente qui vaut approximativement 2 ce qui correspond donc bien à une convergence d'ordre 2 (puisque on est dans un plot logarithmique, une pente de 2 signifie 2 chiffres significatif à chaque itération et donc un ordre de convergence quadratique). Remarquons que après un certain nombre d'itération, l'erreur stagne (typiquement autour des $1e-16$) pour des raisons numériques liées à la capacité de l'ordinateur. Le graphe du haut à droite laisse entendre que la méthode a d'abord légèrement diverger puis s'est mis à converger très rapidement. Les graphes du bas correspondent au cas où la méthode diverge purement et simplement.
+\begin{table}
+\centering
+\begin{tabular}{cccc}
+itération & erreur (sur $y+$) & itération & erreur\\
+\end{tabular}
+\end{table}  
 
 \begin{figure}
 \centering
@@ -132,9 +122,9 @@ Prenons des matrices aléatoires $A$ de taille 5 (\texttt{randn(5)}). Soit $w=[1
 
 
 \subsection*{Rayleigh symétrique}
-On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis à jour à chaque itération). En d'autre mots, elle définit la méthode itérative suivante : 
+On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis a jour à chaque itération). En d'autre mots, elle définit la méthode itérative suivante : 
 $$x_{k+1} = \left(  A- \frac{x^*Ax}{x^*x}  \right)^{-1} x_k.  $$
-Commençons par étudier sa convergence globale et locale. Pour ce faire, on utilise un des théorème du cours : \\
+Commençons par étudier sa convergence globale et locale. Pour ce faire, on utilise un des théorème du cours : 
 \textbf{Proposition 4.4} Soit $A = A^*$ $ \in \mathbb{C}^{n\times n}$. L'itération du quotient de Rayleigh pour $A$ converge vers une direction propre de $A$ pour presque tout itéré initial. Lorsque la suite des itérés converge vers une direction propre, la convergence est cubique. 
 
 Il faut maintenant préciser ce \textit{pour presque tout itéré initial}. Supposons que $A$ est diagonalisable et faisons un changement de variable afin d'exprimer $x$ dans la base formée par les vecteurs propres de $A$. Nommons le $x$ après changement de variables $x'$. Soit $Q$ la matrice dont les colonnes sont les vecteurs propres de $A$ et $D$ la matrice diagonale des valeurs propres de $A$. On utilise le théorème spectrale et le fait que $A$ et $(A-\rho I)^{-1}$ possèdent les mêmes vecteurs propres pour réécrire l'itération : 
@@ -220,7 +210,7 @@ On observe également lors de nos tests un élément prévisible et non néglige
 
 \subsection*{Rayleigh asymétrique}
 
-	Avant tout chose, il est évident qu'il nous faut choisir $x_0$ et $y_0$ non orthogonaux, c'est à dire tels que $$y_0^* x_0 \neq 0,$$ et nous assurer que $$y_t^* x_t \neq 0$$.
+	Avant tout chose, il est évident qu'il nous faut choisir $x_0$ et $y_0$ non orthogonaux, c'est à dire tels que $$y_0^* x_0 \neq 0,$$ et nous assurer que $$y_t^* x_t \neq 0.$$
 	
 	Assurons nous que l'itération asymétrique du quotient de Rayleigh converge bien dans le cas où l'on prend $x_0$ et $y_0$ identiques, que l'on considère une matrice symétrique et que donc on retombe donc sur l'itération symétrique. On constate aisément que l'on retombe sur les mêmes résultats, c'est juste sensiblement plus lent vu qu'on fait deux fois certains calculs. 
 	
