@@ -30,9 +30,9 @@ figure(1)
 surf(X, Y, G1); hold on;
 surf(X , Y, G2); hold on;
 
-plot3(1.4337,-3.309,10,'c.', 'MarkerSize',10);hold on;
-plot3(-0.2264,0.3972,10,'c.', 'MarkerSize',10);hold on;
-plot3(0.706,0.5621,10,'c.', 'MarkerSize',10);hold on;
+plot3(1.4337,-3.309,10,'c.');hold on;
+plot3(-0.2264,0.3972,10,'c.');hold on;
+plot3(0.706,0.5621,10,'c.');
 title('Plot de la fonction G');
 xlabel('1e composante de y');
 ylabel('2e composante de y');

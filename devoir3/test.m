@@ -14,7 +14,6 @@ for i=1:n
 end
 rho
 essai
-t(i)
 x(3)=(-14+sqrt(196-4*(12-2*3)*(2-3)))/(2*(2-3));
 x
     pttt= (x'*A*x)/(x'*x)
