@@ -145,7 +145,7 @@ x_{k+1}' & = & \underbrace{(D-\frac{x_k'^* D x_k'}{x_k'^* x_k'})^{-1}}_{\text{ma
 \end{eqnarray}
 Supposons qu'on souhaite converger vers le vecteur propre dominant $v_1$, autrement dit on souhaite que $lim_{k\rightarrow \infty} x_k' = [1 0 \cdots 0]^T$. Pour que cela soit possible, il faut que $x_0$ ait sa composante dans la direction $v_1$ non nulle ($x_0'^* v_1 \neq 0$). 
 
-Vérifions maintenant de manière numérique les résultats théoriques obtenus. Dans un premier temps, on peut générer un certain nombre de matrices, de différentes tailles et avec des coefficients aléatoires, tel que la matrice reste symétrique. On applique ensuite notre algorithme de Rayleigh symétrique sur ces matrices. On constate qu'on converge toujours en un petit nombre d'itération typiquement moins que 10 voir même moins que 5 si on choisit un bon $x_0$. En revanche le temps de calcul pour chaque itération lui va croître avec la taille des matrices.
+Vérifions maintenant de manière numérique les résultats théoriques obtenus. Dans un premier temps, on peut générer un certain nombre de matrices, de différentes tailles et avec des coefficients aléatoires, tel que la matrice reste symétrique. On applique ensuite notre algorithme de Rayleigh symétrique sur ces matrices. On constate qu'on converge toujours en un petit nombre d'itérations, typiquement moins que 10 voir même moins que 5 si on choisit un bon $x_0$. En revanche le temps de calcul pour chaque itération lui va croître avec la taille des matrices.
 
 Prenons par exemple la matrice symétrique $A$ : 
 
