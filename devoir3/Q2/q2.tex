@@ -157,7 +157,7 @@ $$ A = \left[
 \end{array}
 \right],$$
 
-pour illustrer notre démarche. En utilisant la fonction $eigs$ de \textit{Matlab}, on obtient comme valeurs propres de $A$ : 
+pour illustrer notre démarche. En utilisant la fonction \texttt{eigs} de \textit{Matlab}, on obtient comme valeurs propres de $A$ : 
    \begin{eqnarray} \label{valPropre1}
    \lambda_1 &=& 9.6965\\\label{valPropre2}
    \lambda_2 &=& 1.0796 \\\label{valPropre3}
@@ -181,7 +181,7 @@ $$\begin{array}{ccc}
   3 &  0.000000  & \underline{9.696530} \\
 \end{array}$$
 
-Ce qui correspond bien à la théorie. En effet, à chaque itération on gagne bien 3 chiffres significatifs comme l'illustrent l'erreur (définie comme la différence entre $\rho_k$ et $\rho_{k-1}$ à chaque itération) et les chiffres soulignés qui représentent les chiffres significatifs de $\rho_k$.
+Ce qui correspond bien à la théorie. En effet, à chaque itération on gagne bien 3 chiffres significatifs comme l'illustrent les valeurs de l'erreur calculée (définie comme la différence entre $\rho_k$ et $\rho_{k-1}$ à chaque itération) et les chiffres soulignés qui représentent les chiffres significatifs de $\rho_k$.
 
 On considère maintenant un itéré initial qui n'a pas de composante dans la direction du vecteur propre  
 
@@ -203,9 +203,9 @@ $$ x_0 = \left[
 \end{array}
 \right]$$
 
-Lorsqu'on applique l'itération, on ne converge effectivement plus vers $\lambda_1$ mais vers $\lambda_3$. Le \textit{pour presque tout itéré initial} pour la convergence vers un certain vecteur propre est donc confirmé.
+Lorsqu'on applique l'itération, on ne converge effectivement plus vers $\lambda_1$ mais vers $\lambda_3$. La signification que nous avons donnée à \textit{pour presque tout itéré initial} est donc vérifiée.
 
-On observe également lors de nos tests un élément prévisible et non négligeable, le mauvais conditionnement de la matrice dû au déterminant de $(A-\lambda I)$ qui tend vers $0$ au fil des itérations, la matrice devient singulière. Ce problème ne cause cependant pas de gros soucis dans notre cas. En effet, notre algorithme s'arrête lorsque l'erreur est plus petite que $10^{-5}$, ce n'est donc en général qu'à la dernière itération que l'avertissement sur le conditionnement survient, s'il survient, et la valeur de $\rho$ est déjà suffisamment proche de celle de référence fournie par la fonction $eigs$ de \textit{Matlab}.
+On observe également lors de nos tests un élément prévisible et non négligeable, le mauvais conditionnement de la matrice dû au déterminant de $(A-\lambda I)$ qui tend vers $0$ au fil des itérations, la matrice devient singulière. Ce problème ne cause cependant pas de gros soucis dans notre cas. En effet, notre algorithme s'arrête lorsque l'erreur est plus petite que $10^{-5}$, ce n'est donc en général qu'à la dernière itération que l'avertissement sur le conditionnement survient, s'il survient, et la valeur de $\rho$ est déjà suffisamment proche de celle de référence fournie par la fonction \texttt{eigs} de \textit{Matlab}.
 
 %La figure \ref{fig:RaySym} illustre les valeurs propres (sur l'axe des z, cf. \ref{valPropre1}, \ref{valPropre2} et \ref{valPropre3} pour leur valeur) vers lesquelles l'itération converge pour différents vecteurs propres initiaux $x_0$ (représentés par les points 1, 2 ou 3 sur l'axe des x) et pour différents $\rho$ initiaux (de -10 à 10 sur l'axe des y). Le point 1 de l'axe des x représente le vecteur initial le plus proche du vecteur propre relatif à la valeur propre $\lambda_1$, le deuxième à $\lambda_2$ et le troisième à $\lambda_3$. On constate que lorsque $\rho$ est très proche d'une valeur propre, on aura tendance à converger vers cette valeur, par contre si on s'éloigne on convergera vers la valeur propre pour laquelle le vecteur propre est le plus proche du vecteur initial\footnote{On constate qu'une valeur propre est incohérente par rapport aux autres, ceci est du au fait que, lorsqu'on applique l'algorithme, si on choisit mal le $\rho$ et $x_0$ il est possible qu'après un certain nombre d'itération, on tombe par hasard sur un $\rho$ qui sera identique à l'itération $k-1$ et $k$. Or vu que nous avons défini notre erreur comme la différence des $\rho$, certaines fois l'algorithme s'arrête à cause d'une égalité fortuite  }. 
 
