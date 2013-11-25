@@ -124,7 +124,7 @@ Prenons des matrices aléatoires $A$ de taille 5 (\texttt{randn(5)}). Soit $w=[1
 \includegraphics[width = 8cm]{erreur2.png} & \includegraphics[width = 8cm]{erreur5.png}\\
 \includegraphics[width = 8cm]{erreur.png} & \includegraphics[width = 8cm]{erreur4.png}\\
 \end{tabular}
-\caption{Plot logarithmique de l'erreur à chaque itération (loglog(erreur)). }
+\caption{Plot logarithmique de l'erreur à chaque itération (\texttt{loglog(erreur)}). }
 \label{plor_erreur}
 \end{figure}
 
@@ -133,17 +133,17 @@ Prenons des matrices aléatoires $A$ de taille 5 (\texttt{randn(5)}). Soit $w=[1
 
 \subsection*{Rayleigh symétrique}
 On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis à jour à chaque itération). En d'autre mots, elle définit la méthode itérative suivante : 
-$$x_{k+1} = \left(  A- \frac{x^*Ax}{x^*x}  \right)^{-1} x_k.  $$
+$$x_{k+1} = \left(  A- \frac{x_k^*Ax_k}{x_k^*x_k}  \right)^{-1} x_k.  $$
 Commençons par étudier sa convergence globale et locale. Pour ce faire, on utilise un des théorème du cours : \\
 \textbf{Proposition 4.4} Soit $A = A^*$ $ \in \mathbb{C}^{n\times n}$. L'itération du quotient de Rayleigh pour $A$ converge vers une direction propre de $A$ pour presque tout itéré initial. Lorsque la suite des itérés converge vers une direction propre, la convergence est cubique. 
 
-Il faut maintenant préciser ce \textit{pour presque tout itéré initial}. Supposons que $A$ est diagonalisable et faisons un changement de variable afin d'exprimer $x$ dans la base formée par les vecteurs propres de $A$. Nommons le $x$ après changement de variables $x'$. Soit $Q$ la matrice dont les colonnes sont les vecteurs propres de $A$ et $D$ la matrice diagonale des valeurs propres de $A$. On utilise le théorème spectrale et le fait que $A$ et $(A-\rho I)^{-1}$ possèdent les mêmes vecteurs propres pour réécrire l'itération : 
+Il faut maintenant préciser ce que "pour presque tout itéré initial" signifie. Supposons que $A$ est diagonalisable et faisons un changement de variable afin d'exprimer $x$ dans la base formée par les vecteurs propres de $A$. Nommons le $x$ après changement de variables $x'$. Soit $Q$ la matrice dont les colonnes sont les vecteurs propres de $A$ et $D$ la matrice diagonale des valeurs propres de $A$. C'est-à-dire qu'on a $x = Qx'$. On utilise le théorème spectrale et le fait que $A$ et $(A-\rho I)^{-1}$ possèdent les mêmes vecteurs propres pour réécrire l'itération : 
 \begin{eqnarray}
-Qx_{k+1}' & = &(Q D Q^T - \frac{x_k'^* D x_k}{x_k'^* x_k})^{-1} Qx_{k}'\\
-Qx_{k+1}' & = & Q(D-\frac{x_k'^* D x_k}{x_k'^* x_k})^{-1}Q^T Qx_k'\\
-x_{k+1}' & = & \underbrace{(D-\frac{x_k'^* D x_k}{x_k'^* x_k})^{-1}}_{\text{matrice diagonale}} x_k'
+Qx_{k+1}' & = &(Q D Q^T - \frac{x_k'^* D x_k'}{x_k'^* x_k'})^{-1} Qx_{k}'\\
+Qx_{k+1}' & = & Q(D-\frac{x_k'^* D x_k'}{x_k'^* x_k'})^{-1}Q^T Qx_k'\\
+x_{k+1}' & = & \underbrace{(D-\frac{x_k'^* D x_k'}{x_k'^* x_k'})^{-1}}_{\text{matrice diagonale}} x_k'
 \end{eqnarray}
-Supposons qu'on souhaite converger vers le vecteur propres dominant $v_1$, autrement dit on souhaite que $lim_{k\rightarrow \infty} x_k' = [1 0 \cdots 0]^T$. Pour que cela soit possible, il faut que $x_0$ ait sa composante dans la direction $v_1$ non nulle ($x_0'^* v_1 \neq 0$). 
+Supposons qu'on souhaite converger vers le vecteur propre dominant $v_1$, autrement dit on souhaite que $lim_{k\rightarrow \infty} x_k' = [1 0 \cdots 0]^T$. Pour que cela soit possible, il faut que $x_0$ ait sa composante dans la direction $v_1$ non nulle ($x_0'^* v_1 \neq 0$). 
 
 Vérifions maintenant de manière numérique les résultats théoriques obtenus. Dans un premier temps, on peut générer un certain nombre de matrices, de différentes tailles et avec des coefficients aléatoires, tel que la matrice reste symétrique. On applique ensuite notre algorithme de Rayleigh symétrique sur ces matrices. On constate qu'on converge toujours en un petit nombre d'itération typiquement moins que 10 voir même moins que 5 si on choisit un bon $x_0$. En revanche le temps de calcul pour chaque itération lui va croître avec la taille des matrices.
 
@@ -222,7 +222,7 @@ On observe également lors de nos tests un élément prévisible et non néglige
 
 	Avant tout chose, il est évident qu'il nous faut choisir $x_0$ et $y_0$ non orthogonaux, c'est à dire tels que $$y_0^* x_0 \neq 0,$$ et nous assurer que $$y_t^* x_t \neq 0$$.
 	
-	Assurons nous que l'itération asymétrique du quotient de Rayleigh converge bien dans le cas où l'on prend $x_0$ et $y_0$ identiques, que l'on considère une matrice symétrique et que donc on retombe donc sur l'itération symétrique. On constate aisément que l'on retombe sur les mêmes résultats, c'est juste sensiblement plus lent vu qu'on fait deux fois certains calculs. 
+	Assurons nous que l'itération asymétrique du quotient de Rayleigh converge bien dans le cas où l'on prend $x_0$ et $y_0$ identiques, que l'on considère une matrice symétrique et que l'on retombe donc sur l'itération symétrique. On constate aisément que l'on retombe sur les mêmes résultats, c'est juste sensiblement plus lent vu qu'on fait deux fois certains calculs. 
 	
 	Intéressons-nous maintenant au cas où notre matrice est non symétrique. On a donc un vecteur propre à gauche et un à droite. Prenons le temps de redéfinir ce que sont des vecteurs propres à gauche et à droite. Un vecteur propre à gauche est tel que $X_L A = \lambda X_L$ et un à droite $A X_R = \lambda X_R$. 
 	
