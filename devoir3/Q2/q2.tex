@@ -132,9 +132,9 @@ Prenons des matrices aléatoires $A$ de taille 5 (\texttt{randn(5)}). Soit $w=[1
 
 
 \subsection*{Rayleigh symétrique}
-On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis a jour à chaque itération). En d'autre mots, elle définit la méthode itérative suivante : 
+On peut voir la méthode de Rayleigh comme une méthode de la puissance avec un "shift" variable (mis à jour à chaque itération). En d'autre mots, elle définit la méthode itérative suivante : 
 $$x_{k+1} = \left(  A- \frac{x^*Ax}{x^*x}  \right)^{-1} x_k.  $$
-Commençons par étudier sa convergence globale et locale. Pour ce faire, on utilise un des théorème du cours : 
+Commençons par étudier sa convergence globale et locale. Pour ce faire, on utilise un des théorème du cours : \\
 \textbf{Proposition 4.4} Soit $A = A^*$ $ \in \mathbb{C}^{n\times n}$. L'itération du quotient de Rayleigh pour $A$ converge vers une direction propre de $A$ pour presque tout itéré initial. Lorsque la suite des itérés converge vers une direction propre, la convergence est cubique. 
 
 Il faut maintenant préciser ce \textit{pour presque tout itéré initial}. Supposons que $A$ est diagonalisable et faisons un changement de variable afin d'exprimer $x$ dans la base formée par les vecteurs propres de $A$. Nommons le $x$ après changement de variables $x'$. Soit $Q$ la matrice dont les colonnes sont les vecteurs propres de $A$ et $D$ la matrice diagonale des valeurs propres de $A$. On utilise le théorème spectrale et le fait que $A$ et $(A-\rho I)^{-1}$ possèdent les mêmes vecteurs propres pour réécrire l'itération : 
