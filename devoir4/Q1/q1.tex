@@ -1,0 +1,91 @@
+\section*{Question 1}
+On sait que $\dot{\Ha}(p,q) = 0$ car $\Ha$ est invariant dans le temps.
+De plus, comme
+\[
+  \dot{\Ha}(p,q) = \fpart{\Ha(p,q)}{p}^T\dot{p} + \fpart{\Ha(p,q)}{q}^T\dot{q}
+\]
+on doit avoir
+\[
+  \fpart{\Ha(p,q)}{p}^T\dot{p} + \fpart{\Ha(p,q)}{q}^T\dot{q} = 0.
+\]
+
+Les équations
+\begin{align*}
+  \dot{q} & = \fpart{\Ha(p,q)}{p} & \dot{p} & = \fpart{\Ha(p,q)}{q}
+\end{align*}
+donnent
+\begin{align*}
+  \fpart{\Ha(p,q)}{p}^T\dot{p} + \fpart{\Ha(p,q)}{q}^T\dot{q} & =
+  \fpart{\Ha(p,q)}{p}^T\fpart{\Ha(p,q)}{q} - \fpart{\Ha(p,q)}{q}^T\fpart{\Ha(p,q)}{p}\\
+  & = 0
+\end{align*}
+ce qui respecte bien l'invariance temporelle de $\Ha$.
+
+Soit $f_1(q,p)$ et $f_2(q,p)$ tels que
+\begin{align*}
+  \dot{q} & = f_1(q,p)\\
+  \dot{q} & = f_2(q,p),
+\end{align*}
+on calcule
+\begin{align*}
+  f_1(q,p) & =
+  \begin{pmatrix}
+    \fpart{}{p_1} \left(\frac{1}{2}(p_1^2 + p_2^2) + \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)\\
+    \fpart{}{p_2} \left(\frac{1}{2}(p_1^2 + p_2^2) + \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)
+  \end{pmatrix}\\
+  & =
+  \begin{pmatrix}
+    p_1\\
+    p_2
+  \end{pmatrix}\\
+  & = p\\
+%
+  f_2(q,p) & =
+  -\begin{pmatrix}
+    \fpart{}{q_1} \left(\frac{1}{2}(p_1^2 + p_2^2) + \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)\\
+    \fpart{}{q_2} \left(\frac{1}{2}(p_1^2 + p_2^2) + \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)
+  \end{pmatrix}\\
+  & =
+  \frac{1}{2(q_1^2 + q_2^2)^{3/2}}
+  \begin{pmatrix}
+    2q_1\\
+    2q_2
+  \end{pmatrix}\\
+  & = \frac{q}{\|q\|_2^3}.
+\end{align*}
+
+On remarque que $f_1(q,p) = f_1(p)$ et $f_2(q,p) = f_2(q)$.
+On va utiliser cette propriété qui va nous être particulièrement utile pour euler symplectique.
+Pour euler implicite, on aura besoin de
+\begin{align*}
+  \fpart{f_1(p)}{p} & = I\\
+  \fpart{f_2(q)}{q} & =
+  \begin{pmatrix}
+    \fpart{}{q_1}\frac{q_1}{(q_1^2 + q_2^2)^{3/2}} &
+    \fpart{}{q_2}\frac{q_1}{(q_1^2 + q_2^2)^{3/2}}\\
+    \fpart{}{q_1}\frac{q_2}{(q_1^2 + q_2^2)^{3/2}} &
+    \fpart{}{q_2}\frac{q_2}{(q_1^2 + q_2^2)^{3/2}}
+  \end{pmatrix}\\
+  & =
+  \begin{pmatrix}
+    \frac{(q_1^2 + q_2^2)^{3/2} + 3q_1^2(q_1^2 + q_2^2)^{1/2}}{(q_1^2 + q_2^2)^3} &
+    \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}}\\
+    \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}} &
+    \frac{(q_1^2 + q_2^2)^{3/2} + 3q_2^2(q_1^2 + q_2^2)^{1/2}}{(q_1^2 + q_2^2)^3}
+  \end{pmatrix}\\
+  & =
+  \begin{pmatrix}
+    \frac{4q_1^2 + q_2^2}{(q_1^2 + q_2^2)^{5/2}} &
+    \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}}\\
+    \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}} &
+    \frac{q_1^2 + 4q_2^2}{(q_1^2 + q_2^2)^{5/2}}
+  \end{pmatrix}\\
+  & =
+  \frac{1}{\|q\|_2^{5/2}}
+  \begin{pmatrix}
+    4q_1^2 + q_2^2 &
+    3q_1q_2\\
+    3q_1q_2 &
+    q_1^2 + 4q_2^2
+  \end{pmatrix}
+\end{align*}
