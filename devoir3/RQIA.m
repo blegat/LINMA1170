@@ -1,26 +1,24 @@
-function [ rho ] = RQIA(A, x, y, rhoGiven)
+function [ rho ] = RQIA(A, x, y)
 % RQA Asymmetric Rayleigh quotient iteration
-%   
-% Tested with  x = [1/sqrt(3) 1/sqrt(3) 1/sqrt(3)]'; y = [1 0 0];
-% A = [1 2 3; 1 2 1; 3 2 1] => mu = 5.2361 ok 
+%
+% in :      - 'A' = matrix (real or complex, symetric or not) n*n
+%           - 'x' is a vector n*1
+%           - 'y' is a vector n*1
+%
+% out :     - rho is the approximation of an eigenvalue of A
 
 i = 1;
 eLim = 1e-5;
 err = eLim +1;
-rho = rhoGiven; %10; %(y'*A*x)/(y'*x);
+rho = (y'*A*x)/(y'*x);
 
-while (i < 100 && err > eLim) || i<3
+while i < 500 && err > eLim
     x = (A-rho*eye(size(A)))\x;
     y = (A-rho*eye(size(A)))'\y;
-    
     rho1 = (y'*A*x)/(y'*x);
-   
     err = abs(rho1-rho);
     rho= rho1;
     fprintf('iteration number : %d\n error : %f \n rho : %f \n ',i,err,rho)
-    
-y/norm(y)
-x/norm(x)
     i = i + 1;
 end
 

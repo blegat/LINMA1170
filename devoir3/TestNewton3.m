@@ -1,4 +1,4 @@
-
+% PLOT des figures Newton w ortho v1 (fig 3)
 
 A=[1 3 5;-2 4 6; 5 4 -8];
 W=[0 0.2672 ; 1 0 ; 0 -0.8842];
@@ -29,13 +29,7 @@ end
 figure(1)
 surf(X, Y, G1); hold on;
 surf(X , Y, G2); hold on;
-for i=1:n
-    for j=1:n
-        if (abs(G1(i,j))<5 && abs(G2(i,j))<5)
-            plot3(X(i),Y(j),0,'b.');hold on;
-        end
-    end
-end
+
 plot3(1.4337,-3.309,0,'r.');hold on;
 plot3(-0.2264,0.3972,0,'r.');hold on;
 plot3(0.706,0.5621,0,'r.');hold on;

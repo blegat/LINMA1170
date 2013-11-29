@@ -1,27 +1,27 @@
-function [mu] = RQIS(A,x, muGiven)
-%RQ Rayleigh Quotient Iteration for symmetric matrix
-%  mu returns the approximation of the eigenvalue
-%  x returns the approximation of the eigenvector linked to this mu
-% Tested with  x = [1/sqrt(3) 1/sqrt(3) 1/sqrt(3)]'; A = [1 2 3; 1 2 1; 3 2
-% 1] => mu = 5.2361 ok (cf. wikipedia)
+function [rho] = RQIS(A,x)
+%RQ Rayleigh Quotient Iteration for symetric matrix
+%  
+% in :      - 'A' = matrix (real or complex, symetric) n*n
+%           - 'x' is a vector n*1
+%
+% out :     - rho is the approximation of an eigenvalue of A
 
 i = 1;
-eLim = 1e-8;
+eLim = 1e-5;
 err = eLim +1;
-mu = muGiven; %(x'*A*x)/(x'*x);
-mu
-while (i < 100 && err > eLim) || i<3
-    y = (A-mu*eye(size(A)))\x;
+rho= (x'*A*x)/(x'*x);
+
+while i < 500 && err > eLim
+    y = (A-rho*eye(size(A)))\x;
     x = y/norm(y);
-    x
-    mu1 = (x'*A*x)/(x'*x); % shift = rayleigh quotient --> eigenvalue
-    err = abs(mu1-mu);
-    mu= mu1;
-    fprintf('iteration number : %d\n error : %f \n mu : %f \n ',i,err,mu)
+    rho1 = (x'*A*x)/(x'*x); 
+    err = abs(rho1-rho);
+    rho = rho1;
+    fprintf('iteration number : %d\n error : %f \n rho : %f \n ',i,err,rho)    
     i = i + 1;
 end
-x
-fprintf('final i : %d\n final mu : %f \n ',i-1, mu1)
+
+fprintf('final i : %d\n final rho : %f \n ',i-1, rho1)
 
 end
 
