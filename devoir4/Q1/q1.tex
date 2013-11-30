@@ -6,17 +6,17 @@ De plus, comme
 \]
 on doit avoir
 \[
-  \fpart{\Ha(p,q)}{p}^T\dot{p} + \fpart{\Ha(p,q)}{q}^T\dot{q} = 0.
+  \fpart{\Ha(p,q)}{q}^T\dot{q} + \fpart{\Ha(p,q)}{p}^T\dot{p} = 0.
 \]
 
 Les équations
 \begin{align*}
-  \dot{q} & = \fpart{\Ha(p,q)}{p} & \dot{p} & = \fpart{\Ha(p,q)}{q}
+  \dot{q} & = \fpart{\Ha(p,q)}{p} & \dot{p} & = -\fpart{\Ha(p,q)}{q}
 \end{align*}
 donnent
 \begin{align*}
-  \fpart{\Ha(p,q)}{p}^T\dot{p} + \fpart{\Ha(p,q)}{q}^T\dot{q} & =
-  \fpart{\Ha(p,q)}{p}^T\fpart{\Ha(p,q)}{q} - \fpart{\Ha(p,q)}{q}^T\fpart{\Ha(p,q)}{p}\\
+  \fpart{\Ha(p,q)}{q}^T\dot{q} + \fpart{\Ha(p,q)}{p}^T\dot{p} & =
+  \fpart{\Ha(p,q)}{q}^T\fpart{\Ha(p,q)}{p} - \fpart{\Ha(p,q)}{p}^T\fpart{\Ha(p,q)}{q}\\
   & = 0
 \end{align*}
 ce qui respecte bien l'invariance temporelle de $\Ha$.
@@ -24,14 +24,14 @@ ce qui respecte bien l'invariance temporelle de $\Ha$.
 Soit $f_1(q,p)$ et $f_2(q,p)$ tels que
 \begin{align*}
   \dot{q} & = f_1(q,p)\\
-  \dot{q} & = f_2(q,p),
+  \dot{p} & = f_2(q,p),
 \end{align*}
 on calcule
 \begin{align*}
   f_1(q,p) & =
   \begin{pmatrix}
-    \fpart{}{p_1} \left(\frac{1}{2}(p_1^2 + p_2^2) + \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)\\
-    \fpart{}{p_2} \left(\frac{1}{2}(p_1^2 + p_2^2) + \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)
+    \fpart{}{p_1} \left(\frac{1}{2}(p_1^2 + p_2^2) - \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)\\
+    \fpart{}{p_2} \left(\frac{1}{2}(p_1^2 + p_2^2) - \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)
   \end{pmatrix}\\
   & =
   \begin{pmatrix}
@@ -42,16 +42,16 @@ on calcule
 %
   f_2(q,p) & =
   -\begin{pmatrix}
-    \fpart{}{q_1} \left(\frac{1}{2}(p_1^2 + p_2^2) + \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)\\
-    \fpart{}{q_2} \left(\frac{1}{2}(p_1^2 + p_2^2) + \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)
+    \fpart{}{q_1} \left(\frac{1}{2}(p_1^2 + p_2^2) - \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)\\
+    \fpart{}{q_2} \left(\frac{1}{2}(p_1^2 + p_2^2) - \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)
   \end{pmatrix}\\
   & =
-  \frac{1}{2(q_1^2 + q_2^2)^{3/2}}
+  \frac{-1}{2(q_1^2 + q_2^2)^{3/2}}
   \begin{pmatrix}
     2q_1\\
     2q_2
   \end{pmatrix}\\
-  & = \frac{q}{\|q\|_2^3}.
+  & = \frac{-q}{\|q\|_2^3}.
 \end{align*}
 
 On remarque que $f_1(q,p) = f_1(p)$ et $f_2(q,p) = f_2(q)$.
@@ -61,27 +61,27 @@ Pour euler implicite, on aura besoin de
   \fpart{f_1(p)}{p} & = I\\
   \fpart{f_2(q)}{q} & =
   \begin{pmatrix}
-    \fpart{}{q_1}\frac{q_1}{(q_1^2 + q_2^2)^{3/2}} &
-    \fpart{}{q_2}\frac{q_1}{(q_1^2 + q_2^2)^{3/2}}\\
-    \fpart{}{q_1}\frac{q_2}{(q_1^2 + q_2^2)^{3/2}} &
-    \fpart{}{q_2}\frac{q_2}{(q_1^2 + q_2^2)^{3/2}}
+    \fpart{}{q_1}\frac{-q_1}{(q_1^2 + q_2^2)^{3/2}} &
+    \fpart{}{q_2}\frac{-q_1}{(q_1^2 + q_2^2)^{3/2}}\\
+    \fpart{}{q_1}\frac{-q_2}{(q_1^2 + q_2^2)^{3/2}} &
+    \fpart{}{q_2}\frac{-q_2}{(q_1^2 + q_2^2)^{3/2}}
   \end{pmatrix}\\
   & =
-  \begin{pmatrix}
+  -\begin{pmatrix}
     \frac{(q_1^2 + q_2^2)^{3/2} + 3q_1^2(q_1^2 + q_2^2)^{1/2}}{(q_1^2 + q_2^2)^3} &
     \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}}\\
     \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}} &
     \frac{(q_1^2 + q_2^2)^{3/2} + 3q_2^2(q_1^2 + q_2^2)^{1/2}}{(q_1^2 + q_2^2)^3}
   \end{pmatrix}\\
   & =
-  \begin{pmatrix}
+  -\begin{pmatrix}
     \frac{4q_1^2 + q_2^2}{(q_1^2 + q_2^2)^{5/2}} &
     \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}}\\
     \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}} &
     \frac{q_1^2 + 4q_2^2}{(q_1^2 + q_2^2)^{5/2}}
   \end{pmatrix}\\
   & =
-  \frac{1}{\|q\|_2^{5/2}}
+  \frac{-1}{\|q\|_2^{5/2}}
   \begin{pmatrix}
     4q_1^2 + q_2^2 &
     3q_1q_2\\
@@ -137,44 +137,79 @@ d'où
 
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{0.45\textwidth}
+  \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_q.png}
     \caption{$q$ pour explicite}
     \label{fig:q1_explicite_q}
   \end{subfigure}%
   ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
   %(or a blank line to force the subfigure onto a new line)
-  \begin{subfigure}[b]{0.45\textwidth}
+  \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_p.png}
     \caption{$p$ pour explicite}
     \label{fig:q1_explicite_p}
   \end{subfigure}
-  \begin{subfigure}[b]{0.45\textwidth}
+  ~
+  \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_H.png}
     \caption{$\Ha$ pour explicite}
     \label{fig:q1_explicite_H}
   \end{subfigure}
-  \caption{Résultats pour euler explicite}\label{fig:q1_explicite}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \begin{subfigure}[b]{0.45\textwidth}
+  \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_implicite_q.png}
     \caption{$q$ pour implicite}
     \label{fig:q1_implicite_q}
   \end{subfigure}%
-  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+  ~
   %(or a blank line to force the subfigure onto a new line)
-  \begin{subfigure}[b]{0.45\textwidth}
+  \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_implicite_p.png}
     \caption{$p$ pour implicite}
     \label{fig:q1_implicite_p}
   \end{subfigure}
-  \begin{subfigure}[b]{0.45\textwidth}
+  ~
+  \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_implicite_H.png}
     \caption{$\Ha$ pour implicite}
     \label{fig:q1_implicite_H}
   \end{subfigure}
-  \caption{Résultats pour euler implicite}\label{fig:q1_implicite}
+
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_symplectique1_q.png}
+    \caption{$q$ pour symplectique1}
+    \label{fig:q1_symplectique1_q}
+  \end{subfigure}%
+  ~
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_symplectique1_p.png}
+    \caption{$p$ pour symplectique1}
+    \label{fig:q1_symplectique1_p}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_symplectique1_H.png}
+    \caption{$\Ha$ pour symplectique1}
+    \label{fig:q1_symplectique1_H}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_symplectique2_q.png}
+    \caption{$q$ pour symplectique2}
+    \label{fig:q1_symplectique2_q}
+  \end{subfigure}%
+  ~
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_symplectique2_p.png}
+    \caption{$p$ pour symplectique2}
+    \label{fig:q1_symplectique2_p}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_symplectique2_H.png}
+    \caption{$\Ha$ pour symplectique2}
+    \label{fig:q1_symplectique2_H}
+  \end{subfigure}
+  \caption{Résultats pour la question 2}\label{fig:q1}
 \end{figure}
