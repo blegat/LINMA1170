@@ -89,3 +89,92 @@ Pour euler implicite, on aura besoin de
     q_1^2 + 4q_2^2
   \end{pmatrix}
 \end{align*}
+
+L'équation que Newton-Raphson doit résoudre à chaque pas est la suivante
+\begin{align*}
+  q_{k+1} & = q_k + hf_1(p_{k+1})\\
+  p_{k+1} & = p_k + hf_2(q_{k+1})
+\end{align*}
+ou encore
+\begin{align*}
+  q_k - q_{k+1} + hf_1(p_{k+1}) & = 0\\
+  p_k + hf_2(q_{k+1}) - p_{k+1} & = 0
+\end{align*}
+On doit donc résoudre $f(u) = 0$ où
+$u =
+\begin{pmatrix}
+  q_{k+1}\\
+  p_{k+1}
+\end{pmatrix}$
+et
+\[
+  f
+  \left(
+    \begin{pmatrix}
+      q_{k+1}\\
+      p_{k+1}
+    \end{pmatrix}
+  \right) =
+  \begin{pmatrix}
+    q_k - q_{k+1} + hf_1(p_{k+1})\\
+    p_k + hf_2(q_{k+1}) - p_{k+1}
+  \end{pmatrix}
+\]
+d'où
+\[
+  \fpart{f}{u}
+  \left(
+    \begin{pmatrix}
+      q_{k+1}\\
+      p_{k+1}
+    \end{pmatrix}
+  \right) =
+  \begin{pmatrix}
+    -I & h\fpart{f_1}{p}(p_{k+1})\\
+    h\fpart{f_2}{q}(q_{k+1}) & -I
+  \end{pmatrix}.
+\]
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_explicite_q.png}
+    \caption{$q$ pour explicite}
+    \label{fig:q1_explicite_q}
+  \end{subfigure}%
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_explicite_p.png}
+    \caption{$p$ pour explicite}
+    \label{fig:q1_explicite_p}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_explicite_H.png}
+    \caption{$\Ha$ pour explicite}
+    \label{fig:q1_explicite_H}
+  \end{subfigure}
+  \caption{Résultats pour euler explicite}\label{fig:q1_explicite}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_implicite_q.png}
+    \caption{$q$ pour implicite}
+    \label{fig:q1_implicite_q}
+  \end{subfigure}%
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_implicite_p.png}
+    \caption{$p$ pour implicite}
+    \label{fig:q1_implicite_p}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_implicite_H.png}
+    \caption{$\Ha$ pour implicite}
+    \label{fig:q1_implicite_H}
+  \end{subfigure}
+  \caption{Résultats pour euler implicite}\label{fig:q1_implicite}
+\end{figure}
