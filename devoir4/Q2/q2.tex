@@ -1,1 +1,98 @@
 \section*{Question 2}
+Soient $q =
+\begin{pmatrix}
+  q_1\\
+  q_2
+\end{pmatrix}$,
+$p =
+\begin{pmatrix}
+  p_1\\
+  p_2
+\end{pmatrix}$,
+$f_1(q,p)$ et $f_2(q,p)$ tels que
+\begin{align*}
+  \dot{q} & = f_1(p)\\
+  \dot{p} & = f_2(q).
+\end{align*}
+
+On calcule, en se rappelant des résultats de la question 1
+\begin{align*}
+  f_1(q,p) & =
+  \begin{pmatrix}
+    m_1\frac{p_1}{m_1}\\
+    m_2\frac{p_2}{m_2}
+  \end{pmatrix}\\
+  & = p\\
+%
+  f_2(q,p) & = Gm_1m_2
+  \begin{pmatrix}
+    \frac{-q_1}{m_1\|q_1-q_2\|_2^3}\\
+    \frac{q_2}{m_2\|q_1-q_2\|_2^3}
+  \end{pmatrix}\\
+  & = G
+  \begin{pmatrix}
+    \frac{-m_2q_1}{\|q_1-q_2\|_2^3}\\
+    \frac{m_1q_2}{\|q_1-q_2\|_2^3}
+  \end{pmatrix}.
+\end{align*}
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q2_explicite_q.png}
+    \caption{$q$ pour explicite}
+    \label{fig:q2_explicite_q}
+  \end{subfigure}%
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q2_explicite_p.png}
+    \caption{$p$ pour explicite}
+    \label{fig:q2_explicite_p}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q2_explicite_H.png}
+    \caption{$\Ha$ pour explicite}
+    \label{fig:q2_explicite_H}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q2_symplectique1_q.png}
+    \caption{$q$ pour symplectique1}
+    \label{fig:q2_symplectique1_q}
+  \end{subfigure}%
+  ~
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q2_symplectique1_p.png}
+    \caption{$p$ pour symplectique1}
+    \label{fig:q2_symplectique1_p}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q2_symplectique1_H.png}
+    \caption{$\Ha$ pour symplectique1}
+    \label{fig:q2_symplectique1_H}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q2_symplectique2_q.png}
+    \caption{$q$ pour symplectique2}
+    \label{fig:q2_symplectique2_q}
+  \end{subfigure}%
+  ~
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q2_symplectique2_p.png}
+    \caption{$p$ pour symplectique2}
+    \label{fig:q2_symplectique2_p}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q2_symplectique2_H.png}
+    \caption{$\Ha$ pour symplectique2}
+    \label{fig:q2_symplectique2_H}
+  \end{subfigure}
+  \caption{Résultats pour la question 2}\label{fig:q1}
+\end{figure}
