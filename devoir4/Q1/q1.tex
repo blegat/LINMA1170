@@ -1,6 +1,6 @@
 \section{Question 1}
 \subsection{Équations du mouvement}
-Soit le système hamiltonien à deux corps, d'invariant $\Ha (p,q)$ où $p$ est la vitesse de chaque corps et $q$ leur position \footnote{On a évidemment $p(t)$ et $q(t)$. Pour une planète, la composante $p_1$ représente sa vitesse dans la direction "$x$" du plan et la composante $p_2$, sa vitesse dans la direction "$y$" du plan.}. Considérons tout d'abord un système où un des deux corps a une masse beaucoup considérablement plus élevé que l'autre, ce qui le rend statique. On a alors 
+Soit le système hamiltonien à deux corps, d'invariant $\Ha (p,q)$ où $p$ est la vitesse de chaque corps et $q$ leur position \footnote{On a évidemment $p(t)$ et $q(t)$. Pour une planète, la composante $p_1$ représente sa vitesse dans la direction "$x$" du plan et la composante $p_2$, sa vitesse dans la direction "$y$" du plan.}. Considérons tout d'abord un système où un des deux corps a une masse considérablement plus élevée que l'autre, ce qui nous permet de le considérer comme statique. On a alors 
 $$\Ha (p,q) = \frac{1}{2} p^T p - \frac{1}{||q||_2} . $$
 On sait que $\dot{\Ha}(p,q) = 0$ car $\Ha$ est invariant dans le temps.
 De plus, comme (par la règle de dérivée en chaîne)
@@ -156,6 +156,7 @@ d'où
     h\fpart{f_2}{q}(q_{k+1}) & -I
   \end{pmatrix}.
 \]
+
 Appliquons a présent ces méthodes sur un cas concret où la planète mobile a comme caractéristiques initiales : $p_0 = \begin{pmatrix}
 0\\
 2
@@ -167,7 +168,7 @@ $ et $q_0 = \begin{pmatrix}
 $.\\
 
 \subsection{Comparaison des méthodes numériques}
-Nous allons appliquer à ce cas les différentes méthodes d'intégration numérique pour 100 000 pas de temps dont la valeur est $h=5e-4$ (Euler implicite et explicite) ou $h=5e-2$ (Euler symplectique). Les résultats sont donnés à la figure \ref{fig:q1}
+Nous allons appliquer à ce cas les différentes méthodes d'intégration numérique pour 100 000 pas de temps dont la valeur est $h=5e-4$ (Euler implicite et explicite) ou $h=5e-2$ (Euler symplectique). Les résultats sont donnés à la figure \ref{fig:q1}.
 
 
 \begin{figure}

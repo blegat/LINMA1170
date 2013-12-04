@@ -23,26 +23,16 @@ for k = 1:n
     Jac4(2,k)=h*imag(eigValue(4,1)); %%%%%%%%%%
 
 end
+
 figure();
-plot(Jac1(1,:), Jac1(2,:), 'b.'); 
-xlabel('Re(h*lambda)');
-ylabel('Im(h*lambda)');
-title('lambda1');
+plot(Jac1(1,:), Jac1(2,:), 'b.') %%%%%%%%%%
 figure();
-plot(Jac2(1,:), Jac2(2,:), 'b.');
-xlabel('Re(h*lambda)');
-ylabel('Im(h*lambda)');
-title('lambda2');
+plot(Jac2(1,:), Jac2(2,:), 'b.') %%%%%%%%%%
 figure();
-plot(Jac3(1,:), Jac3(2,:), 'b.');
-xlabel('Re(h*lambda)');
-ylabel('Im(h*lambda)');
-title('lambda3');
+plot(Jac3(1,:), Jac3(2,:), 'b.') %%%%%%%%%%
 figure();
-plot(Jac4(1,:), Jac4(2,:), 'b.');
-xlabel('Re(h*lambda)');
-ylabel('Im(h*lambda)');
-title('lambda4');
+plot(Jac4(1,:), Jac4(2,:), 'b.') %%%%%%%%%%
+
 end
 
 
