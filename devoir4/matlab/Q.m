@@ -43,6 +43,8 @@ end
 
 figure();
 plot(q(1,:), q(2,:), 'linewidth', 1);
+xlabel('x');
+ylabel('y');
 if num == 2
     hold on;
     plot(q(3,:), q(4,:), 'r', 'linewidth', 1);
@@ -52,6 +54,8 @@ saveas(gcf, sprintf('../images/Q%d_%s_q', num, method), 'png');
 
 figure();
 plot(p(1,:), p(2,:), 'linewidth', 1);
+xlabel('x');
+ylabel('y');
 if num == 2
     hold on;
     plot(p(3,:), p(4,:), 'r', 'linewidth', 1);
@@ -61,6 +65,7 @@ saveas(gcf, sprintf('../images/Q%d_%s_p', num, method), 'png');
 
 figure();
 h = zeros(1,n+1);
+xlabel('temps');
 for i = 1:n+1
     h(i) = H(q(:,i), p(:,i));
 end
