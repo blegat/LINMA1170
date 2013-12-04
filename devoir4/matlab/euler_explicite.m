@@ -12,7 +12,7 @@ for k = 1:n
     q(:,k+1) = q(:,k) + h * f_1(p(:,k));
     p(:,k+1) = p(:,k) + h * f_2(q(:,k));
     Ju = Jacobien(q(:,k),p(:,k)); %%%%%%%%
-    eigValue = eig(Ju)
+    eigValue = eig(Ju);
     Jac1(1,k)=h*real(eigValue(1,1)); %%%%%%%%%%
     Jac1(2,k)=h*imag(eigValue(1,1)); %%%%%%%%%%
     Jac2(1,k)=h*real(eigValue(2,1)); %%%%%%%%%%
@@ -24,13 +24,25 @@ for k = 1:n
 
 end
 figure();
-plot(Jac1(1,:), Jac1(2,:), 'b.') %%%%%%%%%%
+plot(Jac1(1,:), Jac1(2,:), 'b.'); 
+xlabel('Re(h*lambda)');
+ylabel('Im(h*lambda)');
+title('lambda1');
 figure();
-plot(Jac2(1,:), Jac2(2,:), 'b.') %%%%%%%%%%
+plot(Jac2(1,:), Jac2(2,:), 'b.');
+xlabel('Re(h*lambda)');
+ylabel('Im(h*lambda)');
+title('lambda2');
 figure();
-plot(Jac3(1,:), Jac3(2,:), 'b.') %%%%%%%%%%
+plot(Jac3(1,:), Jac3(2,:), 'b.');
+xlabel('Re(h*lambda)');
+ylabel('Im(h*lambda)');
+title('lambda3');
 figure();
-plot(Jac4(1,:), Jac4(2,:), 'b.') %%%%%%%%%%
+plot(Jac4(1,:), Jac4(2,:), 'b.');
+xlabel('Re(h*lambda)');
+ylabel('Im(h*lambda)');
+title('lambda4');
 end
 
 

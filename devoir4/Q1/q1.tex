@@ -59,12 +59,14 @@ on calcule
   & = \frac{-q}{\|q\|_2^3}.
 \end{align*}
 Les équations du mouvement sont donc données par : 
-$$\left\lbrace
-\begin{array}{ccc}
+\begin{equation} \label{equation_mvt}
+\left\lbrace
+\begin{array}{ccc} 
 \dot{q} &=& p\\
 \dot{p} &=&  \frac{-q}{\|q\|_2^3}
 \end{array}
-\right.$$
+\right.
+\end{equation}
 
 \subsection{Description des méthodes numériques}
 Nous souhaitons intégrer ces systèmes d'équations différentiels non-linéaires (de forme générale $y'(t) = f(t,y)$, où $y$ désigne aussi bien un scalaire qu'un vecteur) par des méthodes numériques : 
@@ -154,14 +156,14 @@ d'où
     h\fpart{f_2}{q}(q_{k+1}) & -I
   \end{pmatrix}.
 \]
-Appliquons a présent ces méthodes sur un cas concret où la planète mobile a comme caractéristiques initiales : $p_0 = \begin{matrix}
+Appliquons a présent ces méthodes sur un cas concret où la planète mobile a comme caractéristiques initiales : $p_0 = \begin{pmatrix}
 0\\
 2
-\end{matrix}
-$ et $q_0 = \begin{matrix}
+\end{pmatrix}
+$ et $q_0 = \begin{pmatrix}
 0.4\\
 0
-\end{matrix} 
+\end{pmatrix} 
 $.\\
 
 \subsection{Comparaison des méthodes numériques}
@@ -251,6 +253,121 @@ Nous allons appliquer à ce cas les différentes méthodes d'intégration numér
 
 Les principaux points de comparaison des méthodes sont la convergence, l'erreur et le temps de calcul de la méthode.
 
+\paragraph{Convergence : }
+Pour étudier la convergence, nous aurons besoin de la Jacobienne :  
+$$J(q,p) = 
+\begin{pmatrix}
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\\\
+\frac{2*q_1^2 + q_2^2}{(q_1^2+q_2^2)^{5/2}} & \frac{-3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0 \\
+\frac{-3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & \frac{2*q_2^2 + q_1^2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0
+
+\end{pmatrix}
+$$
+Pour rappel, l'erreur entre la "vraie" solution d'une edo et celle obtenue pour des conditions initiales perturbée est définie comme : 
+$$\left\lbrace 
+\begin{array}{ccc}
+e' &=& \lambda e\\
+e(a) &=& \epsilon
+\end{array}
+\right.  
+$$ 
+Où $\lambda$ est la jacobienne du système évaluée en un certain point. Le système sera donc stable si $\mathcal{R} (J) <0$. Pour un système d'équations différentielles, on a donc : 
+$$\left\lbrace 
+\begin{array}{ccc}
+e' &=& A e\\
+e(a) &=& \epsilon
+\end{array}
+\right.  
+$$ 
+Si $A$ est diagonalisable, on peut effectuer un changement de variable tel que 
+$$\left\lbrace 
+\begin{array}{ccc}
+\tilde{e} ' &=& D \tilde{e}\\
+\tilde{e} (a) &=& \epsilon
+\end{array}
+\right.  
+$$ 
+Où $D$ est la matrice diagonale des valeurs propres. On se retrouve alors avec $n$ équations différentielle découplées dont la condition de stabilité est $\mathcal{R} (\lambda_i) <0$ c'est-à-dire que toutes les valeurs propres de la jacobienne soient à gauche de l'axe imaginaire.\\
+On voit directement que notre système n'est pas stable. En effet, calculons par exemple les valeurs propres au point de départ : 
+$$J(q,p) = 
+\begin{pmatrix}
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1\\\\
+ 31.2500 & 0  & 0 & 0 \\
+0 & 15.6250 & 0 & 0
+\end{pmatrix}
+\Longrightarrow eig(J(p,q))=
+\begin{pmatrix}
+5.5902\\
+-5.5902\\
+3.9528\\
+-3.9528
+\end{pmatrix}
+$$
+
+Les résultats numériques des valeurs de $h \lambda$ à chaque itération (la jacobienne variant à chaque itération) sont donnés à la figure \ref{fig:hlambda}. On voit clairement que ces valeurs sont en dehors des zones de convergences d'Euler explicite (cercle de centre $(-1,0)$ et de rayon 1) ainsi que d'Euler implicite (tout le plan sauf le cercle de centre $(1,0)$ et de rayon 1), ce qui est bien naturel étant donné que l'équation analytique est déjà instable.
+Notons bien sûre que le modèle n'est pas purement et simplement instable. En effet, comme le jacobien dépend de la position, il existe des zones de stabilité et des zones d'instabilité. Ce qui explique pourquoi le modèle n'explose pas après quelques itérations.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_hlambda1.png}
+    \caption{$h \lambda_1$}
+  \end{subfigure}%
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_hlambda2.png}
+    \caption{$h \lambda_2$}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_hlambda3.png}
+    \caption{$h \lambda_3$}
+  \end{subfigure}%
+  ~
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_hlambda4.png}
+    \caption{$h \lambda_4$}
+  \end{subfigure}
+  \caption{Valeurs de $h \lambda_i$ dans le plan complexe ($h=5e-4$).}
+  \label{fig:hlambda}
+\end{figure}
+
+Que se passe-t-il si on prend un pas $h$ trop grand? Les valeurs propres tendent toutes vers 0 et on obtient les résultats de la figure \ref{fig_rater}
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_explicite_rate_q.png}
+    \caption{$q$ pour explicite}
+    \label{fig:q1_explicite_q}
+  \end{subfigure}%
+  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+  %(or a blank line to force the subfigure onto a new line)
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_explicite_rate_p.png}
+    \caption{$p$ pour explicite}
+    \label{fig:q1_explicite_p}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_explicite_rate_H.png}
+    \caption{$\Ha$ pour explicite}
+    \label{fig:q1_explicite_H}
+  \end{subfigure}
+\caption{Solutions de l'intégration numérique avec Euler explicite pour un pas $h=5$.}
+\label{fig_rater}
+\end{figure}
+
+\paragraph{Erreur : }
+L'erreur est la différence entre la solution exacte et la solution obtenue par intégration numérique. Comme nous ne disposons pas de la solution exacte, nous ne pouvons pas utiliser cette définition. Cependant, nous pouvons utiliser le graphe de $\Ha$. 
+En effet, nous savons que la solution exacte est telle que $\dot{\Ha} = 0$ c'est à dire que $\Ha$ ne varie pas avec le temps, d'une itération à l'autre. Or sur la figure \ref{fig:q1}, on remarque que $\Ha$ augmente puis se stabilise plus ou moins à une certaine valeur (pour Euler explicite); tandis qu'il diminue puis se stabilise pour une certaine valeur pour Euler implicite. 
+On peut interpréter cela de la manière suivante. Le système d'équations différentielles \ref{equation_mvt} possède une infinité de solutions qui forme une famille de solution. Avec une condition initiale, on obtient alors une unique solution (si la condition de Lipschitz est satisfaite). 
+Lorsqu'on intègre numériquement ce système avec les méthodes d'Euler, on commet forcément des erreurs qui, d'une itération à l'autre, nous font en quelques sorte passer d'une courbe de cette famille de solution à une autre. 
+Ainsi on sur la figure \ref{fig:q1_explicite_H} on passe d'une courbe de la famille de solution à une autre pour ensuite se stabiliser au alentour d'une solution qui n'est pas la vraie solution, mais qui en est à une distance constante. Pour Euler implicite (figure \ref{fig:q1_implicite_H}), c'est la même chose, sauf qu'on stabilise autour d'une autre courbe de cette famille de solution. 
+Pour le cas d'Euler symplectique, comme le pas est $h=5.10^{-2}$, on va plus loin dans le temps, et à chaque fois que l'on repasse près du point de départ, on rechange de courbe dans la famille de solution (on oscille donc autour de la vraie solution, à une distance qui reste stable et relativement petite). Alors que dans le cas d'un pas de temps beaucoup trop grand comme dans la figure \ref{fig_rater}, on va aussi s'écarter de la vraie solution pour se stabiliser autour d'une courbe de la famille de solution (l'erreur reste alors constante, cf. figure \ref{fig_rater}), mais à une distance beaucoup plus grande de la vraie solution!
 
 
 
