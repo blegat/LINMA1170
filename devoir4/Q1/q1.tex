@@ -1,8 +1,11 @@
-\section*{Question 1}
+\section{Question 1}
+\subsection{Équations du mouvement}
+Soit le système hamiltonien à deux corps, d'invariant $\Ha (p,q)$ où $p$ est la vitesse de chaque corps et $q$ leur position \footnote{On a évidemment $p(t)$ et $q(t)$. Pour une planète, la composante $p_1$ représente sa vitesse dans la direction "$x$" du plan et la composante $p_2$, sa vitesse dans la direction "$y$" du plan.}. Considérons tout d'abord un système où un des deux corps a une masse beaucoup considérablement plus élevé que l'autre, ce qui le rend statique. On a alors 
+$$\Ha (p,q) = \frac{1}{2} p^T p - \frac{1}{||q||_2} . $$
 On sait que $\dot{\Ha}(p,q) = 0$ car $\Ha$ est invariant dans le temps.
-De plus, comme
+De plus, comme (par la règle de dérivée en chaîne)
 \[
-  \dot{\Ha}(p,q) = \fpart{\Ha(p,q)}{p}^T\dot{p} + \fpart{\Ha(p,q)}{q}^T\dot{q}
+  \dot{\Ha}(p,q) = \fpart{\Ha(p,q)}{p}^T\dot{p} + \fpart{\Ha(p,q)}{q}^T\dot{q},
 \]
 on doit avoir
 \[
@@ -28,7 +31,8 @@ Soient $f_1(q,p)$ et $f_2(q,p)$ tels que
 \end{align*}
 on calcule
 \begin{align*}
-  f_1(q,p) & =
+  f_1(q,p) & =  \fpart{\Ha (p,q)}{p}\\
+  & =
   \begin{pmatrix}
     \fpart{}{p_1} \left(\frac{1}{2}(p_1^2 + p_2^2) - \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)\\
     \fpart{}{p_2} \left(\frac{1}{2}(p_1^2 + p_2^2) - \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)
@@ -40,7 +44,8 @@ on calcule
   \end{pmatrix}\\
   & = p\\
 %
-  f_2(q,p) & =
+  f_2(q,p) & =  -\fpart{\Ha (p,q)}{q}\\
+  & =
   -\begin{pmatrix}
     \fpart{}{q_1} \left(\frac{1}{2}(p_1^2 + p_2^2) - \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)\\
     \fpart{}{q_2} \left(\frac{1}{2}(p_1^2 + p_2^2) - \frac{1}{\sqrt{q_1^2 + q_2^2}}\right)
@@ -53,10 +58,25 @@ on calcule
   \end{pmatrix}\\
   & = \frac{-q}{\|q\|_2^3}.
 \end{align*}
+Les équations du mouvement sont donc données par : 
+$$\left\lbrace
+\begin{array}{ccc}
+\dot{q} &=& p\\
+\dot{p} &=&  \frac{-q}{\|q\|_2^3}
+\end{array}
+\right.$$
+
+\subsection{Description des méthodes numériques}
+Nous souhaitons intégrer ces systèmes d'équations différentiels non-linéaires (de forme générale $y'(t) = f(t,y)$, où $y$ désigne aussi bien un scalaire qu'un vecteur) par des méthodes numériques : 
+\begin{itemize}
+\item la méthode d'Euler explicite, $y_{n+1} = y_n + h f(t,y_n)$
+\item la méthode d'Euler implicite, $y_{n+1} = y_n + h f(t,y_{n+1})$ qui demande de résoudre une équation non-linéaire de type $g(y_{n+1})=0$, qu'on résoudra en utilisant la méthode itérative de Newton-Raphson
+\item la méthode d'Euler symplectique qui est une combinaison des méthodes d'Euler implicite et explicite (on applique le schéma implicite à une composante de $y$ et un schéma explicite à l'autre). 
+\end{itemize}
 
 On remarque que $f_1(q,p) = f_1(p)$ et $f_2(q,p) = f_2(q)$.
-On va utiliser cette propriété qui va nous être particulièrement utile pour euler symplectique.
-Pour euler implicite, on aura besoin de
+On va utiliser cette propriété qui va nous être particulièrement utile pour Euler symplectique.
+Pour Euler implicite, on aura besoin de
 \begin{align*}
   \fpart{f_1(p)}{p} & = I\\
   \fpart{f_2(q)}{q} & =
@@ -90,7 +110,7 @@ Pour euler implicite, on aura besoin de
   \end{pmatrix}
 \end{align*}
 
-L'équation que Newton-Raphson doit résoudre à chaque pas est la suivante
+L'équation que Newton-Raphson devra résoudre à chaque pas est la suivante
 \begin{align*}
   q_{k+1} & = q_k + hf_1(p_{k+1})\\
   p_{k+1} & = p_k + hf_2(q_{k+1})
@@ -100,7 +120,7 @@ ou encore
   q_k - q_{k+1} + hf_1(p_{k+1}) & = 0\\
   p_k + hf_2(q_{k+1}) - p_{k+1} & = 0
 \end{align*}
-On doit donc résoudre $f(u) = 0$ où
+On doit donc résoudre $g(u) = 0$ où
 $u =
 \begin{pmatrix}
   q_{k+1}\\
@@ -108,7 +128,7 @@ $u =
 \end{pmatrix}$
 et
 \[
-  f
+  g
   \left(
     \begin{pmatrix}
       q_{k+1}\\
@@ -122,7 +142,7 @@ et
 \]
 d'où
 \[
-  \fpart{f}{u}
+  \fpart{g}{u}
   \left(
     \begin{pmatrix}
       q_{k+1}\\
@@ -134,6 +154,19 @@ d'où
     h\fpart{f_2}{q}(q_{k+1}) & -I
   \end{pmatrix}.
 \]
+Appliquons a présent ces méthodes sur un cas concret où la planète mobile a comme caractéristiques initiales : $p_0 = \begin{matrix}
+0\\
+2
+\end{matrix}
+$ et $q_0 = \begin{matrix}
+0.4\\
+0
+\end{matrix} 
+$.\\
+
+\subsection{Comparaison des méthodes numériques}
+Nous allons appliquer à ce cas les différentes méthodes d'intégration numérique pour 100 000 pas de temps dont la valeur est $h=5e-4$ (Euler implicite et explicite) ou $h=5e-2$ (Euler symplectique). Les résultats sont donnés à la figure \ref{fig:q1}
+
 
 \begin{figure}
   \centering
@@ -211,5 +244,24 @@ d'où
     \caption{$\Ha$ pour symplectique2}
     \label{fig:q1_symplectique2_H}
   \end{subfigure}
-  \caption{Résultats pour la question 1}\label{fig:q1}
+  \caption{Résultats pour la question 1}
+  \label{fig:q1}
 \end{figure}
+
+
+Les principaux points de comparaison des méthodes sont la convergence, l'erreur et le temps de calcul de la méthode.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

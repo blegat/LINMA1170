@@ -17,20 +17,12 @@ for k = 1:n
     Jac1(2,k)=h*imag(eigValue(1,1)); %%%%%%%%%%
     Jac2(1,k)=h*real(eigValue(2,1)); %%%%%%%%%%
     Jac2(2,k)=h*imag(eigValue(2,1)); %%%%%%%%%%
-    Jac3(1,k)=h*real(eigValue(3,1)); %%%%%%%%%%
-    Jac3(2,k)=h*imag(eigValue(3,1)); %%%%%%%%%%
-    Jac4(1,k)=h*real(eigValue(4,1)); %%%%%%%%%%
-    Jac4(2,k)=h*imag(eigValue(4,1)); %%%%%%%%%%
 
 end
 figure();
 plot(Jac1(1,:), Jac1(2,:), 'b.') %%%%%%%%%%
 figure();
 plot(Jac2(1,:), Jac2(2,:), 'b.') %%%%%%%%%%
-figure();
-plot(Jac3(1,:), Jac3(2,:), 'b.') %%%%%%%%%%
-figure();
-plot(Jac4(1,:), Jac4(2,:), 'b.') %%%%%%%%%%
 end
 
 
