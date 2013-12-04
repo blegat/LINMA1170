@@ -34,10 +34,10 @@ if strcmp(method, 'explicite')
 elseif strcmp(method, 'implicite')
     [p, q] = euler_implicite(f_1, f_2, @J_1_q1, @J_2_q1, q_0, p_0, h, n);
 elseif strcmp(method, 'symplectique1')
-    h = 5e-2;
+    %h = 5e-2;
     [p, q] = euler_symplectique1(f_1, f_2, q_0, p_0, h, n);
 elseif strcmp(method, 'symplectique2')
-    h = 5e-2;
+    %h = 5e-2;
     [p, q] = euler_symplectique2(f_1, f_2, q_0, p_0, h, n);
 end
 
