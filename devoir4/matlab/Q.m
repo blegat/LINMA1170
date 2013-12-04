@@ -1,4 +1,4 @@
-function q(num, method)
+function Q(num, method)
 
 if num == 1
     q_0 = [0.4; 0];
