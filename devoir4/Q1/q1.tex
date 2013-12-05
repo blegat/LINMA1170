@@ -398,7 +398,9 @@ Temps $[s]$ & 0.136024 & 8.273912 & 0.122837 &  0.142929\\
 \label{table_time}
 \end{table}
 
+Comme prévu, les méthodes d'Euler explicite et symplectique demande un temps de calcul similaire. Celui d'Euler implicite est sensiblement plus élevé. Cela est du au fait que chaque itération temporelle demande trois ou quatre itérations de Newton-Raphson (cf. figure \ref{IterNR}) dont chacune nécessite la résolution d'un système linéaire 4 sur 4.
 
+\paragraph{Conclusion : } En théorie, le seul avantage de la méthode d'Euler implicite sur les autres est le fait qu'elle soit inconditionnellement stable.
 
 
 
