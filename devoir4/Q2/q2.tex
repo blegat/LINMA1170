@@ -17,15 +17,15 @@ $$p =
 \end{pmatrix}$$ et
 $f_1(q,p)$ et $f_2(q,p)$ sont tels que
 \begin{align*}
-  \dot{q} & = f_1(p)\\
-  \dot{p} & = f_2(q).
+  \dot{q} & = f_1(p,q)\\
+  \dot{p} & = f_2(p,q).
 \end{align*}
 
 On calcule, en se rappelant des résultats de la question 1 mais en n'oubliant cependant pas d'inclure les masses 
  
 \begin{align*}
  f_{1,i}(q,p) &= m_i \fpart{\Ha(p,q)}{p_i} \\	
-  f_1(q,p) & =
+  f_1(p) & =
   \begin{pmatrix}
     m_1\frac{p_1}{m_1}\\
     m_2\frac{p_2}{m_2}
@@ -33,7 +33,7 @@ On calcule, en se rappelant des résultats de la question 1 mais en n'oubliant c
   & = p\\
 %	
  f_{2,i}(q,p) &= -\frac{1}{m_i}\fpart{\Ha(p,q)}{q_i} \\
-  f_2(q,p) & = Gm_1m_2
+  f_2(q) & = Gm_1m_2
   \begin{pmatrix}
     \frac{-q_1}{m_1\|q_1-q_2\|_2^3}\\
     \frac{q_2}{m_2\|q_1-q_2\|_2^3}
