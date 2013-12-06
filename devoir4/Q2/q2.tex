@@ -1,29 +1,38 @@
 \section*{Question 2}
-Soient $q =
+\subsection{Équations du mouvement}
+Intéressons nous maintenant au cas où les deux corps sont de masse similaire. L'Hamiltonien du système doit bien entendu être redéfini, il est maintenant donné par 
+
+$$\Ha(p_1,p_2,q_1,q_2) = \frac{1}{2} (\frac{1}{m_1} p_1^T p_1 + \frac{1}{m_2} p_2^T p_2) - G \frac{m_1 m_2}{||q_1- q_2||_2} $$
+
+où $G$ représente la constante gravitationnelle et $m_i$ ma masse du corps $i$. On garde les mêmes conventions qu'à la question 1, c'est à dire que 
+ $$q =
 \begin{pmatrix}
   q_1\\
   q_2
-\end{pmatrix}$,
-$p =
+\end{pmatrix}$$,
+$$p =
 \begin{pmatrix}
   p_1\\
   p_2
-\end{pmatrix}$,
-$f_1(q,p)$ et $f_2(q,p)$ tels que
+\end{pmatrix}$$ et
+$f_1(q,p)$ et $f_2(q,p)$ sont tels que
 \begin{align*}
   \dot{q} & = f_1(p)\\
   \dot{p} & = f_2(q).
 \end{align*}
 
-On calcule, en se rappelant des résultats de la question 1
+On calcule, en se rappelant des résultats de la question 1 mais en n'oubliant cependant pas d'inclure les masses 
+ 
 \begin{align*}
+ f_{1,i}(q,p) &= m_i \fpart{\Ha(p,q)}{p_i} \\	
   f_1(q,p) & =
   \begin{pmatrix}
     m_1\frac{p_1}{m_1}\\
     m_2\frac{p_2}{m_2}
   \end{pmatrix}\\
   & = p\\
-%
+%	
+ f_{2,i}(q,p) &= -\frac{1}{m_i}\fpart{\Ha(p,q)}{q_i} \\
   f_2(q,p) & = Gm_1m_2
   \begin{pmatrix}
     \frac{-q_1}{m_1\|q_1-q_2\|_2^3}\\
@@ -94,5 +103,5 @@ On calcule, en se rappelant des résultats de la question 1
     \caption{$\Ha$ pour symplectique2}
     \label{fig:q2_symplectique2_H}
   \end{subfigure}
-  \caption{Résultats pour la question 2}\label{fig:q1}
+  \caption{Résultats pour la question 2}\label{fig:q2}
 \end{figure}
