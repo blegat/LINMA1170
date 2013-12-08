@@ -29,6 +29,7 @@ end
 
 t = linspace(0, h * n, n+1);
 
+tic()
 if strcmp(method, 'explicite')
     [p, q] = euler_explicite(f_1, f_2, q_0, p_0, h, n);
 elseif strcmp(method, 'implicite')
@@ -40,7 +41,7 @@ elseif strcmp(method, 'symplectique2')
     %h = 5e-2;
     [p, q] = euler_symplectique2(f_1, f_2, q_0, p_0, h, n);
 end
-
+toc()
 figure();
 plot(q(1,:), q(2,:), 'linewidth', 1);
 xlabel('x');
