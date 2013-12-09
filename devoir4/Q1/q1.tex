@@ -68,10 +68,10 @@ Les équations du mouvement sont donc données par :
 \right.
 \end{equation}
 
-Ce système d'équation différentiel admet une unique solution dans $\mathbb{R^4_0}$. En effet : 
+Ce système d'équation différentiel admet une unique solution dans $\mathbb{R}_0^4$. En effet : 
 \begin{eqnarray}
 ||f_1(x)-f_1(y)|| &\leq & ||x-y|| \\
-||f_2(x) - f_2(y)|| &\leq & \left\|\frac{x}{\|x\|^{\frac{3}{2}}} - \frac{y}{\|y\|^{\frac{3}{2}}}\right\| \leq \max(\frac{1}{||x||^{\frac{3}{2}}}, \frac{1}{||y||^{\frac{3}{2}}}) ||x-y||.
+||f_2(x) - f_2(y)|| &\leq & \left\|\frac{x}{\|x\|_2^3} - \frac{y}{\|y\|_2^3}\right\| \leq \max(\frac{1}{\|x\|_2^3}, \frac{1}{\|y\|_2^3}) ||x-y||.
 \end{eqnarray}
 Ce qui implique que le système est Lipschitzien, et par le théorème 5.1 du cours, le système \ref{equation_mvt} admet une unique solution.
 
@@ -110,7 +110,7 @@ Pour Euler implicite, on aura besoin de
     \frac{q_1^2 + 2q_2^2}{(q_1^2 + q_2^2)^{5/2}}
   \end{pmatrix}\\
   & =
-  \frac{1}{\|q\|_2^{5/2}}
+  \frac{1}{\|q\|_2^{5}}
   \begin{pmatrix}
     2q_1^2 + q_2^2 &
     -3q_1q_2\\
