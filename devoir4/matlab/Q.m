@@ -3,7 +3,7 @@ function Q(num, method)
 if num == 1
     q_0 = [0.4; 0];
     p_0 = [0; 2];
-    n = 10000;
+    n = 100000;
     if strncmp(method, 'symplectique', 12)
         h = 5e-2;
     else
@@ -19,7 +19,7 @@ else
     n = 50000;
     h = 1e-4;
 
-    m_1 = 3.343e4;
+    m_1 = 1e4;%3.343e4;
     m_2 = 1e4;
     G = 2.96e-4;
     f_1 = @f_1_q2;
