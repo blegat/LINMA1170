@@ -1,6 +1,8 @@
 \section{Question 1}
 \subsection{Équations du mouvement}
-Soit le système hamiltonien à deux corps, d'invariant $\Ha (p,q)$ où $p$ est la vitesse de chaque corps et $q$ leur position \footnote{On a évidemment $p(t)$ et $q(t)$. Pour une planète, la composante $p_1$ représente sa vitesse dans la direction "$x$" du plan et la composante $p_2$, sa vitesse dans la direction "$y$" du plan.}. Considérons tout d'abord un système où un des deux corps a une masse considérablement plus élevée que l'autre, ce qui nous permet de le considérer comme statique. On a alors 
+Soit le système hamiltonien à deux corps, d'invariant $\Ha (p,q)$ où $p$ est la vitesse de chaque corps et $q$ leur position
+\footnote{On a évidemment $p(t)$ et $q(t)$. Pour une planète, la composante $p_1$ représente sa vitesse dans la direction ``$x$'' du plan et la composante $p_2$, sa vitesse dans la direction ``$y$'' du plan.}.
+Considérons tout d'abord un système où un des deux corps a une masse considérablement plus élevée que l'autre, ce qui nous permet de le considérer comme statique. On a alors
 $$\Ha (p,q) = \frac{1}{2} p^T p - \frac{1}{||q||_2} . $$
 On sait que $\dot{\Ha}(p,q) = 0$ car $\Ha$ est invariant dans le temps.
 De plus, comme (par la règle de dérivée en chaîne)
@@ -56,19 +58,22 @@ on calcule
     2q_1\\
     2q_2
   \end{pmatrix}\\
-  & = \frac{-q}{\|q\|_2^3}.
+  & = \frac{-q}{\|q\|_2^3}
 \end{align*}
-Les équations du mouvement sont donc données par : 
+ce qui n'est guère étonnant pour $\dot{q} = p$ car comme $q$ est la position,
+$\dot{q}$ est la vitesse, c'est à dire $p$.
+
+Les équations du mouvement sont donc données par :
 \begin{equation} \label{equation_mvt}
 \left\lbrace
-\begin{array}{ccc} 
+\begin{array}{ccc}
 \dot{q} &=& p\\
 \dot{p} &=&  \frac{-q}{\|q\|_2^3}
 \end{array}
 \right.
 \end{equation}
 
-Ce système d'équation différentiel admet une unique solution dans $\mathbb{R}_0^4$. En effet : 
+Ce système d'équation différentiel admet une unique solution dans $\mathbb{R}_0^4$. En effet :
 \begin{eqnarray}
 ||f_1(x)-f_1(y)|| &\leq & ||x-y|| \\
 ||f_2(x) - f_2(y)|| &\leq & \left\|\frac{x}{\|x\|_2^3} - \frac{y}{\|y\|_2^3}\right\| \leq \max(\frac{1}{\|x\|_2^3}, \frac{1}{\|y\|_2^3}) ||x-y||.
@@ -76,11 +81,11 @@ Ce système d'équation différentiel admet une unique solution dans $\mathbb{R}
 Ce qui implique que le système est Lipschitzien, et par le théorème 5.1 du cours, le système \ref{equation_mvt} admet une unique solution.
 
 \subsection{Description des méthodes numériques}
-Nous souhaitons intégrer ces systèmes d'équations différentiels non-linéaires (de forme générale $y'(t) = f(t,y)$, où $y$ désigne aussi bien un scalaire qu'un vecteur) par des méthodes numériques : 
+Nous souhaitons intégrer ces systèmes d'équations différentiels non-linéaires (de forme générale $y'(t) = f(t,y)$, où $y$ désigne aussi bien un scalaire qu'un vecteur) par des méthodes numériques :
 \begin{itemize}
 \item la méthode d'Euler explicite, $y_{n+1} = y_n + h f(t,y_n)$
 \item la méthode d'Euler implicite, $y_{n+1} = y_n + h f(t,y_{n+1})$ qui demande de résoudre une équation non-linéaire de type $g(y_{n+1})=0$, qu'on résoudra en utilisant la méthode itérative de Newton-Raphson
-\item la méthode d'Euler symplectique qui est une combinaison des méthodes d'Euler implicite et explicite (on applique le schéma implicite à une composante de $y$ et un schéma explicite à l'autre). 
+\item la méthode d'Euler symplectique qui est une combinaison des méthodes d'Euler implicite et explicite (on applique le schéma implicite à une composante de $y$ et un schéma explicite à l'autre).
 \end{itemize}
 
 On remarque que $f_1(q,p) = f_1(p)$ et $f_2(q,p) = f_2(q)$.
@@ -174,7 +179,7 @@ Appliquons a présent ces méthodes sur un cas concret où la planète mobile a 
 $ et $q_0 = \begin{pmatrix}
 0.4\\
 0
-\end{pmatrix} 
+\end{pmatrix}
 $.\\
 
 Nous allons appliquer à ce cas les différentes méthodes d'intégration numérique pour 100 000 pas de temps dont la valeur est $h=5e-4$ (Euler implicite et explicite) ou $h=5e-2$ (Euler symplectique). Les résultats sont donnés à la figure \ref{fig:q1}.
@@ -182,43 +187,58 @@ Nous allons appliquer à ce cas les différentes méthodes d'intégration numér
 
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_q.png}
     \caption{$q$ pour explicite}
     \label{fig:q1_explicite_q}
   \end{subfigure}%
   ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
   %(or a blank line to force the subfigure onto a new line)
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_explicite_H.png}
+    \caption{$\Ha$ pour explicite}
+    \label{fig:q1_explicite_H}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_p.png}
     \caption{$p$ pour explicite}
     \label{fig:q1_explicite_p}
   \end{subfigure}
   ~
-  \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{images/Q1_explicite_H.png}
-    \caption{$\Ha$ pour explicite}
-    \label{fig:q1_explicite_H}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_explicite_lambda.png}
+    \caption{$h\lambda(J(q,p))$ pour explicite}
+    \label{fig:q1_explicite_lambda}
   \end{subfigure}
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_implicite_q.png}
     \caption{$q$ pour implicite}
     \label{fig:q1_implicite_q}
   \end{subfigure}%
   ~
   %(or a blank line to force the subfigure onto a new line)
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_implicite_H.png}
+    \caption{$\Ha$ pour implicite}
+    \label{fig:q1_implicite_H}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_implicite_p.png}
     \caption{$p$ pour implicite}
     \label{fig:q1_implicite_p}
   \end{subfigure}
   ~
-  \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth]{images/Q1_implicite_H.png}
-    \caption{$\Ha$ pour implicite}
-    \label{fig:q1_implicite_H}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{images/Q1_implicite_lambda.png}
+    \caption{$h\lambda(J(q,p))$ pour implicite}
+    \label{fig:q1_implicite_lambda}
   \end{subfigure}
+  \caption{Résultats pour la question 1 pour euler explicite et implicite}
+  \label{fig:q1_sym}
+\end{figure}
 
+\begin{figure}
+  \centering
   \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_symplectique1_q.png}
     \caption{$q$ pour symplectique1}
@@ -256,58 +276,57 @@ Nous allons appliquer à ce cas les différentes méthodes d'intégration numér
     \caption{$\Ha$ pour symplectique2}
     \label{fig:q1_symplectique2_H}
   \end{subfigure}
-  \caption{Résultats pour la question 1}
-  \label{fig:q1}
+  \caption{Résultats pour la question 1 pour euler symplectique}
+  \label{fig:q1_sym}
 \end{figure}
 
 
 Les principaux points de comparaison des méthodes sont la convergence, l'erreur et le temps de calcul de la méthode.
 
-\paragraph{Convergence : }
-Pour étudier la convergence, nous aurons besoin de la Jacobienne :  
-$$J(q,p) = 
+\subsubsection{Convergence}
+Pour étudier la convergence, nous aurons besoin de la Jacobienne :
+$$J(q,p) =
 \begin{pmatrix}
-0 & 0 & 1 & 0\\
-0 & 0 & 0 & 1\\\\
-\frac{2*q_1^2 + q_2^2}{(q_1^2+q_2^2)^{5/2}} & \frac{-3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0 \\
-\frac{-3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & \frac{2*q_2^2 + q_1^2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0
-
-\end{pmatrix}
+  0 & 0 & 1 & 0\\
+  0 & 0 & 0 & 1\\\\
+  \frac{2q_1^2 + q_2^2}{(q_1^2+q_2^2)^{5/2}} & \frac{-3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0 \\
+  \frac{-3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & \frac{2q_2^2 + q_1^2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0
+\end{pmatrix}.
 $$
-Pour rappel, l'erreur entre la "vraie" solution d'une équation différentielle ordinaire et celle obtenue pour des conditions initiales perturbée est définie comme : 
-$$\left\lbrace 
+Pour rappel, l'erreur entre la ``vraie'' solution d'une équation différentielle ordinaire et celle obtenue pour des conditions initiales perturbée est définie comme :
+$$\left\lbrace
 \begin{array}{ccc}
 e' &=& \lambda e\\
 e(a) &=& \epsilon
 \end{array}
-\right.  
-$$ 
-Où $\lambda$ est la jacobienne du système évaluée en un certain point. Le système sera donc stable si $\mathcal{R} (J) <0$. Pour un système d'équations différentielles, on a donc : 
-$$\left\lbrace 
+\right.
+$$
+Où $\lambda$ est la jacobienne du système évaluée en un certain point. Le système sera donc stable si $\mathcal{R} (J) <0$. Pour un système d'équations différentielles, on a donc :
+$$\left\lbrace
 \begin{array}{ccc}
 e' &=& A e\\
 e(a) &=& \epsilon
 \end{array}
-\right.  
-$$ 
-Si $A$ est diagonalisable, on peut effectuer un changement de variable tel que 
-$$\left\lbrace 
+\right.
+$$
+Si $A$ est diagonalisable, on peut effectuer un changement de variable tel que
+$$\left\lbrace
 \begin{array}{ccc}
 \tilde{e} ' &=& D \tilde{e}\\
 \tilde{e} (a) &=& \epsilon
 \end{array}
-\right.  
-$$ 
+\right.
+$$
 Où $D$ est la matrice diagonale des valeurs propres. On se retrouve alors avec $n$ équations différentielle découplées dont la condition de stabilité est $\mathcal{R} (\lambda_i) <0$; c'est-à-dire tel que toutes les valeurs propres de la jacobienne soient à gauche de l'axe imaginaire.\\
-On voit directement que notre système n'est pas stable. En effet, calculons par exemple les valeurs propres au point de départ : 
-$$J(q,p) = 
+On voit directement que notre système n'est pas stable. En effet, calculons par exemple les valeurs propres au point de départ :
+$$J(q,p) =
 \begin{pmatrix}
 0 & 0 & 1 & 0\\
 0 & 0 & 0 & 1\\\\
  31.2500 & 0  & 0 & 0 \\
 0 & 15.6250 & 0 & 0
 \end{pmatrix}
-\Longrightarrow eig(J(p,q))=
+\Longrightarrow \mathrm{eig}(J(p,q))=
 \begin{pmatrix}
 5.5902\\
 -5.5902\\
@@ -316,8 +335,15 @@ $$J(q,p) =
 \end{pmatrix}
 $$
 
-Les résultats numériques des valeurs de $h \lambda$ à chaque itération (la jacobienne variant à chaque itération) sont donnés à la figure \ref{fig:hlambda}. On voit clairement que ces valeurs sont en dehors des zones de convergences d'Euler explicite (cercle de centre $(-1,0)$ et de rayon 1) ainsi que d'Euler implicite (tout le plan excepté le cercle de centre $(1,0)$ et de rayon 1), ce qui est bien naturel étant donné que l'équation analytique est elle-même instable.
-Notons bien sûre que le modèle n'est pas purement et simplement instable. En effet, comme la jacobienne dépend de $q$, il existe des zones de stabilité et des zones d'instabilité. Ce qui explique pourquoi le modèle n'explose pas après quelques itérations.
+Les résultats numériques des valeurs de $h \lambda$ à chaque itération (la jacobienne variant à chaque itération)
+sont donnés à la figure~\ref{fig:hlambda}.
+On voit clairement que ces valeurs sont en dehors des zones de convergences d'Euler explicite
+(cercle de centre $(-1,0)$ et de rayon 1) ainsi que d'Euler implicite
+(tout le plan excepté le cercle de centre $(1,0)$ et de rayon 1),
+ce qui est bien naturel étant donné que l'équation analytique est elle-même instable.
+Notons bien sûre que le modèle n'est pas purement et simplement instable.
+En effet, comme la jacobienne dépend de $q$, il existe des zones de stabilité et des zones d'instabilité.
+Ce qui explique pourquoi le modèle n'explose pas après quelques itérations.
 
 \begin{figure}
   \centering
@@ -345,7 +371,8 @@ Notons bien sûre que le modèle n'est pas purement et simplement instable. En e
   \label{fig:hlambda}
 \end{figure}
 
-Que se passe-t-il si on prend un pas $h$ trop grand? Les valeurs propres tendent toutes vers 0 et on obtient les résultats de la figure \ref{fig_rater}
+Que se passe-t-il si on prend un pas $h$ trop grand?
+Les valeurs propres tendent toutes vers 0 et on obtient les résultats de la figure~\ref{fig_rater}.
 
 \begin{figure}
   \centering
@@ -371,18 +398,39 @@ Que se passe-t-il si on prend un pas $h$ trop grand? Les valeurs propres tendent
 \label{fig_rater}
 \end{figure}
 
-\paragraph{Erreur : }
-L'erreur est par définition la différence entre la solution exacte et la solution obtenue par intégration numérique. Comme nous ne disposons pas de la solution exacte, nous ne pouvons pas utiliser cette définition. Cependant, nous pouvons utiliser le graphe de $\Ha$. 
-En effet, nous savons que la solution exacte est telle que $\dot{\Ha} = 0$ ou autrement dit $\Ha$ ne varie pas avec le temps (d'une itération à l'autre). Or sur la figure \ref{fig:q1}, on remarque que $\Ha$ augmente puis se stabilise plus ou moins à une certaine valeur (pour Euler explicite autour de $-0.495$ alors que la valeur initiale se situe à $-0.5$); tandis qu'il diminue puis se stabilise autour d'une certaine valeur ($-0.505$) pour Euler implicite. 
-On peut interpréter cela de la manière suivante. Le système d'équations différentielles \ref{equation_mvt} possède une infinité de solutions qui forment une famille de solutions. Avec une condition initiale, on obtient alors une unique solution (si la condition de Lipschitz est satisfaite). 
-Lorsqu'on intègre numériquement ce système avec les méthodes d'Euler, on commet forcément des erreurs qui, d'une itération à l'autre, nous font en quelques sorte passer d'une courbe de cette famille de solutions à une autre. 
-Ainsi on sur la figure \ref{fig:q1_explicite_H} on passe d'une courbe de la famille de solution à une autre pour ensuite se stabiliser au alentour d'une solution (pour laquelle $\Ha=-0.505$) qui n'est pas la vraie solution, mais qui en est à une distance constante. Pour Euler implicite (figure \ref{fig:q1_implicite_H}), c'est la même chose, sauf qu'on stabilise autour d'une autre courbe de cette famille de solution (pour laquelle $\Ha = -0.495$). 
-Pour le cas d'Euler symplectique, étant donné que le pas vaut $h=5.10^{-2}$, les 10000 itérations nous emmènent plus loin dans le temps. A chaque fois que l'on repasse près du point de départ, on change de courbe dans la famille de solutions (on oscille donc autour de la vraie solution, à une distance qui reste stable et relativement petite \footnote{On observe que Euler symplectique commet une erreur sur le $\Ha$ qui est plus grande que celle commise par Euler implicite ou explicite (on oscille ici entre $-0.4$ et $-0.54$). Cela est du au fait que la discrétisation temporelle est plus grossière. D'ailleurs si on applique Euler symplectique avec $h=5.10^{-4}$, on obtient un $\Ha$ dont la valeur oscille entre $-0.495$ et $0.505$.}). Alors que dans le cas d'un pas de temps beaucoup trop grand comme dans la figure \ref{fig_rater}, on va aussi s'écarter de la vraie solution pour se stabiliser autour d'une courbe de la famille de solutions (l'erreur reste alors constante, cf. figure \ref{fig_rater}), mais à une distance beaucoup plus grande de la vraie solution!
+\subsubsection{Erreur}
+L'erreur est par définition la différence entre la solution exacte et la solution obtenue par intégration numérique.
+Comme nous ne disposons pas de la solution exacte, nous ne pouvons pas utiliser cette définition. Cependant, nous pouvons utiliser le graphe de $\Ha$.
+En effet, nous savons que la solution exacte est telle que $\dot{\Ha} = 0$ ou autrement dit $\Ha$ ne varie pas avec le temps (d'une itération à l'autre).
+Or sur la figure \ref{fig:q1}, on remarque que $\Ha$ augmente puis se stabilise plus ou moins à une certaine valeur (pour Euler explicite autour de $-0.495$ alors que la valeur initiale se situe à $-0.5$);
+tandis qu'il diminue puis se stabilise autour d'une certaine valeur ($-0.505$) pour Euler implicite.
+On peut interpréter cela de la manière suivante.
+Le système d'équations différentielles \ref{equation_mvt} possède une infinité de solutions qui forment une famille de solutions.
+Avec une condition initiale, on obtient alors une unique solution (si la condition de Lipschitz est satisfaite).
+Lorsqu'on intègre numériquement ce système avec les méthodes d'Euler,
+on commet forcément des erreurs qui, d'une itération à l'autre,
+nous font en quelques sorte passer d'une courbe de cette famille de solutions à une autre.
+Ainsi sur la figure \ref{fig:q1_explicite_H} on passe d'une courbe de la famille de solution à une autre pour ensuite se stabiliser au alentour d'une solution (pour laquelle $\Ha=-0.505$) qui n'est pas la vraie solution,
+mais qui en est à une distance constante. Pour Euler implicite (figure \ref{fig:q1_implicite_H}),
+c'est la même chose, sauf qu'on stabilise autour d'une autre courbe de cette famille de solution (pour laquelle $\Ha = -0.495$).
+Pour le cas d'Euler symplectique, étant donné que le pas vaut $h=5 \cdot 10^{-2}$, les 10000 itérations nous emmènent plus loin dans le temps.
+À chaque fois que l'on repasse près du point de départ,
+on change de courbe dans la famille de solutions (on oscille donc autour de la vraie solution,
+à une distance qui reste stable et relativement petite
+\footnote{On observe que Euler symplectique commet une erreur sur le $\Ha$ qui est plus grande que celle commise par Euler implicite ou explicite (on oscille ici entre $-0.4$ et $-0.54$).
+Cela est du au fait que la discrétisation temporelle est plus grossière.
+D'ailleurs si on applique Euler symplectique avec $h=5.10^{-4}$, on obtient un $\Ha$ dont la valeur oscille entre $-0.495$ et $-0.505$.}).
+Alors que dans le cas d'un pas de temps beaucoup trop grand comme dans la figure \ref{fig_rater},
+on va aussi s'écarter de la vraie solution pour se stabiliser autour d'une courbe de la famille de solutions
+(l'erreur reste alors constante, cf. figure \ref{fig_rater}), mais à une distance beaucoup plus grande de la vraie solution!
 
 
 
-\paragraph{Temps de calcul : }
-La méthode d'Euler explicite demande simplement d'évaluer les fonctions $f_1(p)$ et $f_2(q)$ à chaque itération. Alors que la méthode d'Euler implicite exige à chaque itération, de résoudre une équation non-linéaire. Le nombre d'itérations demandées à Newton-Raphson pour converger est illustré à la figure \ref{IterNR}.
+\subsubsection{Temps de calcul}
+La méthode d'Euler explicite demande simplement d'évaluer les fonctions $f_1(p)$ et $f_2(q)$ à chaque itération.
+Alors que la méthode d'Euler implicite exige à chaque itération,
+de résoudre une équation non-linéaire.
+Le nombre d'itérations demandées à Newton-Raphson pour converger est illustré à la figure \ref{IterNR}.
 
 \begin{figure}
 \centering
@@ -412,10 +460,3 @@ Comme prévu, les méthodes d'Euler explicite et symplectique demande un temps d
 
 \paragraph{Conclusion : } En théorie, le seul avantage de la méthode d'Euler implicite sur les autres est le fait qu'elle soit inconditionnellement stable. Cependant, on peut douter de l'intérêt d'utiliser une méthode inconditionnellement stable lorsqu'on résout une équation instable. D'ailleurs, si on applique Euler implicite avec un pas trop grand ($h=5.10^{-2}$, par exemple), on diverge tout autant qu'avec Euler explicite. \\
   Les méthodes symplectiques semblent être les plus avantageuses. En effet, bien qu'elles soient d'ordre 1 tout comme Euler implicite et explicite, elle donnent des résultats correctes pour un pas de temps $h=5.10^{-2}$, contrairement aux deux autres. Intuitivement, en comparant les figure \ref{fig:q1_explicite_H} et \ref{fig:q1_implicite_H}, on remarque que Euler implicite part dans un sens alors que l'explicite part dans l'autre. Comme la méthode symplectique fait une combinaison des deux, les erreurs se corrigent l'une l'autre.
-
-
-
-
-
-
-

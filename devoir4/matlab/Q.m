@@ -13,6 +13,7 @@ if num == 1
     f_1 = @f_1_q1;
     f_2 = @f_2_q1;
     H = @H_q1;
+    eigen_values = @eigen_values_q1;
 else
     q_0 = [0.4; 0; 0; 0];
     p_0 = [0; 2; 0; -2];
@@ -42,6 +43,7 @@ elseif strcmp(method, 'symplectique2')
     [p, q] = euler_symplectique2(f_1, f_2, q_0, p_0, h, n);
 end
 toc()
+tic
 figure();
 plot(q(1,:), q(2,:), 'linewidth', 0.5);
 xlabel('x');
@@ -65,11 +67,24 @@ end
 saveas(gcf, sprintf('../images/Q%d_%s_p', num, method), 'png');
 
 figure();
-h = zeros(1,n+1);
+Hs = zeros(1,n+1);
 xlabel('temps');
 for i = 1:n+1
-    h(i) = H(q(:,i), p(:,i));
+    Hs(i) = H(q(:,i), p(:,i));
 end
-plot(t, h, 'linewidth', 0.5);
+plot(t, Hs, 'linewidth', 0.5);
 saveas(gcf, sprintf('../images/Q%d_%s_H', num, method), 'png');
+
+if num == 1
+    figure();
+    lambda = zeros(4,n+1);
+    xlabel('temps');
+    for i = 1:n+1
+        lambda(:,i) = eigen_values(q(:,i), p(:,i));
+    end
+    plot(t, h*lambda, 'linewidth', 0.5);
+    legend('\lambda_1', '\lambda_2', '\lambda_3', '\lambda_4');
+    saveas(gcf, sprintf('../images/Q%d_%s_lambda', num, method), 'png');
+end
+toc
 end
