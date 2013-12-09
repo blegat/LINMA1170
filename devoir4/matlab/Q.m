@@ -3,7 +3,7 @@ function Q(num, method)
 if num == 1
     q_0 = [0.4; 0];
     p_0 = [0; 2];
-    n = 10000;
+    n = 100000;
     if strncmp(method, 'symplectique', 12)
         h = 5e-2;
     else
@@ -43,23 +43,23 @@ elseif strcmp(method, 'symplectique2')
 end
 toc()
 figure();
-plot(q(1,:), q(2,:), 'linewidth', 1);
+plot(q(1,:), q(2,:), 'linewidth', 0.5);
 xlabel('x');
 ylabel('y');
 if num == 2
     hold on;
-    plot(q(3,:), q(4,:), 'r', 'linewidth', 1);
+    plot(q(3,:), q(4,:), 'r', 'linewidth', 0.5);
     legend('q_1', 'q_2');
 end
 saveas(gcf, sprintf('../images/Q%d_%s_q', num, method), 'png');
 
 figure();
-plot(p(1,:), p(2,:), 'linewidth', 1);
+plot(p(1,:), p(2,:), 'linewidth', 0.5);
 xlabel('x');
 ylabel('y');
 if num == 2
     hold on;
-    plot(p(3,:), p(4,:), 'r', 'linewidth', 1);
+    plot(p(3,:), p(4,:), 'r', 'linewidth', 0.5);
     legend('p_1', 'p_2');
 end
 saveas(gcf, sprintf('../images/Q%d_%s_p', num, method), 'png');
@@ -70,6 +70,6 @@ xlabel('temps');
 for i = 1:n+1
     h(i) = H(q(:,i), p(:,i));
 end
-plot(t, h, 'linewidth', 2);
+plot(t, h, 'linewidth', 0.5);
 saveas(gcf, sprintf('../images/Q%d_%s_H', num, method), 'png');
 end
