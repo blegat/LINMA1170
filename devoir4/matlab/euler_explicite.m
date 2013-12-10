@@ -26,12 +26,24 @@ end
 
 % figure();
 % plot(Jac1(1,:), Jac1(2,:), 'b.') %%%%%%%%%%
+% title('lambda1*h');
+% xlabel('Re(lambda*h)');
+% ylabel('Im(lambda*h)');
 % figure();
 % plot(Jac2(1,:), Jac2(2,:), 'b.') %%%%%%%%%%
+% title('lambda2*h');
+% xlabel('Re(lambda*h)');
+% ylabel('Im(lambda*h)');
 % figure();
 % plot(Jac3(1,:), Jac3(2,:), 'b.') %%%%%%%%%%
+% title('lambda3*h');
+% xlabel('Re(lambda*h)');
+% ylabel('Im(lambda*h)');
 % figure();
 % plot(Jac4(1,:), Jac4(2,:), 'b.') %%%%%%%%%%
+% title('lambda4*h');
+% xlabel('Re(lambda*h)');
+% ylabel('Im(lambda*h)');
 
 end
 
