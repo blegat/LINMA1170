@@ -379,20 +379,20 @@ Les valeurs propres tendent toutes vers 0 et on obtient les résultats de la fig
   \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_rate_q.png}
     \caption{$q$ pour explicite}
-    \label{fig:q1_explicite_q}
+    \label{fig:q1_explicite_rate_q}
   \end{subfigure}%
   ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
   %(or a blank line to force the subfigure onto a new line)
   \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_rate_p.png}
     \caption{$p$ pour explicite}
-    \label{fig:q1_explicite_p}
+    \label{fig:q1_explicite_rate_p}
   \end{subfigure}
   ~
   \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_rate_H.png}
     \caption{$\Ha$ pour explicite}
-    \label{fig:q1_explicite_H}
+    \label{fig:q1_explicite_rate_H}
   \end{subfigure}
 \caption{Solutions de l'intégration numérique avec Euler explicite pour un pas $h=5$.}
 \label{fig_rater}
@@ -460,3 +460,5 @@ Comme prévu, les méthodes d'Euler explicite et symplectique demande un temps d
 
 \paragraph{Conclusion : } En théorie, le seul avantage de la méthode d'Euler implicite sur les autres est le fait qu'elle soit inconditionnellement stable. Cependant, on peut douter de l'intérêt d'utiliser une méthode inconditionnellement stable lorsqu'on résout une équation instable. D'ailleurs, si on applique Euler implicite avec un pas trop grand ($h=5.10^{-2}$, par exemple), on diverge tout autant qu'avec Euler explicite. \\
   Les méthodes symplectiques semblent être les plus avantageuses. En effet, bien qu'elles soient d'ordre 1 tout comme Euler implicite et explicite, elle donnent des résultats correctes pour un pas de temps $h=5.10^{-2}$, contrairement aux deux autres. Intuitivement, en comparant les figure \ref{fig:q1_explicite_H} et \ref{fig:q1_implicite_H}, on remarque que Euler implicite part dans un sens alors que l'explicite part dans l'autre. Comme la méthode symplectique fait une combinaison des deux, les erreurs se corrigent l'une l'autre.
+  
+  La méthode d'Euler symplectique est en fait souvent utilisée dans des problèmes comme celui-ci impliquant un Hamiltonien. En effet elle évite ce qu'on appelle l'\textit{energy drift} qui est présent notamment dans le cas d'euler explicite ou implicite, c'est à dire que l'énergie change de manière graduelle au cours du temps, comme cela apparait aux graphes \ref{fig:q1_explicite_H} et \ref{fig:q1_implicite_H}. Pour euler symplectique, l'énergie va certes fluctuer mais restera comprise entre des bornes comme illustré aux graphes \ref{fig:q1_symplectique1_H} et \ref{fig:q1_symplectique2_H}. 
