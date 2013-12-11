@@ -415,7 +415,7 @@ Pour le cas d'Euler symplectique, étant donné que le pas vaut $h=5 \cdot 10^{-
 À chaque fois que l'on repasse près du point de départ,
 on change de courbe dans la famille de solutions (on oscille donc autour de la vraie solution,
 à une distance qui reste stable et relativement petite
-\footnote{On observe que Euler symplectique commet une erreur sur le $\Ha$ qui est plus grande que celle commise par Euler implicite ou explicite sur une orbite(on oscille ici entre $-0.4$ et $-0.54$).
+\footnote{On observe que Euler symplectique commet une erreur sur le $\Ha$ qui est plus grande que celle commise par Euler implicite ou explicite sur une orbite (on oscille ici entre $-0.4$ et $-0.54$).
 Cela est du au fait que la discrétisation temporelle est plus grossière.
 D'ailleurs si on applique Euler symplectique avec $h=5.10^{-4}$, on obtient un $\Ha$ dont la valeur oscille entre $-0.495$ et $-0.505$, qui est l'erreur commise par Euler explicite/implicite sur la première revolution.}).\\
 Dans le cas d'un pas de temps beaucoup trop grand comme dans la figure \ref{fig_rater},
@@ -428,16 +428,16 @@ on va aussi s'écarter de la vraie solution pour se stabiliser autour d'une cour
 La méthode d'Euler explicite demande simplement d'évaluer les fonctions $f_1(p)$ et $f_2(q)$ à chaque itération.
 Alors que la méthode d'Euler implicite exige à chaque itération,
 de résoudre une équation non-linéaire.
-Le nombre d'itérations demandées à Newton-Raphson pour converger est illustré à la figure \ref{IterNR}.
+%Le nombre d'itérations demandées à Newton-Raphson est illustré à la figure \ref{IterNR}.
 
-\begin{figure}
-\centering
-\includegraphics[width=7cm]{images/iterationNR.png}
-\caption{Nombre d'itérations nécessaire pour que Newton-Raphson converge.}
-\label{IterNR}
-\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[width=7cm]{images/iterationNR.png}
+%\caption{Nombre d'itérations nécessaire pour que Newton-Raphson converge.}
+%\label{IterNR}
+%\end{figure}
 
-Les méthodes d'Euler symplectique ne demande pas plus de temps de calcul que celle d'Euler explicite. En effet, comme $f_1$ ne dépend que de $p$ et $f_2$ que de $q$, Euler symplectique consiste simplement à faire le calcul d'une des deux fonction $p_{k+1}$ ou $q_{k+1}$ avec un Euler explicite, puis d'utiliser cette mise à jour d'une des deux fonction pour calculer la deuxième. \\
+Les méthodes d'Euler symplectique ne demande pas plus de temps de calcul que celle d'Euler explicite. En effet, comme $f_1$ ne dépend que de $p$ et $f_2$ que de $q$, Euler symplectique consiste simplement à faire le calcul d'une des deux fonctions $p_{k+1}$ ou $q_{k+1}$ avec un Euler explicite, puis d'utiliser cette mise à jour d'une des deux fonctions pour calculer la deuxième. \\
 Le temps de calcul pris par chaque méthode est indiqué dans la table \ref{table_time}.
 
 \begin{table}[h]
@@ -446,17 +446,17 @@ Le temps de calcul pris par chaque méthode est indiqué dans la table \ref{tabl
 \hline
  & Euler explicite & Euler implicite & Euler symplectique 1 & Euler symplectique 2 \\
 \hline
-Temps $[s]$ & 0.136024 & 8.273912 & 0.122837 &  0.142929\\
+Temps $[s]$ & 0.592897 & 254.122866 & 0.609895 &  0.605592\\
 \hline
 \end{tabular}
-\caption{Temps de calcul pour les différentes méthodes avec 10 000 itérations temporelles.}
+\caption{Temps de calcul pour les différentes méthodes avec 100 000 itérations temporelles.}
 \label{table_time}
 \end{table}
 
-Comme prévu, les méthodes d'Euler explicite et symplectique demande un temps de calcul similaire. Celui d'Euler implicite est sensiblement plus élevé. Cela est du au fait que chaque itération temporelle demande trois ou quatre itérations de Newton-Raphson (cf. figure \ref{IterNR}) dont chacune nécessite la résolution d'un système linéaire 4 sur 4.
+Comme prévu, les méthodes d'Euler explicite et symplectique demande un temps de calcul similaire. Celui d'Euler implicite est sensiblement plus élevé. Cela est du au fait que chaque itération temporelle demande trois itérations de Newton-Raphson dont chacune nécessite la résolution d'un système linéaire 4 sur 4.
 
 
-\paragraph{Conclusion : } En théorie, le seul avantage de la méthode d'Euler implicite sur les autres est le fait qu'elle soit inconditionnellement stable. Cependant, on peut douter de l'intérêt d'utiliser une méthode inconditionnellement stable lorsqu'on résout une équation instable. D'ailleurs, si on applique Euler implicite avec un pas trop grand ($h=5.10^{-2}$, par exemple), on diverge tout autant qu'avec Euler explicite. \\
-  Les méthodes symplectiques semblent être les plus avantageuses. En effet, bien qu'elles soient d'ordre 1 tout comme Euler implicite et explicite, elle donnent des résultats correctes pour un pas de temps $h=5.10^{-2}$, contrairement aux deux autres. Intuitivement, en comparant les figure \ref{fig:q1_explicite_H} et \ref{fig:q1_implicite_H}, on remarque que Euler implicite part dans un sens alors que l'explicite part dans l'autre. Comme la méthode symplectique fait une combinaison des deux, intuitivement, on peut supposer que les erreurs se corrigent en quelques sortes l'une l'autre.
+\subsubsection{Conclusion} En théorie, le seul avantage de la méthode d'Euler implicite sur les autres est le fait qu'elle soit inconditionnellement stable. Cependant, on peut douter de l'intérêt d'utiliser une méthode inconditionnellement stable lorsqu'on résout une équation instable. D'ailleurs, si on applique Euler implicite avec un pas trop grand ($h=5.10^{-2}$, par exemple), on diverge tout autant qu'avec Euler explicite. \\
+  Les méthodes symplectiques semblent être les plus avantageuses. En effet, bien qu'elles soient d'ordre 1 tout comme Euler implicite et explicite, elle donnent des résultats correctes pour un pas de temps $h=5.10^{-2}$, contrairement aux deux autres. Intuitivement, en comparant les figure \ref{fig:q1_explicite_H} et \ref{fig:q1_implicite_H}, on remarque que Euler implicite part dans un sens alors que l'explicite part dans l'autre. Comme la méthode symplectique fait une combinaison des deux, intuitivement, on peut supposer que les erreurs se corrigent en quelque sorte l'une l'autre.
 
-  La méthode d'Euler symplectique est en fait souvent utilisée dans des problèmes comme celui-ci impliquant un Hamiltonien. En effet elle évite ce qu'on appelle l'\textit{energy drift} qui est présent notamment dans le cas d'euler explicite ou implicite, c'est à dire que l'énergie change de manière graduelle au cours du temps, comme cela apparait aux graphes \ref{fig:q1_explicite_H} et \ref{fig:q1_implicite_H}. Pour euler symplectique, l'énergie va certes fluctuer mais restera comprise entre des bornes comme illustré aux graphes \ref{fig:q1_symplectique1_H} et \ref{fig:q1_symplectique2_H}.
+  La méthode d'Euler symplectique est en fait souvent utilisée dans des problèmes comme celui-ci impliquant un hamiltonien. En effet elle évite ce qu'on appelle l'\textit{energy drift} qui est présent notamment dans le cas d'Euler explicite ou implicite, c'est à dire que l'énergie change de manière graduelle au cours du temps, comme cela apparait aux graphes \ref{fig:q1_explicite_H} et \ref{fig:q1_implicite_H}. Pour Euler symplectique, l'énergie va certes fluctuer mais restera comprise entre des bornes comme illustré aux graphes \ref{fig:q1_symplectique1_H} et \ref{fig:q1_symplectique2_H}.
