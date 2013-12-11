@@ -73,18 +73,18 @@ Les équations du mouvement sont donc données par :
 \right.
 \end{equation}
 
-Ce système d'équation différentiel admet une unique solution dans $\mathbb{R}_0^4$. En effet :
+Ce système d'équations différentielles admet une unique solution dans $\mathbb{R}_0^4$. En effet :
 \begin{eqnarray}
 ||f_1(x)-f_1(y)|| &\leq & ||x-y|| \\
 ||f_2(x) - f_2(y)|| &\leq & \left\|\frac{x}{\|x\|_2^3} - \frac{y}{\|y\|_2^3}\right\| \leq \max(\frac{1}{\|x\|_2^3}, \frac{1}{\|y\|_2^3}) ||x-y||.
 \end{eqnarray}
-Ce qui implique que le système est Lipschitzien, et par le théorème 5.1 du cours, le système \ref{equation_mvt} admet une unique solution.
+Ce qui implique que le système est Lipschitzien et, par le théorème 5.1 du cours, le système \ref{equation_mvt} admet une unique solution.
 
 \subsection{Description des méthodes numériques}
-Nous souhaitons intégrer ces systèmes d'équations différentiels non-linéaires (de forme générale $y'(t) = f(t,y)$, où $y$ désigne aussi bien un scalaire qu'un vecteur) par des méthodes numériques :
+Nous souhaitons intégrer ce système d'équations différentielles non-linéaires (de forme générale $y'(t) = f(t,y)$, où $y$ désigne aussi bien un scalaire qu'un vecteur) par les méthodes numériques suivantes :
 \begin{itemize}
 \item la méthode d'Euler explicite, $y_{n+1} = y_n + h f(t,y_n)$
-\item la méthode d'Euler implicite, $y_{n+1} = y_n + h f(t,y_{n+1})$ qui demande de résoudre une équation non-linéaire de type $g(y_{n+1})=0$, qu'on résoudra en utilisant la méthode itérative de Newton-Raphson
+\item la méthode d'Euler implicite, $y_{n+1} = y_n + h f(t,y_{n+1})$ qui demande de résoudre une équation non-linéaire de type $g(y_{n+1})=0$ à chaque itération, qu'on résoudra en utilisant la méthode itérative de Newton-Raphson
 \item la méthode d'Euler symplectique qui est une combinaison des méthodes d'Euler implicite et explicite (on applique le schéma implicite à une composante de $y$ et un schéma explicite à l'autre).
 \end{itemize}
 
@@ -103,23 +103,23 @@ Pour Euler implicite, on aura besoin de
   & =
   \begin{pmatrix}
     \frac{-(q_1^2 + q_2^2)^{3/2} + 3q_1^2(q_1^2 + q_2^2)^{1/2}}{(q_1^2 + q_2^2)^3} &
-    \frac{-3q_1q_2}{(q_1^2 + q_2^2)^{5/2}}\\
-    \frac{-3q_1q_2}{(q_1^2 + q_2^2)^{5/2}} &
+    \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}}\\
+    \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}} &
     \frac{-(q_1^2 + q_2^2)^{3/2} + 3q_2^2(q_1^2 + q_2^2)^{1/2}}{(q_1^2 + q_2^2)^3}
   \end{pmatrix}\\
   & =
   \begin{pmatrix}
     \frac{2q_1^2 - q_2^2}{(q_1^2 + q_2^2)^{5/2}} &
-    \frac{-3q_1q_2}{(q_1^2 + q_2^2)^{5/2}}\\
-    \frac{-3q_1q_2}{(q_1^2 + q_2^2)^{5/2}} &
+    \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}}\\
+    \frac{3q_1q_2}{(q_1^2 + q_2^2)^{5/2}} &
     \frac{-q_1^2 + 2q_2^2}{(q_1^2 + q_2^2)^{5/2}}
   \end{pmatrix}\\
   & =
   \frac{1}{\|q\|_2^{5}}
   \begin{pmatrix}
     2q_1^2 - q_2^2 &
-    -3q_1q_2\\
-    -3q_1q_2 &
+    3q_1q_2\\
+    3q_1q_2 &
     -q_1^2 + 2q_2^2
   \end{pmatrix}
 \end{align*}
@@ -182,18 +182,15 @@ $ et $q_0 = \begin{pmatrix}
 \end{pmatrix}
 $.\\
 
-Nous allons appliquer à ce cas les différentes méthodes d'intégration numérique pour 100 000 pas de temps dont la valeur est $h=5e-4$ (Euler implicite et explicite) ou $h=5e-2$ (Euler symplectique). Les résultats sont donnés à la figure \ref{fig:q1}.
+Nous allons appliquer à ce cas les différentes méthodes d'intégration numérique pour 100 000 pas de temps dont la valeur est $h=5e-4$ (Euler implicite et explicite) ou $h=5e-2$ (Euler symplectique). Les résultats sont donnés aux figures \ref{fig:q1_exp}, \ref{fig:q1_imp} et \ref{fig:q1_sym}.
 
-
-\begin{figure}
+\begin{figure}[!ht]
   \centering
   \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_q.png}
     \caption{$q$ pour explicite}
     \label{fig:q1_explicite_q}
   \end{subfigure}%
-  ~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
-  %(or a blank line to force the subfigure onto a new line)
   \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_H.png}
     \caption{$\Ha$ pour explicite}
@@ -204,19 +201,21 @@ Nous allons appliquer à ce cas les différentes méthodes d'intégration numér
     \caption{$p$ pour explicite}
     \label{fig:q1_explicite_p}
   \end{subfigure}
-  ~
   \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_explicite_lambda.png}
     \caption{$h\lambda$ en fonction du temps pour explicite}
     \label{fig:q1_explicite_lambda}
   \end{subfigure}
+  \caption{Résultats pour la question 1 pour Euler explicite}
+  \label{fig:q1_exp}
+\end{figure}
+
+\begin{figure}[!ht]
   \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_implicite_q.png}
     \caption{$q$ pour implicite}
     \label{fig:q1_implicite_q}
   \end{subfigure}%
-  ~
-  %(or a blank line to force the subfigure onto a new line)
   \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_implicite_H.png}
     \caption{$\Ha$ pour implicite}
@@ -227,17 +226,16 @@ Nous allons appliquer à ce cas les différentes méthodes d'intégration numér
     \caption{$p$ pour implicite}
     \label{fig:q1_implicite_p}
   \end{subfigure}
-  ~
   \begin{subfigure}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_implicite_lambda.png}
     \caption{$h\lambda$ en fonction du temps pour implicite}
     \label{fig:q1_implicite_lambda}
   \end{subfigure}
-  \caption{Résultats pour la question 1 pour euler explicite et implicite}
-  \label{fig:q1_sym}
+  \caption{Résultats pour la question 1 pour Euler implicite}
+  \label{fig:q1_imp}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!ht]
   \centering
   \begin{subfigure}[b]{0.3\textwidth}
     \includegraphics[width=\textwidth]{images/Q1_symplectique1_q.png}
@@ -276,7 +274,7 @@ Nous allons appliquer à ce cas les différentes méthodes d'intégration numér
     \caption{$\Ha$ pour symplectique2}
     \label{fig:q1_symplectique2_H}
   \end{subfigure}
-  \caption{Résultats pour la question 1 pour euler symplectique}
+  \caption{Résultats pour la question 1 pour Euler symplectique}
   \label{fig:q1_sym}
 \end{figure}
 
@@ -289,8 +287,8 @@ $$J(q,p) =
 \begin{pmatrix}
   0 & 0 & 1 & 0\\
   0 & 0 & 0 & 1\\\\
-  \frac{2q_1^2 - q_2^2}{(q_1^2+q_2^2)^{5/2}} & \frac{-3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0 \\
-  \frac{-3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & \frac{2q_2^2 - q_1^2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0
+  \frac{2q_1^2 - q_2^2}{(q_1^2+q_2^2)^{5/2}} & \frac{3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0 \\
+  \frac{3q_1q_2}{(q_1^2+q_2^2)^{5/2}} & \frac{2q_2^2 - q_1^2}{(q_1^2+q_2^2)^{5/2}} & 0 & 0
 \end{pmatrix}.
 $$
 Pour rappel, l'erreur entre la ``vraie'' solution d'une équation différentielle ordinaire et celle obtenue pour des conditions initiales perturbée est définie comme :
