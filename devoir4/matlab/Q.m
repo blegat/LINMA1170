@@ -75,16 +75,23 @@ end
 plot(t, Hs, 'linewidth', 0.5);
 saveas(gcf, sprintf('../images/Q%d_%s_H', num, method), 'png');
 
-if num == 1
+if num == 1 && strcmp(method, 'explicite') || strcmp(method, 'implicite')
     figure();
     lambda = zeros(4,n+1);
     xlabel('temps');
     for i = 1:n+1
         lambda(:,i) = eigen_values(q(:,i), p(:,i));
     end
-    plot(t, real(h*lambda), 'linewidth', 0.5);
+
+    if strcmp(method, 'explicite')
+        plot(t, abs(1 + h*lambda), 'linewidth', 0.5);
+        ylabel('|1 + h\lambda|');
+    else
+        plot(t, abs(1 ./ (1 - h*lambda)), 'linewidth', 0.5);
+        ylabel('1 / |1 - h\lambda|');
+    end
     legend('\lambda_1', '\lambda_2', '\lambda_3', '\lambda_4');
-    %saveas(gcf, sprintf('../images/Q%d_%s_lambda', num, method), 'png');
+    saveas(gcf, sprintf('../images/Q%d_%s_lambda', num, method), 'png');
 end
 toc
 end
