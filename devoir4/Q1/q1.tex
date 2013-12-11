@@ -315,7 +315,7 @@ $$\left\lbrace
 \end{array}
 \right.
 $$
-Où $D$ est la matrice diagonale des valeurs propres. On se retrouve alors avec $n$ équations différentielle découplées dont la condition de stabilité est $\mathcal{R} (\lambda_i) <0$; c'est-à-dire tel que toutes les valeurs propres de la jacobienne soient à gauche de l'axe imaginaire.\\
+Où $D$ est la matrice diagonale des valeurs propres. On se retrouve alors avec $n$ équations différentielles découplées dont la condition de stabilité est $\mathcal{R} (\lambda_i) <0$; c'est-à-dire tel que toutes les valeurs propres de la jacobienne soient à gauche de l'axe imaginaire.\\
 On voit directement que notre système n'est pas stable. En effet, calculons par exemple les valeurs propres au point de départ :
 $$J(q,p) =
 \begin{pmatrix}
@@ -335,7 +335,7 @@ $$
 
 Les résultats numériques des valeurs de $h \lambda$ à chaque itération (la jacobienne variant à chaque itération)
 sont donnés à la figure~\ref{fig:hlambda}.
-On voit clairement que ces valeurs sont en dehors des zones de convergences d'Euler explicite
+On voit clairement que ces valeurs sont en dehors des zones de convergence d'Euler explicite
 (cercle de centre $(-1,0)$ et de rayon 1) ainsi que d'Euler implicite
 (tout le plan excepté le cercle de centre $(1,0)$ et de rayon 1),
 ce qui est bien naturel étant donné que l'équation analytique est elle-même instable.
@@ -400,7 +400,7 @@ Les valeurs propres tendent toutes vers 0 et on obtient les résultats de la fig
 L'erreur est par définition la différence entre la solution exacte et la solution obtenue par intégration numérique.
 Comme nous ne disposons pas de la solution exacte, nous ne pouvons pas utiliser cette définition. Cependant, nous pouvons utiliser le graphe de $\Ha$.
 En effet, nous savons que la solution exacte est telle que $\dot{\Ha} = 0$ ou autrement dit $\Ha$ ne varie pas avec le temps (d'une itération à l'autre).
-Or sur la figure \ref{fig:q1_explicite_H}, on remarque que $\Ha$ augmente puis se stabilise une première fois à une certaine valeur (pour Euler explicite autour de $-0.495$ alors que la valeur initiale se situe à $-0.5$). Ensuite $\Ha$ ré-augmente encore et se re-stabilise encore à une valeur de $\Ha$ plus haute... on obtient une fonction $\Ha$ en escalier. Tandis qu'il diminue puis se stabilise une première fois autour d'une certaine valeur ($-0.505$) pour Euler implicite. Et on obtient une fonction en escalier descendant.
+Or sur la figure \ref{fig:q1_explicite_H}, on remarque que $\Ha$ augmente puis se stabilise une première fois à une certaine valeur (pour Euler explicite autour de $-0.495$ alors que la valeur initiale se situe à $-0.5$). Ensuite $\Ha$ ré-augmente encore et se re-stabilise encore à une valeur de $\Ha$ plus haute... on obtient une fonction $\Ha$ en escalier montant. Tandis qu'il diminue puis se stabilise une première fois autour d'une certaine valeur ($-0.505$) pour Euler implicite. Et on obtient une fonction en escalier descendant.
 On peut interpréter cela de la manière suivante.
 Le système d'équations différentielles \ref{equation_mvt} possède une infinité de solutions qui forment une famille de solutions.
 Avec une condition initiale, on obtient alors une unique solution (si la condition de Lipschitz est satisfaite).
@@ -408,10 +408,10 @@ Lorsqu'on intègre numériquement ce système avec les méthodes d'Euler,
 on commet forcément des erreurs qui, d'une itération à l'autre, peuvent
 nous faire en quelques sorte passer d'une courbe de cette famille de solutions à une autre.
 Ainsi sur la figure \ref{fig:q1_explicite_H} on passe d'une courbe de la famille de solution à une autre pour ensuite se stabiliser au alentour d'une solution (pour laquelle $\Ha=-0.505$) qui n'est pas la vraie solution,
-mais qui en est à une distance constante. Ensuite, on fait un tour d'orbite et on rechange de courbe de solution (une qui a une énergie plus haute pour Euler explicite)... et on s'éloigne progressivement de la vraie solution (comme on s'en éloigne en augmentant d'énergie, les orbites sont de plus en plus de grande envergure). Si on met cela en lien avec la figure \ref{fig:q1_explicite_lambda} (module $h\lambda$ en fonction du temps), on remarque que les endroits où on change d'orbite (où le $\Ha$ monte d'un étage) correspondent aux temps où les valeurs de $h \lambda $ sont grandes, c'est à dire les ``pics d'instabilités numériques''. \\
+mais qui en est à une distance constante. Ensuite, on fait un tour d'orbite et on rechange de courbe de solution (une qui a une énergie plus haute pour Euler explicite)... et on s'éloigne progressivement de la vraie solution (comme on s'en éloigne en augmentant d'énergie, les orbites sont de plus en plus de grande envergure). Si on met cela en lien avec la figure \ref{fig:q1_explicite_lambda} (partie réelle de $h\lambda$ en fonction du temps), on remarque que les endroits où on change d'orbite (où le $\Ha$ monte d'un étage) correspondent aux temps où les valeurs de $h \lambda $ sont grandes, c'est à dire les ``pics d'instabilités numériques''. \\
 Pour Euler implicite (figure \ref{fig:q1_implicite_H}),
-c'est la même chose, sauf qu'on stabilise autour d'une autre courbe de cette famille de solution (pour laquelle $\Ha = -0.495$), et à chaque tour d'orbite on rechange de courbe de solution pour aller vers une qui a une énergie $\Ha$ moindre (les orbites sont de plus en plu de petite envergure).\\
-Pour le cas d'Euler symplectique, étant donné que le pas vaut $h=5 \cdot 10^{-2}$, les 10000 itérations nous emmènent plus loin dans le temps.
+c'est la même chose, sauf qu'on stabilise autour d'une autre courbe de cette famille de solution (pour laquelle $\Ha = -0.495$), et à chaque tour d'orbite on rechange de courbe de solution pour aller vers une qui a une énergie $\Ha$ moindre (les orbites sont de plus en plus de petites envergures).\\
+Pour le cas d'Euler symplectique, étant donné que le pas vaut $h=5 \cdot 10^{-2}$, les 100000 itérations nous emmènent plus loin dans le temps.
 À chaque fois que l'on repasse près du point de départ,
 on change de courbe dans la famille de solutions (on oscille donc autour de la vraie solution,
 à une distance qui reste stable et relativement petite
