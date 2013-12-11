@@ -82,7 +82,7 @@ if num == 1
     for i = 1:n+1
         lambda(:,i) = eigen_values(q(:,i), p(:,i));
     end
-    plot(t, h*lambda, 'linewidth', 0.5);
+    plot(t, real(h*lambda), 'linewidth', 0.5);
     legend('\lambda_1', '\lambda_2', '\lambda_3', '\lambda_4');
     saveas(gcf, sprintf('../images/Q%d_%s_lambda', num, method), 'png');
 end
