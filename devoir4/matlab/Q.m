@@ -53,7 +53,7 @@ if num == 2
     plot(q(3,:), q(4,:), 'r', 'linewidth', 0.5);
     legend('q_1', 'q_2');
 end
-%saveas(gcf, sprintf('../images/Q%d_%s_q', num, method), 'png');
+saveas(gcf, sprintf('../images/Q%d_%s_q', num, method), 'png');
 
 figure();
 plot(p(1,:), p(2,:), 'linewidth', 0.5);
@@ -64,7 +64,7 @@ if num == 2
     plot(p(3,:), p(4,:), 'r', 'linewidth', 0.5);
     legend('p_1', 'p_2');
 end
-%saveas(gcf, sprintf('../images/Q%d_%s_p', num, method), 'png');
+saveas(gcf, sprintf('../images/Q%d_%s_p', num, method), 'png');
 
 figure();
 Hs = zeros(1,n+1);
@@ -73,18 +73,18 @@ for i = 1:n+1
     Hs(i) = H(q(:,i), p(:,i));
 end
 plot(t, Hs, 'linewidth', 0.5);
-%saveas(gcf, sprintf('../images/Q%d_%s_H', num, method), 'png');
+saveas(gcf, sprintf('../images/Q%d_%s_H', num, method), 'png');
 
-% if num == 1
-%     figure();
-%     lambda = zeros(4,n+1);
-%     xlabel('temps');
-%     for i = 1:n+1
-%         lambda(:,i) = eigen_values(q(:,i), p(:,i));
-%     end
-%     plot(t, real(h*lambda), 'linewidth', 0.5);
-%     legend('\lambda_1', '\lambda_2', '\lambda_3', '\lambda_4');
-%     %saveas(gcf, sprintf('../images/Q%d_%s_lambda', num, method), 'png');
-% end
+if num == 1
+    figure();
+    lambda = zeros(4,n+1);
+    xlabel('temps');
+    for i = 1:n+1
+        lambda(:,i) = eigen_values(q(:,i), p(:,i));
+    end
+    plot(t, real(h*lambda), 'linewidth', 0.5);
+    legend('\lambda_1', '\lambda_2', '\lambda_3', '\lambda_4');
+    %saveas(gcf, sprintf('../images/Q%d_%s_lambda', num, method), 'png');
+end
 toc
 end
