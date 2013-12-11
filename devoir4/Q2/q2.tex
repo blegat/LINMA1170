@@ -70,8 +70,61 @@ On calcule, en se rappelant des résultats de la question 1 mais en n'oubliant c
   \end{pmatrix}.
 \end{align*}
 
+On obtient finalement notre système de 8 équations différentielles à 8 variables, qu'on va résoudre numériquement, comme dans la question 1, aux moyens des méthodes d'Euler explicite et symplectiques.\\
+On choisit comme condition initiales : 
+$$
+q_1 = \begin{pmatrix}
+0.4\\
+0
+\end{pmatrix},
+q_2 = \begin{pmatrix}
+0\\
+0
+\end{pmatrix},
+p_1 = \begin{pmatrix}
+0\\
+2
+\end{pmatrix},
+p_2 = \begin{pmatrix}
+0\\
+-2
+\end{pmatrix},
+$$
 
 \subsection{Analyse de la solution}
+
+Commençons par calculer la jacobienne du système. Pour cela, calculons $\fpart{f_2}{q}$ :
+$$
+\begin{pmatrix}
+\frac{Gm_2(2(q_{11}-q_{21})^2 - (q_{12} - q_{22})^2)}{||q||^5_2} & \frac{3Gm_2(q_{11}-q_{21})(q_{12} - q_{22}))}{||q||^5_2} & \frac{Gm_2(-2(q_{11}-q_{21})^2 + (q_{12} - q_{22})^2)}{||q||^5_2} & \frac{3Gm_2(q_{11}-q_{21})(q_{12} - q_{22}))}{||q||^5_2} \\
+\frac{3Gm_2(q_{11}-q_{21})(q_{12} - q_{22}))}{||q||^5_2} & \frac{Gm_2(2(q_{12}-q_{21})^2 - (q_{11} - q_{21})^2)}{||q||^5_2} & \frac{3Gm_2(q_{11}-q_{21})(q_{12} - q_{22}))}{||q||^5_2} & \frac{Gm_2(-2(q_{12}-q_{22})^2 + (q_{11} - q_{21})^2)}{||q||^5_2} \\
+\frac{-Gm_1(2(q_{11}-q_{21})^2 - (q_{12} - q_{22})^2)}{||q||^5_2} & \frac{-3Gm_1(q_{11}-q_{21})(q_{12} - q_{22}))}{||q||^5_2} & \frac{-Gm_1(-2(q_{11}-q_{21})^2 + (q_{12} - q_{22})^2)}{||q||^5_2} & \frac{-3Gm_1(q_{11}-q_{21})(q_{12} - q_{22}))}{||q||^5_2} \\
+\frac{-3Gm_1(q_{11}-q_{21})(q_{12} - q_{22}))}{||q||^5_2} & \frac{-Gm_1(2(q_{12}-q_{21})^2 - (q_{11} - q_{21})^2)}{||q||^5_2} & \frac{-3Gm_1(q_{11}-q_{21})(q_{12} - q_{22}))}{||q||^5_2} & \frac{-Gm_1(-2(q_{12}-q_{22})^2 + (q_{11} - q_{21})^2)}{||q||^5_2} \\
+\end{pmatrix}
+$$
+
+La jacobienne est donnée par : 
+\begin{equation}
+J(q,p) = 
+\begin{pmatrix}
+0 & I\\
+\fpart{f_2}{q} & 0
+\end{pmatrix}.
+\end{equation}
+Si on évalue $J(q,p)$ aux conditions initiales et qu'on calcul ses valeurs propres, on obtient : 
+$$
+\begin{pmatrix}
+20.0431    \\
+-20.0431   \\
+-0.0000 +14.1726i \\
+-0.0000 -14.1726i  \\
+-0.0000          \\
+-0.0000          \\
+0.0000          \\
+0.0000 
+\end{pmatrix}
+$$
+On en conclut que le système n'est pas stable.\\
 
 Intéressons nous maintenant aux résultats obtenus. 
 
