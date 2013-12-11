@@ -34,32 +34,37 @@
 \newcommand{\constant}{\ensuremath{\mathrm{cst}}}
 \newcommand{\bigoh}{\ensuremath{\mathcal{O}}}
 
-% cfr http://en.wikibooks.org/wiki/LaTeX/Colors
-\usepackage{color}
-\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
-\definecolor{dkgreen}{rgb}{0.25,0.7,0.35}
-\definecolor{dkred}{rgb}{0.7,0,0}
-
 \usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+
+%Pour insertion de codes matlab...
 \lstset{
-  numbers=left,
-  numberstyle=\tiny\color{gray},
-  basicstyle=\rm\small\ttfamily,
-  keywordstyle=\bfseries\color{dkred},
-  frame=single,
-  commentstyle=\color{gray}=small,
-  stringstyle=\color{dkgreen},
-  %backgroundcolor=\color{gray!10},
-  %tabsize=2,
-  rulecolor=\color{black!30},
-  %title=\lstname,
-  breaklines=true,
-  framextopmargin=2pt,
-  framexbottommargin=2pt,
-  extendedchars=true,
-  inputencoding=utf8x
+	backgroundcolor=\color{lbcolor},
+numbers=left,
+%
+	tabsize=4,
+	rulecolor=,
+	language=matlab,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
 }
-\lstset{language={matlab}}
 
 \title{Devoir 4}
 \author{Arnaud Cerckel \and Benoît Legat \and
@@ -73,5 +78,19 @@ Nicolas Stevens \and Harold Taeter}
 
 \input{Q1/q1.tex}
 \input{Q2/q2.tex}
+\section*{Code Matlab}
+\lstinputlisting[label=,caption=Code source de Q.m]{matlab/Q.m}
+\lstinputlisting[label=,caption=Code source de euler$\_$symplectique1.m]{matlab/euler_symplectique1.m}
+\lstinputlisting[label=,caption=Code source de euler$\_$symplectique2.m]{matlab/euler_symplectique2.m}
+\lstinputlisting[label=,caption=Code source de euler$\_$explicite.m]{matlab/euler_explicite.m}
+\lstinputlisting[label=,caption=Code source de euler$\_$implicite.m]{matlab/euler_implicite.m}
+\lstinputlisting[label=,caption=Code source de newton$\_$raphson.m]{matlab/newton_raphson.m}
+\lstinputlisting[label=,caption=Code source de f$\_$1$\_$q1.m]{matlab/f_1_q1.m}
+\lstinputlisting[label=,caption=Code source de f$\_$2$\_$q1.m]{matlab/f_2_q1.m}
+\lstinputlisting[label=,caption=Code source de f$\_$1$\_$q2.m]{matlab/f_1_q2.m}
+\lstinputlisting[label=,caption=Code source de H$\_$q1.m]{matlab/H_q1.m}
+\lstinputlisting[label=,caption=Code source de H$\_$q2.m]{matlab/H_q2.m}
+
+
 
 \end{document}
